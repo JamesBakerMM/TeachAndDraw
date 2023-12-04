@@ -1,20 +1,36 @@
+import {Pen} from "../lib/monke.js"
+const p = new Pen(preload,setup,draw);
+let x = 0;
+let img=p.loadImage("../images/sample.png");
+let btn = p.makeButton(200,0,100,50);
+window.pen=p;
+
+p.preload();
+
+function preload(){}
+
 function setup() {
     // Example setup code
-    pen.canvas.width=1200;
-    pen.canvas.height=1200;
+    p.w=800;
+    p.h=350;
 }
 
-let x = 0;
 function draw() {
-    // Example drawing code
-    pen.shape.rectangle(0,0,pen.canvas.width,pen.canvas.height);
-    pen.colour.fill="red";
-    pen.shape.rectangle(x,200,100,50);
-    pen.shape.oval(200, 100, 50, 30); // Draws an oval
-    pen.shape.line(300, 50, 400, 150); // Draws a line
+    // Example drawing code    
+    p.colour.fill="grey";
+    p.shape.rectangle(0+p.w/2,0,p.w,p.canvas.height);
+    p.colour.fill="red";
+    p.shape.rectangle(x,200,100,50);
+    p.shape.oval(200, 100, 50, 30); 
+    p.shape.line(300, 50, 400, 150); 
+    p.shape.multiline(10, 10, 50, 50, 10, 90);
+    p.shape.shape(100, 100, 150, 150, 100, 200, 50, 150);
 
     x += 1; // Move the circle
-    if (x > pen.canvas.width)  {
+    if (x > p.w)  {
         x = 0; // Reset position
     }
+    pen.image.draw(img,9,9)
+
+    btn.draw();
 }
