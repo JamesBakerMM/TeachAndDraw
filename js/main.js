@@ -3,7 +3,6 @@ const p = new Pen(preload,setup,draw);
 let x = 0;
 let img=p.loadImage("../images/sample.png");
 let btn = p.makeButton(200,0,100,50);
-window.pen=p;
 
 p.preload();
 
@@ -16,7 +15,7 @@ function setup() {
 }
 
 function draw() {
-    // Example drawing code    
+    // Example drawing code-
     p.colour.fill="grey";
     p.shape.rectangle(0+p.w/2,0,p.w,p.canvas.height);
     p.colour.fill="red";
@@ -30,7 +29,8 @@ function draw() {
     if (x > p.w)  {
         x = 0; // Reset position
     }
-    pen.image.draw(img,9,9)
+    p.image.draw(img,9,9)
 
     btn.draw();
+    console.log(p.mouse.x,p.mouse.y)
 }
