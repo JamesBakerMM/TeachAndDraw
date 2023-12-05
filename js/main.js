@@ -2,6 +2,8 @@ import {Pen} from "../lib/monke.js"
 const p = new Pen(preload,setup,draw);
 let x = 0;
 let img=p.loadImage(0,0,"../images/sample.png");
+let img2=p.loadImage(p.w/2,p.h/2,"../images/sample2.png");
+let btn = p.makeButton(200,0,100,50);
 
 p.preload();
 
@@ -35,7 +37,10 @@ function draw() {
     img.w=p.w;
     img.h=p.h;
     img.draw();
-
+    img2.x=p.mouse.x-img2.w/2;
+    img2.y=p.mouse.y-img2.h/2;
+    img2.draw();
+    btn.draw();
 }
 
 //changing it so images have: an x and y
