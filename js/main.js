@@ -1,4 +1,4 @@
-import {Pen} from "../lib/monke.js"
+import {Pen} from "../lib/Pen.js"
 const p = new Pen(preload,setup,draw);
 const shape=p.shape;
 const colour=p.colour;
