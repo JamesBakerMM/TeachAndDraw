@@ -22,7 +22,7 @@ function preload(){}
 function setup() {
     p.w=800;
     p.h=350;    
-    img.x=200;
+    img.x=p.w/2;
     img.y=200;   
 }
 
@@ -66,7 +66,6 @@ function draw() {
 
     img2.x=200;
     img2.y=200;
-    img2.draw();
     img2.x=p.mouse.x;
     img2.y=p.mouse.y;
     img2.draw();
