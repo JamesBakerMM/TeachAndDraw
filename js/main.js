@@ -3,6 +3,8 @@ const p = new Pen(preload,setup,draw);
 window.pen=p;
 const shape=p.shape;
 const colour=p.colour;
+const mouse=p.mouse;
+const keyboard=p.kb;
 
 let x = 0;
 
@@ -43,13 +45,7 @@ function draw() {
         150+x, 200, 
         100+x, 150
     );
-    for(let i=0; i<400; i++){
-        const offsetX=i*20;
-        const prevFill=colour.fill;
-        colour.fill="black";
-        p.text.draw(0+offsetX,20,i*20);
-        colour.fill=prevFill;
-    }
+
     p.shape.line(
         200,0,
         200,p.h
@@ -62,12 +58,12 @@ function draw() {
     }
 
 
-    img.draw();
+    // img.draw();
 
     img2.x=200;
     img2.y=200;
-    img2.x=p.mouse.x;
-    img2.y=p.mouse.y;
+    img2.x=150;
+    img2.y=150;
     img2.draw();
     btn.draw();
     btn2.draw();
