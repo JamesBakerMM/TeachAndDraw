@@ -29,6 +29,7 @@ function setup() {
 }
 
 function draw() { 
+    img.rotation=0;
     img.w=p.w;
     img.h=p.h;
     colour.fill="grey";
@@ -57,8 +58,9 @@ function draw() {
         x = 0;
     }
 
+    img2.rotation++
 
-    // img.draw();
+    img.draw();
 
     img2.x=200;
     img2.y=200;
