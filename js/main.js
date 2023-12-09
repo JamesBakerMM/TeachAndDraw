@@ -23,21 +23,28 @@ btn.label=`Entity Id:${btn.id}`;
 let btn2 = p.makeButton(350,100,100,50);
 btn2.label=`Entity Id:${btn2.id}`;
 
+ let fart = [];
+
 
 function setup() {
-    if(p.frameCount===0){
-        p.w=800;
-        p.h=350; 
-        img.x=p.w/2;
-        img.y=p.h/2;  
-        img.w=p.w;
-        img.h=p.h;
-        console.log(j)
-    }
+    p.w=800;
+    p.h=350; 
+    img.x=p.w/2;
+    img.y=p.h/2;  
+    img.w=p.w;
+    img.h=p.h;
+
+    fart.reduce();
+    fart.filter();
+    fart.map();
+    return
 }
 
 function draw() { 
-    setup();
+    if(p.frameCount===0){
+        setup();
+        return
+    }
 
     img.rotation=0;
 
