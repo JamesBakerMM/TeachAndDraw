@@ -1,0 +1,2 @@
+rect and oval dif width with same width value
+remove space
