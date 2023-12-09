@@ -38,6 +38,7 @@ function setup() {
 
 function draw() { 
     setup();
+
     img.rotation=0;
 
     colour.fill="grey";
