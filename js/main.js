@@ -1,4 +1,5 @@
 import {Pen} from "../lib/Pen.js"
+import {Group} from "../lib/Group.js"
 const p = new Pen(draw);
 const shape=p.shape;
 const colour=p.colour;
@@ -20,10 +21,17 @@ let j=p.loadJsonFile("../data/jason.json");
 let btn = p.makeButton(200,100,100,50);
 btn.label=`Entity Id:${btn.id}`;
 
+let example=new Group();
 let btn2 = p.makeButton(350,100,100,50);
 btn2.label=`Entity Id:${btn2.id}`;
 
- let fart = [];
+
+window.example=example;
+example.push({id:0})
+example.push({id:1})
+example.push({id:2})
+example.push({id:3})
+example.push({id:4})
 
 
 function setup() {
@@ -33,17 +41,11 @@ function setup() {
     img.y=p.h/2;  
     img.w=p.w;
     img.h=p.h;
-
-    fart.reduce();
-    fart.filter();
-    fart.map();
-    return
 }
 
 function draw() { 
     if(p.frameCount===0){
         setup();
-        return
     }
 
     img.rotation=0;
