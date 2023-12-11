@@ -85,4 +85,14 @@ function draw() {
     img2.draw();
     btn.draw();
     btn2.draw();
+    colour.fill="black"
+    text.draw(20,20,"align");
+    text.alignment="left";
+    text.draw(20,40,"left");
+    text.alignment="center";
+    text.draw(20,60,"center");
+    text.alignment="right";
+    text.font = "Arial";
+    
+    text.draw(20,80,"right");
 }

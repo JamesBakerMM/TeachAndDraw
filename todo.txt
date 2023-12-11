@@ -1,0 +1,42 @@
+Animation:
+    extends Group etc
+    methods in the class scaffold
+Left,right,center alignment options for:
+    shapes
+    image? I guess?
+Text:
+    uses penstroke for fill
+    backgrond if true, uses fill for a block of colour behind the text
+    height,width properties
+    textSize
+    Font    
+Sound:
+    load
+    max - limits how many instances can play at once
+    volume
+    play
+    loop
+    isPlaying
+    onFinish - callback holder
+Game:
+    world:
+        force
+            x
+            y
+        you can bind things to the world to allow it to effect them
+    sprite:
+        velocity system
+        limited sensor system
+            can do circle or square checking if x or y in it
+            can be checked against goodCollider 
+        attachement points for:
+            colliders
+            animations
+    goodCollider: <- more expensive, better more complex behaviour
+        collision stuff
+        >circleCollider
+        >lineCollider
+        >rectangleCollider
+
+notes:
+    want to do rollback eventually where things will store their state from up to x rollback frames ago
