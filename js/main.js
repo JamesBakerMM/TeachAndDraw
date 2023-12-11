@@ -44,6 +44,7 @@ function setup() {
 }
 
 function draw() { 
+    p.text.alignment="left";
     if(p.frameCount===0){
         setup();
     }

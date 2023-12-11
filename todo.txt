@@ -1,15 +1,18 @@
+STATE MANAGEMENT:
+    save one state
+    load that state
+
+    change to stack system
+
 Animation:
     extends Group etc
     methods in the class scaffold
-Left,right,center alignment options for:
-    shapes
-    image? I guess?
+
 Text:
     uses penstroke for fill
     backgrond if true, uses fill for a block of colour behind the text
-    height,width properties
-    textSize
     Font    
+
 Sound:
     load
     max - limits how many instances can play at once
@@ -18,6 +21,10 @@ Sound:
     loop
     isPlaying
     onFinish - callback holder
+
+Testing:
+    Implement own testing suite for canvas using that image dif stuff
+
 Game:
     world:
         force
