@@ -50,10 +50,12 @@ function draw() {
     }
 
     img.rotation=0;
-
     colour.fill="grey";
     shape.rectangle(p.w/2,p.h/2,p.w,p.h);
     colour.fill="red";
+
+    
+    text.draw(50, 50, "This is a long piece of text that should be wrapped within the specified width.", 200);
     shape.rectangle(x,200,100,50);
     shape.rectangle(p.mouse.x,p.mouse.y,100,50);
     shape.oval(p.mouse.x, p.mouse.y, 50, 30); 
