@@ -1,11 +1,11 @@
 import { Pen } from "../lib/Pen.js";
 import { Group } from "../lib/Group.js";
 const p = new Pen(draw);
-const shape = p.shape;
-const colour = p.colour;
+const shp = p.shape;
+const col = p.colour;
 const mouse = p.mouse;
-const keyboard = p.kb;
-const text = p.text;
+const kb = p.kb;
+const txt = p.text;
 
 p.start();
 
@@ -16,15 +16,16 @@ let x = 0;
 let anim = p.loadAnimation(
     p.w / 2,
     p.h / 2,
-    "../images/sample2.png",
-    "../images/sample.png",
-    "../images/sample3.png"
+    "../images/fac0_wreckage1.png",
+    "../images/fac0_wreckage2.png",
+    "../images/fac0_wreckage3.png",
+    "../images/fac0_wreckage4.png",
 );
 window.anim = anim;
-let img = p.loadImage(p.mouse.x, p.mouse.y, "../images/sample.png");
-let img5 = p.loadImage(p.mouse.x, p.mouse.y, "../images/sample3.png");
+let img = p.loadImage(mouse.x, mouse.y, "../images/sample.png");
+let img5 = p.loadImage(mouse.x, mouse.y, "../images/sample3.png");
 let img2 = p.loadImage(p.w / 2, p.h / 2, "../images/sample2.png");
-let txt = p.loadTextFile("../data/hello.txt");
+let text = p.loadTextFile("../data/hello.txt");
 let j = p.loadJsonFile("../data/jason.json");
 let btn = p.makeButton(200, 100, 100, 50);
 btn.label = `Entity Id:${btn.id}`;
@@ -50,32 +51,32 @@ function setup() {
 }
 
 function draw() {
-    p.text.alignment = "left";
+    txt.alignment = "left";
     if (p.frameCount === 0) {
         setup();
     }
 
     img.rotation = 0;
-    colour.fill = "grey";
-    shape.rectangle(p.w / 2, p.h / 2, p.w, p.h);
-    colour.fill = "blue";
-    text.size = 19;
+    col.fill = "grey";
+    shp.rectangle(p.w / 2, p.h / 2, p.w, p.h);
+    col.fill = "blue";
+    txt.size = 19;
 
-    text.draw(
+    txt.draw(
         447,
         120,
         "This is a long piece of text that should be wrapped within the specified width.",
         200
     );
-    shape.rectangle(x, 200, 100, 50);
-    shape.rectangle(p.mouse.x, p.mouse.y, 100, 50);
-    shape.oval(p.mouse.x, p.mouse.y, 50, 30);
-    shape.line(300, 50, 400, 150);
-    shape.multiline(10, 10, 50, 50, 10, 90);
-    shape.shape(150 + x, 100, 200 + x, 150, 150 + x, 200, 100 + x, 150);
+    shp.rectangle(x, 200, 100, 50);
+    shp.rectangle(mouse.x, mouse.y, 100, 50);
+    shp.oval(mouse.x, mouse.y, 50, 30);
+    shp.line(300, 50, 400, 150);
+    shp.multiline(10, 10, 50, 50, 10, 90);
+    shp.shape(150 + x, 100, 200 + x, 150, 150 + x, 200, 100 + x, 150);
 
-    shape.line(200, 0, 200, p.h);
-    text.draw(200, 200, "200,200");
+    shp.line(200, 0, 200, p.h);
+    txt.draw(200, 200, "200,200");
 
     x += 1;
     if (x > p.w) {
@@ -91,23 +92,17 @@ function draw() {
     img2.draw();
     btn.draw();
     btn2.draw();
-    colour.fill = "black";
-    text.draw(20, 20, "align");
-    text.alignment = "left";
-    text.draw(20, 40, "left");
-    text.alignment = "center";
-    text.draw(20, 60, "center");
-    text.alignment = "right";
-    text.font = "Arial";
+    col.fill = "black";
+    txt.draw(20, 20, "align");
+    txt.alignment = "left";
+    txt.draw(20, 40, "left");
+    txt.alignment = "center";
+    txt.draw(20, 60, "center");
+    txt.alignment = "right";
+    txt.font = "Arial";
 
-    text.draw(20, 80, "right");
+    txt.draw(20, 80, "right");
     anim.x = mouse.x;
     anim.y = mouse.y;
-    console.log(anim.currentFrame)
-    if (anim.currentFrame < anim.length-1) {
-        anim.currentFrame++;
-    } else {
-        anim.currentFrame=0;
-    }
     anim.draw();
 }
