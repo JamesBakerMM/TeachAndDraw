@@ -87,8 +87,6 @@ function draw() {
 
     img.draw();
 
-    img2.x = mouse.x;
-    img2.y = mouse.y;
     img2.draw();
     btn.draw();
     btn2.draw();
