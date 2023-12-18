@@ -68,6 +68,8 @@ function draw() {
         "This is a long piece of text that should be wrapped within the specified width.",
         200
     );
+
+    
     shp.rectangle(x, 200, 100, 50);
     shp.rectangle(mouse.x, mouse.y, 100, 50);
     shp.oval(mouse.x, mouse.y, 50, 30);
@@ -103,4 +105,5 @@ function draw() {
     anim.x = mouse.x;
     anim.y = mouse.y;
     anim.draw();
+
 }
