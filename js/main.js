@@ -7,36 +7,44 @@ window.pen = p;
 
 let x = 0;
 
-let anim = q.loadAnimation(
-    q.w / 2,
+let anim1=q.loadAnimation(
+        20+8*20,
+        q.h / 2-20,
+        "../images/fac0_wreckage1.png",
+        "../images/fac0_wreckage2.png",
+        "../images/fac0_wreckage3.png",
+        "../images/fac0_wreckage4.png",
+    )
+let anim2=q.loadAnimation(
+    20+5*20,
     q.h / 2,
     "../images/fac0_wreckage1.png",
     "../images/fac0_wreckage2.png",
     "../images/fac0_wreckage3.png",
     "../images/fac0_wreckage4.png",
-);
-window.anim = anim;
+)
+let anim3=q.loadAnimation(
+    20+8*20,
+    q.h / 2-120,
+    "../images/fac0_wreckage1.png",
+    "../images/fac0_wreckage2.png",
+    "../images/fac0_wreckage3.png",
+    "../images/fac0_wreckage4.png",
+)
 let img = q.loadImage(mouse.x, mouse.y, "../images/sample.png");
-let img5 = q.loadImage(mouse.x, mouse.y, "../images/sample3.png");
+
 let img2 = q.loadImage(p.w / 2, q.h / 2, "../images/sample2.png");
 let text = q.loadTextFile("../data/hello.txt");
 let j = q.loadJsonFile("../data/jason.json");
 let btn = q.makeButton(200, 100, 100, 50);
 btn.label = `Entity Id:${btn.id}`;
 
-let example = new Group();
 let btn2 = q.makeButton(350, 100, 100, 50);
 btn2.label = `Entity Id:${btn2.id}`;
 
-window.example = example;
-example.push({ id: 0 });
-example.push({ id: 1 });
-example.push({ id: 2 });
-example.push({ id: 3 });
-example.push({ id: 4 });
 
-const testCollider=q.makeBoxCollider(139,139,100);
-const secondCollider=q.makeBoxCollider(250,200,100);
+const testCollider=q.makeBoxCollider(100,100,50);
+const secondCollider=q.makeBoxCollider(250,250,100);
 testCollider.velocity.x=2;
 testCollider.velocity.y=2;
 
@@ -86,9 +94,9 @@ function draw() {
 
     img2.rotation++;
 
-    img.draw();
+    // img.draw();
 
-    img2.draw();
+    // img2.draw();
     btn.draw();
     btn2.draw();
     col.fill = "black";
@@ -102,14 +110,20 @@ function draw() {
     txt.alignment = "right";
     txt.font = "Arial";
     txt.draw(80, 80, "right sdfds");
-    anim.x = mouse.x;
-    anim.y = mouse.y;
-    anim.draw();
-
-    if(testCollider.overlaps(secondCollider)){
-        console.log("boop")
-    }
-
+    
     testCollider.draw();
     secondCollider.draw();
+
+    anim1.draw();
+    txt.alignment="center";
+    txt.draw(anim1.x,anim1.y,"anim1")
+    anim2.draw();
+    txt.draw(anim2.x,anim2.y,"anim2")
+    anim3.draw();
+    txt.draw(anim3.x,anim3.y,"anim3")
+
+    if(testCollider.overlaps(secondCollider)){
+        
+    }
+
 }
