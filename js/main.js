@@ -1,37 +1,31 @@
-import { Pen } from "../lib/Pen.js";
+import { $ as p,shp,col,mouse,kb,txt } from "../lib/Pen.js";
 import { Group } from "../lib/Group.js";
-const p = new Pen(draw);
-const shp = p.shape;
-const col = p.colour;
-const mouse = p.mouse;
-const kb = p.kb;
-const txt = p.text;
-
-p.start();
+const q = p;
+p.start(draw);
 
 window.pen = p;
 
 let x = 0;
 
-let anim = p.loadAnimation(
-    p.w / 2,
-    p.h / 2,
+let anim = q.loadAnimation(
+    q.w / 2,
+    q.h / 2,
     "../images/fac0_wreckage1.png",
     "../images/fac0_wreckage2.png",
     "../images/fac0_wreckage3.png",
     "../images/fac0_wreckage4.png",
 );
 window.anim = anim;
-let img = p.loadImage(mouse.x, mouse.y, "../images/sample.png");
-let img5 = p.loadImage(mouse.x, mouse.y, "../images/sample3.png");
-let img2 = p.loadImage(p.w / 2, p.h / 2, "../images/sample2.png");
-let text = p.loadTextFile("../data/hello.txt");
-let j = p.loadJsonFile("../data/jason.json");
-let btn = p.makeButton(200, 100, 100, 50);
+let img = q.loadImage(mouse.x, mouse.y, "../images/sample.png");
+let img5 = q.loadImage(mouse.x, mouse.y, "../images/sample3.png");
+let img2 = q.loadImage(p.w / 2, q.h / 2, "../images/sample2.png");
+let text = q.loadTextFile("../data/hello.txt");
+let j = q.loadJsonFile("../data/jason.json");
+let btn = q.makeButton(200, 100, 100, 50);
 btn.label = `Entity Id:${btn.id}`;
 
 let example = new Group();
-let btn2 = p.makeButton(350, 100, 100, 50);
+let btn2 = q.makeButton(350, 100, 100, 50);
 btn2.label = `Entity Id:${btn2.id}`;
 
 window.example = example;
@@ -41,13 +35,18 @@ example.push({ id: 2 });
 example.push({ id: 3 });
 example.push({ id: 4 });
 
+const testCollider=q.makeBoxCollider(139,139,100);
+const secondCollider=q.makeBoxCollider(250,200,100);
+testCollider.velocity.x=2;
+testCollider.velocity.y=2;
+
 function setup() {
-    p.w = 800;
-    p.h = 350;
-    img.x = p.w / 2;
-    img.y = p.h / 2;
-    img.w = p.w;
-    img.h = p.h;
+    q.w = 800;
+    q.h = 350;
+    img.x = q.w / 2;
+    img.y = q.h / 2;
+    img.w = q.w;
+    img.h = q.h;
 }
 
 function draw() {
@@ -58,7 +57,7 @@ function draw() {
 
     img.rotation = 0;
     col.fill = "grey";
-    shp.rectangle(p.w / 2, p.h / 2, p.w, p.h);
+    shp.rectangle(p.w / 2, q.h / 2, q.w, q.h);
     col.fill = "blue";
     txt.size = 19;
 
@@ -77,11 +76,11 @@ function draw() {
     shp.multiline(10, 10, 50, 50, 10, 90);
     shp.shape(150 + x, 100, 200 + x, 150, 150 + x, 200, 100 + x, 150);
 
-    shp.line(200, 0, 200, p.h);
+    shp.line(200, 0, 200, q.h);
     txt.draw(200, 200, "200,200");
 
     x += 1;
-    if (x > p.w) {
+    if (x > q.w) {
         x = 0;
     }
 
@@ -93,17 +92,24 @@ function draw() {
     btn.draw();
     btn2.draw();
     col.fill = "black";
-    txt.draw(20, 20, "align");
+    txt.draw(80, 20, "align");
     txt.alignment = "left";
-    txt.draw(20, 40, "left");
+    txt.draw(80, 40, "left sfsd");
+
     txt.alignment = "center";
-    txt.draw(20, 60, "center");
+    txt.draw(80, 60, "center sdf");
+
     txt.alignment = "right";
     txt.font = "Arial";
-
-    txt.draw(20, 80, "right");
+    txt.draw(80, 80, "right sdfds");
     anim.x = mouse.x;
     anim.y = mouse.y;
     anim.draw();
 
+    if(testCollider.overlaps(secondCollider)){
+        console.log("boop")
+    }
+
+    testCollider.draw();
+    secondCollider.draw();
 }
