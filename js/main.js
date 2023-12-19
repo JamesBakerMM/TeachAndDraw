@@ -117,6 +117,8 @@ function draw() {
     anim1.draw();
     txt.alignment="center";
     txt.draw(anim1.x,anim1.y,"anim1")
+    anim2[anim2.frame].w=32;
+    anim2[anim2.frame].h=32;
     anim2.draw();
     txt.draw(anim2.x,anim2.y,"anim2")
     anim3.draw();
