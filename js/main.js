@@ -42,11 +42,13 @@ btn.label = `Entity Id:${btn.id}`;
 let btn2 = q.makeButton(350, 100, 100, 50);
 btn2.label = `Entity Id:${btn2.id}`;
 
+const testCollider=q.makeBoxCollider(400,250,50);
+const secondCollider=q.makeBoxCollider(250,200,100);
+const thirdCollider=q.makeBoxCollider(250,500,75);
+testCollider.velocity.x=-2;
+testCollider.velocity.y=0;
 
-const testCollider=q.makeBoxCollider(100,100,50);
-const secondCollider=q.makeBoxCollider(250,250,100);
-testCollider.velocity.x=2;
-testCollider.velocity.y=2;
+thirdCollider.velocity.y=-2;
 
 function setup() {
     q.w = 800;
@@ -75,7 +77,6 @@ function draw() {
         "This is a long piece of text that should be wrapped within the specified width.",
         200
     );
-
     
     shp.rectangle(x, 200, 100, 50);
     shp.rectangle(mouse.x, mouse.y, 100, 50);
@@ -113,18 +114,21 @@ function draw() {
     
     testCollider.draw();
     secondCollider.draw();
+    thirdCollider.draw();
 
     anim1.draw();
     txt.alignment="center";
     txt.draw(anim1.x,anim1.y,"anim1")
-    anim2[anim2.frame].w=32;
-    anim2[anim2.frame].h=32;
     anim2.draw();
     txt.draw(anim2.x,anim2.y,"anim2")
     anim3.draw();
     txt.draw(anim3.x,anim3.y,"anim3")
 
-    if(testCollider.overlaps(secondCollider)){
+    if(testCollider.collides(secondCollider)){
+        
+    }
+
+    if(thirdCollider.collides(secondCollider)){
         
     }
 
