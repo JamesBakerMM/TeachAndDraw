@@ -1,11 +1,11 @@
 
-# JbScript Drawing Library
+# DRAFTNAME Workout.js
 ## *A Simplified Canvas Library for learning to Code*
 This library is a small canvas library providing a set of drawing commands, asset loading commands, math functions and some basic 2d colliders. It is designed from the ground up for educational use.
 
 It is also it should be noted a reaction to p5 and p5.play. I have taught for a course using these 2 libraries multiple times since 2020 for Griffith University, as well as run 4, 2 week long gamejams using various versions of p5.play. 
 
-While I think p5 and p5.play are excellent teaching tools I feel they suffer from feature creep leading to large instruction sets that are intimidating to new students. By contrast this library is focused on a limited command set to reduce initial complexity and basic programming techniques.
+While I think p5 and p5.play are excellent teaching tools I feel they suffer from feature creep leading to large instruction sets that are intimidating to new students. By contrast this library is focused on a limited command set to reduce initial complexity.
 
 ## Core Principles
 - **Consistency is valuable** it is a great feeling when new assuming how something works and being correct based on prior experience. Below are some examples of how that influences the library design:
