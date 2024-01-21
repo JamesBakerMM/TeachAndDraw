@@ -2,11 +2,12 @@ import { $ as p,shp,col,mouse,kb,txt } from "../lib/Pen.js";
 import { Group } from "../lib/Group.js";
 const q = p;
 p.start(draw);
-
+p.debug=true;
 window.pen = p;
 
 let x = 0;
 
+// load animations
 let anim1=q.loadAnimation(
         20+8*20,
         q.h / 2-20,
@@ -31,11 +32,16 @@ let anim3=q.loadAnimation(
     "../images/fac0_wreckage3.png",
     "../images/fac0_wreckage4.png",
 )
+//end load animations
+
+//load assets
 let img = q.loadImage(mouse.x, mouse.y, "../images/sample.png");
 
 let img2 = q.loadImage(p.w / 2, q.h / 2, "../images/sample2.png");
 let text = q.loadTextFile("../data/hello.txt");
 let j = q.loadJsonFile("../data/jason.json");
+//end load assets
+
 let btn = q.makeButton(200, 100, 100, 50);
 btn.label = `Entity Id:${btn.id}`;
 
