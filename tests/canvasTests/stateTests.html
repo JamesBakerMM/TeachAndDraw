@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Group Tests</title>
+        <script type="module">
+            import {
+                $,
+                shp as shape,
+                col as colour,
+                mouse,
+                kb,
+                txt,
+            } from "/lib/Pen.js";
+            import { Group } from "/lib/Group.js";
+            import { TestSuite } from "/tests/TestSuite.js";
+
+            $.start(draw);
+            $.width = 800;
+            $.height = 800;
+
+            const test = new TestSuite();
+            //test reset
+            $.state.reset();
+
+            //test save twice load once
+
+            //test save once load twice
+
+            //test save and load updates colour
+            //test save and load updates shape
+            //test save and load updates text
+
+
+            $.state.save();
+            console.log($.state.stack[0]);
+
+            test.message("Defaults")
+                // Test for colour properties
+                test.assertEqual($.state.stack[0].colour.fill, "white", "Colour fill should be white");
+                test.assertEqual($.state.stack[0].colour.stroke, "white", "Colour stroke should be white");
+
+                // Test for shape properties
+                test.assertEqual($.state.stack[0].shape.strokeDashed.length, 0, "Shape strokeDashed should be an empty array");
+                test.assertEqual($.state.stack[0].shape.xAlignment, "center", "Shape xAlignment should be 'center'");
+                test.assertEqual($.state.stack[0].shape.yAlignment, "center", "Shape yAlignment should be 'center'");
+                test.assertEqual($.state.stack[0].shape.strokeWidth, 1, "Shape strokeWidth should be 1");
+
+                // Test for text properties
+                test.assertEqual($.state.stack[0].text.alignment, "center", "Text alignment should be 'center'");
+                test.assertEqual($.state.stack[0].text.baseline, "middle", "Text baseline should be 'middle'");
+                test.assertEqual($.state.stack[0].text.size, 16, "Text size should be 16");
+                test.assertEqual($.state.stack[0].text.font, "sans-serif", "Text font should be 'sans-serif'");
+                
+                $.state.load();
+                
+            test.message("Resets")
+                
+                $.state.reset();
+                test.assertEqual($.colour.fill, "white", "Colour fill should be white");
+                test.assertEqual($.colour.stroke, "white", "Colour stroke should be white");
+
+                // test.assertEqual($.shape.strokeDashed.length, 0, "Shape strokeDashed should be an empty array");
+                test.assertEqual($.shape.xAlignment, "center", "Shape xAlignment should be 'center'");
+                test.assertEqual($.shape.yAlignment, "center", "Shape yAlignment should be 'center'");
+                test.assertEqual($.shape.strokeWidth, 1, "Shape strokeWidth should be 1");
+
+                test.assertEqual($.text.alignment, "center", "Text alignment should be 'center'");
+                test.assertEqual($.text.baseline, "middle", "Text baseline should be 'middle'");
+                test.assertEqual($.text.size, 16, "Text size should be 16");
+                test.assertEqual($.text.font, "sans-serif", "Text font should be 'sans-serif'");
+
+                
+            test.message("Text State changes")
+                $.text.alignment="left";
+                $.state.save();
+                $.text.alignment="right";
+                $.state.load();
+                test.assertEqual($.text.alignment,"left","State should alignment to left as set pre save");
+
+                $.text.baseline="bottom";
+                $.state.save();
+                $.text.baseline="middle";
+                $.state.load();
+                test.assertEqual($.text.baseline,"bottom","State should restore baselie to middle as set pre save");
+
+                $.text.size=10;
+                $.state.save();
+                $.text.size=20;
+                $.state.load();
+                test.assertEqual($.text.size,16,"State should restore size to 10 as set pre save");
+                
+                $.text.font="serif";
+                $.state.save();
+                $.text.font="example font";
+                $.state.load();
+                test.assertEqual($.text.font,"serif","State should restore font to serif as set pre save");
+
+                $.state.reset();
+
+            test.message("Shape State changes")
+                $.shape.xAlignment="right";
+                $.state.save();
+                $.shape.xAlignment="left";
+                $.state.load();
+                test.assertEqual($.shape.xAlignment,"right","State should restore shape xAlignment to right");
+                
+                $.shape.yAlignment="top";
+                $.state.save();
+                $.shape.yAlignment="bottom";
+                $.state.load();
+                test.assertEqual($.shape.yAlignment,"top","State should restore shape yAlignment to top");
+                
+                $.state.reset();
+
+            test.message("Colour State changes")
+                $.colour.fill="blue";
+                $.state.save();
+                $.colour.fill="red";
+                $.state.load();
+                test.assertEqual($.colour.fill,"blue","state should restore the .fill colour to blue");
+                
+                $.colour.stroke="green";
+                $.state.save();
+                $.colour.stroke="yellow.";
+                $.state.load();
+                test.assertEqual($.colour.stroke,"green","state should restore the .fill colour to green");
+
+            $.state.reset();
+            test.message("Confirm Save/Load stack management")
+                $.state.save();
+                $.state.save();
+                test.assertEqual($.state.stack.length,2,"After 2 saves, state stack should have 2 entries");
+                
+                $.state.load();
+                test.assertEqual($.state.stack.length,1,"After load one state should remain");
+
+            test.message("Confirm multiple loads throws an error")
+                test.assertError(()=>{
+                    $.state.stack=[]; //set stack to 0
+                    $.state.load();
+                },"Program should error when try to load from an empty stack");
+            
+            test.reportResults();
+            
+            function draw() {
+            }
+        </script>
+        <style>
+            html,
+            body,
+            * {
+                margin: 0px;
+                padding: 0px;
+                background-color: rgb(30, 30, 25);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+    </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Group Tests</title>
+        <script type="module">
+            import {
+                $,
+                shp as shape,
+                col as colour,
+                mouse,
+                kb,
+                txt,
+            } from "/lib/Pen.js";
+            import { Group } from "/lib/Group.js";
+            import { TestSuite } from "/tests/TestSuite.js";
+            const test = new TestSuite();
+            //GROUP TYPE CHECKING
+            test.assertError(() => {
+                let numGroup = new Group(0, "a");
+                numGroup.push(0);
+                numGroup.push("a");
+            }, "group should error on mismatched types on creation");
+            test.assertError(() => {
+                let numGroup = new Group();
+                numGroup.push(0);
+                numGroup.push("a");
+            }, "group should error on mismatched types on push");
+            test.assertError(() => {
+                let numGroup = new Group();
+                numGroup.push($.makeBoxCollider(2, 2, 20, 20));
+                numGroup.push({});
+            }, "group should error when a non collider object is added to a group");
+            test.assertError(() => {
+                let numGroup = new Group();
+                numGroup.unshift(0);
+                numGroup.unshift("a");
+            }, "group should error on mismatched types on unshift");
+
+            //GROUP REMOVAL
+            let objGroup = new Group(
+                {
+                    id: 1,
+                    remove: true,
+                },
+                {
+                    id: 2,
+                    remove: false,
+                },
+                {
+                    id: 3,
+                    remove: true,
+                }
+            );
+            let otherObjGroup = new Group(
+                {
+                    id: "a",
+                    remove: false,
+                },
+                {
+                    id: "b",
+                    remove: true,
+                },
+                {
+                    id: 3,
+                    remove: true,
+                }
+            );
+            Group.cleanup();
+            test.assertEqual(
+                objGroup.length,
+                otherObjGroup.length,
+                "cleanup should remove all entries marked for removal from all groups"
+            );
+            test.assertEqual(
+                objGroup.id,
+                otherObjGroup.id,
+                "cleanup should remove all entries marked for removal from all groups"
+            );
+
+
+            //GROUP COLLISIONS
+            const LEFT_X = 20;
+            const SIZE = 100;
+            const RIGHT_X = LEFT_X + SIZE - 20;
+            const sampleCollider = makeTestBox(LEFT_X, 160);
+
+            const leftGroup = new Group();
+            for (let i = 0; i < 3; i++) {
+                const Y_OFFSET = (SIZE + 10) * i;
+                const tempCollider = makeTestBox(LEFT_X, 280 + Y_OFFSET);
+                console.log(tempCollider);
+                leftGroup.push(tempCollider);
+            }
+            const rightGroup = new Group();
+            for (let i = 0; i < 2; i++) {
+                const Y_OFFSET = (SIZE + 10) * i;
+                const tempCollider = makeTestBox(RIGHT_X, 210 + Y_OFFSET);
+                rightGroup.push(tempCollider);
+            }
+
+            test.assertTrue(() => {
+                return rightGroup.overlaps(leftGroup);
+            }, "rightGroup should overlap left group");
+
+            test.assertTrue(() => {
+                return sampleCollider.overlaps(rightGroup);
+            }, "sampleCollider should overlap rightGroup");
+            test.assertTrue(() => {
+                return rightGroup.overlaps(sampleCollider);
+            }, "rightGroup should overlap sampleCollider");
+            test.assertFalse(() => {
+                return leftGroup.overlaps(sampleCollider);
+            }, "leftGroup should NOT overlap sampleCollider");
+            test.assertTrue(() => {
+                return rightGroup[0].overlaps(leftGroup[0]);
+            }, "manually selected sprites from 2 groups should overlap ");
+
+            function makeTestBox(x, y) {
+                let tempBox = $.makeBoxCollider(x, y, SIZE, SIZE);
+                return tempBox;
+            }
+
+            $.start(draw);
+            $.width = 800;
+            $.height = 800;
+            function draw() {
+                sampleCollider.draw();
+                leftGroup.draw();
+                rightGroup.draw();
+            }
+            test.reportResults();
+        </script>
+        <style>
+            html,
+            body,
+            * {
+                margin: 0px;
+                padding: 0px;
+                background-color: rgb(30, 30, 25);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+    </body>
+</html>

@@ -23,23 +23,162 @@ something something change the main.js file to see changes
 [Demo Video](www.github.com/jamesBakerMM) - You can watch a video tutorial on how to get started here! :)
 
 ## Documentation
-**Core**- basic drawing commands
-- [pen](www.github.com/jamesBakerMM) - the core everything builds from, his controls the canvas and holds all the other command sets.
-- [colour](www.github.com/jamesBakerMM) - controls the colours of things
-- [shape](www.github.com/jamesBakerMM) - controls the drawing of various shapes and some config options
-- [text](www.github.com/jamesBakerMM) - controls the drawing of to the screen and has some config options
+## [pen](www.github.com/jamesBakerMM) - the core everything builds from, this controls the canvas and holds all the other command sets. ##
+#### Methods: ####
+- **loadAnimation(x,y,...paths)**: 
+- **loadImage(x,y,filepath)**:
+- **loadTextFile(filepath)**: 
+- **loadJsonFile(filepath)**: 
+- **makeButton(x,y,w,h,label="btn")**: 
+- **makeBoxCollider(x,y,w,h)**: sdfsd
+- **makeCircleCollider(x,y,d)**: NOT DONE
+## [state](www.github.com/jamesBakerMM) - saves and loads drawing states for the program ##
+#### Methods: ####
+- **save**
+- **load**
+## [camera](www.github.com/jamesBakerMM) - camera ##
+#### Properties: ####
+- **x**
+- **y**
+#### Methods: ####
+- **on**
+- **off**
+## [math](www.github.com/jamesBakerMM) - set of degree based math functions and a few generally handy ones ##
+#### Methods: ####
+- **sin** works in degrees
+- **cos** works in degrees
+- **tan** works in degrees
+- **atan** works in degrees
+- **atan2** works in degrees
+- **dist(x1,y1,x2,y2)** returns the dist between 2 points
+- **random(firstVal,secondVal)** returns a random number
+- **rescaleNumber(num,inMin,inMax,outMin,outMax)** rescales a number from one range to another
+## [colour](www.github.com/jamesBakerMM)  - controls the colours of things ##
+- #### Properties: ####
+    - **fill**
+    - **stroke**
+## [shape](www.github.com/jamesBakerMM) - controls the drawing of various shapes and some config options ##
+#### Properties: ####
+- **xAlignment** ❓changes the origin point on x axis, valid values are: "left","center","right", considered for removal!
+- **yAlignment** ❓same as above, considered for removal!
+- **strokeWidth** takes an int sets the strokeWidth/strokeWeight that heavy
+#### Methods: ####
+- **rectangle(x,y,w,h)** - draws a rectangle, origin point adjustable by x and y alignment
+- **oval(x,y,w,h)** - draws a oval at given coords
+- **line(xStart, yStart, xEnd, yEnd)**
+- **multiline(...coords)** draws a set of lines from point to point if given a sequence of x,y pairs
+- **shape(...coords)** name needs to be changed to polygon or something
+- **arc(x, y, w, h, startAngle, endAngle)** 
 
-**Entities** - objects that maintain their own x and y properties
-- [img](www.github.com/jamesBakerMM) - 
-- [collider](www.github.com/jamesBakerMM) - 
-- [animation](www.github.com/jamesBakerMM) - 
+  
+## [text](www.github.com/jamesBakerMM) - controls the drawing of to the screen and has some config options ##
+#### Properties: ####
+- **alignment** ["left","center","right"]
+- **baseline** ["top","middle","bottom","alphabetic"]
+- **size** 
+- **font**
+#### Methods: ####
+- draw(x,y,content,maxWidth)
 
-**Controls** - sfsd
-- [mouse](www.github.com/jamesBakerMM) - 
-- [keyboard](www.github.com/jamesBakerMM) - 
+# **Entities** - objects that maintain their own x and y properties #
+- ##  [img](www.github.com/jamesBakerMM) actually a wrapper around an asset behind the scenes ## 
+    - #### Properties: ####
+        - id
+        - w
+        - h
+        - rotation
+    - #### Methods: ####
+        - draw()
+- ## [boxCollider && circleCollider](www.github.com/jamesBakerMM) ##
+    - #### Properties: ####
+        - id
+        - velocity
+        - mass
+        - bounciness
+        - prevX
+        - prevY
+        - x
+        - y
+        - h
+        - w
+        - rotation
+        - attachment: an attached asset, like an img or animation
+    - #### Methods: ####
+        - draw()
+        - collides()
+        - overlaps()
+        - pointInCollider
+- ## [animation](www.github.com/jamesBakerMM) (extends array) ##
+    - #### Properties: ####
+      - **delay:** int 
+      - **length:** int
+      - **frame** int
+      - **looping** boolean 
+      - **x** int 
+      - **y** int 
+      - **w** int 
+      - **h** int 
+      - **playing** boolean 
+      - **rotation** int 
+    - #### Methods:
+        - **progressFrame():int**
+# **Controls** #
+- ## [mouse](www.github.com/jamesBakerMM) ##
+    - #### Properties:
+        - x
+        - y
+        - prevX
+        - prevY
+      - **position:** Point Instance
+      - **previous:** Point Instance
+      - **isPressed:** boolean
 
-**Media** - sfsd
-- [sound](www.github.com/jamesBakerMM) - 
-- [video](www.github.com/jamesBakerMM) - 
+
+- ## [keyboard](www.github.com/jamesBakerMM) ## 
+- #### Methods:  ####
+    - **pressed(key):boolean**
+    - **down(key):boolean**
+    - **howLongDown(key):int**
+
+# **Media** #
+- ## [sound](www.github.com/jamesBakerMM) ##  
+    - #### Properties:  ####
+        - isPlaying
+        - time
+        - volume
+    - #### Methods:  ####
+        - play
+        - stop 
+        - loop
+        - pause
+        - goto
+- ## [video](www.github.com/jamesBakerMM) ##
+    - #### Properties:  ####
+        - x
+        - y
+        - w - not settable
+        - h - not settable
+        - rotation
+        - scale - % scale
+        - isPlaying
+        - time
+        - volume
+    - #### Methods:  ####
+        - play
+        - stop
+        - loop
+        - pause
+        - goto
+## [group](www.github.com/jamesBakerMM) (extends array) - dynamic single type array with automated clean up for marked entries ##
+- #### Properties:  ####
+    - length
+- #### Methods:  ####
+    - **cleanup**: removes objects that have .remove===true
+    - **push**: typechecks
+    - **unshift**: typechecks
+    - **draw**: typechecks
+    - **overlaps**: typechecks
+    - **collides**: typechecks
+    - **getRandomEntry**: returns random entry
 ## License
 something something GPL 3.0 something something complete
