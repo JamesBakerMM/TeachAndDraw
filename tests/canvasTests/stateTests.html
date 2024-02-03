@@ -24,14 +24,6 @@
             //test reset
             $.state.reset();
 
-            //test save twice load once
-
-            //test save once load twice
-
-            //test save and load updates colour
-            //test save and load updates shape
-            //test save and load updates text
-
 
             $.state.save();
             console.log($.state.stack[0]);
@@ -61,7 +53,7 @@
                 test.assertEqual($.colour.fill, "white", "Colour fill should be white");
                 test.assertEqual($.colour.stroke, "white", "Colour stroke should be white");
 
-                // test.assertEqual($.shape.strokeDashed.length, 0, "Shape strokeDashed should be an empty array");
+                test.assertTrue(()=>{return $.shape.strokeDashed.length===0}, "Shape strokeDashed should be an empty array");
                 test.assertEqual($.shape.xAlignment, "center", "Shape xAlignment should be 'center'");
                 test.assertEqual($.shape.yAlignment, "center", "Shape yAlignment should be 'center'");
                 test.assertEqual($.shape.strokeWidth, 1, "Shape strokeWidth should be 1");

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Group Tests</title>
+        <script type="module">
+            import {
+                $,
+                shp as shape,
+                col as colour,
+                mouse,
+                kb,
+                txt
+            } from "/lib/Pen.js";
+            import {
+                Point
+            } from "/lib/Point.js";
+            import { Group } from "/lib/Group.js";
+            import { TestSuite } from "/tests/TestSuite.js";
+
+            $.start(draw);
+            $.width = 800;
+            $.height = 800;
+
+            const test = new TestSuite();
+            
+            test.message("Point Creation");
+            const nuPoint=new Point($,20,30)
+            test.assertEqual(nuPoint.x,20,"x should be 20");
+            test.assertEqual(nuPoint.y,30,"y should be 30");
+            
+            test.message("Point x and y update");
+            nuPoint.x=10;
+            nuPoint.y=70;
+            test.assertEqual(nuPoint.x,10,"x should be 10 after the change");
+            test.assertEqual(nuPoint.y,70,"y should be 70 after the change");
+            
+            test.message("isInRect");
+
+            const x=50;
+            const y=50;
+            const w=100;
+            const h=100;
+            
+            test.assertTrue(()=>{return Point.isInRect(nuPoint.x,nuPoint.y,x,y,w,h)},"point should be in given rect");
+            
+            nuPoint.x=0;
+            nuPoint.y=0;
+            const x2=100;
+            const y2=100;
+            const w2=1;
+            const h2=1;
+
+            test.assertFalse(()=>{return Point.isInRect(nuPoint.x,nuPoint.y,x2,y2,w2,h2)},"point should not be in the given Rect");
+
+            test.reportResults();
+            
+            function draw() {
+            }
+        </script>
+        <style>
+            html,
+            body,
+            * {
+                margin: 0px;
+                padding: 0px;
+                background-color: rgb(30, 30, 25);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+    </body>
+</html>
