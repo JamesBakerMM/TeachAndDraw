@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Group Tests</title>
+        <title>Maff Tests</title>
         <script type="module">
             import {
                 $,
@@ -26,25 +26,72 @@
             const test = new TestSuite();
             
             test.message("num checking!");
-            //isNum
+
+            test.assertTrue(
+                ()=>{
+                    return $.math.isNum(7);
+                },
+                "isNum should accept 7 as a number"
+            );
+            test.assertTrue(
+                ()=>{
+                    return $.math.isNum(5.7);
+                },
+                "isNum should accept 5.7 as a number"
+            );
+            
+            test.assertError(
+                ()=>{
+                    return $.math.isNum("7");
+                },
+                "isNum should NOT be accepted '7' as a number"
+            );
+            test.assertError(()=>{
+                $.math.isNum(Infinity);
+            },"Infinity should NOT be accepted as a number");
+            
+            test.assertError(()=>{
+                $.math.isNum(NaN);
+            },"NaN should NOT be accepted as a number");
+            
 
             test.message("Calculation checks!");
-            //sin
-            //cos
-            //tan
-            //atan
-            //atan2
-            //dist
-            //rescaleNumber
+            test.assertEqual(
+                $.math.sin(20),
+                0.3420201433256687,
+                "sin(20 deg) should be 0.3420201433256687"
+            );
+            test.assertEqual(
+                $.math.cos(20),
+                0.9396926207859084,
+                "cos(20 deg) should be 0.9396926207859084"
+            );
+            test.assertEqual(
+                $.math.tan(20),
+                0.36397023426620234,
+                "tan(20 deg) should be 0.36397023426620234"
+            );
+            test.assertEqual(
+                $.math.dist(20,20,40,40),
+                28.284271247461902,
+                "dist(20,20,40,40) should be 28.284271247461902"
+            );
+
+            test.assertEqual(
+                $.math.rescaleNumber(5,0,10,0,100),
+                50,
+                "5 should be rescaled to 50 moving from 0->10 versus 0->100"
+            );
+            test.message("atan");
+            test.message("atan2"); 
+
             
             test.message("Random checks!");
             //random
 
-
             test.reportResults();
             
-            function draw() {
-            }
+            function draw() {}
         </script>
         <style>
             html,
