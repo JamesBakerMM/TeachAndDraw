@@ -1,4 +1,4 @@
-import { $, shp as shape, col as colour, mouse, kb, txt as text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
 import { Group } from "../../lib/Group.js";
 $.start(draw);
 $.debug=true;

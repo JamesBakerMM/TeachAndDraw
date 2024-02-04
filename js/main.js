@@ -1,4 +1,4 @@
-import { $ as p,shp,col,mouse,kb,txt } from "../lib/Pen.js";
+import { $ as p,shape,colour,mouse,kb,txt } from "../lib/Pen.js";
 import { Group } from "../lib/Group.js";
 const q = p;
 p.start(draw);
@@ -74,7 +74,7 @@ function draw() {
     img.rotation = 0;
     colour.fill = "grey";
     shape.rectangle(p.w / 2, q.h / 2, q.w, q.h);
-    col.fill = "blue";
+    colour.fill = "blue";
     txt.size = 19;
 
     txt.draw(
@@ -84,14 +84,14 @@ function draw() {
         200
     );
     
-    shp.rectangle(x, 200, 100, 50);
-    shp.rectangle(mouse.x, mouse.y, 100, 50);
-    shp.oval(mouse.x, mouse.y, 50, 30);
-    shp.line(300, 50, 400, 150);
-    shp.multiline(10, 10, 50, 50, 10, 90);
-    shp.shape(150 + x, 100, 200 + x, 150, 150 + x, 200, 100 + x, 150);
+    shape.rectangle(x, 200, 100, 50);
+    shape.rectangle(mouse.x, mouse.y, 100, 50);
+    shape.oval(mouse.x, mouse.y, 50, 30);
+    shape.line(300, 50, 400, 150);
+    shape.multiline(10, 10, 50, 50, 10, 90);
+    shape.shape(150 + x, 100, 200 + x, 150, 150 + x, 200, 100 + x, 150);
 
-    shp.line(200, 0, 200, q.h);
+    shape.line(200, 0, 200, q.h);
     txt.draw(200, 200, "200,200");
 
     x += 1;
@@ -106,7 +106,7 @@ function draw() {
     // img2.draw();
     btn.draw();
     btn2.draw();
-    col.fill = "black";
+    colour.fill = "black";
     txt.draw(80, 20, "align");
     txt.alignment = "left";
     txt.draw(80, 40, "left sfsd");
