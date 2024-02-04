@@ -72,8 +72,8 @@ function draw() {
     }
 
     img.rotation = 0;
-    col.fill = "grey";
-    shp.rectangle(p.w / 2, q.h / 2, q.w, q.h);
+    colour.fill = "grey";
+    shape.rectangle(p.w / 2, q.h / 2, q.w, q.h);
     col.fill = "blue";
     txt.size = 19;
 

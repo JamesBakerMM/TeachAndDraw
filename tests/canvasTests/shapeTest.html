@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Shape Tests</title>
+        <script type="module">
+            import {
+                $,
+                shp as shape,
+                col as colour,
+                mouse,
+                kb,
+                txt
+            } from "/lib/Pen.js";
+            import {
+                Point
+            } from "/lib/Point.js";
+            import { Group } from "/lib/Group.js";
+            import { TestSuite } from "/tests/TestSuite.js";
+
+            $.start(draw);
+            $.width = 800;
+            $.height = 800;
+
+            const test = new TestSuite();
+
+            //check xAlignment
+            //check xAlignmnt
+
+            test.reportResults();
+            
+            function draw() {}
+        </script>
+        <style>
+            html,
+            body,
+            * {
+                margin: 0px;
+                padding: 0px;
+                background-color: rgb(30, 30, 25);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+    </body>
+</html>
