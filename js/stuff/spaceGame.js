@@ -1,8 +1,9 @@
-import { $ as p, shp as shape, col as colour, mouse, kb, txt as text } from "../../lib/Pen.js";
+import { $ as p, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
 import { Group } from "../../lib/Group.js";
 
 p.start(draw);
 
+p.debug=true;
 //screen code
     p.w = 800;
     p.h = 800;
