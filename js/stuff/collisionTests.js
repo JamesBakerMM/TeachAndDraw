@@ -25,6 +25,7 @@ function draw(){
         console.log("left square collided with right square")
     }
 
+    //comment out the bellow collides calls
     if(leftEdge.collides(leftSquare)){
         console.log("left edge collides with left square")
     }
