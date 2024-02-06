@@ -26,13 +26,13 @@ function draw(){
     }
 
     //comment out the bellow collides calls
-    if(leftEdge.collides(leftSquare)){
-        console.log("left edge collides with left square")
-    }
+    // if(leftEdge.collides(leftSquare)){
+    //     console.log("left edge collides with left square")
+    // }
 
-    if(edges.collides(rightSquare)){
-        console.log("right square collides with a member of the edges group")
-    }
+    // if(edges.collides(rightSquare)){
+    //     console.log("right square collides with a member of the edges group")
+    // }
     squares.draw();
     edges.draw();
 }
