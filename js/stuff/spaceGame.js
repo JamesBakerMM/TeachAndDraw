@@ -127,7 +127,7 @@ function makeEnemyWave(x, y, amount = 5, x_increment = 100, y_increment=10) {
 function splashScreen() {
     colour.fill = "white";
     text.draw(p.w / 2, p.h / 2, "Press a to start!");
-    if (kb.pressed("a")) {
+    if (kb.pressed("any")) {
         currentScreen = SCREENS.MENU;
     }
 }
