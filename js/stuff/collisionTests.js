@@ -33,6 +33,7 @@ function draw(){
     if(edges.collides(rightSquare)){
         console.log("right square collides with a member of the edges group")
     }
+    
     squares.draw();
     edges.draw();
 }
