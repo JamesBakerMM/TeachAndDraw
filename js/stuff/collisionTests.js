@@ -10,13 +10,13 @@ leftEdge.static=true;
 let rightEdge=$.makeBoxCollider($.w,$.h/2,20,$.h);
 rightEdge.static=true;
 
-edges.push(leftEdge);
-edges.push(rightEdge);
+//edges.push(leftEdge);
+//edges.push(rightEdge);
 
-let leftSquare=$.makeBoxCollider($.w/2-20,$.h/2,40,40);
-leftSquare.velocity.x=2;
-let rightSquare=$.makeBoxCollider($.w/2+80,$.h/2,40,40);
-rightSquare.velocity.x=-2;
+let leftSquare=$.makeBoxCollider($.w/2-200,$.h/2-30,40,40);
+leftSquare.velocity.x=1;
+let rightSquare=$.makeBoxCollider($.w/2+200,$.h/2,40,40);
+rightSquare.velocity.x=-1;
 squares.push(leftSquare);
 squares.push(rightSquare);
 
@@ -26,14 +26,20 @@ function draw(){
     }
 
     //comment out the bellow collides calls
-    if(leftEdge.collides(leftSquare)){
-        console.log("left edge collides with left square")
-    }
+    //if(leftEdge.collides(leftSquare)){
+    //    console.log("left edge collides with left square")
+    //}
 
     if(edges.collides(rightSquare)){
         console.log("right square collides with a member of the edges group")
     }
     
+    for (let i = 0; i < squares.length; i++) {
+        $.colour.fill = "#00000000";
+        $.colour.stroke = "#FFFF00FF";
+        $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
+    }
+
     squares.draw();
-    edges.draw();
+    //edges.draw();
 }
