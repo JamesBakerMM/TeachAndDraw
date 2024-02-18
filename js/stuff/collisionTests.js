@@ -1,5 +1,6 @@
 import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
 import { Group } from "../../lib/Group.js";
+import {Velocity} from "../../lib/Velocity.js"
 $.start(draw);
 $.debug=true;
 let edges = new Group();
@@ -40,6 +41,12 @@ function draw(){
 
     squares.draw();
     //edges.draw();
+    if(mouse.isPressed){
+        leftSquare.x=mouse.x;
+        leftSquare.y=mouse.y;
+        leftSquare.velocity.x=0;
+        leftSquare.velocity.y=0;
+    }
     
     for (let i = 0; i < squares.length; i++) {
         if(leftSquare.collides(squares[i])){
