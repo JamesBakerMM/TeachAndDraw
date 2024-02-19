@@ -6,15 +6,55 @@
     <title>Document</title>
     <script src="./js/stuff/collisionTests.js" type="module" defer></script>
     <style>
-        html, body,* {
+        html, body {
             margin:0px;
             padding:0px;
             background-color:rgb(30,30,25);
+            font-family:sans-serif; 
+            color:white;
         }       
+        #debug {
+            position:absolute;
+            border-radius:15px;
+            padding:1rem;
+            right:10px;
+            background-color:rgba(30,30,25,0.5);
+            top:0;
+            width:300px;
+            transition:0.5s;
+        }
+        
+        #debug.hidden {
+            right: -360px; /* Hide all except 1px */
+        }
+        #debug.hidden button {
+            position:absolute;
+        }
+        #debug:hover {
+            background-color:rgba(30,30,25,1);
+        }
+        #debug:hover button {
+            opacity:1;
+        }
+        #debug button {
+            left:-3rem;
+            position:absolute;
+            height:3rem;
+            width:3rem;
+            opacity:0.5;
+        }
+        #debug ul {
+            padding-left:1rem;
+        }
     </style>
 </head>
 <body>
     <canvas id="myCanvas" style="border:2px solid black;"></canvas>
-    
+    <aside id="debug">
+        <button>🔍</button>
+        <section>
+
+        </section>
+    </aside>
 </body>
 </html>
