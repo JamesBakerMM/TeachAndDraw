@@ -6,16 +6,16 @@ $.start(draw);
 $.debug=true;
 let edges = makeGroup();
 let squares = makeGroup();
-let leftEdge=$.makeBoxCollider(0,$.h/2,20,$.h);
-leftEdge.static=true;
-let rightEdge=$.makeBoxCollider($.w,$.h/2,20,$.h);
-rightEdge.static=true;
+// let leftEdge=$.makeBoxCollider(0,$.h/2,20,$.h);
+// leftEdge.static=true;
+// let rightEdge=$.makeBoxCollider($.w,$.h/2,20,$.h);
+// rightEdge.static=true;
 
-//edges.push(leftEdge);
-//edges.push(rightEdge);
+// edges.push(leftEdge);
+// edges.push(rightEdge);
 
 
-let leftSquare=$.makeBoxCollider($.w/2-200,$.h/2-20,80,80);
+let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
 leftSquare.velocity.x = 6;
 leftSquare.mass = 2;
 leftSquare.friction = 10;
@@ -70,7 +70,7 @@ for (let i = -5; i < 5; i++) {
 
 function draw(){
     // if($.frameCount>50){
-    //     $.paused=true;
+        // $.paused=true;
     // }
     squares.draw();
     //edges.draw();
