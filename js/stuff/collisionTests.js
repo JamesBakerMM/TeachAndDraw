@@ -69,9 +69,9 @@ for (let i = -5; i < 5; i++) {
 }
 
 function draw(){
-    // if($.frameCount>50){
-        // $.paused=true;
-    // }
+    if($.frameCount>50){
+        $.paused=true;
+    }
     squares.draw();
     //edges.draw();
     if(mouse.isPressed){
@@ -84,8 +84,7 @@ function draw(){
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
         // if(leftSquare.collides(squares[i])){
-            // squares[i].remove=true
-            //console.log("left square collided with right square")
+        //     squares[i].remove=true
         // }
         // for (let j = 0; j < squares.length; j++) {
         //     if (i != j) {
