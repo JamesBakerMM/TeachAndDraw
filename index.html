@@ -12,6 +12,7 @@
             background-color:rgb(30,30,25);
             font-family:sans-serif; 
             color:white;
+            overflow:hidden;
         }       
         #debug {
             position:absolute;
@@ -22,6 +23,12 @@
             top:0;
             width:300px;
             transition:0.5s;
+        }
+
+        .prev {
+            background-color:red;
+            background-size:10px;
+            height:1lh;
         }
         
         #debug.hidden {
@@ -44,6 +51,8 @@
             opacity:0.5;
         }
         #debug ul {
+            padding:0;
+            margin:0;
             padding-left:1rem;
         }
     </style>
@@ -51,7 +60,7 @@
 <body>
     <canvas id="myCanvas" style="border:2px solid black;"></canvas>
     <aside id="debug">
-        <button>🔍</button>
+        <button id="showhidebtn">🔍</button>
         <section>
 
         </section>

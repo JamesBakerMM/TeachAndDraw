@@ -1,11 +1,11 @@
 import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
-import { Group } from "../../lib/Group.js";
+import { makeGroup } from "../../lib/Group.js";
 
 $.start(draw);
 
 $.debug=true;
-let edges = new Group();
-let squares = new Group();
+let edges = makeGroup();
+let squares = makeGroup();
 let leftEdge=$.makeBoxCollider(0,$.h/2,20,$.h);
 leftEdge.static=true;
 let rightEdge=$.makeBoxCollider($.w,$.h/2,20,$.h);
@@ -69,9 +69,9 @@ for (let i = -5; i < 5; i++) {
 }
 
 function draw(){
-    if($.frameCount>50){
-        $.paused=true;
-    }
+    // if($.frameCount>50){
+    //     $.paused=true;
+    // }
     squares.draw();
     //edges.draw();
     if(mouse.isPressed){
@@ -83,12 +83,15 @@ function draw(){
     
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
-        if(leftSquare.collides(squares[i])){
+        // if(leftSquare.collides(squares[i])){
+            // squares[i].remove=true
             //console.log("left square collided with right square")
-        }
+        // }
         // for (let j = 0; j < squares.length; j++) {
         //     if (i != j) {
-        //         squares[i].collides(squares[j]);
+        //         if(squares[i].collides(squares[j])){
+        //             squares[j].remove=true;
+        //         }
         //     }
         // }
 
