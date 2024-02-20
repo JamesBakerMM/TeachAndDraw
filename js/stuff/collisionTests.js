@@ -21,7 +21,8 @@ leftSquare.mass = 2;
 leftSquare.friction = 10;
 squares.push(leftSquare);
 
-for (let i = -5; i < 5; i++) {
+const START_NUM=-30;
+for (let i = START_NUM; i < 5; i++) {
     let rightSquare=$.makeBoxCollider($.w/2+200,$.h/2 + i * 60,40,40);
     rightSquare.velocity.x = 0;
     rightSquare.mass = 1;
@@ -30,7 +31,7 @@ for (let i = -5; i < 5; i++) {
 }
 
 
-for (let i = -5; i < 5; i++) {
+for (let i = START_NUM; i < 5; i++) {
     let rightSquare=$.makeBoxCollider($.w/2+150,$.h/2 + i * 60,40,40);
     rightSquare.velocity.x = 0;
     rightSquare.mass = 1;
@@ -38,7 +39,7 @@ for (let i = -5; i < 5; i++) {
     squares.push(rightSquare);
 }
 
-for (let i = -5; i < 5; i++) {
+for (let i = START_NUM; i < 5; i++) {
     let rightSquare=$.makeBoxCollider($.w/2+100,$.h/2 + i * 60,40,40);
     rightSquare.velocity.x = 0;
     rightSquare.mass = 1;
@@ -46,21 +47,21 @@ for (let i = -5; i < 5; i++) {
     squares.push(rightSquare);
 }
 
-for (let i = -5; i < 5; i++) {
+for (let i = START_NUM; i < 5; i++) {
     let rightSquare=$.makeBoxCollider($.w/2+50,$.h/2 + i * 60,40,40);
     rightSquare.velocity.x = 0;
     rightSquare.mass = 1;
     rightSquare.friction = 10;
     squares.push(rightSquare);
 }
-for (let i = -5; i < 5; i++) {
+for (let i = START_NUM; i < 5; i++) {
     let rightSquare=$.makeBoxCollider($.w/2+2,$.h/2 + i * 60,40,40);
     rightSquare.velocity.x = 0;
     rightSquare.mass = 1;
     rightSquare.friction = 10;
     squares.push(rightSquare);
 }
-for (let i = -5; i < 5; i++) {
+for (let i = START_NUM; i < 5; i++) {
     let rightSquare=$.makeBoxCollider($.w/2-39,$.h/2 + i * 60,40,40);
     rightSquare.velocity.x = 0;
     rightSquare.mass = 1;
@@ -69,9 +70,11 @@ for (let i = -5; i < 5; i++) {
 }
 
 function draw(){
-    if($.frameCount>50){
-        $.paused=true;
-    }
+    // if($.frameCount>50){
+
+    // $.text.font="arial";
+        // $.paused=true;
+    // }
     squares.draw();
     //edges.draw();
     if(mouse.isPressed){
@@ -79,6 +82,19 @@ function draw(){
         leftSquare.y=mouse.y;
         leftSquare.velocity.x=0;
         leftSquare.velocity.y=0;
+    }
+
+    if(kb.isDown("arrowup")){
+        leftSquare.velocity.y--
+    }
+    if(kb.isDown("arrowdown")){
+        leftSquare.velocity.y++
+    }
+    if(kb.isDown("arrowleft")){
+        leftSquare.velocity.x--
+    }
+    if(kb.isDown("arrowright")){
+        leftSquare.velocity.x++
     }
     
     squares.collides(squares);
