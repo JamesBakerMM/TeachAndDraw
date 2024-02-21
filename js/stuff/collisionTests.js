@@ -3,7 +3,7 @@ import { makeGroup } from "../../lib/Group.js";
 
 $.start(draw);
 
-$.debug=true;
+// $.debug=true;
 let edges = makeGroup();
 let squares = makeGroup();
 // let leftEdge=$.makeBoxCollider(0,$.h/2,20,$.h);
@@ -21,7 +21,7 @@ leftSquare.mass = 2;
 leftSquare.friction = 10;
 squares.push(leftSquare);
 
-const START_NUM=-55;
+const START_NUM=-45;
 for (let i = START_NUM; i < 5; i++) {
     let rightSquare=$.makeBoxCollider($.w/2+200,$.h/2 + i * 60,40,40);
     rightSquare.velocity.x = 0;
