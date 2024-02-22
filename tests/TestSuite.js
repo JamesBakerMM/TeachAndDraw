@@ -8,6 +8,34 @@ export class TestSuite {
         this.results.push({test:message, passed:undefined})
     }
 
+    simulateMouseMove(targetElement, x, y) {
+        const mouseMoveEvent = new MouseEvent('mousemove', {
+            bubbles: true,   
+            cancelable: true, 
+            clientX: x,      
+            clientY: y,       
+        });
+        targetElement.dispatchEvent(mouseMoveEvent);
+    }
+    simulateMouseClick(targetElement, x, y) {
+        const mouseDownEvent = new MouseEvent('mousedown', {
+            bubbles: true,
+            cancelable: true,
+            clientX: x,
+            clientY: y,
+        });
+        targetElement.dispatchEvent(mouseDownEvent);
+    
+        setTimeout(() => {
+            const mouseUpEvent = new MouseEvent('mouseup', {
+                bubbles: true,
+                cancelable: true,
+                clientX: x,
+                clientY: y,
+            });
+            targetElement.dispatchEvent(mouseUpEvent);
+        }, 100);
+    }
     assertEqual(a, b, message = "Values are not equal") {
         try {
             if (a !== b) {

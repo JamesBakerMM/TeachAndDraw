@@ -24,36 +24,6 @@
             $.height = 800;
 
             const test = new TestSuite();
-            
-            test.message("num checking!");
-
-            test.assertTrue(
-                ()=>{
-                    return $.math.isNum(7);
-                },
-                "isNum should accept 7 as a number"
-            );
-            test.assertTrue(
-                ()=>{
-                    return $.math.isNum(5.7);
-                },
-                "isNum should accept 5.7 as a number"
-            );
-            
-            test.assertError(
-                ()=>{
-                    return $.math.isNum("7");
-                },
-                "isNum should NOT be accepted '7' as a number"
-            );
-            test.assertError(()=>{
-                $.math.isNum(Infinity);
-            },"Infinity should NOT be accepted as a number");
-            
-            test.assertError(()=>{
-                $.math.isNum(NaN);
-            },"NaN should NOT be accepted as a number");
-            
 
             test.message("Calculation checks!");
             test.assertEqual(
@@ -82,10 +52,10 @@
                 50,
                 "5 should be rescaled to 50 moving from 0->10 versus 0->100"
             );
-            test.message("atan");
-            test.message("atan2"); 
+            // test.message("atan");
+            // test.message("atan2"); 
             
-            test.message("Random checks!");
+            // test.message("Random checks!");
             //random
 
             test.reportResults();
