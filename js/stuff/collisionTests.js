@@ -3,7 +3,7 @@ import { makeGroup } from "../../lib/Group.js";
 
 $.start(draw);
 
-// $.debug=true;
+$.debug=true;
 let edges = makeGroup();
 let squares = makeGroup();
 // let leftEdge=$.makeBoxCollider(0,$.h/2,20,$.h);
@@ -16,6 +16,7 @@ let squares = makeGroup();
 
 
 let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
+window.lSquare=leftSquare;
 leftSquare.velocity.x = 6;
 leftSquare.mass = 2;
 leftSquare.friction = 10;
@@ -74,7 +75,6 @@ function draw(){
     // $.text.font="arial";
         // $.paused=true;
     // }
-    squares.draw();
     //edges.draw();
     if(mouse.isPressed){
         leftSquare.x=mouse.x;
@@ -102,7 +102,6 @@ function draw(){
     // if(leftSquare.y>$.height || leftSquare.y<0){
     //     leftSquare.velocity.y=-leftSquare.velocity.y
     // }
-    
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
         if(squares[i].x>$.width){
@@ -117,20 +116,10 @@ function draw(){
             squares[i].y=$.height-1
             squares[i].velocity.y=-squares[i].velocity.y
         }
-        
-        // if(leftSquare.collides(squares[i])){
-        //     squares[i].remove=true
-        // }
-        // for (let j = 0; j < squares.length; j++) {
-        //     if (i != j) {
-        //         if(squares[i].collides(squares[j])){
-        //             squares[j].remove=true;
-        //         }
-        //     }
-        // }
 
         $.colour.fill = "#00000000";
         $.colour.stroke = "#FFFF00FF";
         $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
+    $.drawAllEntities();
 }
