@@ -117,9 +117,9 @@ function draw(){
             squares[i].velocity.y=-squares[i].velocity.y
         }
 
-        $.colour.fill = "#00000000";
-        $.colour.stroke = "#FFFF00FF";
-        $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
+        // $.colour.fill = "#00000000";
+        // $.colour.stroke = "#FFFF00FF";
+        // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
     $.drawAllEntities();
 }
