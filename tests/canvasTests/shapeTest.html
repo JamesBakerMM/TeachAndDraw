@@ -23,7 +23,9 @@
             $.start(draw);
             $.width = 800;
             $.height = 800;
-            $.debug=true;
+
+            colour.stroke="black";
+            // $.debug=true;
 
             const test = new TestSuite();
 
@@ -33,7 +35,8 @@
             test.reportResults();
             
             function draw() {
-                //background
+                //background 
+                $.colour.stroke="black";
                 $.colour.fill="gray";
                 $.shape.rectangle($.w/2,$.h/2,$.w,$.h);
 
@@ -123,16 +126,20 @@
                 $.shape.line(POINT_X,200,POINT_X+100,200);
                 
                 $.text.draw(POINT_X,250,"dashed stroke test");
+                $.shape.strokeDash=10;
                 $.shape.line(POINT_X,300,POINT_X+100,300);
                 
                 $.text.draw(POINT_X,325,"multiline");
+                $.shape.strokeDash=0;
                 $.shape.multiline(
                     POINT_X,350,
                     POINT_X+100,350,
                     POINT_X+100,450,    
                     POINT_X,450,    
                 )
-                $.text.draw(POINT_X,480,"multishape");
+
+                
+                $.text.draw(POINT_X,480,"shape");
                 $.shape.shape(
                     POINT_X,500,
                     POINT_X+100,500,

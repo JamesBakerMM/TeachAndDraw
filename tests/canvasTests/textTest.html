@@ -25,15 +25,43 @@
             $.height = 800;
 
             const test = new TestSuite();
-            
-            test.message("text checking!");
-            test.message("alignment checking!");
-            test.message("size checking!");
-            test.message("font checking!");
 
             test.reportResults();
             
-            function draw() {}
+            function draw() {
+                
+                const COL_ONE_X=200;
+                shape.strokeDash=5;
+                shape.line(
+                    COL_ONE_X,0,
+                    COL_ONE_X,$.height
+                );
+                test.message("text checking!");
+                    text.draw(COL_ONE_X,20,"basic text set");
+                    test.message("alignment checking!");
+                    text.alignment="left";
+                    text.draw(COL_ONE_X,60,"left text");
+                    text.alignment="right";
+                    text.draw(COL_ONE_X,80,"right text");
+                    text.alignment="center";
+                    text.draw(COL_ONE_X,100,"center text");
+                    test.message("size checking!");
+                    text.size=40;
+                    text.draw(COL_ONE_X,140,"big text");
+                    text.size=12;
+                    text.draw(COL_ONE_X,180,"small text");
+                    test.message("font checking!");
+
+                    text.size=16;
+                    text.font="serif"
+                    text.font="italic 20px Arial";
+                    text.draw(COL_ONE_X,220,"serif text");
+                    text.font="sans-serif"
+                    text.draw(COL_ONE_X,240,"sans-serif");
+                    text.font="monospace"
+                    text.draw(COL_ONE_X,260,"monospace");
+                $.paused=true;
+            }
         </script>
         <style>
             html,

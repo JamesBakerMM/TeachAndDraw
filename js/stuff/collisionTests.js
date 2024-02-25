@@ -1,5 +1,6 @@
 import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
 import { makeGroup } from "../../lib/Group.js";
+import { Paint } from "../../lib/Pallete.js";
 
 $.start(draw);
 
