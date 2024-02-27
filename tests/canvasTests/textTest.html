@@ -31,7 +31,13 @@
             function draw() {
                 
                 const COL_ONE_X=200;
+                colour.stroke='rgba(255,255,255,0.25)'
                 shape.strokeDash=5;
+                shape.strokeWidth=4;
+                colour.fill="red";
+                shape.rectangle(
+                    100,100,100,100
+                )
                 shape.line(
                     COL_ONE_X,0,
                     COL_ONE_X,$.height
@@ -60,6 +66,14 @@
                     text.draw(COL_ONE_X,240,"sans-serif");
                     text.font="monospace"
                     text.draw(COL_ONE_X,260,"monospace");
+                    
+                    text.font="sans-serif"
+                    text.bold=true;
+                    text.draw(COL_ONE_X,280,"bold");
+                    text.bold=false;
+
+                    text.italic=true;
+                    text.draw(COL_ONE_X,300,"italic");
                 $.paused=true;
             }
         </script>
