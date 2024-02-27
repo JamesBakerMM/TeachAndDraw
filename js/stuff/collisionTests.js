@@ -7,14 +7,6 @@ $.start(draw);
 $.debug=true;
 let edges = makeGroup();
 let squares = makeGroup();
-// let leftEdge=$.makeBoxCollider(0,$.h/2,20,$.h);
-// leftEdge.static=true;
-// let rightEdge=$.makeBoxCollider($.w,$.h/2,20,$.h);
-// rightEdge.static=true;
-
-// edges.push(leftEdge);
-// edges.push(rightEdge);
-
 
 let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
 window.lSquare=leftSquare;
