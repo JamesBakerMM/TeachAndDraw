@@ -10,9 +10,9 @@ let squares = makeGroup();
 
 let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
 window.lSquare=leftSquare;
-leftSquare.velocity.x = 6;
+leftSquare.velocity.x = 0;
 leftSquare.mass = 2;
-leftSquare.friction = 10;
+leftSquare.friction = 1;
 squares.push(leftSquare);
 
 const START_NUM=-45;
@@ -66,6 +66,7 @@ function draw(){
     // $.text.font="arial";
     // $.paused=true;
     //edges.draw();
+
     if(mouse.isPressed){
         leftSquare.x=mouse.x;
         leftSquare.y=mouse.y;
