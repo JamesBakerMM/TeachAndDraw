@@ -5,89 +5,163 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Text Tests</title>
         <script type="module">
-
-            import {
-                $,
-                shape,
-                colour,
-                mouse,
-                kb,
-                text
-            } from "/lib/Pen.js";
-            import {
-                Point
-            } from "/lib/Point.js";
+            import { $, shape, colour, mouse, kb, text } from "/lib/Pen.js";
+            import { Point } from "/lib/Point.js";
             import { Group } from "/lib/Group.js";
             import { TestSuite } from "/tests/TestSuite.js";
 
             $.start(draw);
+            $.debug = true;
             $.width = 800;
             $.height = 800;
 
             const test = new TestSuite();
 
             test.reportResults();
-            
+
             function draw() {
-                
-                const COL_ONE_X=200;
-                colour.stroke='rgba(255,255,255,0.25)'
-                shape.strokeDash=5;
-                shape.strokeWidth=4;
-                colour.fill="red";
-                shape.rectangle(
-                    100,100,100,100
-                )
-                shape.line(
-                    COL_ONE_X,0,
-                    COL_ONE_X,$.height
-                );
+                const COL_ONE_X = 200;
+                colour.stroke = "rgba(255,255,255,0.25)";
+                shape.strokeDash = 5;
+                shape.strokeWidth = 4;
+                colour.fill = "red";
+                shape.rectangle(100, 100, 100, 100);
+                shape.line(COL_ONE_X, 0, COL_ONE_X, $.height);
                 test.message("text checking!");
-                    text.draw(COL_ONE_X,20,"basic text set");
-                    test.message("alignment checking!");
-                    text.alignment="left";
-                    text.draw(COL_ONE_X,60,"left text");
-                    text.alignment="right";
-                    text.draw(COL_ONE_X,80,"right text");
-                    text.alignment="center";
-                    text.draw(COL_ONE_X,100,"center text");
-                    test.message("size checking!");
-                    text.size=40;
-                    text.draw(COL_ONE_X,140,"big text");
-                    text.size=12;
-                    text.draw(COL_ONE_X,180,"small text");
-                    test.message("font checking!");
+                text.draw(COL_ONE_X, 20, "basic text set");
+                test.message("alignment checking!");
+                console.log(text.alignment);
+                text.alignment.x = "left";
+                text.draw(COL_ONE_X, 60, "left text");
+                text.alignment.x = "right";
+                text.draw(COL_ONE_X, 80, "right text");
+                text.alignment.x = "center";
+                text.draw(COL_ONE_X, 100, "center text");
+                test.message("size checking!");
+                text.size = 40;
+                text.draw(COL_ONE_X, 140, "big text");
+                text.size = 12;
+                text.draw(COL_ONE_X, 180, "small text");
+                test.message("font checking!");
 
-                    text.size=16;
-                    text.font="serif"
-                    text.font="italic 20px Arial";
-                    text.draw(COL_ONE_X,220,"serif text");
-                    text.font="sans-serif"
-                    text.draw(COL_ONE_X,240,"sans-serif");
-                    text.font="monospace"
-                    text.draw(COL_ONE_X,260,"monospace");
-                    
-                    text.font="sans-serif"
-                    text.bold=true;
-                    text.draw(COL_ONE_X,280,"bold");
-                    text.bold=false;
+                text.size = 16;
+                text.font = "serif";
+                text.font = "italic 20px Arial";
+                text.draw(COL_ONE_X, 220, "serif text");
+                text.font = "sans-serif";
+                text.draw(COL_ONE_X, 240, "sans-serif");
+                text.font = "monospace";
+                text.draw(COL_ONE_X, 260, "monospace");
 
-                    text.italic=true;
-                    text.draw(COL_ONE_X,300,"italic");
-                $.paused=true;
+                text.font = "sans-serif";
+                text.bold = true;
+                text.draw(COL_ONE_X, 280, "bold");
+                text.bold = false;
+
+                text.italic = true;
+                text.draw(COL_ONE_X, 300, "italic");
+                $.paused = true;
             }
         </script>
         <style>
             html,
-            body,
-            * {
+            body {
                 margin: 0px;
                 padding: 0px;
                 background-color: rgb(30, 30, 25);
+                font-family: sans-serif;
+                color: white;
+                overflow: hidden;
+            }
+            #debug {
+                position: absolute;
+                border-radius: 15px;
+                padding: 1rem;
+                right: 10px;
+                background-color: rgba(30, 30, 25, 0.5);
+                top: 0;
+                width: 300px;
+                transition: 0.5s;
+            }
+            .invisible {
+                display: none;
+            }
+            .prev {
+                background-color: red;
+                background-size: 10px;
+                height: 1lh;
+            }
+            .wrapper {
+                overflow: hidden;
+                margin: 0 !important;
+                padding: 0;
+            }
+            #debug.hidden {
+                right: -360px; /* Hide all except 1px */
+            }
+            #debug.hidden button {
+                position: absolute;
+            }
+            #debug:hover {
+                background-color: rgba(30, 30, 25, 1);
+            }
+            #debug:hover button {
+                opacity: 1;
+            }
+            #debug button {
+                left: -3rem;
+                position: absolute;
+                height: 3rem;
+                width: 3rem;
+                opacity: 0.5;
+            }
+            #debug ul {
+                padding: 0;
+                margin: 0;
+                padding-left: 1rem;
+            }
+
+            .grid-overlay {
+                margin-top: 1rem;
+            }
+
+            .grid-overlay::after {
+                content: "";
+                position: absolute;
+                /* background-color:red; */
+                opacity: 1;
+                top: 0px;
+                left: 0;
+                pointer-events: none; /* Allows clicks to pass through */
+                width: 100%;
+                height: 100vh;
+
+                background-image: linear-gradient(
+                        to right,
+                        rgba(0, 255, 0, 0.15) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        rgba(0, 255, 0, 0.15) 1px,
+                        transparent 1px
+                    );
+                background-size: 50px 50px;
+            }
+
+            canvas {
+                box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+                    rgba(0, 0, 0, 0.23) 0px 3px 6px;
             }
         </style>
     </head>
     <body>
-        <canvas id="myCanvas"></canvas>
+        <div class="wrapper">
+            <canvas id="myCanvas" style="border: 2px solid black"></canvas>
+        </div>
+        <aside id="debug" class="invisible">
+            <button id="showhidebtn">🔍</button>
+            <section></section>
+        </aside>
     </body>
 </html>

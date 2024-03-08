@@ -40,8 +40,9 @@
                 test.assertEqual($.state.stack[0].shape.strokeWidth, 1, "Shape strokeWidth should be 1");
 
                 // Test for text properties
-                test.assertEqual($.state.stack[0].text.alignment, "center", "Text alignment should be 'center'");
-                test.assertEqual($.state.stack[0].text.baseline, "middle", "Text baseline should be 'middle'");
+                console.log("CHECK",$.state.stack[0].text.alignment.x)
+                test.assertEqual($.state.stack[0].text.alignment.x, "center", "Text alignment should be 'center'");
+                test.assertEqual($.state.stack[0].text.alignment.y, "center", "Text alignment.y should be 'center'");
                 test.assertEqual($.state.stack[0].text.size, 16, "Text size should be 16");
                 test.assertEqual($.state.stack[0].text.font, "sans-serif", "Text font should be 'sans-serif'");
                 
@@ -58,24 +59,24 @@
                 test.assertEqual($.shape.yAlignment, "center", "Shape yAlignment should be 'center'");
                 test.assertEqual($.shape.strokeWidth, 1, "Shape strokeWidth should be 1");
 
-                test.assertEqual($.text.alignment, "center", "Text alignment should be 'center'");
-                test.assertEqual($.text.baseline, "middle", "Text baseline should be 'middle'");
+                test.assertEqual($.text.alignment.x, "center", "Text alignment.x should be 'center'");
+                test.assertEqual($.text.alignment.y, "center", "Text alignment.y should be 'center'");
                 test.assertEqual($.text.size, 16, "Text size should be 16");
                 test.assertEqual($.text.font, "sans-serif", "Text font should be 'sans-serif'");
 
                 
             test.message("Text State changes")
-                $.text.alignment="left";
+                $.text.alignment.x="left";
                 $.state.save();
-                $.text.alignment="right";
+                $.text.alignment.x ="right";
                 $.state.load();
-                test.assertEqual($.text.alignment,"left","State should alignment to left as set pre save");
+                test.assertEqual($.text.alignment.x,"left","State should alignment to left as set pre save");
 
-                $.text.baseline="bottom";
+                $.text.alignment.y="bottom";
                 $.state.save();
-                $.text.baseline="middle";
+                $.text.alignment.y="center";
                 $.state.load();
-                test.assertEqual($.text.baseline,"bottom","State should restore baselie to middle as set pre save");
+                test.assertEqual($.text.alignment.y,"bottom","State should restore alignment y to bottom as set pre save");
 
                 $.text.size=10;
                 $.state.save();

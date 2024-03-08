@@ -25,7 +25,8 @@
             $.height = 800;
 
             const entityA=$.makeEntity(50,110);
-            const entityB=$.makeEntity(150,110);
+            const entityB=$.makeEntity(100,110);
+            const entityC=$.makeEntity(150,110);
 
             // const failAnim=$.loadAnimation("2",3,"test");
             const anim = $.loadAnimation(
@@ -50,6 +51,7 @@
 
             entityA.asset=alternateAnim;
             entityB.asset=alternateAnim;
+            entityC.asset=alternateAnim;
 
             const test = new TestSuite();
             
@@ -72,6 +74,8 @@
                 entityA.draw();
                 entityB.asset.delay=20;
                 entityB.draw();
+                entityC.asset.playing=false;
+                entityC.draw();
             }
         </script>
         <style>
