@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Button Tests</title>
+        <title>Animation Tests</title>
         <script type="module">
 
             import {
@@ -24,49 +24,54 @@
             $.width = 300;
             $.height = 800;
 
+            const entityA=$.makeEntity(50,110);
+            const entityB=$.makeEntity(150,110);
+
+            // const failAnim=$.loadAnimation("2",3,"test");
+            const anim = $.loadAnimation(
+                20,50,
+                "./images/animAsset1.png",
+                "./images/animAsset2.png",
+                "./images/animAsset3.png",
+                "./images/animAsset4.png",
+                "./images/animAsset5.png",
+                "./images/animAsset6.png",
+            );
+
+            const alternateAnim=$.loadAnimation(
+                20,110,
+                "./images/animAssetLetter1.png",
+                "./images/animAssetLetter2.png",
+                "./images/animAssetLetter3.png",
+                "./images/animAssetLetter4.png",
+                "./images/animAssetLetter5.png",
+                "./images/animAssetLetter6.png",
+            );
+
+            entityA.asset=alternateAnim;
+            entityB.asset=alternateAnim;
+
             const test = new TestSuite();
-            let btn = $.makeButton(100,40,200,100,"testbtn")
-
-            test.assertEqual(100,btn.x,"x should be 20");
-            test.assertEqual(40,btn.y,"y should be 40");
-            test.assertEqual(200,btn.w,"w should be 200");
-            test.assertEqual(100,btn.h,"h should be 100");
-            test.assertEqual("testbtn",btn.label,"label should be testbtn");
-
-            //fake a mousemove event over the button 
-            //fake a mousemove event NOT over the button 
             
-            //fake a mouseclick event over the button
-            //fake a mouseclick event NOT over the button
-
+            
             test.reportResults();
             
-            const fakeMouse={
-                x:0,
-                y:50,
-                velocity:{
-                    x:1,
-                    y:0
-                }
-            }
 
             function draw() {
-                if(fakeMouse.x>$.width){
-                    fakeMouse.x=0;
-                }
-                $.shape.rectangle($.width/2,$.height/2,$.width,$.height)
-                test.simulateMouseMove($.canvas,fakeMouse.x,fakeMouse.y)
-                btn.draw();
-                fakeMouse.x+=fakeMouse.velocity.x
-                $.colour.fill="red";
-                if(fakeMouse.x===95){
-                    test.simulateMouseClick($.canvas,fakeMouse.x,fakeMouse.y)
-                }
-                if(fakeMouse.x>95 && fakeMouse.x<105) {
-                    $.shape.oval(fakeMouse.x,fakeMouse.y,25);
-                } else {
-                    $.shape.oval(fakeMouse.x,fakeMouse.y,5);
-                }
+                $.colour.fill="grey";
+                $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
+                
+                $.colour.fill="black";
+                $.text.alignment="left";
+                $.text.draw(20,20,"Raw Animation");
+                anim.draw();
+
+                $.text.draw(20,80,"Entity Solo Animation");
+
+                $.text.draw(20,80,"Entity Solo Animation");
+                entityA.draw();
+                entityB.asset.delay=20;
+                entityB.draw();
             }
         </script>
         <style>

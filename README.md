@@ -181,4 +181,4 @@ something something change the main.js file to see changes
     - **collides**: typechecks
     - **getRandomEntry**: returns random entry
 ## License
-something something GPL 3.0 something something complete
+To Be Determined
