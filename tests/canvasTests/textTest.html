@@ -25,12 +25,10 @@
                 shape.strokeDash = 5;
                 shape.strokeWidth = 4;
                 colour.fill = "red";
-                shape.rectangle(100, 100, 100, 100);
                 shape.line(COL_ONE_X, 0, COL_ONE_X, $.height);
                 test.message("text checking!");
                 text.draw(COL_ONE_X, 20, "basic text set");
                 test.message("alignment checking!");
-                console.log(text.alignment);
                 text.alignment.x = "left";
                 text.draw(COL_ONE_X, 60, "left text");
                 text.alignment.x = "right";
@@ -60,6 +58,7 @@
 
                 text.italic = true;
                 text.draw(COL_ONE_X, 300, "italic");
+
                 $.paused = true;
             }
         </script>
