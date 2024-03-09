@@ -78,8 +78,8 @@
                 if($.mouse.isPressed){
                     fart.push($.makeEntity(mouse.x,mouse.y))
                     fart[fart.length-1].asset=alternateAnim;
-                    fart[fart.length-1].asset=alternateAnim;
-                    fart[fart.length-1].velocity.y=-5;
+                    fart[fart.length-1].asset.rotation=30;
+                    fart[fart.length-1].velocity.y=-1;
                     // console.log(fart[fart.length-1],fart[fart.length-1].asset.w,fart[fart.length-1].h)
                 }
                 entityA.draw();
