@@ -44,6 +44,8 @@
                 test.assertEqual($.state.stack[0].text.alignment.y, "center", "Text alignment.y should be 'center'");
                 test.assertEqual($.state.stack[0].text.size, 16, "Text size should be 16");
                 test.assertEqual($.state.stack[0].text.font, "sans-serif", "Text font should be 'sans-serif'");
+                test.assertEqual($.state.stack[0].text.bold, false, "Text bold should be false");
+                test.assertEqual($.state.stack[0].text.italic, false, "Text italic should be false");
                 
                 $.state.load();
                 
@@ -57,11 +59,12 @@
                 test.assertEqual($.shape.alignment.y, "center", "Shape alignment.y should be 'center'");
                 test.assertEqual($.shape.strokeWidth, 1, "Shape strokeWidth should be 1");
 
+                test.assertEqual($.text.bold, false, "Text bold should be false");
+                test.assertEqual($.text.italic, false, "Text italic should be false");
                 test.assertEqual($.text.alignment.x, "center", "Text alignment.x should be 'center'");
                 test.assertEqual($.text.alignment.y, "center", "Text alignment.y should be 'center'");
                 test.assertEqual($.text.size, 16, "Text size should be 16");
                 test.assertEqual($.text.font, "sans-serif", "Text font should be 'sans-serif'");
-
                 
             test.message("Text State changes")
                 $.text.alignment.x="left";
@@ -87,6 +90,19 @@
                 $.text.font="example font";
                 $.state.load();
                 test.assertEqual($.text.font,"serif","State should restore font to serif as set pre save");
+
+
+                $.text.bold=true;
+                $.state.save();
+                $.text.bold=false;
+                $.state.load();
+                test.assertEqual($.text.bold,true, "State should restore text.bold to true");
+                
+                $.text.italic=true;
+                $.state.save();
+                $.text.italic=false;
+                $.state.load();
+                test.assertEqual($.text.italic,true, "State should restore text.italic to true");
 
                 $.state.reset();
 
