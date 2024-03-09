@@ -40,27 +40,27 @@ for (let i = START_NUM; i < 5; i++) {
     squares.push(rightSquare);
 }
 
-// for (let i = START_NUM; i < 5; i++) {
-//     let rightSquare=$.makeBoxCollider($.w/2+50,$.h/2 + i * 60,40,40);
-//     rightSquare.velocity.x = 0;
-//     rightSquare.mass = 1;
-//     rightSquare.friction = 10;
-//     squares.push(rightSquare);
-// }
-// for (let i = START_NUM; i < 5; i++) {
-//     let rightSquare=$.makeBoxCollider($.w/2+2,$.h/2 + i * 60,40,40);
-//     rightSquare.velocity.x = 0;
-//     rightSquare.mass = 1;
-//     rightSquare.friction = 10;
-//     squares.push(rightSquare);
-// }
-// for (let i = START_NUM; i < 5; i++) {
-//     let rightSquare=$.makeBoxCollider($.w/2-39,$.h/2 + i * 60,40,40);
-//     rightSquare.velocity.x = 0;
-//     rightSquare.mass = 1;
-//     rightSquare.friction = 10;
-//     squares.push(rightSquare);
-// }
+for (let i = START_NUM; i < 5; i++) {
+    let rightSquare=$.makeBoxCollider($.w/2+50,$.h/2 + i * 60,40,40);
+    rightSquare.velocity.x = 0;
+    rightSquare.mass = 1;
+    rightSquare.friction = 10;
+    squares.push(rightSquare);
+}
+for (let i = START_NUM; i < 5; i++) {
+    let rightSquare=$.makeBoxCollider($.w/2+2,$.h/2 + i * 60,40,40);
+    rightSquare.velocity.x = 0;
+    rightSquare.mass = 1;
+    rightSquare.friction = 10;
+    squares.push(rightSquare);
+}
+for (let i = START_NUM; i < 5; i++) {
+    let rightSquare=$.makeBoxCollider($.w/2-39,$.h/2 + i * 60,40,40);
+    rightSquare.velocity.x = 0;
+    rightSquare.mass = 1;
+    rightSquare.friction = 10;
+    squares.push(rightSquare);
+}
 
 function draw(){
     // $.text.font="arial";

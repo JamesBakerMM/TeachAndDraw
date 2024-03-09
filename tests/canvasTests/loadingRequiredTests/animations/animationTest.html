@@ -17,16 +17,18 @@
             import {
                 Point
             } from "/lib/Point.js";
-            import { Group } from "/lib/Group.js";
+            import { Group,makeGroup } from "/lib/Group.js";
             import { TestSuite } from "/tests/TestSuite.js";
 
             $.start(draw);
+            // $.debug=true;
             $.width = 300;
             $.height = 800;
 
             const entityA=$.makeEntity(50,110);
             const entityB=$.makeEntity(100,110);
             const entityC=$.makeEntity(150,110);
+            const entityD=$.makeEntity(150,210);
 
             // const failAnim=$.loadAnimation("2",3,"test");
             const anim = $.loadAnimation(
@@ -49,16 +51,17 @@
                 "./images/animAssetLetter6.png",
             );
 
+            let testImage=$.loadImage(210,210,"./images/animAssetLetter6.png");
             entityA.asset=alternateAnim;
             entityB.asset=alternateAnim;
             entityC.asset=alternateAnim;
-
+            entityD.asset=testImage;
+            
             const test = new TestSuite();
-            
-            
             test.reportResults();
-            
 
+            let fart=makeGroup();
+            
             function draw() {
                 $.colour.fill="grey";
                 $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
@@ -71,11 +74,23 @@
                 $.text.draw(20,80,"Entity Solo Animation");
 
                 $.text.draw(20,80,"Entity Solo Animation");
+
+                if($.mouse.isPressed){
+                    fart.push($.makeEntity(mouse.x,mouse.y))
+                    fart[fart.length-1].asset=alternateAnim;
+                    fart[fart.length-1].asset=alternateAnim;
+                    fart[fart.length-1].velocity.y=-5;
+                    // console.log(fart[fart.length-1],fart[fart.length-1].asset.w,fart[fart.length-1].h)
+                }
                 entityA.draw();
                 entityB.asset.delay=20;
                 entityB.draw();
                 entityC.asset.playing=false;
                 entityC.draw();
+                // testImage.draw();
+                entityD.draw();
+                fart.draw();
+                // $.paused=true;
             }
         </script>
         <style>
