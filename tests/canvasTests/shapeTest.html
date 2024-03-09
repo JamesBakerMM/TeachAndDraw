@@ -36,11 +36,12 @@
             
             function draw() {
                 //background 
+                $.debug=true;
                 $.colour.stroke="black";
                 $.colour.fill="gray";
                 $.shape.rectangle($.w/2,$.h/2,$.w,$.h);
 
-                $.text.alignment="left";
+                $.text.alignment.x="left";
 
                 const RECT_X=100;
                 $.shape.line(
@@ -51,14 +52,14 @@
                 )
                 colour.fill="black";
                 text.draw(RECT_X,50,"Rect X Alignments")
-                shape.xAlignment="center";
+                shape.alignment.x="center";
                 shape.rectangle(RECT_X,100,50);
                 text.draw(RECT_X,150,"left")
-                shape.xAlignment="left";
+                shape.alignment.x="left";
                 shape.rectangle(RECT_X,190,50);
                 
                 text.draw(RECT_X,250,"right")
-                shape.xAlignment="right";
+                shape.alignment.x="right";
                 shape.rectangle(RECT_X,290,50);
                 
                 const OVAL_X=300;
@@ -70,12 +71,12 @@
                 )
                 colour.fill="black";
                 text.draw(OVAL_X,50,"Oval X Alignments")
-                shape.xAlignment="center";
+                shape.alignment.x="center";
                 shape.oval(OVAL_X,100,25);
-                shape.xAlignment="left";
+                shape.alignment.x="left";
                 text.draw(OVAL_X,150,"left")
                 shape.oval(OVAL_X,190,25);
-                shape.xAlignment="right";
+                shape.alignment.x="right";
                 text.draw(OVAL_X,250,"right")
                 shape.oval(OVAL_X,290,25);
 
@@ -92,12 +93,12 @@
                     450
                 )
                 const Y_RECT_ALIGN=450;
-                $.shape.xAlignment="center";
-                $.shape.yAlignment="top";
+                $.shape.alignment.x="center";
+                $.shape.alignment.y="top";
                 $.shape.rectangle(40,Y_RECT_ALIGN,50);
-                $.shape.yAlignment="center";
+                $.shape.alignment.y="center";
                 $.shape.rectangle(100,Y_RECT_ALIGN,50);
-                $.shape.yAlignment="bottom";
+                $.shape.alignment.y="bottom";
                 $.shape.rectangle(160,Y_RECT_ALIGN,50);
                 $.shape.line(
                     0,
@@ -107,12 +108,12 @@
                 )
 
                 const Y_OVAL_ALIGN=625;
-                $.shape.xAlignment="center";
-                $.shape.yAlignment="top";
+                $.shape.alignment.x="center";
+                $.shape.alignment.y="top";
                 $.shape.oval(40,Y_OVAL_ALIGN,25);
-                $.shape.yAlignment="center";
+                $.shape.alignment.y="center";
                 $.shape.oval(100,Y_OVAL_ALIGN,25);
-                $.shape.yAlignment="bottom";
+                $.shape.alignment.y="bottom";
                 $.shape.oval(160,Y_OVAL_ALIGN,25);
 
                 const POINT_X=450;

@@ -26,7 +26,6 @@
 
 
             $.state.save();
-            console.log($.state.stack[0]);
 
             test.message("Defaults")
                 // Test for colour properties
@@ -34,9 +33,9 @@
                 test.assertEqual($.state.stack[0].colour.stroke, "white", "Colour stroke should be white");
 
                 // Test for shape properties
-                test.assertEqual($.state.stack[0].shape.strokeDashed.length, 0, "Shape strokeDashed should be an empty array");
-                test.assertEqual($.state.stack[0].shape.xAlignment, "center", "Shape xAlignment should be 'center'");
-                test.assertEqual($.state.stack[0].shape.yAlignment, "center", "Shape yAlignment should be 'center'");
+                test.assertEqual($.state.stack[0].shape.strokeDash,0, "Shape strokeDash should be 0");
+                test.assertEqual($.state.stack[0].shape.alignment.x, "center", "Shape alignment.x should be 'center'");
+                test.assertEqual($.state.stack[0].shape.alignment.y, "center", "Shape alignment.y should be 'center'");
                 test.assertEqual($.state.stack[0].shape.strokeWidth, 1, "Shape strokeWidth should be 1");
 
                 // Test for text properties
@@ -53,9 +52,9 @@
                 test.assertEqual($.colour.fill, "white", "Colour fill should be white");
                 test.assertEqual($.colour.stroke, "white", "Colour stroke should be white");
 
-                test.assertTrue(()=>{return $.shape.strokeDashed.length===0}, "Shape strokeDashed should be an empty array");
-                test.assertEqual($.shape.xAlignment, "center", "Shape xAlignment should be 'center'");
-                test.assertEqual($.shape.yAlignment, "center", "Shape yAlignment should be 'center'");
+                test.assertEqual($.shape.strokeDash,0, "Shape strokeDash should be 0");
+                test.assertEqual($.shape.alignment.x, "center", "Shape alignment.x should be 'center'");
+                test.assertEqual($.shape.alignment.y, "center", "Shape alignment.y should be 'center'");
                 test.assertEqual($.shape.strokeWidth, 1, "Shape strokeWidth should be 1");
 
                 test.assertEqual($.text.alignment.x, "center", "Text alignment.x should be 'center'");
@@ -92,17 +91,17 @@
                 $.state.reset();
 
             test.message("Shape State changes")
-                $.shape.xAlignment="right";
+                $.shape.alignment.x="right";
                 $.state.save();
-                $.shape.xAlignment="left";
+                $.shape.alignment.x="left";
                 $.state.load();
-                test.assertEqual($.shape.xAlignment,"right","State should restore shape xAlignment to right");
+                test.assertEqual($.shape.alignment.x,"right","State should restore shape alignment.x to right");
                 
-                $.shape.yAlignment="top";
+                $.shape.alignment.y="top";
                 $.state.save();
-                $.shape.yAlignment="bottom";
+                $.shape.alignment.y="bottom";
                 $.state.load();
-                test.assertEqual($.shape.yAlignment,"top","State should restore shape yAlignment to top");
+                test.assertEqual($.shape.alignment.y,"top","State should restore shape alignment.y to top");
                 
                 $.state.reset();
 
