@@ -16,50 +16,14 @@ leftSquare.friction = 1;
 squares.push(leftSquare);
 
 const START_NUM=-45;
-for (let i = START_NUM; i < 5; i++) {
-    let rightSquare=$.makeBoxCollider($.w/2+200,$.h/2 + i * 60,40,40);
-    rightSquare.velocity.x = 0;
-    rightSquare.mass = 1;
-    rightSquare.friction = 10;
-    squares.push(rightSquare);
-}
-
-for (let i = START_NUM; i < 5; i++) {
-    let rightSquare=$.makeBoxCollider($.w/2+150,$.h/2 + i * 60,40,40);
-    rightSquare.velocity.x = 0;
-    rightSquare.mass = 1;
-    rightSquare.friction = 10;
-    squares.push(rightSquare);
-}
-
-for (let i = START_NUM; i < 5; i++) {
-    let rightSquare=$.makeBoxCollider($.w/2+100,$.h/2 + i * 60,40,40);
-    rightSquare.velocity.x = 0;
-    rightSquare.mass = 1;
-    rightSquare.friction = 10;
-    squares.push(rightSquare);
-}
-
-for (let i = START_NUM; i < 5; i++) {
-    let rightSquare=$.makeBoxCollider($.w/2+50,$.h/2 + i * 60,40,40);
-    rightSquare.velocity.x = 0;
-    rightSquare.mass = 1;
-    rightSquare.friction = 10;
-    squares.push(rightSquare);
-}
-for (let i = START_NUM; i < 5; i++) {
-    let rightSquare=$.makeBoxCollider($.w/2+2,$.h/2 + i * 60,40,40);
-    rightSquare.velocity.x = 0;
-    rightSquare.mass = 1;
-    rightSquare.friction = 10;
-    squares.push(rightSquare);
-}
-for (let i = START_NUM; i < 5; i++) {
-    let rightSquare=$.makeBoxCollider($.w/2-39,$.h/2 + i * 60,40,40);
-    rightSquare.velocity.x = 0;
-    rightSquare.mass = 1;
-    rightSquare.friction = 10;
-    squares.push(rightSquare);
+for (let i = 0; i < 800; i += 100) {
+    for (let j = 0; j < 600; j += 10) {
+        let rightSquare=$.makeBoxCollider(i,j, 5, 5);
+        rightSquare.velocity.x = 0;
+        rightSquare.mass = 1;
+        rightSquare.friction = 10;
+        squares.push(rightSquare);
+    }
 }
 
 function draw(){
@@ -97,15 +61,19 @@ function draw(){
     for (let i = 0; i < squares.length; i++) {
         if(squares[i].x>$.width){
             squares[i].x=$.width;
-            squares[i].velocity.x=-squares[i].velocity.x
+            squares[i].velocity.x=-squares[i].velocity.x;
         }
         if(squares[i].x<0){
             squares[i].x=0;
-            squares[i].velocity.x=-squares[i].velocity.x
+            squares[i].velocity.x=-squares[i].velocity.x;
         }
         if(squares[i].y>$.height){
-            squares[i].y=$.height-1
-            squares[i].velocity.y=-squares[i].velocity.y
+            squares[i].y=$.height-1;
+            squares[i].velocity.y=-squares[i].velocity.y;
+        }
+        if(squares[i].y<0){
+            squares[i].y=0;
+            squares[i].velocity.y=-squares[i].velocity.y;
         }
 
         // $.colour.fill = "#00000000";
