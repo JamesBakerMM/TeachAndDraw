@@ -61,6 +61,8 @@
             test.reportResults();
 
             let fart=makeGroup();
+
+            let rotation=0;
             
             function draw() {
                 $.colour.fill="grey";
@@ -78,8 +80,12 @@
                 if($.mouse.isPressed){
                     fart.push($.makeEntity(mouse.x,mouse.y))
                     fart[fart.length-1].asset=alternateAnim;
-                    fart[fart.length-1].asset.rotation=30;
+                    if(rotation>360){
+                        rotation=0;
+                    }
+                    fart[fart.length-1].asset.rotation=rotation;
                     fart[fart.length-1].velocity.y=-1;
+                    rotation++;
                     // console.log(fart[fart.length-1],fart[fart.length-1].asset.w,fart[fart.length-1].h)
                 }
                 entityA.draw();
