@@ -18,8 +18,8 @@ leftSquare.friction = 1;
 squares.push(leftSquare);
 
 const START_NUM=-45;
-for (let i = 0; i < 800; i += 20) {
-    for (let j = 0; j < 600; j += 20) {
+for (let i = 0; i < 800; i += 15) {
+    for (let j = 0; j < 600; j += 15) {
         let rightSquare=$.makeBoxCollider(i,j, 5, 5);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
