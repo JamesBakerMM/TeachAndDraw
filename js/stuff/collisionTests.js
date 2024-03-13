@@ -3,7 +3,7 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Pallete.js";
 
 $.start(draw);
-$.debug=true;
+// $.debug=true;
 let edges = makeGroup();
 let squares = makeGroup();
 
@@ -17,9 +17,8 @@ leftSquare.mass = 200000;
 leftSquare.friction = 1;
 squares.push(leftSquare);
 
-const START_NUM=-45;
 for (let i = 0; i < 800; i += 15) {
-    for (let j = 0; j < 600; j += 15) {
+    for (let j = 0; j < 400; j += 15) {
         let rightSquare=$.makeBoxCollider(i,j, 5, 5);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
