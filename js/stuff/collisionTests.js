@@ -3,7 +3,7 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Pallete.js";
 
 $.start(draw);
-// $.debug=true;
+$.debug=false;
 let edges = makeGroup();
 let squares = makeGroup();
 
@@ -86,4 +86,6 @@ function draw(){
         // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
     $.drawAllColliders();
+
+    document.getElementById("fps").innerText = $.time.averageFps;
 }
