@@ -8,11 +8,12 @@ let edges = makeGroup();
 let squares = makeGroup();
 
 let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
+leftSquare.speed=2;
+leftSquare.direction=240;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 leftSquare.asset=img;
 
 window.lSquare=leftSquare;
-leftSquare.velocity.x = 0;
 leftSquare.mass = 200000;
 leftSquare.friction = 1;
 squares.push(leftSquare);
