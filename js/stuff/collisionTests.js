@@ -3,7 +3,7 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Pallete.js";
 
 $.start(draw);
-$.debug=true;
+$.debug=false;
 $.fps=20;
 let edges = makeGroup();
 let squares = makeGroup();
@@ -13,15 +13,14 @@ leftSquare.speed=2;
 leftSquare.direction=240;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 leftSquare.asset=img;
-
 window.lSquare=leftSquare;
 leftSquare.mass = 200000;
 leftSquare.friction = 1;
 squares.push(leftSquare);
 
-let rightSquare;
 
-for (let i = 0; i < 800; i += 15) {
+let rightSquare;
+for (let i = 0; i < 800; i += 10) {
     for (let j = 0; j < 400; j += 10) {
         rightSquare=$.makeBoxCollider(i,j, 5, 5);
         rightSquare.velocity.x = 0;
@@ -62,24 +61,23 @@ function draw(){
 
     let colorArray = ["white", "yellow", "red", "purple", "blue"];
 
+    //Quad tree testing stuff
     /*
-    Quad tree testing stuff
-    let num = $.quadTree.getValue(leftSquare.x, leftSquare.y, leftSquare.w, leftSquare.h);
+    let num = $.quadTree.getValue(leftSquare.x, leftSquare.y, leftSquare.radius);
+    let text = num.toString(2);
+    while (text.length < 4) {
+        text = "0" + text;
+    }
     if (true) {
         for (let i = 1; i <= 4; i++) {
             for (let j = 1; j <= 4; j++) {
-                for (let k = 1; k <= 4; k++) {
-                    for (let l = 1; l <= 4; l++) {
-                        let q = $.quadTree.getQuad().getQuad(i).getQuad(j).getQuad(k).getQuad(l);
-                        $.colour.fill = colorArray[l];
-                        $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.size);
-                    }
-                }
+                let q = $.quadTree.getQuad().getQuad(i).getQuad(j);
+                $.colour.fill = colorArray[j];
+                $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.size);
             }
         }
     }    
-    */
-
+*/
     // if(leftSquare.x>$.width || leftSquare.x<0){
     //     leftSquare.velocity.x=-leftSquare.velocity.x
     // }
