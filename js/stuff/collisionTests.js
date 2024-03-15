@@ -21,7 +21,7 @@ squares.push(leftSquare);
 
 let rightSquare;
 for (let i = 0; i < 800; i += 10) {
-    for (let j = 0; j < 400; j += 10) {
+    for (let j = 0; j < 500; j += 10) {
         rightSquare=$.makeBoxCollider(i,j, 5, 5);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
