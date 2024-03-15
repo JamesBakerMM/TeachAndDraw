@@ -21,7 +21,7 @@ squares.push(leftSquare);
 
 let rightSquare;
 for (let i = 0; i < 800; i += 10) {
-    for (let j = 0; j < 400; j += 10) {
+    for (let j = 0; j < 500; j += 10) {
         rightSquare=$.makeBoxCollider(i,j, 5, 5);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
@@ -62,20 +62,21 @@ function draw(){
     let colorArray = ["white", "yellow", "red", "purple", "blue"];
 
     //Quad tree testing stuff
-    /*
+ /*   
     let num = $.quadTree.getValue(leftSquare.x, leftSquare.y, leftSquare.radius);
     let text = num.toString(2);
-    while (text.length < 4) {
-        text = "0" + text;
-    }
+    console.log(text);
     if (true) {
-        for (let i = 1; i <= 4; i++) {
+        for (let i = 1; i <= 2; i++) {
             for (let j = 1; j <= 4; j++) {
-                let q = $.quadTree.getQuad().getQuad(i).getQuad(j);
-                $.colour.fill = colorArray[j];
-                $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.size);
+                for (let k = 1; k <= 4; k++) {
+                    let q = $.quadTree.getQuad().getQuad(i).getQuad(j).getQuad(k);
+                    $.colour.fill = colorArray[k];
+                    $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.width, q.height);
+                }
             }
         }
+        
     }    
 */
     // if(leftSquare.x>$.width || leftSquare.x<0){
