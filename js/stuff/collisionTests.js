@@ -3,7 +3,8 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Pallete.js";
 
 $.start(draw);
-$.debug=false;
+$.debug=true;
+$.fps=20;
 let edges = makeGroup();
 let squares = makeGroup();
 
