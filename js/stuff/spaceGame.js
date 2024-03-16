@@ -1,12 +1,12 @@
-import { $ as p, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
 import { Group } from "../../lib/Group.js";
 
-p.start(draw);
+$.start(draw);
 
-p.debug=true;
+// $.debug=true;
 //screen code
-    p.w = 800;
-    p.h = 800;
+    $.w = 800;
+    $.h = 800;
 
     const SCREENS = {
         SPLASH: 0,
@@ -18,21 +18,20 @@ p.debug=true;
 //end screen
 
 //player code
-    let player = makePlayer();
 //end player code
 
 //edges
     let edges = new Group();
 
-    edges.push(makeEdge(0, p.h / 2));
-    edges.push(makeEdge(p.w, p.h / 2));
+    // edges.push(makeEdge(0, $.h / 2));
+    // edges.push(makeEdge($.w, $.h / 2));
 //end edges
 
 //buttons
     const BTN={
-        home:p.makeButton(p.w/2,p.h/2,100,60,"home"),
-        toPlay:p.makeButton(p.w/2,p.h/2,100,60,"play"),
-        toCredits:p.makeButton(p.w/2,p.h/2,100,60,"credits"),
+        home:$.makeButton($.w/2,$.h/2,100,60,"home"),
+        toPlay:$.makeButton($.w/2,$.h/2,100,60,"play"),
+        toCredits:$.makeButton($.w/2,$.h/2,100,60,"credits"),
     }
 
     BTN.home.onClick=()=>{
@@ -60,35 +59,39 @@ const COUNTERS={
 
 //assets
     let assets = {
-        enemyImg: p.loadImage(0, 0, "./images/fac0_refinery.png"),
-        bg: p.loadImage(0,0,"./images/bg.png"),
-        bg_top: p.loadImage(0,p.h/2,"./images/bg.png"),
-        bg_bottom: p.loadImage(0,p.h,"./images/bg.png"),
-        shot:p.loadImage(0,0,"./images/fac0_wreckage1.png")
+        playerImg: $.loadImage(0, 0, "./images/fac0_refinery.png"),
+        enemyImg: $.loadImage(0, 0, "./images/fac1_refinery.png"),
+        bg: $.loadImage(0,0,"./images/bg.jpg"),
+        bg_top: $.loadImage(0,$.h/2,"./images/bg.jpg"),
+        bg_bottom: $.loadImage(0,$.h,"./images/bg.jpg"),
+        shot:$.loadImage(0,0,"./images/fac0_wreckage1.png")
     };
 
-    assets.enemyImg.rotation = 90;
+    
+    let player = makePlayer();
+
 //end assets
 
-let enemies = new Group();
+const enemies = new Group();
+const bullets = new Group();
 
 function draw() {
     setup();
 
     //top row
-    bgSpace(p.w/2,p.h/2-assets.bg.h);
-    bgSpace(p.w/2-assets.bg.w,p.h/2-assets.bg.h);
-    bgSpace(p.w/2+assets.bg.w,p.h/2-assets.bg.h);
+    bgSpace($.w/2,$.h/2-assets.bg.h);
+    bgSpace($.w/2-assets.bg.w,$.h/2-assets.bg.h);
+    bgSpace($.w/2+assets.bg.w,$.h/2-assets.bg.h);
     
     //middle row
-    bgSpace(p.w/2,p.h/2);
-    bgSpace(p.w/2-assets.bg.w,p.h/2);
-    bgSpace(p.w/2+assets.bg.w,p.h/2);
+    bgSpace($.w/2,$.h/2);
+    bgSpace($.w/2-assets.bg.w,$.h/2);
+    bgSpace($.w/2+assets.bg.w,$.h/2);
     
     //bottom row
-    bgSpace(p.w/2,p.h/2+assets.bg.h);
-    bgSpace(p.w/2-assets.bg.w,p.h/2+assets.bg.h);
-    bgSpace(p.w/2+assets.bg.w,p.h/2+assets.bg.h);
+    bgSpace($.w/2,$.h/2+assets.bg.h);
+    bgSpace($.w/2-assets.bg.w,$.h/2+assets.bg.h);
+    bgSpace($.w/2+assets.bg.w,$.h/2+assets.bg.h);
 
     switch (currentScreen) {
         case SCREENS.SPLASH:
@@ -107,7 +110,9 @@ function draw() {
 }
 
 function setup() {
-    if (p.frameCount === 0) {
+    if ($.frameCount === 0) {
+        player = makePlayer();
+        player.asset=assets.enemyImg;
         makeEnemyWave(100, -50, 3, 295);
     }
 }
@@ -126,7 +131,7 @@ function makeEnemyWave(x, y, amount = 5, x_increment = 100, y_increment=10) {
 
 function splashScreen() {
     colour.fill = "white";
-    text.draw(p.w / 2, p.h / 2, "Press a to start!");
+    text.draw($.w / 2, $.h / 2, "Press a to start!");
     if (kb.howLongDown("any")>10) {
         currentScreen = SCREENS.MENU;
     }
@@ -134,10 +139,10 @@ function splashScreen() {
 
 function menuScreen() {
     colour.fill = "black";
-    text.draw(p.w / 2, p.h / 2, "MENU");
+    text.draw($.w / 2, $.h / 2, "MENU");
     BTN.toPlay.draw();
     BTN.toCredits.draw();
-    BTN.toCredits.y=p.h/2+BTN.toCredits.h+20;
+    BTN.toCredits.y=$.h/2+BTN.toCredits.h+20;
 }
 
 function bgSpace(x,y){
@@ -171,21 +176,21 @@ function gameScreen() {
                 y:-80,
                 num:5,
                 x_increment:140,
-                y_increment:p.math.random(-10,70)
+                y_increment:$.math.random(-10,70)
             },
             {
                 x:100,
                 y:-80,
                 num:3,
                 x_increment:295,
-                y_increment:p.math.random(-10,70)
+                y_increment:$.math.random(-10,70)
             },
             {
                 x:100,
                 y:-80,
                 num:7,
                 x_increment:100,
-                y_increment:p.math.random(-10,70)
+                y_increment:$.math.random(-10,70)
             }
         );
         const chosenOption=options.getRandomEntry();
@@ -199,14 +204,14 @@ function gameScreen() {
     edgeEnforcement();
     
     //draw calls
-    let randomX=p.math.random(-2,2);
-    let randomY=p.math.random(-2,2);
+    let randomX=$.math.random(-2,2);
+    let randomY=$.math.random(-2,2);
     for (let enemy of enemies) {
         enemyEdgeEnforcement(enemy,randomX,randomY);
         for (let shot of player.shots) {
             if (shot.overlaps(enemy)) {
-                shot.remove = true;
-                enemy.remove = true;
+                shot.remove();
+                enemy.remove();
             }
         }
     }
@@ -215,9 +220,9 @@ function gameScreen() {
         const offset = 20;
         if (
             shot.x < 0 - offset ||
-            shot.x > p.w + offset ||
+            shot.x > $.w + offset ||
             shot.y < 0 - offset ||
-            shot.x > p.h + offset
+            shot.x > $.h + offset
         ) {
             shot.remove = true;
         }
@@ -229,23 +234,21 @@ function gameScreen() {
     for (let edge of edges) {
         drawEdge(edge.x, edge.y, edge.w, edge.h);
     }
-    enemies.draw();
-    edges.draw();
-    player.draw();
 
     chargedShot();
     hp();
-    BTN.home.x=p.w-BTN.home.w;
+    BTN.home.x=$.w-BTN.home.w;
     BTN.home.y=20+BTN.home.h/2;
     BTN.home.draw();
+    $.drawAllColliders();
 }
 
 function enemyEdgeEnforcement(enemy,randomX,randomY) {
-    if (enemy.y > p.h || enemy.y < -150) {
+    if (enemy.y > $.h || enemy.y < -150) {
         enemy.velocity.y = -enemy.velocity.y;
         enemy.velocity.x = randomX;
     }
-    if (enemy.x > p.h || enemy.x < 0) {
+    if (enemy.x > $.h || enemy.x < 0) {
         enemy.velocity.x = -enemy.velocity.x;
         enemy.velocity.y = randomY;
     }
@@ -261,9 +264,9 @@ function edgeEnforcement() {
         }
     }
 
-    const isAtRightEdge = player.x > p.w - 10;
+    const isAtRightEdge = player.x > $.w - 10;
     if (isAtRightEdge) {
-        player.x = p.w - 10;
+        player.x = $.w - 10;
         const isGoingLeft = player.velocity.x > 0;
         if (isGoingLeft) {
             player.velocity.x -= 0.1;
@@ -272,25 +275,25 @@ function edgeEnforcement() {
 }
 
 function controls() {
-    if (kb.down("a")) {
+    if (kb.isDown("a")) {
         player.velocity.x -= 0.1;
         player.x -= 1;
     }
 
-    if (kb.down("d")) {
+    if (kb.isDown("d")) {
         player.velocity.x += 0.1;
         player.x += 1;
     }
 
-    if (kb.down(" ") || kb.down("f")) {
+    if (kb.isDown("f")) {
         {
             if (player.charge < player.maxCharge) {
                 player.charge++;
             }
         }
     }
-
-    if (kb.pressed(" ") || kb.pressed("f")) {
+    console.log('game',kb.isDown("f"))
+    if (kb.justPressed(" ") && kb.isDown("f")===false) {
         player.shots.push(makeShot(player.x, player.y - 100, player.charge));
         player.charge = 10;
     }
@@ -298,26 +301,26 @@ function controls() {
 
 function hp() {
     const hpRectSize = player.hp;
-    const barY = p.h - 40;
+    const barY = $.h - 40;
     colour.stroke = "rgba(0,0,0,0)";
     colour.fill = "red";
-    shape.rectangle(p.w / 2, barY, 200, 20);
+    shape.rectangle($.w / 2, barY, 200, 20);
     colour.fill = "green";
-    shape.xAlignment="left";
-    shape.rectangle(p.w / 2-100, barY, hpRectSize, 20);
+    shape.alignment.x="left";
+    shape.rectangle($.w / 2-100, barY, hpRectSize, 20);
 }
 
 function background(col) {
     colour.fill = col;
-    shape.rectangle(p.w / 2, p.h / 2, p.w, p.h);
+    shape.rectangle($.w / 2, $.h / 2, $.w, $.h);
 }
 
 function chargedShot() {
     const x = 20;
-    const y = p.w - 100;
-    shape.colour.fill = "orange";
-    const chargeAngle=p.math.rescaleNumber(player.charge,0,100,0,360);
-    const chargeSize=p.math.rescaleNumber(player.charge,0,100,5,25);
+    const y = $.w - 100;
+    colour.fill = "orange";
+    const chargeAngle=$.math.rescaleNumber(player.charge,0,100,0,360);
+    const chargeSize=$.math.rescaleNumber(player.charge,0,100,5,25);
     shape.arc(x,y,chargeSize,chargeSize,0,chargeAngle);
 }
 
@@ -328,53 +331,60 @@ function creditScreen() {
     ];
     colour.fill = "white";
     text.size=40;
-    text.draw(p.w / 2, p.h / 2 - 300, "CREDITS");
+    text.draw($.w / 2, $.h / 2 - 300, "CREDITS");
     text.size=26;
 
-    text.alignment="left";
+    text.alignment.x="left";
     for(let i=0; i<credits.length; i++){
         const increment=i*(text.size+10)+40;
-        text.draw(p.w/2-100,p.h / 2 - 270+increment,credits[i]);
+        text.draw($.w/2-100,$.h / 2 - 270+increment,credits[i]);
     }
     
-    BTN.home.x=p.w-BTN.home.w;
+    BTN.home.x=$.w-BTN.home.w;
     BTN.home.y=20+BTN.home.h/2;
     BTN.home.draw();
 }
 
 function makeEnemy(x, y) {
-    let newEnemy = p.makeBoxCollider(x, y, 64, 95);
-    newEnemy.attachement=assets.enemyImg;
-    newEnemy.velocity.y = 2;
+    let newEnemy = $.makeBoxCollider(x, y, 64, 95);
+    newEnemy.asset=assets.enemyImg;
+    newEnemy.rotation=180;
+    newEnemy.direction=180;
+    newEnemy.friction=0;
+    newEnemy.speed = 2;
     return newEnemy;
 }
 
 function makeShot(x, y, charge) {
-    let tempShot = p.makeBoxCollider(x, y, charge, charge);
-    tempShot.attachement=assets.shot;
+    //if multishot use charge for how many
+
+    //if burst use charge for how long
+
+    //if default use charge for size
+    let tempShot = $.makeBoxCollider(x, y, charge, charge);
+    // tempShot.attachement=assets.shot;
     tempShot.charge = charge;
-    tempShot.velocity.y = -5;
+    tempShot.direction=0;
+    tempShot.speed=5;
 
     return tempShot;
 }
 
-
 function makePlayer(){
-    let tempPlayer=p.makeBoxCollider(p.w / 2, p.h - 100, 64, 95);
+    let tempPlayer=$.makeBoxCollider($.w / 2, $.h - 100, 64, 95);
 
     tempPlayer.charge = 10;
     tempPlayer.maxCharge = 100;
     tempPlayer.shots = new Group();
     
     tempPlayer.hp = 200;
-    tempPlayer.attachement = p.loadImage(0, 0, "./images/fac1_refinery.png");
-    tempPlayer.attachement.rotation = 270;
+    tempPlayer.asset = assets.playerImg;
     
     window.player = tempPlayer;
     return tempPlayer;
 } 
 
 function makeEdge(x, y) {
-    let tempEdge = p.makeBoxCollider(x, y, 30, p.h);
+    let tempEdge = $.makeBoxCollider(x, y, 30, $.h);
     return tempEdge;
 }
