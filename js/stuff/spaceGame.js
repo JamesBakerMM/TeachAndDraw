@@ -111,8 +111,6 @@ function draw() {
 
 function setup() {
     if ($.frameCount === 0) {
-        player = makePlayer();
-        player.asset=assets.enemyImg;
         makeEnemyWave(100, -50, 3, 295);
     }
 }
