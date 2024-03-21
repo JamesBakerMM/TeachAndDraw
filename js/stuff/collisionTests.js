@@ -9,7 +9,7 @@ let squares = makeGroup();
 let ships = makeGroup();
 
 let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
-leftSquare.speed=2;
+leftSquare.speed=0;
 leftSquare.direction=240;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 leftSquare.asset=img;
@@ -19,18 +19,34 @@ leftSquare.friction = 0;
 squares.push(leftSquare);
 
 let rightSquare;
-for (let i = 0; i < 700; i += 15) {
-    for (let j = 0; j < 500; j += 15) {
-        rightSquare=$.makeBoxCollider(i,j, 5, 5);
+for (let i = 10; i < 790; i += 10) {
+    for (let j = 10; j < 590; j += 5) {
+        rightSquare=$.makeBoxCollider(i,j, 3, 3);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
-        rightSquare.friction = 1;
+        rightSquare.friction = 10;
         squares.push(rightSquare);
     }
 }
 
+function drawTree(quad, counter) {
+    let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
+    for (let i = 1; i <= 4; i++) {
+        let q = quad.getQuad(i);
+        if (q != null) {
+            $.colour.fill = colorArray[counter];
+            counter += 1;
+            if (counter == colorArray.length) {
+                counter = 0;
+            }
+            $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.size, q.size);
+            drawTree(q, counter);
+        }
+    }
+}
+
 function draw(){
-    // $.paused=true;
+    $.paused=false;
 
     if(mouse.isPressed){
         leftSquare.x=mouse.x;
@@ -55,26 +71,24 @@ function draw(){
         leftSquare.velocity.x+=2*$.time.timeMultipler;
         leftSquare.rotation=90;
     }
-    let colorArray = ["white", "yellow", "red", "purple", "blue"];
+    
 
     //Quad tree testing stuff
+ 
  /*   
+    let colorArray = ["white", "yellow", "red", "purple", "blue"];
     let num = $.quadTree.getValue(leftSquare.x, leftSquare.y, leftSquare.radius);
     let text = num.toString(2);
     console.log(text);
-    if (true) {
-        for (let i = 1; i <= 2; i++) {
-            for (let j = 1; j <= 4; j++) {
-                for (let k = 1; k <= 4; k++) {
-                    let q = $.quadTree.getQuad().getQuad(i).getQuad(j).getQuad(k);
-                    $.colour.fill = colorArray[k];
-                    $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.width, q.height);
-                }
-            }
+    for (let i = 1; i <= 4; i++) {
+        for (let j = 1; j <= 4; j++) {
+            let q = $.quadTree.getQuad().getQuad(i).getQuad(j);
+            $.colour.fill = colorArray[j];
+            $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.width, q.height);
         }
-        
-    }    
+    }
 */
+
     // if(leftSquare.x>$.width || leftSquare.x<0){
     //     leftSquare.velocity.x=-leftSquare.velocity.x
     // }
@@ -105,6 +119,10 @@ function draw(){
         // $.colour.stroke = "#FFFF00FF";
         // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
+
+    //drawTree(squares.QuadTree.getTree(), 0);
+    //console.log(squares.QuadTree.getTree());
+
     $.drawAllColliders();
 
     document.getElementById("fps").innerText = $.time.averageFps;
