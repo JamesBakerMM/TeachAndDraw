@@ -3,10 +3,10 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Pallete.js";
 
 $.start(draw);
-$.debug=true;
+$.debug=false;
 $.fps=20;
-let edges = makeGroup();
 let squares = makeGroup();
+let ships = makeGroup();
 
 let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
 leftSquare.speed=2;
@@ -18,14 +18,13 @@ leftSquare.mass = 200000;
 leftSquare.friction = 0;
 squares.push(leftSquare);
 
-
 let rightSquare;
-for (let i = 0; i < 700; i += 10) {
-    for (let j = 0; j < 200; j += 10) {
+for (let i = 0; i < 700; i += 15) {
+    for (let j = 0; j < 500; j += 15) {
         rightSquare=$.makeBoxCollider(i,j, 5, 5);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
-        rightSquare.friction = 10;
+        rightSquare.friction = 1;
         squares.push(rightSquare);
     }
 }
@@ -39,24 +38,23 @@ function draw(){
         leftSquare.velocity.x=0;
         leftSquare.velocity.y=0;
     }
-
+    
     if(kb.isDown("arrowup")){
-        leftSquare.velocity.y-=2
-        leftSquare.rotation=270;
-    }
-    if(kb.isDown("arrowdown")){
-        leftSquare.velocity.y+=2
-        leftSquare.rotation=90;
-    }
-    if(kb.isDown("arrowleft")){
-        leftSquare.velocity.x-=2
-        leftSquare.rotation=180;
-    }
-    if(kb.isDown("arrowright")){
-        leftSquare.velocity.x+=2
+        leftSquare.velocity.y-=2*$.time.timeMultipler;
         leftSquare.rotation=0;
     }
-
+    if(kb.isDown("arrowdown")){
+        leftSquare.velocity.y+=2*$.time.timeMultipler;
+        leftSquare.rotation=180;
+    }
+    if(kb.isDown("arrowleft")){
+        leftSquare.velocity.x-=2*$.time.timeMultipler;
+        leftSquare.rotation=270;
+    }
+    if(kb.isDown("arrowright")){
+        leftSquare.velocity.x+=2*$.time.timeMultipler;
+        leftSquare.rotation=90;
+    }
     let colorArray = ["white", "yellow", "red", "purple", "blue"];
 
     //Quad tree testing stuff
@@ -85,21 +83,22 @@ function draw(){
     // }
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
-        if(squares[i].x>$.width){
-            squares[i].x=$.width;
-            squares[i].velocity.x=-squares[i].velocity.x;
+        const sq = squares[i];
+        if(sq.x>$.width){
+            sq.x=$.width;
+            sq.velocity.x=-sq.velocity.x;
         }
-        if(squares[i].x<0){
-            squares[i].x=0;
-            squares[i].velocity.x=-squares[i].velocity.x;
+        if(sq.x<0){
+            sq.x=0;
+            sq.velocity.x=-sq.velocity.x;
         }
-        if(squares[i].y>$.height){
-            squares[i].y=$.height-1;
-            squares[i].velocity.y=-squares[i].velocity.y;
+        if(sq.y>$.height){
+            sq.y=$.height-1;
+            sq.velocity.y=-sq.velocity.y;
         }
-        if(squares[i].y<0){
-            squares[i].y=0;
-            squares[i].velocity.y=-squares[i].velocity.y;
+        if(sq.y<0){
+            sq.y=0;
+            sq.velocity.y=-sq.velocity.y;
         }
 
         // $.colour.fill = "#00000000";
