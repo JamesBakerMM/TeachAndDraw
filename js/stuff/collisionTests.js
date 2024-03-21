@@ -15,7 +15,7 @@ let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 leftSquare.asset=img;
 window.lSquare=leftSquare;
 leftSquare.mass = 200000;
-leftSquare.friction = 1;
+leftSquare.friction = 0;
 squares.push(leftSquare);
 
 
@@ -41,19 +41,19 @@ function draw(){
     }
 
     if(kb.isDown("arrowup")){
-        leftSquare.velocity.y--
+        leftSquare.velocity.y-=2
         leftSquare.rotation=270;
     }
     if(kb.isDown("arrowdown")){
-        leftSquare.velocity.y++
+        leftSquare.velocity.y+=2
         leftSquare.rotation=90;
     }
     if(kb.isDown("arrowleft")){
-        leftSquare.velocity.x--
+        leftSquare.velocity.x-=2
         leftSquare.rotation=180;
     }
     if(kb.isDown("arrowright")){
-        leftSquare.velocity.x++
+        leftSquare.velocity.x+=2
         leftSquare.rotation=0;
     }
 
