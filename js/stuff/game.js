@@ -53,7 +53,7 @@ function draw() {
         200,0,
         200,p.h
     )
-    text.draw(200,200,"200,200")
+    text.print(200,200,"200,200")
 
     x += 1;
     if (x > p.w)  {

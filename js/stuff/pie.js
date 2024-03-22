@@ -58,7 +58,7 @@ function drawSlice(value,total,offset,fill,label){
 
     // Draw label
     p.shape.oval(x-5,y-3,2)
-    p.text.draw(x, y, label);
+    p.text.print(x, y, label);
 
     return size
 }

@@ -27,37 +27,37 @@
                 colour.fill = "red";
                 shape.line(COL_ONE_X, 0, COL_ONE_X, $.height);
                 test.message("text checking!");
-                text.draw(COL_ONE_X, 20, "basic text set");
+                text.print(COL_ONE_X, 20, "basic text set");
                 test.message("alignment checking!");
                 text.alignment.x = "left";
-                text.draw(COL_ONE_X, 60, "left text");
+                text.print(COL_ONE_X, 60, "left text");
                 text.alignment.x = "right";
-                text.draw(COL_ONE_X, 80, "right text");
+                text.print(COL_ONE_X, 80, "right text");
                 text.alignment.x = "center";
-                text.draw(COL_ONE_X, 100, "center text");
+                text.print(COL_ONE_X, 100, "center text");
                 test.message("size checking!");
                 text.size = 40;
-                text.draw(COL_ONE_X, 140, "big text");
+                text.print(COL_ONE_X, 140, "big text");
                 text.size = 12;
-                text.draw(COL_ONE_X, 180, "small text");
+                text.print(COL_ONE_X, 180, "small text");
                 test.message("font checking!");
 
                 text.size = 16;
                 text.font = "serif";
                 text.font = "italic 20px Arial";
-                text.draw(COL_ONE_X, 220, "serif text");
+                text.print(COL_ONE_X, 220, "serif text");
                 text.font = "sans-serif";
-                text.draw(COL_ONE_X, 240, "sans-serif");
+                text.print(COL_ONE_X, 240, "sans-serif");
                 text.font = "monospace";
-                text.draw(COL_ONE_X, 260, "monospace");
+                text.print(COL_ONE_X, 260, "monospace");
 
                 text.font = "sans-serif";
                 text.bold = true;
-                text.draw(COL_ONE_X, 280, "bold");
+                text.print(COL_ONE_X, 280, "bold");
                 text.bold = false;
 
                 text.italic = true;
-                text.draw(COL_ONE_X, 300, "italic");
+                text.print(COL_ONE_X, 300, "italic");
 
                 $.paused = true;
             }

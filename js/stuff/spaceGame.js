@@ -129,7 +129,7 @@ function makeEnemyWave(x, y, amount = 5, x_increment = 100, y_increment=10) {
 
 function splashScreen() {
     colour.fill = "white";
-    text.draw($.w / 2, $.h / 2, "Press a to start!");
+    text.print($.w / 2, $.h / 2, "Press a to start!");
     if (kb.howLongDown("any")>10) {
         currentScreen = SCREENS.MENU;
     }
@@ -137,7 +137,7 @@ function splashScreen() {
 
 function menuScreen() {
     colour.fill = "black";
-    text.draw($.w / 2, $.h / 2, "MENU");
+    text.print($.w / 2, $.h / 2, "MENU");
     BTN.toPlay.draw();
     BTN.toCredits.draw();
     BTN.toCredits.y=$.h/2+BTN.toCredits.h+20;
@@ -151,7 +151,7 @@ function bgSpace(x,y){
 
 function gameScreen() {
     colour.fill="black";
-    text.draw(20,20,"TIMER WAVE"+ TIMERS.WAVE);
+    text.print(20,20,"TIMER WAVE"+ TIMERS.WAVE);
 
     if(TIMERS.WAVE>0){
         TIMERS.WAVE--
@@ -329,13 +329,13 @@ function creditScreen() {
     ];
     colour.fill = "white";
     text.size=40;
-    text.draw($.w / 2, $.h / 2 - 300, "CREDITS");
+    text.print($.w / 2, $.h / 2 - 300, "CREDITS");
     text.size=26;
 
     text.alignment.x="left";
     for(let i=0; i<credits.length; i++){
         const increment=i*(text.size+10)+40;
-        text.draw($.w/2-100,$.h / 2 - 270+increment,credits[i]);
+        text.print($.w/2-100,$.h / 2 - 270+increment,credits[i]);
     }
     
     BTN.home.x=$.w-BTN.home.w;

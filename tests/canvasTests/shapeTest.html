@@ -51,14 +51,14 @@
                     $.h
                 )
                 colour.fill="black";
-                text.draw(RECT_X,50,"Rect X Alignments")
+                text.print(RECT_X,50,"Rect X Alignments")
                 shape.alignment.x="center";
                 shape.rectangle(RECT_X,100,50);
-                text.draw(RECT_X,150,"left")
+                text.print(RECT_X,150,"left")
                 shape.alignment.x="left";
                 shape.rectangle(RECT_X,190,50);
                 
-                text.draw(RECT_X,250,"right")
+                text.print(RECT_X,250,"right")
                 shape.alignment.x="right";
                 shape.rectangle(RECT_X,290,50);
                 
@@ -70,18 +70,18 @@
                     $.h
                 )
                 colour.fill="black";
-                text.draw(OVAL_X,50,"Oval X Alignments")
+                text.print(OVAL_X,50,"Oval X Alignments")
                 shape.alignment.x="center";
                 shape.oval(OVAL_X,100,25);
                 shape.alignment.x="left";
-                text.draw(OVAL_X,150,"left")
+                text.print(OVAL_X,150,"left")
                 shape.oval(OVAL_X,190,25);
                 shape.alignment.x="right";
-                text.draw(OVAL_X,250,"right")
+                text.print(OVAL_X,250,"right")
                 shape.oval(OVAL_X,290,25);
 
 
-                $.text.draw(
+                $.text.print(
                     20,
                     375,
                     "Y ALIGNMENT"
@@ -119,18 +119,18 @@
                 const POINT_X=450;
                 $.colour.stroke="black";
                 
-                $.text.draw(POINT_X,50,"line");
+                $.text.print(POINT_X,50,"line");
                 $.shape.line(POINT_X,100,POINT_X+100,100);
                 $.shape.strokeWidth=3;
                 
-                $.text.draw(POINT_X,150,"stroke width test");
+                $.text.print(POINT_X,150,"stroke width test");
                 $.shape.line(POINT_X,200,POINT_X+100,200);
                 
-                $.text.draw(POINT_X,250,"dashed stroke test");
+                $.text.print(POINT_X,250,"dashed stroke test");
                 $.shape.strokeDash=10;
                 $.shape.line(POINT_X,300,POINT_X+100,300);
                 
-                $.text.draw(POINT_X,325,"multiline");
+                $.text.print(POINT_X,325,"multiline");
                 $.shape.strokeDash=0;
                 $.shape.multiline(
                     POINT_X,350,
@@ -140,7 +140,7 @@
                 )
 
                 
-                $.text.draw(POINT_X,480,"shape");
+                $.text.print(POINT_X,480,"shape");
                 $.shape.shape(
                     POINT_X,500,
                     POINT_X+100,500,
@@ -150,7 +150,7 @@
                 )
 
                 const ARC_X=650;
-                $.text.draw(ARC_X,50,"arc");
+                $.text.print(ARC_X,50,"arc");
                 $.shape.arc(
                     ARC_X,120,100,0,0,120
                 )

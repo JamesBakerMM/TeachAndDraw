@@ -24,7 +24,7 @@ function draw(){
         colour.fill=Paint.blue.dark[0];
         shape.oval(x,y,size);
         colour.fill=Paint.blue.pale[0];
-        text.draw(x,y,"c")
+        text.print(x,y,"c")
     }
 
     for(let i=0; i<tutors; i++){
@@ -35,7 +35,7 @@ function draw(){
         colour.fill=Paint.red.pale[0];
         shape.oval(x,y,size);
         colour.fill=Paint.pink.dark[0];
-        text.draw(x,y,"t")
+        text.print(x,y,"t")
     }
 
     let x=-10;
@@ -51,7 +51,7 @@ function draw(){
         colour.fill=Paint.purple.pale[0];
         shape.oval(x,y,size);
         colour.fill=Paint.purple.dark[0];
-        text.draw(x,y,"s")
+        text.print(x,y,"s")
     }
     $.drawAllEntities();
 }
