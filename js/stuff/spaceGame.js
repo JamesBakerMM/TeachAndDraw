@@ -278,7 +278,7 @@ function controls() {
     }
 
     if (kb.isDown("d")) {
-        player.velocity.x += 0.1;
+        player.velocity.x += 0.1; 
         player.x += 1;
     }
 
