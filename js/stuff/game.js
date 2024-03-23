@@ -42,7 +42,7 @@ function draw() {
     shape.oval(p.mouse.x, p.mouse.y, 50, 30); 
     shape.line(300, 50, 400, 150); 
     shape.multiline(10, 10, 50, 50, 10, 90);
-    shape.shape(
+    shape.polygon(
         150+x, 100, 
         200+x, 150, 
         150+x, 200, 

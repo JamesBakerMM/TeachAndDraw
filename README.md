@@ -67,7 +67,7 @@ something something change the main.js file to see changes
 - **oval(x,y,w,h)** - draws a oval at given coords
 - **line(xStart, yStart, xEnd, yEnd)**
 - **multiline(...coords)** draws a set of lines from point to point if given a sequence of x,y pairs
-- **shape(...coords)** name needs to be changed to polygon or something
+- **polygon(...coords)** name needs to be changed to polygon or something
 - **arc(x, y, w, h, startAngle, endAngle)** 
 
   

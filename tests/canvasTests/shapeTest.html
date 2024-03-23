@@ -17,7 +17,6 @@
             import {
                 Point
             } from "/lib/Point.js";
-            import { Group } from "/lib/Group.js";
             import { TestSuite } from "/tests/TestSuite.js";
 
             $.start(draw);
@@ -28,9 +27,6 @@
             // $.debug=true;
 
             const test = new TestSuite();
-
-            //check xAlignment
-            //check xAlignmnt
 
             test.reportResults();
             
@@ -141,7 +137,7 @@
 
                 
                 $.text.print(POINT_X,480,"shape");
-                $.shape.shape(
+                $.shape.polygon(
                     POINT_X,500,
                     POINT_X+100,500,
                     POINT_X+100,600,    

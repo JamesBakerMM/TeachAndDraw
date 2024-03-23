@@ -1,5 +1,4 @@
 import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
-import { Group } from "../../lib/Group.js";
 
 $.start(draw);
 
@@ -21,7 +20,7 @@ $.start(draw);
 //end player code
 
 //edges
-    let edges = new Group();
+    let edges = $.makeGroup();
 
     // edges.push(makeEdge(0, $.h / 2));
     // edges.push(makeEdge($.w, $.h / 2));
@@ -72,8 +71,8 @@ const COUNTERS={
 
 //end assets
 
-const enemies = new Group();
-const bullets = new Group();
+const enemies = $.makeGroup();
+const bullets = $.makeGroup();
 
 function draw() {
     setup();
@@ -168,7 +167,7 @@ function gameScreen() {
 
     if(enemies.length <= COUNTERS.MIN_ENEMIES){
         COUNTERS.WAVES--
-        let options=new Group(
+        let options=$.makeGroup(
             {
                 x:100,
                 y:-80,
@@ -222,7 +221,7 @@ function gameScreen() {
             shot.y < 0 - offset ||
             shot.x > $.h + offset
         ) {
-            shot.remove = true;
+            shot.remove();
         }
         shot.draw();
         colour.stroke = "rgba(0,0,0,0)";
@@ -349,7 +348,7 @@ function makeEnemy(x, y) {
     newEnemy.rotation=180;
     newEnemy.direction=180;
     newEnemy.friction=0;
-    newEnemy.speed = 2;
+    newEnemy.speed = 8;
     return newEnemy;
 }
 
@@ -363,7 +362,8 @@ function makeShot(x, y, charge) {
     // tempShot.attachement=assets.shot;
     tempShot.charge = charge;
     tempShot.direction=0;
-    tempShot.speed=5;
+    tempShot.friction=0;
+    tempShot.speed=10;
 
     return tempShot;
 }
@@ -373,7 +373,7 @@ function makePlayer(){
 
     tempPlayer.charge = 10;
     tempPlayer.maxCharge = 100;
-    tempPlayer.shots = new Group();
+    tempPlayer.shots = $.makeGroup();
     
     tempPlayer.hp = 200;
     tempPlayer.asset = assets.playerImg;
