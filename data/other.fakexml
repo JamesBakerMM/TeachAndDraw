@@ -1,0 +1,12 @@
+<text @heading:1> hsdfkjshd </text> 
+[list @colour:red @style:bold @padding:10]
+    <text @style:bold>juhdsM</text>
+    <img @src:./images/example.png>label for the image</img>
+    <text>hsdf</text>
+[/list]
+[grid]
+    <text @style:bold>juhdsM</text>
+    <img @src:./images/example.png>label for the image</img>
+[/grid]
+(button @padding:5)text for the button(/button)
+(slider @start:0 @current:5 @end:100)sample label(/slider)

@@ -1,0 +1,5 @@
+[list @padding:10]
+    <text @style:bold>juhdsM</text>
+    <img @src:./images/example.png>label for the image</img>
+    <text>hsdf</text>
+[/list]
