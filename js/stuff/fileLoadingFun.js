@@ -14,21 +14,31 @@ let scanner;
 let parser;
 let renderer;
 let screen;
+let nodes = [];
 function setup() {
     if (doneSetup === false) {
         stream = file.join("\n");
         scanner = new Scanner(stream);
         scanner.scan();
         parser = new Parser(scanner.tokens);
-        console.log(parser.parse());
+        nodes = parser.parse();
+        // console.log(parser.parse());
+        nodes[0].x = $.w / 2;
+        nodes[0].y = $.h / 2;
+        nodes[0].w = 250;
+        nodes[0].h = 50;
         doneSetup = true;
     }
 }
 
 function draw() {
     setup();
-    for(let node of nodes){
-        node.draw();
+    $.paused = true;
+    console.log("kjhsdfkds|", nodes);
+    for (const node of nodes) {
+        if (node) {
+            node.draw();
+        }
     }
 }
 
@@ -131,7 +141,7 @@ class Scanner {
         let attributes = {};
         let isClosingTag = this.match("/");
         let tagContent = this.consumeUntil("]");
-        let tagName = tagContent.split(/\s+/)[0]; 
+        let tagName = tagContent.split(/\s+/)[0];
         attributes = this.extractAttributes(
             tagContent.substring(tagName.length).trim()
         );
@@ -311,7 +321,7 @@ class Parser {
                 throw new Error(`Unexpected token: ${token.type}`);
         }
     }
-    parseStructuralNode() { 
+    parseStructuralNode() {
         const token = this.advance();
         return new StructuralNode(token.lexeme);
     }
@@ -321,35 +331,36 @@ class Parser {
     }
 
     parseNodesUntil(END_TOKEN_TYPE) {
-        console.log("Making",this.peek().type)
+        console.log("Making", this.peek().type);
         const startToken = this.advance();
         const attributes = startToken.attributes;
         const children = [];
         let result;
 
-        if(startToken.type==="STRUCTURAL_OPEN"){
-            switch(startToken.lexeme){
+        if (startToken.type === "STRUCTURAL_OPEN") {
+            switch (startToken.lexeme) {
                 case "list":
-                    console.log("make a list dumbass")
-                    result = new ListNodes(0,0,$.w,$.h);
-                    result.attributes //get and fill with attributes
-                    break
+                    console.log("make a list dumbass");
+                    result = new ListNodes(0, 0, $.w, $.h);
+                    result.attributes; //get and fill with attributes
+                    break;
             }
-        }else if (this.peek().type === TokenType.TEXT) {
+        } else if (this.peek().type === TokenType.TEXT) {
             let textToken = this.advance();
             startToken.value = textToken.lexeme;
-            result=new TextNodes(0,0,$.w,$.h,textToken.lexeme)
+            result = new TextNodes(0, 0, $.w, $.h, textToken.lexeme);
         } else {
-            result=new ContentNode(startToken.lexeme, attributes, children);
+            result = new ContentNode(startToken.lexeme, attributes, children);
         }
 
         while (!this.checkType(END_TOKEN_TYPE) && !this.isAtEnd()) {
             children.push(this.parseNode());
-            
         }
 
+        result.children = children;
+
         //if its a structural open
-            //add the children
+        //add the children
 
         this.advance();
         return result;
@@ -374,238 +385,6 @@ class Parser {
     }
 }
 
-// class Renderer {
-//     constructor(nodes) {
-//         this.nodes = nodes;
-//         this.currentPathParent = nodes[0]; //way to track back to the parent node working from
-//         this.blocks = [];
-//     }
-//     render() {
-//         console.log(this.nodes);
-//         console.log("------------------");
-//         console.log("------------------");
-//         console.log("------------------");
-
-//         let depth = 0;
-//         let xOffset = 0; // Horizontal offset for child nodes
-//         let yOffset = 200; // Vertical offset to stack nodes
-//         for (let node of this.nodes) {
-//             if (node) {
-//                 this.renderNode(node, depth, xOffset, yOffset);
-//                 yOffset += 60;
-//             }
-//         }
-//     }
-//     renderNode(node, depth = 0, xOffset = 0, yOffset = 0, parent) {
-//         const width = $.w;
-//         const height = 50;
-
-//         let values;
-//         if (node.value) {
-//             this.blocks.push({
-//                 x: xOffset,
-//                 y: yOffset,
-//                 w: width,
-//                 h: height,
-//                 type: node.type,
-//                 parent: parent,
-//                 values: node.value,
-//             });
-//         } else {
-//             this.blocks.push({
-//                 x: xOffset,
-//                 y: yOffset,
-//                 w: width,
-//                 h: height,
-//                 type: node.type,
-//                 parent: parent,
-//             });
-//         }
-
-//         const indent = " ".repeat(depth * 2);
-
-//         switch (node.type) {
-//             case "text":
-//                 console.log(`${indent}<text>`);
-//                 if (node.children.length > 0) {
-//                     depth += 1;
-//                     let childXOffset = xOffset + 50; // Indent child nodes
-//                     let childYOffset = yOffset + height;
-//                     for (let child of node.children) {
-//                         // Stack child nodes below the parent
-//                         this.renderNode(
-//                             child,
-//                             depth + 1,
-//                             childXOffset,
-//                             childYOffset,
-//                             node
-//                         );
-//                         childYOffset += 50;
-//                     }
-//                 }
-//                 break;
-//             case "Text":
-//                 console.log(`${indent}${node.text}`);
-//                 break;
-//             case "grid":
-//                 console.log(`${indent}[grid]`);
-//                 if (node.children.length > 0) {
-//                     depth += 1;
-//                     let childXOffset = xOffset + 10; // Indent child nodes
-//                     let childYOffset = yOffset + height;
-//                     for (let child of node.children) {
-//                         // Stack child nodes below the parent
-//                         this.renderNode(
-//                             child,
-//                             depth + 1,
-//                             childXOffset,
-//                             childYOffset,
-//                             node
-//                         );
-//                         childYOffset += 50;
-//                     }
-//                 }
-//                 break;
-//             case "list":
-//                 console.log(`${indent}[list]`);
-//                 if (node.children.length > 0) {
-//                     depth += 1;
-//                     let childXOffset = xOffset + 10; // Indent child nodes
-//                     let childYOffset = yOffset + height;
-//                     for (let child of node.children) {
-//                         // Stack child nodes below the parent
-//                         this.renderNode(
-//                             child,
-//                             depth + 1,
-//                             childXOffset,
-//                             childYOffset,
-//                             node
-//                         );
-//                         childYOffset += 50;
-//                     }
-//                 }
-//                 break;
-//             case "button":
-//                 console.log(`${indent}[button]`);
-//                 if (node.children.length > 0) {
-//                     depth += 1;
-//                     let childXOffset = xOffset + 10; // Indent child nodes
-//                     let childYOffset = yOffset + height;
-//                     for (let child of node.children) {
-//                         // Stack child nodes below the parent
-//                         this.renderNode(
-//                             child,
-//                             depth + 1,
-//                             childXOffset,
-//                             childYOffset,
-//                             node
-//                         );
-//                         childYOffset += 50;
-//                     }
-//                 }
-//                 break;
-//             case "slider":
-//                 console.log(`${indent}[slider]`);
-//                 if (node.children.length > 0) {
-//                     depth += 1;
-//                     let childXOffset = xOffset + 10; // Indent child nodes
-//                     let childYOffset = yOffset + height;
-//                     for (let child of node.children) {
-//                         // Stack child nodes below the parent
-//                         this.renderNode(
-//                             child,
-//                             depth + 1,
-//                             childXOffset,
-//                             childYOffset,
-//                             node
-//                         );
-//                         childYOffset += 50;
-//                     }
-//                 }
-//                 break;
-//             case "button":
-//                 console.log(`${indent}[button]:${node.text}`);
-//                 if (node.children.length > 0) {
-//                     depth += 1;
-//                     let childXOffset = xOffset + 10; // Indent child nodes
-//                     let childYOffset = yOffset + height;
-//                     for (let child of node.children) {
-//                         // Stack child nodes below the parent
-//                         this.renderNode(
-//                             child,
-//                             depth + 1,
-//                             childXOffset,
-//                             childYOffset,
-//                             node
-//                         );
-//                         childYOffset += 50;
-//                     }
-//                 }
-//                 break;
-//         }
-//     }
-//     renderText() {
-//         //work out dimensions first
-//         //work out height of a line of text
-//         //work out width
-//         //{w, h} feed this down to children so they know their parents dimensions
-//     }
-//     renderList() {}
-//     renderGrid() {}
-//     renderBlocks() {
-//         //for each block etc
-//     }
-// }
-
-// class Screen {
-//     constructor(blocks) {
-//         this.y = 0;
-//         this.blocks = blocks;
-//         console.log(blocks);
-//     }
-//     drawBlocks() {
-//         // console.log(this.blocks)
-//         shape.alignment.y = "top";
-//         shape.alignment.x = "left";
-//         text.alignment.y = "top";
-//         text.alignment.x = "left";
-//         for (let block of this.blocks) {
-//             if (block.type === "list" || block.parent.type === "list") {
-//                 $.colour.fill = `green`;
-//             } else if (block.type === "grid" || block.parent.type === "grid") {
-//                 $.colour.fill = `blue`;
-//             } else if (
-//                 block.type === "button" ||
-//                 block.parent.type === "button"
-//             ) {
-//                 $.colour.fill = `purple`;
-//             } else if (
-//                 block.type === "slider" ||
-//                 block.parent.type === "slider"
-//             ) {
-//                 $.colour.fill = `aqua`;
-//             } else {
-//                 $.colour.fill = `red`;
-//             }
-//             if (block.parent !== undefined) {
-//                 //if it has parents
-//                 $.shape.strokeWidth = 0;
-//                 $.colour.fill = "rgba(0,0,0,0.5)";
-//                 $.colour.stroke = "rgba(0,0,0,0.5)";
-//             } else {
-//                 $.colour.stroke = "white";
-//                 $.shape.strokeDash = 2;
-//                 $.shape.strokeWidth = 2;
-//             }
-//             shape.rectangle(block.x, block.y, block.w, block.h);
-//             $.colour.fill = `black`;
-//             console.log("block values", block.values);
-//             text.print(block.x, block.y, `  ${block.type}`);
-//         }
-//     }
-//     //this
-// }
-
 //eventually build a node manager with a query selector
 
 class Nodes {
@@ -614,82 +393,96 @@ class Nodes {
         this.y = y;
         this.w = w;
         this.h = h;
-        this.calcedH=h;
+        this.calcedH = h;
         this.children = [];
-        this.attributes=[];
-        this.parent=null;
+        this.attributes = [];
+        this.parent = null;
+        this.type = "node";
     }
-    draw(x=this.x,y=this.y,maxW=this.w,maxH=this.h){
-        //adjust the maxW and maxH for padding if padding set
-        for(let child of this.children){
-            child.draw(x,y,maxW,maxH)
+    draw(x = this.x, y = this.y, maxW = this.w, maxH = this.h) {
+        for (let child of this.children) {
+            child.draw(x, y, maxW, maxH);
         }
     }
 }
 
-class ListNodes extends Nodes{
+class BoundingBox{
+    constructor(x,y,w,h){
+        this.x=x;
+        this.y=y;
+        this.w=w;
+        this.h=h;
+    }
+    adjustXPadding(value){
+
+    }
+    adjustYPadding(value){
+
+    }
+}
+
+class ListNodes extends Nodes {
     constructor(x, y, w, h) {
-        super(x,y,w,h);
+        super(x, y, w, h);
+        this.type = "list";
     }
-    draw(x=this.x,y=this.y,maxW=this.w,maxH=this.h){
-        this.calcedH=0;
-        let x_offset=10;
-        let y_offset=0;
-        //adjust the maxW and maxH for padding if padding set
-        for(let child of this.children){
-            this.calcedH+=child.h;
+    draw(x = this.x, y = this.y, maxW = this.w, maxH = this.h) {
+        let x_offset = 0;
+        let y_offset = 0;
+        $.colour.fill = "rgba(255,255,255,0.5)";
+        $.shape.rectangle(x, y, maxW, this.calcedH);
+        //if attribute padding set
+            //offset x start
+            //offset y start
+            //slightly reduce maxW
+            //slightly reduce maxH
+        for (let child of this.children) {
+            child.draw(x + x_offset, y + y_offset, maxW, maxH);
+            y_offset += child.h;
         }
-        $.colour.fill="rgba(255,255,255,0.5)";
-        $.shape.rectangle(x,y,maxW,this.calcedH);
-        for(let child of this.children){
-            child.draw(x+x_offset,y+y_offset,maxW,maxH);
-            y_offset+=child.h;
-        }
+        this.calcedH=y_offset;
+        this.h=y_offset;
     }
 }
 
-class TextNodes extends Nodes{
-    constructor(x,y,w,h,content) {
-        super(x,y,w,h);
-        this.content=content;
-        this.colour="black";
-        this.style="normal";
-        for(let attribute of this.attributes){
+class TextNodes extends Nodes {
+    constructor(x, y, w, h, content) {
+        super(x, y, w, h);
+        this.content = content;
+        this.colour = "black";
+        this.style = "normal";
+        for (let attribute of this.attributes) {
             console.log(attribute);
             //get the key
-            const key="";
-            const value="";
-            if(this[key]){
-                this[key]=value;
+            const key = "";
+            const value = "";
+            if (this[key]) {
+                this[key] = value;
             }
         }
+        this.type = "text";
         //loop attributes
-            //update any relevant matches!
+        //update any relevant matches!
     }
-    draw(x=this.x,y=this.y,maxW=this.w,maxH=this.h){
+    draw(x = this.x, y = this.y, maxW = this.w, maxH = this.h) {
+
+        $.text.alignment.x="left";
+        $.text.alignment.y="top";
+        $.shape.alignment.x="center";
+        $.shape.alignment.y="top";
+        console.log("size",$.text.size);
+        maxH = $.text.size*1.2;
+        //if attribute padding set
+            //offset x start
+            //offset y start
+            //slightly reduce maxW
+            //slightly reduce maxH
         //adjust the maxW and maxH for padding if padding set
         //calculate h based on the width and current font size an update the font
-        $.colour.fill="rgba(0,0,0,0)";
-        $.shape.rectangle(x,y,maxW,maxH);
-        $.colour.fill="black";
-        $.text.print(x,y,this.content);
+        $.colour.fill = "rgba(0,0,0,0)";
+        $.shape.rectangle(x, y, maxW, maxH);
+        $.colour.fill = "black";
+        $.text.print(x-maxW/2, y, this.content);
+        this.h=$.text.size*1.2;
     }
 }
-let nodes=[];
-
-let list= new ListNodes($.w/2,100,$.w,50);
-
-let listItems={}
-listItems.one=new TextNodes(list.x,list.y,list.w,list.h,"one");
-list.children.push(listItems.one);
-listItems.one.parent=list; 
-
-listItems.two=new TextNodes(list.x,list.y,list.w,list.h,"two");
-list.children.push(listItems.two);  
-listItems.two.parent=list; 
-
-listItems.three=new TextNodes(list.x,list.y,list.w,list.h,"three");
-list.children.push(listItems.three);
-listItems.three.parent=list; 
-
-nodes.push(list);

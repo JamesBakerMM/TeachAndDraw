@@ -3,12 +3,13 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Pallete.js";
 
 $.start(draw);
-$.debug=false;
-$.fps=20;
+$.debug=true;
 let squares = makeGroup();
 let ships = makeGroup();
 
-let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
+// let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
+let leftSquare=$.makeBoxCollider($.w/2,$.h/2,80,80);
+leftSquare.movedByCamera=false;
 leftSquare.speed=0;
 leftSquare.direction=240;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
@@ -20,8 +21,17 @@ squares.push(leftSquare);
 
 let rightSquare;
 
-for (let i = 10; i < 790; i += 10) {
-    for (let j = 10; j < 590; j += 5) {
+// for (let i = 10; i < 790; i += 10) {
+//     for (let j = 10; j < 590; j += 5) {
+//         rightSquare=$.makeBoxCollider(i,j, 3, 3);
+//         rightSquare.velocity.x = 0;
+//         rightSquare.mass = 1;
+//         rightSquare.friction = 5;
+//         squares.push(rightSquare);
+//     }
+// }
+for (let i = 10; i < 190; i += 10) {
+    for (let j = 10; j < 190; j += 5) {
         rightSquare=$.makeBoxCollider(i,j, 3, 3);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
@@ -48,10 +58,9 @@ function drawTree(quad, counter) {
 
 function draw(){
     $.paused=false;
-
-    if(mouse.isPressed){
-        leftSquare.x=mouse.x;
-        leftSquare.y=mouse.y;
+    if(mouse.isPressed && $.frameCount % 4 ===0){
+        $.camera.x=mouse.x;
+        $.camera.y=mouse.y;
         leftSquare.velocity.x=0;
         leftSquare.velocity.y=0;
     }
@@ -71,9 +80,26 @@ function draw(){
     if(kb.isDown("arrowright")){
         leftSquare.velocity.x+=2*$.time.timeMultipler;
         leftSquare.rotation=90;
-    }
+    } 
     
-
+    shape.polygon(
+        $.w/2-75,100,
+        $.w/2,200,
+        $.w/2+75,100,
+    );
+    
+    if(kb.isDown("a")){
+        $.camera.xOffset-=1
+    }
+    if(kb.isDown("d")){
+        $.camera.xOffset+=1
+    }
+    if(kb.isDown("w")){
+        $.camera.yOffset-=1
+    }
+    if(kb.isDown("s")){
+        $.camera.yOffset+=1
+    }
     //Quad tree testing stuff
  
  /*   
@@ -99,22 +125,22 @@ function draw(){
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
-        if(sq.x>$.width){
-            sq.x=$.width;
-            sq.velocity.x=-sq.velocity.x;
-        }
-        if(sq.x<0){
-            sq.x=0;
-            sq.velocity.x=-sq.velocity.x;
-        }
-        if(sq.y>$.height){
-            sq.y=$.height-1;
-            sq.velocity.y=-sq.velocity.y;
-        }
-        if(sq.y<0){
-            sq.y=0;
-            sq.velocity.y=-sq.velocity.y;
-        }
+        // if(sq.x>$.width){
+        //     sq.x=$.width-1;
+        //     sq.velocity.x=-sq.velocity.x;
+        // }
+        // if(sq.x<0){
+        //     sq.x=0;
+        //     sq.velocity.x=-sq.velocity.x;
+        // }
+        // if(sq.y>$.height){
+        //     sq.y=$.height-1;
+        //     sq.velocity.y=-sq.velocity.y;
+        // }
+        // if(sq.y<0){
+        //     sq.y=0;
+        //     sq.velocity.y=-sq.velocity.y;
+        // }
 
         // $.colour.fill = "#00000000";
         // $.colour.stroke = "#FFFF00FF";
