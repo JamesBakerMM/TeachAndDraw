@@ -58,7 +58,7 @@ function drawTree(quad, counter) {
 
 function draw(){
     $.paused=false;
-    if(mouse.isPressed && $.frameCount % 4 ===0){
+    if(mouse.isPressed && $.frameCount % 10 ===0){
         $.camera.x=mouse.x;
         $.camera.y=mouse.y;
         leftSquare.velocity.x=0;
@@ -89,16 +89,16 @@ function draw(){
     );
     
     if(kb.isDown("a")){
-        $.camera.xOffset-=1
+        $.camera.x-=10
     }
     if(kb.isDown("d")){
-        $.camera.xOffset+=1
+        $.camera.x+=10
     }
     if(kb.isDown("w")){
-        $.camera.yOffset-=1
+        $.camera.y-=10
     }
     if(kb.isDown("s")){
-        $.camera.yOffset+=1
+        $.camera.y+=10
     }
     //Quad tree testing stuff
  
