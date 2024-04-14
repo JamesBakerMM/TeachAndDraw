@@ -59,8 +59,7 @@ function drawTree(quad, counter) {
 function draw(){
     $.paused=false;
     if(mouse.isPressed && $.frameCount % 10 ===0){
-        $.camera.x=mouse.x;
-        $.camera.y=mouse.y;
+        $.camera.moveTo(mouse.x,mouse.y);
         leftSquare.velocity.x=0;
         leftSquare.velocity.y=0;
     }
