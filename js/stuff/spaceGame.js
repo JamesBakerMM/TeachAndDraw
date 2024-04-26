@@ -137,8 +137,22 @@ function splashScreen() {
 function menuScreen() {
     colour.fill = "black";
     text.print($.w / 2, $.h / 2, "MENU");
+
+    console.log("BTN.home "+BTN.home.clicked);
+    console.log("BTN.toPlay "+BTN.toPlay.clicked);
+    console.log("BTN.toCredits "+BTN.toCredits.clicked);
+
+    if(BTN.toPlay.clicked){
+        currentScreen=SCREENS.GAME;
+    }
+
+    if(BTN.toCredits.clicked){
+        currentScreen=SCREENS.CREDITS;
+    }
+
     BTN.toPlay.draw();
     BTN.toCredits.draw();
+
     BTN.toCredits.y=$.h/2+BTN.toCredits.h+20;
 }
 
@@ -149,6 +163,10 @@ function bgSpace(x,y){
 }
 
 function gameScreen() {
+    if(BTN.home.clicked){
+        currentScreen=SCREENS.MENU;
+    }
+
     colour.fill="black";
     text.print(20,20,"TIMER WAVE"+ TIMERS.WAVE);
 
@@ -322,6 +340,10 @@ function chargedShot() {
 }
 
 function creditScreen() {
+    if(BTN.home.clicked){
+        currentScreen=SCREENS.MENU;
+    }
+
     const credits=[
         "Ship Art - James",
         "Bg Art - Nasa"

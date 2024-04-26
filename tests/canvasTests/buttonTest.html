@@ -56,17 +56,18 @@
                 }
                 $.shape.rectangle($.width/2,$.height/2,$.width,$.height)
                 test.simulateMouseMove($.canvas,fakeMouse.x,fakeMouse.y)
-                btn.draw();
                 fakeMouse.x+=fakeMouse.velocity.x
                 $.colour.fill="red";
                 if(fakeMouse.x===95){
                     test.simulateMouseClick($.canvas,fakeMouse.x,fakeMouse.y)
                 }
-                if( $.mouse.leftClicked) {
+                if(btn.clicked) {
                     $.shape.oval(fakeMouse.x,fakeMouse.y,25);
+                    console.log("clicked!")
                 } else {
                     $.shape.oval(fakeMouse.x,fakeMouse.y,5);
                 }
+                btn.draw();
             }
         </script>
         <style>
