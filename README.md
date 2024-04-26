@@ -1,5 +1,5 @@
 
-# DRAFTNAME Workout.js
+# TeachAndDraw.js
 ## *A Simplified Canvas Library for learning to Code*
 This library is a small canvas library providing a set of drawing commands, asset loading commands, math functions and some basic 2d colliders. It is designed from the ground up for educational use.
 
