@@ -24,6 +24,9 @@ We use runtime type checking and detailed error messages throughout the library 
 ### Performance matters
 Students are famously poor. Many learners will be working on low-power, low-RAM and/or older computers. TeachAndDraw has been optimised for performance to support users on a wider range of hardware.
 
+### Code doesn’t have to rot
+TeachAndDraw has no dependencies and is written in raw JavaScript to facilitate this. 
+
 ## Getting Started
 TeachAndDraw is still under development and isn’t ready to be used yet. 
 
