@@ -1,4 +1,4 @@
-# TeachAndDraw.js
+# TeachAndDraw
 This JavaScript library has been developed as a teaching and learning tool and is deliberately simple, to minimise the mental overhead while learning programming. The aim of this library is to provide a set of easy to use functions to draw shapes and images onto a HTML5 Canvas, while providing support for loading resources, handling various native events and providing simple 2D physics.
 
 The original concept was based on the [P5js](https://p5js.org/) and [P5Play](https://p5play.org/) libraries, but with a more controlled and consistent feature set. We felt that the P5 libraries have suffered from scope creep over time, which has led to them straying from the original design, and introducing inconsistencies as developers changed. The design choices within the library have a focus on making it easy for new programmers to understand, allowing simple code to produce interesting and complex applications.
@@ -9,7 +9,7 @@ Despite providing error checking and additional layers of abstraction, being lig
 ### Consistency supports learning
 Consistent patterns of behaviour help learners build a more accurate mental model, and their confidence as coders.
 
-The most significant impact this has on the design of TeachAndDraw.js is that the library has a limited instruction set. This allows learners to become familiar with all of their options and build a good understanding of the tools available for solving problems.
+The most significant impact this has on the design of TeachAndDraw is that the library has a limited instruction set. This allows learners to become familiar with all of their options and build a good understanding of the tools available for solving problems.
 
 Other elements of TeachAndDraw that support consistency include:
 
