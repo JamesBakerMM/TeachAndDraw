@@ -1,0 +1,30 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: TeachAndDraw
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: James
+    family-names: Baker
+  - given-names: Andrew
+    family-names: Paroz
+    affiliation: CSIRO
+    orcid: 'https://orcid.org/0009-0008-0626-007X'
+  - given-names: Jessica
+    family-names: Korte
+    orcid: 'https://orcid.org/0000-0002-4412-7199'
+    affiliation: Queensland University of Technology
+abstract: >-
+  TeachAndDraw.js is a JavaScript library that has been
+  developed as a teaching and learning tool and is
+  deliberately simple, to minimise the mental overhead while
+  learning programming. The aim of this library is to
+  provide a set of easy to use functions to draw shapes and
+  images onto a HTML5 Canvas, while providing support for
+  loading resources, handling various native events and
+  providing simple 2D physics.
+license: MIT
