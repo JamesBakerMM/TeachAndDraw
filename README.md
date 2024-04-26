@@ -27,7 +27,7 @@ Students are famously poor. Many learners will be working on low-power, low-RAM 
 ## Getting Started
 TeachAndDraw is still under development and isn’t ready to be used yet. 
 
-While most of the library is functional and able to be used, there are many known bugs that are listed to be fixed. This means that while it is under development, there may be structural and namespace changes that would break applications built on the current version.
+While a good chunk of the library is functional and able to be used, there are many known bugs that are listed to be fixed, and some core features missing. This means that while it is under development, there may be structural and namespace changes that would break applications built on the current version.
 
 ## Documentation
 Please refer to our [current student facing API](https://docs.google.com/spreadsheets/d/12SQKND3Bnb3Lsor-3u5c3VIvEbvPTExkTkCbnj_q0XM/edit#gid=0).
