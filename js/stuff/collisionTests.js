@@ -1,6 +1,6 @@
 import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
 import { makeGroup } from "../../lib/Group.js";
-import { Paint } from "../../lib/Pallete.js";
+import { Paint } from "../../lib/Paint.js";
 
 $.start(draw);
 $.debug=true;
@@ -62,19 +62,19 @@ function draw(){
         $.camera.moveTo(mouse.x,mouse.y);
     }
     
-    if(kb.isDown("arrowup")){
+    if(kb.isDown("uparrow")){
         leftSquare.velocity.y-=2*$.time.timeMultipler;
         leftSquare.rotation=0;
     }
-    if(kb.isDown("arrowdown")){
+    if(kb.isDown("downarrow")){
         leftSquare.velocity.y+=2*$.time.timeMultipler;
         leftSquare.rotation=180;
     }
-    if(kb.isDown("arrowleft")){
+    if(kb.isDown("leftarrow")){
         leftSquare.velocity.x-=2*$.time.timeMultipler;
         leftSquare.rotation=270;
     }
-    if(kb.isDown("arrowright")){
+    if(kb.isDown("rightarrow")){
         leftSquare.velocity.x+=2*$.time.timeMultipler;
         leftSquare.rotation=90;
     } 
