@@ -15,14 +15,11 @@
             $.height = 800;
 
             let audioFile = $.loadSound("./test.mp3");
-            let imagesss = $.loadImage(0,0,"./testsss.png");
-            let Jossss = $.loadJsonFile("./testsss.json");
 
             let audioBegun = false;
             audioFile.volume = 50;
             function draw() {
                 if($.frameCount===133){
-                    console.log("play audio!")
                     audioFile.play();
 
                 }
