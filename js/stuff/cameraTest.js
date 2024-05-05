@@ -28,16 +28,16 @@ for(let circle of circles){
 }
 
 function draw() {
-    if ($.kb.isDown("a")) {
+    if ($.kb.down("a")) {
         $.camera.x -= 1;
     }
-    if ($.kb.isDown("d")) {
+    if ($.kb.down("d")) {
         $.camera.x += 1;
     }
-    if ($.kb.isDown("w")) {
+    if ($.kb.down("w")) {
         $.camera.y -= 1;
     }
-    if ($.kb.isDown("s")) {
+    if ($.kb.down("s")) {
         $.camera.y += 1;
     }
     circles.draw();

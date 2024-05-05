@@ -77,7 +77,7 @@
 
                 $.text.print(20,80,"Entity Solo Animation");
 
-                if($.mouse.isPressed){
+                if($.mouse.leftClicked){
                     fart.push($.makeEntity(mouse.x,mouse.y))
                     fart[fart.length-1].asset=alternateAnim;
                     if(rotation>360){

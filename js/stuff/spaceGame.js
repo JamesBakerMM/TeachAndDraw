@@ -290,25 +290,25 @@ function edgeEnforcement() {
 }
 
 function controls() {
-    if (kb.isDown("a")) {
+    if (kb.down("a")) {
         player.velocity.x -= 0.1;
         player.x -= 1;
     }
 
-    if (kb.isDown("d")) {
+    if (kb.down("d")) {
         player.velocity.x += 0.1; 
         player.x += 1;
     }
 
-    if (kb.isDown("f")) {
+    if (kb.down("f")) {
         {
             if (player.charge < player.maxCharge) {
                 player.charge++;
             }
         }
     }
-    console.log('game',kb.isDown("f"))
-    if (kb.justPressed(" ") && kb.isDown("f")===false) {
+    console.log('game',kb.down("f"))
+    if (kb.pressed(" ") && kb.down("f")===false) {
         player.shots.push(makeShot(player.x, player.y - 100, player.charge));
         player.charge = 10;
     }

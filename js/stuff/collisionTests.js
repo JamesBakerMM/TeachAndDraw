@@ -62,19 +62,19 @@ function draw(){
         $.camera.moveTo(mouse.x,mouse.y);
     }
     
-    if(kb.isDown("uparrow")){
+    if(kb.down("uparrow")){
         leftSquare.velocity.y-=2*$.time.timeMultipler;
         leftSquare.rotation=0;
     }
-    if(kb.isDown("downarrow")){
+    if(kb.down("downarrow")){
         leftSquare.velocity.y+=2*$.time.timeMultipler;
         leftSquare.rotation=180;
     }
-    if(kb.isDown("leftarrow")){
+    if(kb.down("leftarrow")){
         leftSquare.velocity.x-=2*$.time.timeMultipler;
         leftSquare.rotation=270;
     }
-    if(kb.isDown("rightarrow")){
+    if(kb.down("rightarrow")){
         leftSquare.velocity.x+=2*$.time.timeMultipler;
         leftSquare.rotation=90;
     } 
@@ -85,16 +85,16 @@ function draw(){
         $.w/2+75,100,
     );
     
-    if(kb.isDown("a")){
+    if(kb.down("a")){
         $.camera.x-=10
     }
-    if(kb.isDown("d")){
+    if(kb.down("d")){
         $.camera.x+=10
     }
-    if(kb.isDown("w")){
+    if(kb.down("w")){
         $.camera.y-=10
     }
-    if(kb.isDown("s")){
+    if(kb.down("s")){
         $.camera.y+=10
     }
     //Quad tree testing stuff
