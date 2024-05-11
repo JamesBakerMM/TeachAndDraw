@@ -30,8 +30,8 @@ let rightSquare;
 //         squares.push(rightSquare);
 //     }
 // }
-for (let i = 10; i < 190; i += 10) {
-    for (let j = 10; j < 190; j += 5) {
+for (let i = 10; i < 400; i += 10) {
+    for (let j = 10; j < 400; j += 5) {
         rightSquare=$.makeBoxCollider(i,j, 3, 3);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
@@ -56,7 +56,13 @@ function drawTree(quad, counter) {
     }
 }
 
-function draw(){
+function background(colour){
+    pen.colour.fill=colour;
+    $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
+}
+
+function draw() { 
+    background("rgba(125,125,125)");
     $.paused=false;
     if(mouse.leftClicked){
         $.camera.moveTo(mouse.x,mouse.y);
@@ -78,7 +84,6 @@ function draw(){
         leftSquare.velocity.x+=2*$.time.timeMultipler;
         leftSquare.rotation=90;
     } 
-    
     shape.polygon(
         $.w/2-75,100,
         $.w/2,200,
