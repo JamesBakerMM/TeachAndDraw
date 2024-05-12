@@ -16,17 +16,24 @@
             //should fail to load!
             let failTextFile = $.loadTextFile("./fail.text");
             let failTextFile2 = $.loadTextFile("./data/example/big/folder/path/fail.text");
-            let failJsonFile = $.loadJsonFile("./fail.json ");
-            let failAudioFile = $.loadSound("./fail.wav");
-            let failImageFile = $.loadImage(0,0,"./fail.jpg");
+            let failJsonFile = $.loadJsonFile("./fail.json");
+            let failAudioFile = $.loadSound("./fail example.wav ");
+            let failImageFile = $.loadImage(0,0,"./fail34.gif");
+            let failTextFile3 = $.loadTextFile("./fail3.text");
+            let failTextFile4 = $.loadTextFile("./data/example/big/folder/path/fail3.text");
+            let failJsonFile2 = $.loadJsonFile("./fail2.json ");
+            let failAudioFile2 = $.loadSound("./fail example3.wav ");
+            let failImageFile2 = $.loadImage(0,0,"./fa$@#il12.jpg");
+            let failAnimation = $.loadAnimation(0,0,"./fail.jpg","./failAnim1.jpg","./success.png");
 
             let successTextFile = $.loadTextFile("./success.txt");
             let successJsonFile = $.loadJsonFile("./success.json");
             let successAudioFile = $.loadSound("./success.mp3");
             let successImageFile = $.loadImage(0,0,"./success.png");
+            let successAnimation = $.loadAnimation(0,0,"./success.png","./success.png","./success.png");
 
             function draw() {
-                shape.rectangle($.w / 2, $.h / 2, $.w, $.h);
+                $.shape.rectangle($.width / 2, $.height / 2, $.width, $.height);
             }
         </script>
         <style>
