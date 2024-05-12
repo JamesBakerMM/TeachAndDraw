@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Button Tests</title>
+        <title>Touch Tests</title>
         <script type="module">
 
             import {
@@ -23,7 +23,7 @@
             $.start(draw);
             $.width = 300;
             $.height = 800;
-            $.debug = true;
+            //$.debug = true;
 
             const test = new TestSuite();
             let btn = $.makeButton(100,40,200,100,"testbtn")
@@ -52,23 +52,9 @@
             }
 
             function draw() {
-                if(fakeMouse.x>$.width){
-                    fakeMouse.x=0;
-                }
-                $.shape.rectangle($.width/2,$.height/2,$.width,$.height)
-                test.simulateMouseMove($.canvas,fakeMouse.x,fakeMouse.y)
-                fakeMouse.x+=fakeMouse.velocity.x
-                $.colour.fill="red";
-                if(fakeMouse.x===95){
-                    test.simulateMouseClick($.canvas,fakeMouse.x,fakeMouse.y)
-                }
-                if(btn.clicked) {
-                    $.shape.oval(fakeMouse.x,fakeMouse.y,25);
-                    console.log("clicked!")
-                } else {
-                    $.shape.oval(fakeMouse.x,fakeMouse.y,5);
-                }
-                btn.draw();
+                $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
+                $.colour.fill = "aqua";
+                if ($.touch.down) $.shape.oval($.touch.x, $.touch.y,20,20);
             }
         </script>
         <style>
