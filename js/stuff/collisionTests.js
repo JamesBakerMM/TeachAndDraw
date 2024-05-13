@@ -3,7 +3,7 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Paint.js";
 
 $.start(draw);
-$.debug=true;
+$.debug=false;
 let squares = makeGroup();
 let ships = makeGroup();
 
@@ -20,18 +20,8 @@ leftSquare.friction = 0;
 squares.push(leftSquare);
 
 let rightSquare;
-
-// for (let i = 10; i < 790; i += 10) {
-//     for (let j = 10; j < 590; j += 5) {
-//         rightSquare=$.makeBoxCollider(i,j, 3, 3);
-//         rightSquare.velocity.x = 0;
-//         rightSquare.mass = 1;
-//         rightSquare.friction = 5;
-//         squares.push(rightSquare);
-//     }
-// }
-for (let i = 10; i < 400; i += 10) {
-    for (let j = 10; j < 400; j += 5) {
+for (let i = 10; i < 800; i += 10) {
+    for (let j = 10; j < 600; j += 10) {
         rightSquare=$.makeBoxCollider(i,j, 3, 3);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
@@ -64,10 +54,15 @@ function background(colour){
 function draw() { 
     background("rgba(125,125,125)");
     $.paused=false;
-    if(mouse.leftClicked){
+    /*if(mouse.leftClicked){
         $.camera.moveTo(mouse.x,mouse.y);
+    }*/
+
+    if(mouse.leftDown){
+        leftSquare.x = mouse.x;
+        leftSquare.y = mouse.y;
     }
-    
+
     if(kb.down("uparrow")){
         leftSquare.velocity.y-=2*$.time.timeMultipler;
         leftSquare.rotation=0;
@@ -102,21 +97,6 @@ function draw() {
     if(kb.down("s")){
         $.camera.y+=10
     }
-    //Quad tree testing stuff
- 
- /*   
-    let colorArray = ["white", "yellow", "red", "purple", "blue"];
-    let num = $.quadTree.getValue(leftSquare.x, leftSquare.y, leftSquare.radius);
-    let text = num.toString(2);
-    console.log(text);
-    for (let i = 1; i <= 4; i++) {
-        for (let j = 1; j <= 4; j++) {
-            let q = $.quadTree.getQuad().getQuad(i).getQuad(j);
-            $.colour.fill = colorArray[j];
-            $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.width, q.height);
-        }
-    }
-*/
 
     // if(leftSquare.x>$.width || leftSquare.x<0){
     //     leftSquare.velocity.x=-leftSquare.velocity.x
