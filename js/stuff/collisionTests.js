@@ -12,10 +12,11 @@ let leftSquare=$.makeBoxCollider($.w/2,$.h/2,80,80);
 leftSquare.movedByCamera=false;
 leftSquare.speed=0;
 leftSquare.direction=240;
+leftSquare.static = true;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 leftSquare.asset=img;
 window.lSquare=leftSquare;
-leftSquare.mass = 200000;
+leftSquare.mass = 1;
 leftSquare.friction = 0;
 squares.push(leftSquare);
 
