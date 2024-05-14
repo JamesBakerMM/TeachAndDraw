@@ -3,26 +3,31 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Paint.js";
 
 $.start(draw);
-$.debug=false;
+// $.debug=true;
 let squares = makeGroup();
 let ships = makeGroup();
 
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
-let leftSquare=$.makeBoxCollider($.w/2,$.h/2,80,80);
-leftSquare.movedByCamera=false;
-leftSquare.speed=0;
-leftSquare.direction=240;
-leftSquare.static = true;
+let yellowShip=$.makeBoxCollider($.w/2,$.h/2,80,80);
+yellowShip.movedByCamera=false;
+yellowShip.speed=0;
+yellowShip.direction=240;
+yellowShip.static = true;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
-leftSquare.asset=img;
-window.lSquare=leftSquare;
-leftSquare.mass = 1;
-leftSquare.friction = 0;
-squares.push(leftSquare);
+yellowShip.asset=img;
+window.lSquare=yellowShip;
+yellowShip.mass = 1;
+yellowShip.friction = 0;
+squares.push(yellowShip);
+let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
+redShip.static=true;
+redShip.speed=2;
+redShip.direction=270;
+redShip.friction=0;
 
 let rightSquare;
-for (let i = 10; i < 800; i += 10) {
-    for (let j = 10; j < 600; j += 10) {
+for (let i = 10; i < 500; i += 10) {
+    for (let j = 10; j < 500; j += 10) {
         rightSquare=$.makeBoxCollider(i,j, 3, 3);
         rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
@@ -60,25 +65,25 @@ function draw() {
     }*/
 
     if(mouse.leftDown){
-        leftSquare.x = mouse.x;
-        leftSquare.y = mouse.y;
+        yellowShip.x = mouse.x;
+        yellowShip.y = mouse.y;
     }
 
     if(kb.down("uparrow")){
-        leftSquare.velocity.y-=2*$.time.timeMultipler;
-        leftSquare.rotation=0;
+        yellowShip.velocity.y-=2*$.time.timeMultipler;
+        yellowShip.rotation=0;
     }
     if(kb.down("downarrow")){
-        leftSquare.velocity.y+=2*$.time.timeMultipler;
-        leftSquare.rotation=180;
+        yellowShip.velocity.y+=2*$.time.timeMultipler;
+        yellowShip.rotation=180;
     }
     if(kb.down("leftarrow")){
-        leftSquare.velocity.x-=2*$.time.timeMultipler;
-        leftSquare.rotation=270;
+        yellowShip.velocity.x-=2*$.time.timeMultipler;
+        yellowShip.rotation=270;
     }
     if(kb.down("rightarrow")){
-        leftSquare.velocity.x+=2*$.time.timeMultipler;
-        leftSquare.rotation=90;
+        yellowShip.velocity.x+=2*$.time.timeMultipler;
+        yellowShip.rotation=90;
     } 
     shape.polygon(
         $.w/2-75,100,
