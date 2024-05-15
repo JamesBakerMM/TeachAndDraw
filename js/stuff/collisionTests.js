@@ -60,7 +60,7 @@ function background(colour){
 function draw() { 
     background("rgba(125,125,125)");
     $.paused=false;
-    /*if(mouse.leftClicked){
+    /*if(mouse.leftUp){
         $.camera.moveTo(mouse.x,mouse.y);
     }*/
 

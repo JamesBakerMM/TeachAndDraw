@@ -308,7 +308,7 @@ function controls() {
         }
     }
     console.log('game',kb.down("f"))
-    if (kb.pressed(" ") && kb.down("f")===false) {
+    if (kb.up(" ") && kb.down("f")===false) {
         player.shots.push(makeShot(player.x, player.y - 100, player.charge));
         player.charge = 10;
     }
