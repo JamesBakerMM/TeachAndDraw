@@ -5,19 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Animation Tests</title>
         <script type="module">
-
-            import {
-                $,
-                shape,
-                colour,
-                mouse,
-                kb,
-                text
-            } from "/lib/Pen.js";
-            import {
-                Point
-            } from "/lib/Point.js";
-            import { Group,makeGroup } from "/lib/Group.js";
+            import { $, shape, colour, mouse, kb, text } from "/lib/Pen.js";
+            import { Point } from "/lib/Point.js";
+            import { Group, makeGroup } from "/lib/Group.js";
             import { TestSuite } from "/tests/TestSuite.js";
 
             $.start(draw);
@@ -25,73 +15,177 @@
             $.width = 300;
             $.height = 800;
 
-            const entityA=$.makeEntity(50,110);
-            const entityB=$.makeEntity(100,110);
-            const entityC=$.makeEntity(150,110);
-            const entityD=$.makeEntity(150,210);
+            const entityA = $.makeEntity(50, 110);
+            const entityB = $.makeEntity(100, 110);
+            const entityC = $.makeEntity(150, 110);
+            const entityD = $.makeEntity(150, 210);
 
             // const failAnim=$.loadAnimation("2",3,"test");
             const anim = $.loadAnimation(
-                20,50,
+                20,
+                50,
                 "./images/animAsset1.png",
                 "./images/animAsset2.png",
                 "./images/animAsset3.png",
                 "./images/animAsset4.png",
                 "./images/animAsset5.png",
-                "./images/animAsset6.png",
+                "./images/animAsset6.png"
             );
 
-            const alternateAnim=$.loadAnimation(
-                20,110,
+            const alternateAnim = $.loadAnimation(
+                20,
+                110,
                 "./images/animAssetLetter1.png",
                 "./images/animAssetLetter2.png",
                 "./images/animAssetLetter3.png",
                 "./images/animAssetLetter4.png",
                 "./images/animAssetLetter5.png",
-                "./images/animAssetLetter6.png",
+                "./images/animAssetLetter6.png"
             );
 
-            let testImage=$.loadImage(210,210,"./images/animAssetLetter6.png");
-            entityA.asset=alternateAnim;
-            entityB.asset=alternateAnim;
-            entityC.asset=alternateAnim;
-            entityD.asset=testImage;
-            
-            const test = new TestSuite();
-            test.reportResults();
+            let testImage = $.loadImage(
+                210,
+                210,
+                "./images/animAssetLetter6.png"
+            );
+            entityA.asset = alternateAnim;
+            entityB.asset = alternateAnim;
+            entityC.asset = alternateAnim;
+            entityD.asset = testImage;
 
-            let fart=makeGroup();
+            const testAnim = $.loadAnimation(
+                20,
+                50,
+                "./images/animAsset1.png",
+                "./images/animAsset2.png",
+                "./images/animAsset3.png",
+                "./images/animAsset4.png",
+                "./images/animAsset5.png",
+                "./images/animAsset6.png"
+            );
+            let testsHaveRun = false;
+            function runTests() {
+                if (testsHaveRun===false) {
+                    const test = new TestSuite();
+                    
+                    //X
+                    test.message("X tests");
+                        test.assertEqual(testAnim.x, 20,"x inits");
 
-            let rotation=0;
-            
+                        testAnim.x++
+                        test.assertEqual(testAnim.x, 21,"x++");
+                        
+                        testAnim.x=50;
+                        test.assertEqual(testAnim.x, 50,"x sets to 50");
+                        
+                        testAnim.x-=50;
+                        test.assertEqual(testAnim.x, 0,"x-=");
+                    
+                    //Y
+                    test.message("Y tests");
+                        test.assertEqual(testAnim.y, 50,"y inits");
+
+                        testAnim.y++
+                        test.assertEqual(testAnim.y, 51,"y++");
+                        
+                        testAnim.y=60;
+                        test.assertEqual(testAnim.y, 60,"y sets to 50");
+                        
+                        testAnim.y-=50;
+                        test.assertEqual(testAnim.y, 10,"y-=");
+
+                    //ROTATION
+                    test.message("rotation tests");
+                        test.assertEqual(testAnim.rotation, 0,"rotation inits");
+                        
+                        testAnim.rotation++
+                        test.assertEqual(testAnim.rotation, 1,"rotation++");
+                        
+                        testAnim.rotation=60;
+                        test.assertEqual(testAnim.rotation, 60,"rotation sets to 50");
+                        
+                        testAnim.rotation-=50;
+                        test.assertEqual(testAnim.rotation, 10,"rotation-=");
+                        
+                        test.assertError(()=>{testAnim.rotation="jhskjdhfsd"},"rotation should error when non number given")
+
+                    //FRAME
+                    test.message("Frame")
+                        testAnim.frame=1;
+                        test.assertEqual(testAnim.frame,1,"setting frame to specified number");
+                        
+                        testAnim.frame=-2;
+                        test.assertEqual(testAnim.frame,0,"setting frame below 0 should set it to 0");
+                        
+                        testAnim.frame=10000;
+                        test.assertEqual(testAnim.frame,5,"setting frame above max should set it to max");
+
+                        test.assertError(()=>{testAnim.frame="ajhfjh"},"frame should be protected from being set to not a number")
+
+                    //PLAYING
+                    test.message("playing")
+                    testAnim.playing=false;
+                    test.assertFalse(()=>{return testAnim.playing},"anim playing can be set to false")
+                    
+                    testAnim.playing=true;
+                    test.assertTrue(()=>{return testAnim.playing},"anim playing can be set to true")
+                    test.assertError(()=>{testAnim.playing="ajhfjh"},"playing should be protected from being set to not a boolean")
+
+                    //LOOPING
+                    test.message("looping")
+                    testAnim.looping=false;
+                    test.assertFalse(()=>{return testAnim.looping},"anim looping can be set to false")
+                    
+                    testAnim.looping=true;
+                    test.assertTrue(()=>{return testAnim.looping},"anim looping can be set to true")
+                    test.assertError(()=>{testAnim.looping="ajhfjh"},"looping should be protected from being set to not a boolean")
+                    
+                    //DELAY
+                    test.message("delay")
+                    test.assertEqual(testAnim.delay,4,"init delay is 4");
+
+                    testAnim.delay=10;
+                    test.assertEqual(testAnim.delay,10,"delay can be set to a value");
+
+                    test.assertError(()=>{testAnim.delay="ajhfjh"},"delay should be protected from being set to not a number")
+                    test.reportResults();
+                    testsHaveRun = true;
+                }
+            }
+
+            let fart = makeGroup();
+
+            let rotation = 0;
+
             function draw() {
-                $.colour.fill="grey";
-                $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
-                
-                $.colour.fill="black";
-                $.text.alignment.x="left";
-                $.text.print(20,20,"Raw Animation");
+                runTests();
+                $.colour.fill = "grey";
+                $.shape.rectangle($.width / 2, $.height / 2, $.width, $.height);
+
+                $.colour.fill = "black";
+                $.text.alignment.x = "left";
+                $.text.print(20, 20, "Raw Animation");
                 anim.draw();
 
-                $.text.print(20,80,"Entity Solo Animation");
+                $.text.print(20, 80, "Entity Solo Animation");
 
-                $.text.print(20,80,"Entity Solo Animation");
+                $.text.print(20, 80, "Entity Solo Animation");
 
-                if($.mouse.leftDown){
-                    fart.push($.makeEntity(mouse.x,mouse.y))
-                    fart[fart.length-1].asset=alternateAnim;
-                    if(rotation>360){
-                        rotation=0;
+                if ($.mouse.leftDown) {
+                    fart.push($.makeEntity(mouse.x, mouse.y));
+                    fart[fart.length - 1].asset = alternateAnim;
+                    if (rotation > 360) {
+                        rotation = 0;
                     }
-                    fart[fart.length-1].rotation=rotation;
-                    fart[fart.length-1].velocity.y=-1;
+                    fart[fart.length - 1].rotation = rotation;
+                    fart[fart.length - 1].velocity.y = -1;
                     rotation++;
                 }
                 entityA.draw();
-                entityB.asset.delay=20;
+                entityB.asset.delay = 20;
                 entityB.draw();
-                entityC.asset.playing=false;
-                entityC.rotation++
+                entityC.asset.playing = false;
+                entityC.rotation++;
                 entityC.draw();
                 testImage.draw();
                 entityD.draw();
@@ -100,93 +194,99 @@
             }
         </script>
         <style>
-        html, body {
-            margin:0px;
-            padding:0px;
-            background-color:rgb(30,30,25);
-            font-family:sans-serif; 
-            color:white;
-            overflow:hidden;
-        }       
-        #debug {
-            position:absolute;
-            border-radius:15px;
-            padding:1rem;
-            right:10px;
-            background-color:rgba(30,30,25,0.5);
-            top:0;
-            width:300px;
-            transition:0.5s;
-        }
-        .invisible {
-            display:none;
-        }
-        .prev {
-            background-color:red;
-            background-size:10px;
-            height:1lh;
-        }
-        .wrapper {
-            overflow:hidden;
-            margin:0 !important; 
-            padding:0;
-        }
-        #debug.hidden {
-            right: -360px; /* Hide all except 1px */
-        }
-        #debug.hidden button {
-            position:absolute;
-        }
-        #debug:hover {
-            background-color:rgba(30,30,25,1);
-        }
-        #debug:hover button {
-            opacity:1;
-        }
-        #debug button {
-            left:-3rem;
-            position:absolute;
-            height:3rem;
-            width:3rem;
-            opacity:0.5;
-        }
-        #debug ul {
-            padding:0;
-            margin:0;
-            padding-left:1rem;
-        }
+            html,
+            body {
+                margin: 0px;
+                padding: 0px;
+                background-color: rgb(30, 30, 25);
+                font-family: sans-serif;
+                color: white;
+                overflow: hidden;
+            }
+            #debug {
+                position: absolute;
+                border-radius: 15px;
+                padding: 1rem;
+                right: 10px;
+                background-color: rgba(30, 30, 25, 0.5);
+                top: 0;
+                width: 300px;
+                transition: 0.5s;
+            }
+            .invisible {
+                display: none;
+            }
+            .prev {
+                background-color: red;
+                background-size: 10px;
+                height: 1lh;
+            }
+            .wrapper {
+                overflow: hidden;
+                margin: 0 !important;
+                padding: 0;
+            }
+            #debug.hidden {
+                right: -360px; /* Hide all except 1px */
+            }
+            #debug.hidden button {
+                position: absolute;
+            }
+            #debug:hover {
+                background-color: rgba(30, 30, 25, 1);
+            }
+            #debug:hover button {
+                opacity: 1;
+            }
+            #debug button {
+                left: -3rem;
+                position: absolute;
+                height: 3rem;
+                width: 3rem;
+                opacity: 0.5;
+            }
+            #debug ul {
+                padding: 0;
+                margin: 0;
+                padding-left: 1rem;
+            }
 
-        .grid-overlay {
-            margin-top:1rem;
-        }
+            .grid-overlay {
+                margin-top: 1rem;
+            }
 
-        .grid-overlay::after {
-            content: "";
-            position:absolute;
-            /* background-color:red; */
-            opacity:1;
-            top: 0px;
-            left: 0;
-            pointer-events: none; /* Allows clicks to pass through */
-            width:100%;
-            height:100vh;
+            .grid-overlay::after {
+                content: "";
+                position: absolute;
+                /* background-color:red; */
+                opacity: 1;
+                top: 0px;
+                left: 0;
+                pointer-events: none; /* Allows clicks to pass through */
+                width: 100%;
+                height: 100vh;
 
-            background-image: 
-                linear-gradient(to right, rgba(0,255,0,0.15) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,255,0,0.15) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-    </style>
-</head>
-<body>
-    <div class="wrapper">
-        <canvas id="myCanvas"  style="border:2px solid black;"></canvas>
-    </div>
-    <aside id="debug" class="invisible">
-        <button id="showhidebtn">🔍</button>
-        <section>
-
-        </section>
-    </aside>
-</body>
+                background-image: linear-gradient(
+                        to right,
+                        rgba(0, 255, 0, 0.15) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        rgba(0, 255, 0, 0.15) 1px,
+                        transparent 1px
+                    );
+                background-size: 50px 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <canvas id="myCanvas" style="border: 2px solid black"></canvas>
+        </div>
+        <aside id="debug" class="invisible">
+            <button id="showhidebtn">🔍</button>
+            <section></section>
+        </aside>
+    </body>
 </html>

@@ -87,9 +87,7 @@ export class TestSuite {
             if(result.passed){
                 console.log("✅ "+msg);
             } else if(result.passed===undefined) {
-                console.log()
-                console.log(msg.toUpperCase())
-                console.log("------------------------------")
+                console.info(msg.toUpperCase())
             } else  {
                 console.error("❌ "+msg);
             }
