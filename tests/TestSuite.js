@@ -36,6 +36,45 @@ export class TestSuite {
             targetElement.dispatchEvent(mouseUpEvent);
         }, 100);
     }
+    simulateTouchStart(targetElement, x, y) {
+        const touchStartEvent = new TouchEvent('touchstart', {
+            bubbles: true,
+            cancelable: true,
+            touches: [new Touch({
+                identifier: Date.now(),
+                target: targetElement,
+                clientX: x,
+                clientY: y,
+                radiusX: 2.5,
+                radiusY: 2.5,
+                rotationAngle: 0,
+                force: 0.5,
+            })]
+        });
+        targetElement.dispatchEvent(touchStartEvent);
+    }
+    simulateTouchEnd(targetElement, x, y) {
+        this.simulateTouchStart(targetElement,x,y);
+        
+        setTimeout(() => {
+            const touchEndEvent = new TouchEvent('touchend', {
+                bubbles: true,
+                cancelable: true,
+                changedTouches: [new Touch({
+                    identifier: Date.now(),
+                    target: targetElement,
+                    clientX: x,
+                    clientY: y,
+                    radiusX: 2.5,
+                    radiusY: 2.5,
+                    rotationAngle: 0,
+                    force: 0.5,
+                })]
+            });
+            targetElement.dispatchEvent(touchEndEvent);
+        }, 2000);
+        
+    }
     assertEqual(a, b, message = "Values are not equal") {
         try {
             if (a !== b) {
