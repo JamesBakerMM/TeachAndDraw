@@ -77,23 +77,23 @@
 
                 $.text.print(20,80,"Entity Solo Animation");
 
-                if($.mouse.leftClicked){
+                if($.mouse.leftDown){
                     fart.push($.makeEntity(mouse.x,mouse.y))
                     fart[fart.length-1].asset=alternateAnim;
                     if(rotation>360){
                         rotation=0;
                     }
-                    fart[fart.length-1].asset.rotation=rotation;
+                    fart[fart.length-1].rotation=rotation;
                     fart[fart.length-1].velocity.y=-1;
                     rotation++;
-                    // console.log(fart[fart.length-1],fart[fart.length-1].asset.w,fart[fart.length-1].h)
                 }
                 entityA.draw();
                 entityB.asset.delay=20;
                 entityB.draw();
                 entityC.asset.playing=false;
+                entityC.rotation++
                 entityC.draw();
-                // testImage.draw();
+                testImage.draw();
                 entityD.draw();
                 fart.draw();
                 // $.paused=true;
