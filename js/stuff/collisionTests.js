@@ -10,7 +10,7 @@ let ships = makeGroup();
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
 let leftSquare=$.makeBoxCollider($.w/2,$.h/2,80,80);
 leftSquare.movedByCamera=false;
-leftSquare.speed=0;
+leftSquare.speed=1000;
 leftSquare.direction=240;
 leftSquare.static = true;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
@@ -24,9 +24,8 @@ let rightSquare;
 for (let i = 10; i < 800; i += 10) {
     for (let j = 10; j < 600; j += 10) {
         rightSquare=$.makeBoxCollider(i,j, 3, 3);
-        rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
-        rightSquare.friction = 5;
+        rightSquare.friction = 100;
         squares.push(rightSquare);
     }
 }
