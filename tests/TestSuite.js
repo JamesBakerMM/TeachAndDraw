@@ -8,6 +8,37 @@ export class TestSuite {
         this.results.push({test:message, passed:undefined})
     }
 
+    simulateKeyDown(targetElement,key){
+        const keyDownEvent = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: key,
+            code: `Key${key.toUpperCase()}`,
+            keyCode: key.toUpperCase().charCodeAt(0),
+            charCode: key.toUpperCase().charCodeAt(0),
+            which: key.toUpperCase().charCodeAt(0),
+        });
+        targetElement.dispatchEvent(keyDownEvent);
+    }
+    simulateKeyPress(targetElement,key){
+        this.simulateKeyDown(targetElement,key);
+        
+        setTimeout(() => {
+            console.log(targetElement,key);
+            console.log("event time");
+            const keyUpEvent = new KeyboardEvent('keyup', {
+                bubbles: true,
+                cancelable: true,
+                key: key,
+                code: `Key${key.toUpperCase()}`,
+                keyCode: key.toUpperCase().charCodeAt(0),
+                charCode: key.toUpperCase().charCodeAt(0),
+                which: key.toUpperCase().charCodeAt(0),
+            });
+            targetElement.dispatchEvent(keyUpEvent);
+        }, 2000);
+
+    }
     simulateMouseMove(targetElement, x, y) {
         const mouseMoveEvent = new MouseEvent('mousemove', {
             bubbles: true,   
@@ -35,6 +66,45 @@ export class TestSuite {
             });
             targetElement.dispatchEvent(mouseUpEvent);
         }, 100);
+    }
+    simulateTouchStart(targetElement, x, y) {
+        const touchStartEvent = new TouchEvent('touchstart', {
+            bubbles: true,
+            cancelable: true,
+            touches: [new Touch({
+                identifier: Date.now(),
+                target: targetElement,
+                clientX: x,
+                clientY: y,
+                radiusX: 2.5,
+                radiusY: 2.5,
+                rotationAngle: 0,
+                force: 0.5,
+            })]
+        });
+        targetElement.dispatchEvent(touchStartEvent);
+    }
+    simulateTouchEnd(targetElement, x, y) {
+        this.simulateTouchStart(targetElement,x,y);
+        
+        setTimeout(() => {
+            const touchEndEvent = new TouchEvent('touchend', {
+                bubbles: true,
+                cancelable: true,
+                changedTouches: [new Touch({
+                    identifier: Date.now(),
+                    target: targetElement,
+                    clientX: x,
+                    clientY: y,
+                    radiusX: 2.5,
+                    radiusY: 2.5,
+                    rotationAngle: 0,
+                    force: 0.5,
+                })]
+            });
+            targetElement.dispatchEvent(touchEndEvent);
+        }, 2000);
+        
     }
     assertEqual(a, b, message = "Values are not equal") {
         try {
@@ -87,9 +157,7 @@ export class TestSuite {
             if(result.passed){
                 console.log("✅ "+msg);
             } else if(result.passed===undefined) {
-                console.log()
-                console.log(msg.toUpperCase())
-                console.log("------------------------------")
+                console.info(msg.toUpperCase())
             } else  {
                 console.error("❌ "+msg);
             }

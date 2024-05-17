@@ -1,28 +1,33 @@
-import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Paint.js";
 
 $.start(draw);
-$.debug=false;
+// $.debug=true;
 let squares = makeGroup();
 let ships = makeGroup();
 
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
-let leftSquare=$.makeBoxCollider($.w/2,$.h/2,80,80);
-leftSquare.movedByCamera=false;
-leftSquare.speed=1000;
-leftSquare.direction=240;
-leftSquare.static = true;
+let yellowShip=$.makeBoxCollider($.w/2,$.h/2,80,80);
+yellowShip.movedByCamera=false;
+yellowShip.speed=1000;
+yellowShip.direction=240;
+yellowShip.static = true;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
-leftSquare.asset=img;
-window.lSquare=leftSquare;
-leftSquare.mass = 1;
-leftSquare.friction = 0;
-squares.push(leftSquare);
+yellowShip.asset=img;
+window.lSquare=yellowShip;
+yellowShip.mass = 1;
+yellowShip.friction = 0;
+squares.push(yellowShip);
+let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
+redShip.static=true;
+redShip.speed=2;
+redShip.direction=270;
+redShip.friction=0;
 
 let rightSquare;
-for (let i = 10; i < 800; i += 10) {
-    for (let j = 10; j < 600; j += 10) {
+for (let i = 10; i < 500; i += 10) {
+    for (let j = 10; j < 500; j += 10) {
         rightSquare=$.makeBoxCollider(i,j, 3, 3);
         rightSquare.mass = 1;
         rightSquare.friction = 100;
@@ -35,7 +40,8 @@ function drawTree(quad, counter) {
     for (let i = 1; i <= 4; i++) {
         let q = quad.getQuad(i);
         if (q != null) {
-            $.colour.fill = colorArray[counter];
+            $.colour.stroke="black";
+            $.colour.fill = "white";//colorArray[counter];
             counter += 1;
             if (counter == colorArray.length) {
                 counter = 0;
@@ -54,30 +60,31 @@ function background(colour){
 function draw() { 
     background("rgba(125,125,125)");
     $.paused=false;
-    /*if(mouse.leftClicked){
+    /*if(mouse.leftUp){
         $.camera.moveTo(mouse.x,mouse.y);
     }*/
 
     if(mouse.leftDown){
-        leftSquare.x = mouse.x;
-        leftSquare.y = mouse.y;
+        yellowShip.x = mouse.x;
+        yellowShip.y = mouse.y;
     }
 
-    if(kb.down("uparrow")){
-        leftSquare.velocity.y-=2*$.time.timeMultipler;
-        leftSquare.rotation=0;
+    yellowShip.rotation=yellowShip.direction;
+    if(keys.down("uparrow")){
+        yellowShip.direction=0;
+        yellowShip.speed=5;
     }
-    if(kb.down("downarrow")){
-        leftSquare.velocity.y+=2*$.time.timeMultipler;
-        leftSquare.rotation=180;
+    if(keys.down("downarrow")){
+        yellowShip.direction=180;
+        yellowShip.speed=5;
     }
-    if(kb.down("leftarrow")){
-        leftSquare.velocity.x-=2*$.time.timeMultipler;
-        leftSquare.rotation=270;
+    if(keys.down("leftarrow")){
+        yellowShip.direction=270;
+        yellowShip.speed=5;
     }
-    if(kb.down("rightarrow")){
-        leftSquare.velocity.x+=2*$.time.timeMultipler;
-        leftSquare.rotation=90;
+    if(keys.down("rightarrow")){
+        yellowShip.direction=90;
+        yellowShip.speed=5;
     } 
     shape.polygon(
         $.w/2-75,100,
@@ -85,16 +92,16 @@ function draw() {
         $.w/2+75,100,
     );
     
-    if(kb.down("a")){
+    if(keys.down("a")){
         $.camera.x-=10
     }
-    if(kb.down("d")){
+    if(keys.down("d")){
         $.camera.x+=10
     }
-    if(kb.down("w")){
+    if(keys.down("w")){
         $.camera.y-=10
     }
-    if(kb.down("s")){
+    if(keys.down("s")){
         $.camera.y+=10
     }
 
@@ -129,7 +136,7 @@ function draw() {
         // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
 
-    //drawTree(squares.QuadTree.getTree(), 0);
+    drawTree(squares.QuadTree.getTree(), 0);
     //console.log(squares.QuadTree.getTree());
 
     $.drawAllColliders();

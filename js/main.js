@@ -1,4 +1,4 @@
-import { $ as p,shape,colour,mouse,kb,txt } from "../lib/Pen.js";
+import { $ as p,shape,colour,mouse,keys,txt } from "../lib/Pen.js";
 import { Group } from "../lib/Group.js";
 const q = p;
 p.start(draw);

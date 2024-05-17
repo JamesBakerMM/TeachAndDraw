@@ -1,4 +1,4 @@
-import { $, shape, colour, mouse, kb, text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 
 $.start(draw);
 
@@ -129,7 +129,7 @@ function makeEnemyWave(x, y, amount = 5, x_increment = 100, y_increment=10) {
 function splashScreen() {
     colour.fill = "white";
     text.print($.w / 2, $.h / 2, "Press a to start!");
-    if (kb.howLongDown("any")>10) {
+    if (keys.howLongDown("any")>10) {
         currentScreen = SCREENS.MENU;
     }
 }
@@ -290,25 +290,25 @@ function edgeEnforcement() {
 }
 
 function controls() {
-    if (kb.down("a")) {
+    if (keys.down("a")) {
         player.velocity.x -= 0.1;
         player.x -= 1;
     }
 
-    if (kb.down("d")) {
+    if (keys.down("d")) {
         player.velocity.x += 0.1; 
         player.x += 1;
     }
 
-    if (kb.down("f")) {
+    if (keys.down("f")) {
         {
             if (player.charge < player.maxCharge) {
                 player.charge++;
             }
         }
     }
-    console.log('game',kb.down("f"))
-    if (kb.pressed(" ") && kb.down("f")===false) {
+    console.log('game',keys.down("f"))
+    if (keys.up(" ") && keys.down("f")===false) {
         player.shots.push(makeShot(player.x, player.y - 100, player.charge));
         player.charge = 10;
     }

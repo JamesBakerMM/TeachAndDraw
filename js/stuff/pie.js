@@ -4,7 +4,7 @@ const p = new Pen(draw);
 const shape=p.shape;
 const colour=p.colour;
 const mouse=p.mouse;
-const keyboard=p.kb;
+const keyboard=p.keys;
 const text=p.text;
 
 let urbie=50;
