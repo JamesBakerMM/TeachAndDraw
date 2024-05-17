@@ -4,8 +4,8 @@ import { Paint } from "../../lib/Paint.js";
 
 $.start(draw);
 // $.debug=true;
-let squares = makeGroup();
-let ships = makeGroup();
+let squares = $.makeGroup();
+let ships = $.makeGroup();
 
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
 let yellowShip=$.makeBoxCollider($.w/2,$.h/2,80,80);
@@ -26,12 +26,11 @@ redShip.direction=270;
 redShip.friction=0;
 
 let rightSquare;
-for (let i = 10; i < 500; i += 10) {
-    for (let j = 10; j < 500; j += 10) {
+for (let i = 10; i < 800; i += 10) {
+    for (let j = 10; j < 600; j += 10) {
         rightSquare=$.makeBoxCollider(i,j, 3, 3);
-        rightSquare.velocity.x = 0;
         rightSquare.mass = 1;
-        rightSquare.friction = 5;
+        rightSquare.friction = 100;
         squares.push(rightSquare);
     }
 }
@@ -137,7 +136,7 @@ function draw() {
         // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
 
-    drawTree(squares.QuadTree.getTree(), 0);
+    //drawTree(squares.QuadTree.getTree(), 0);
     //console.log(squares.QuadTree.getTree());
 
     $.drawAllColliders();
