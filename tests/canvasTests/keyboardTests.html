@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Touch Tests</title>
+        <title>Keyboard Tests</title>
         <script type="module">
             import { $, shape, colour, mouse, keys, text } from "/lib/Pen.js";
             import { Point } from "/lib/Point.js";
@@ -19,62 +19,73 @@
             const test = new TestSuite();
             function generateReport() {
                 if (testIsDone === false) {
-                    test.assertEqual(initXOfTouch,0,"initial touch x was 0");
-                    test.assertEqual(initYOfTouch,0,"initial touch y was 0");
-                    test.assertEqual($.touch.x,$.width/2,`last x touch was ${$.width/2}`);
-                    test.assertEqual($.touch.y,$.height/2,`last y touch was ${$.height/2}`);
-                    test.assertFalse(()=>{return $.touch.down},"touch is not currently down");
-                    test.assertFalse(()=>{return $.touch.up},"touch did not just go up");
-                    test.assertTrue(()=>{return touchUpHappened},"touchUp happened");
-                    test.assertTrue(()=>{return touchDownHappened},"touchDown happened");
-                    test.assertTrue(()=>{return howLongDidTouchDownHappen>100},"touch was down for over 100 frames");
+                    test.message("any keys being pressed now?");
+                    test.assertFalse(()=>{$.keys.down("any")},"not down on any key")
+                    test.assertFalse(()=>{$.keys.up("any")},"not up on any key")
+
+                    test.message("wheres the any key!?");
+                    test.assertTrue(()=>{return anyWentDown},"any key went down");
+                    test.assertTrue(()=>{return anyWentUp},"any key went up");
+                    test.assertTrue(()=>{return anyKeyDownFor>50},"any key was down for over 50frames");
+
+                    test.message("f to pay respects");
+                    test.assertTrue(()=>{return fKeyWentDown},"f key went down");
+                    test.assertTrue(()=>{return fKeyWentUp},"f key went up");
+                    test.assertTrue(()=>{return fKeyDownFor>50},"f key was down for over 50frames");
+
+                    test.message("arrow key checks");
                     test.reportResults();
                     testIsDone = true;
                 }
             }
 
-            //THEN run tests, checking those values
-            let touchUpHappened = false;
-            let touchDownHappened = false;
-            let howLongDidTouchDownHappen = 0;
-            let initXOfTouch=$.touch.x;
-            let initYOfTouch=$.touch.y;
-            const SPAWNTOUCHFRAMECOUNT=100;
+            let fKeyDownFor=0;
+            let fKeyWentUp=false;
+            let fKeyWentDown=false;
+            let anyKeyDownFor=0;
+            let anyWentUp=false;
+            let anyWentDown=false;
             const ENDOFTESTFRAMECOUNT=300;
             function draw() {
-                if ($.touch.down) {
-                    $.colour.fill = "green";
-                    touchDownHappened = true;
-                    howLongDidTouchDownHappen++;
-                } else {
-                    $.colour.fill = "aqua";
-                }
+                $.colour.fill = "aqua";
                 $.shape.rectangle($.width / 2, $.height / 2, $.width, $.height);
+
+                //any checks
+                if($.keys.down("any")){
+                    anyWentDown = true;anyKeyDownFor++
+                }
+                if($.keys.up("any")){
+                    anyWentUp = true;
+                }
+
+                //f checks
+                if($.keys.down("f")){
+                    fKeyDownFor++
+                    fKeyWentDown=true;
+                    $.colour.fill = "green";
+                    $.shape.rectangle($.width / 2, $.height / 2, $.width, $.height);
+                }
+                if($.keys.up("f")){
+                    fKeyWentUp = true;
+                    $.shape.oval($.width / 2, $.height / 2, 100, 100);
+                }
+                if ($.frameCount === 100) {
+                    test.simulateKeyPress(
+                        document.querySelector("canvas"),
+                        "f"
+                    );
+                }
+                
+                if ($.frameCount === ENDOFTESTFRAMECOUNT) {
+                    generateReport();
+                }
                 $.colour.fill = "black";
-                $.text.alignment.x = "left";
-                $.text.print(20, 20, `touchdown ${$.touch.down}`);
-                $.text.print(20, 40, `touchup ${$.touch.up}`);
                 $.text.alignment.x="center";
                 $.text.size=24;
                 if($.frameCount<=ENDOFTESTFRAMECOUNT){
                     $.text.print($.width/2,40,"🛑 please do not press as test is done");
                 } else {
                     $.text.print($.width/2,40,"✔️ test is done");
-
-                }
-                if ($.touch.up) {
-                    touchUpHappened = true;
-                    $.shape.oval($.width / 2, $.height / 2, 100, 100);
-                }
-                if ($.frameCount === SPAWNTOUCHFRAMECOUNT) {
-                    test.simulateTouchEnd(
-                        document.querySelector("canvas"),
-                        $.w / 2,
-                        $.h / 2
-                    );
-                }
-                if ($.frameCount === ENDOFTESTFRAMECOUNT) {
-                    generateReport();
                 }
             }
         </script>

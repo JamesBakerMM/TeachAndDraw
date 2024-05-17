@@ -8,6 +8,37 @@ export class TestSuite {
         this.results.push({test:message, passed:undefined})
     }
 
+    simulateKeyDown(targetElement,key){
+        const keyDownEvent = new KeyboardEvent('keydown', {
+            bubbles: true,
+            cancelable: true,
+            key: key,
+            code: `Key${key.toUpperCase()}`,
+            keyCode: key.toUpperCase().charCodeAt(0),
+            charCode: key.toUpperCase().charCodeAt(0),
+            which: key.toUpperCase().charCodeAt(0),
+        });
+        targetElement.dispatchEvent(keyDownEvent);
+    }
+    simulateKeyPress(targetElement,key){
+        this.simulateKeyDown(targetElement,key);
+        
+        setTimeout(() => {
+            console.log(targetElement,key);
+            console.log("event time");
+            const keyUpEvent = new KeyboardEvent('keyup', {
+                bubbles: true,
+                cancelable: true,
+                key: key,
+                code: `Key${key.toUpperCase()}`,
+                keyCode: key.toUpperCase().charCodeAt(0),
+                charCode: key.toUpperCase().charCodeAt(0),
+                which: key.toUpperCase().charCodeAt(0),
+            });
+            targetElement.dispatchEvent(keyUpEvent);
+        }, 2000);
+
+    }
     simulateMouseMove(targetElement, x, y) {
         const mouseMoveEvent = new MouseEvent('mousemove', {
             bubbles: true,   

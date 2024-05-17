@@ -4,7 +4,7 @@ window.pen=p;
 const shape=p.shape;
 const colour=p.colour;
 const mouse=p.mouse;
-const keyboard=p.kb;
+const keyboard=p.keys;
 const text=p.text;
 
 let x = 0;
