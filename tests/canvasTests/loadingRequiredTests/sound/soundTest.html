@@ -9,12 +9,13 @@
             import { Paint } from "/lib/Paint.js";
             import { TestSuite } from "/tests/TestSuite.js";
 
-            $.start(draw);
+            $.use(draw);
             $.debug = true;
             $.width = 800;
             $.height = 800;
 
             let audioFile = $.loadSound("./test.mp3");
+            console.log(audioFile);
 
             let audioBegun = false;
             audioFile.volume = 50;

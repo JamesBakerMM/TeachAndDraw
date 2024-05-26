@@ -1,6 +1,6 @@
 import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 
-$.start(draw);
+$.use(draw);
 
 // $.debug=true;
 //screen code

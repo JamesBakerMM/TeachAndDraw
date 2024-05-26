@@ -2,7 +2,7 @@ import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Paint.js";
 
-$.start(draw);
+$.use(draw);
 $.width=1000;
 $.height=2100;
 // $.debug=true;

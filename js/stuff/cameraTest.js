@@ -1,6 +1,6 @@
 import { $ } from "../../lib/Pen.js";
 
-$.start(draw);
+$.use(draw);
 
 $.width = 400;
 $.height = 400;
