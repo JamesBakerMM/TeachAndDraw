@@ -53,7 +53,7 @@ function drawTree(quad, counter) {
 }
 
 function background(colour){
-    pen.colour.fill=colour;
+    $.colour.fill=colour;
     $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
 }
 
