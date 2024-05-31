@@ -148,6 +148,9 @@
                     test.assertEqual(testAnim.delay,10,"delay can be set to a value");
 
                     test.assertError(()=>{testAnim.delay="ajhfjh"},"delay should be protected from being set to not a number")
+
+                    //loading check
+                    test.assertError(()=>{$.loadAnimation(0,0,"kjh1.png")},"should throw an error ")
                     test.reportResults();
                     testsHaveRun = true;
                 }
