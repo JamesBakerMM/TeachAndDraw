@@ -3,7 +3,7 @@ import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Paint.js";
 
 $.use(draw);
-$.debug=true;
+$.debug=false;
 let squares = $.makeGroup();
 let ships = $.makeGroup();
 
@@ -59,7 +59,7 @@ function background(colour){
 
 function setup(){
     if($.frameCount===0){
-        console.log('sjkdhfjkdsh');
+        console.log('Start');
     }
 }
 
