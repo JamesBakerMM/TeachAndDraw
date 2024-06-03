@@ -2,8 +2,8 @@ import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Paint.js";
 
-$.start(draw);
-// $.debug=true;
+$.use(draw);
+$.debug=false;
 let squares = $.makeGroup();
 let ships = $.makeGroup();
 
@@ -53,11 +53,18 @@ function drawTree(quad, counter) {
 }
 
 function background(colour){
-    pen.colour.fill=colour;
+    $.colour.fill=colour;
     $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
 }
 
+function setup(){
+    if($.frameCount===0){
+        console.log('Start');
+    }
+}
+
 function draw() { 
+    setup();
     background("rgba(125,125,125)");
     $.paused=false;
     /*if(mouse.leftUp){
@@ -136,7 +143,7 @@ function draw() {
         // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
 
-    //drawTree(squares.QuadTree.getTree(), 0);
+    // drawTree(squares.QuadTree.getTree(), 0);
     //console.log(squares.QuadTree.getTree());
 
     $.drawAllColliders();

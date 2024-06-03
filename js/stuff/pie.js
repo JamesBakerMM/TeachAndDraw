@@ -15,7 +15,7 @@ let marauder=2;
 
 let total=urbie+madcat+catapult+osiris+marauder;
 
-p.start();
+p.use();
 window.pen=p;
 
 let angle=0;

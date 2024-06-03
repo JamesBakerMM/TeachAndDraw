@@ -1,6 +1,6 @@
 import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 
-$.start(draw);
+$.use(draw);
 
 const file = $.loadTextFile("./data/fakeml.fakexml");
 let stream;

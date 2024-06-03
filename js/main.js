@@ -1,7 +1,7 @@
 import { $ as p,shape,colour,mouse,keys,txt } from "../lib/Pen.js";
 import { Group } from "../lib/Group.js";
 const q = p;
-p.start(draw);
+p.use(draw);
 p.debug=true;
 window.pen = p;
 

@@ -1,6 +1,6 @@
 import { $ } from "../../lib/Pen.js";
 
-$.start(draw);
+$.use(draw);
 
 $.width = 400;
 $.height = 400;
@@ -8,7 +8,7 @@ $.debug = true;
 
 const topLeft = $.makeBoxCollider(100, 100, 20, 20);
 const topRight = $.makeBoxCollider($.width - 100, 100, 20, 20);
-const bottomLeft = $.makeBoxCollider(100, $.height - 100, 20, 20);
+const bottomLeft = $.makeBoxCollider(100, $.height - 100, 40, 40);
 const bottomRight = $.makeBoxCollider($.width - 100, $.height - 100, 20, 20);
 const topCenter = $.makeBoxCollider($.width / 2, $.height / 2 - 50, 20, 20);
 
@@ -43,9 +43,9 @@ function draw() {
     circles.draw();
     for (let circle of circles) {
         if (circle.movedByCamera) {
-            $.text.print(circle.x, circle.y, `🎥 ${parseInt(circle.x)},${parseInt(circle.y)}`);
+            $.text.print(circle.x, circle.y-20, `🎥 ${parseInt(circle.x)},${parseInt(circle.y)}`);
         } else {
-            $.text.print(circle.x, circle.y, `${parseInt(circle.x)},${parseInt(circle.y)}`);
+            $.text.print(circle.x, circle.y-20, `${parseInt(circle.x)},${parseInt(circle.y)}`);
         }
     }
 }
