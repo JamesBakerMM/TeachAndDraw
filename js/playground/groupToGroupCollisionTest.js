@@ -2,21 +2,30 @@ import { $ } from "../../lib/Pen.js";
 
 $.use(draw);
 let beegSprite = makeBeegSprite($.w / 2, $.h / 2);
-let leftGroup = $.makeGroup();
+// let leftGroup = $.makeGroup();
 let rightGroup = $.makeGroup();
 
 for (let i = 0; i < 10; i++) {
     for (let j = 0; j < 80; j++) {
-        leftGroup.push(makeLeftShip(i * 20, 0 + 10 * j));
+        // leftGroup.push(makeLeftShip(i * 20, 0 + 10 * j));
         rightGroup.push(makeRightShip(400 + i * 20, 10 + 10 * j));
     }
 }
 function draw() {
-    leftGroup.collides(leftGroup);
-    rightGroup.collides(rightGroup);
-    leftGroup.collides(rightGroup);
-    leftGroup.collides(beegSprite);
-    rightGroup.collides(beegSprite);
+    if($.frameCount===1){
+        $.paused=true;
+    }
+    // leftGroup.collides(leftGroup);
+    // rightGroup.collides(rightGroup);
+    // leftGroup.collides(rightGroup);
+    // console.log(rightGroup.overlaps(beegSprite))
+    // console.log(leftGroup.overlaps(beegSprite))
+    if(rightGroup.overlaps(beegSprite)){
+        console.log("OVERLAP TIME")
+        $.colour.fill="red";
+        $.shape.rectangle($.w/2,$.h/2,$.w,$.h);
+    };
+    // rightGroup.collides(beegSprite);
     $.drawAllColliders();
 }
 

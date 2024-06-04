@@ -65,6 +65,16 @@
             );
             let testsHaveRun = false;
             function runTests() {
+                const anim = $.loadAnimation(
+                20,
+                50,
+                "./images/animAsset1.png",
+                "./images/animAsset2.png",
+                "./images/animAsset3.png",
+                "./images/animAsset4.png",
+                "./images/animAsset5.png",
+                "./images/animAsset6.png"
+            );
                 if (testsHaveRun===false) {
                     const test = new TestSuite();
                     
