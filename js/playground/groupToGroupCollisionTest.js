@@ -1,6 +1,7 @@
 import { $ } from "../../lib/Pen.js";
 
 $.use(draw);
+// $.debug=true;
 let beegSprite = makeBeegSprite($.w / 2, $.h / 2);
 let smallSprite = $.makeBoxCollider(20, $.h / 2,20,20);
 smallSprite.friction=0;
@@ -8,26 +9,21 @@ smallSprite.velocity.x=12;
 let leftGroup = $.makeGroup();
 let rightGroup = $.makeGroup();
 
-for (let i = 0; i < 10; i++) {
-    for (let j = 0; j < 10; j++) {
+for (let i = 0; i < 8; i++) {
+    for (let j = 0; j < 80; j++) {
         leftGroup.push(makeLeftShip(i * 20, 0 + 10 * j));
-        leftGroup.push(makeRightShip(400 + i * 20, 10 + 10 * j));
+        rightGroup.push(makeRightShip(400 + i * 20, 10 + 10 * j));
     }
 }
 function draw() {
     if($.frameCount===2){
         // $.paused=true;
     }
-    // leftGroup.collides(leftGroup);
-    // rightGroup.collides(rightGroup);
-    // leftGroup.collides(rightGroup);
-    // console.log(rightGroup.overlaps(beegSprite))
-    // console.log(leftGroup.overlaps(beegSprite))
-    if(leftGroup.collides(leftGroup)){
-        $.colour.fill="red";
+    if(leftGroup.collides(rightGroup)){
+        $.colour.fill="grey";
         $.shape.rectangle($.w/2,$.h/2,$.w,$.h);
     };
-    // rightGroup.collides(beegSprite);
+    rightGroup.collides(beegSprite);
     $.drawAllColliders();
 }
 
