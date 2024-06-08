@@ -1,8 +1,7 @@
 import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
-import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Paint.js";
 
-$.use(draw);
+$.use(update);
 $.debug=false;
 let squares = $.makeGroup();
 let ships = $.makeGroup();
@@ -11,7 +10,7 @@ let ships = $.makeGroup();
 let yellowShip=$.makeBoxCollider($.w/2,$.h/2,80,80);
 yellowShip.movedByCamera=false;
 yellowShip.speed=0;
-yellowShip.direction=240;
+yellowShip.direction=0;
 yellowShip.static = true;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 yellowShip.asset=img;
@@ -63,7 +62,7 @@ function setup(){
     }
 }
 
-function draw() { 
+function update() { 
     setup();
     background("rgba(125,125,125)");
     $.paused=false;
