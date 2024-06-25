@@ -2,28 +2,32 @@ import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 import { Paint } from "../../lib/Paint.js";
 
 $.use(update);
-$.debug=false;
+$.debug=true;
 let squares = $.makeGroup();
 let ships = $.makeGroup();
 
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
-let yellowShip=$.makeBoxCollider($.w/2,$.h/2,80,80);
-yellowShip.movedByCamera=false;
-yellowShip.speed=0;
-yellowShip.direction=0;
-yellowShip.static = true;
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
-yellowShip.asset=img;
-window.lSquare=yellowShip;
-yellowShip.mass = 1;
-yellowShip.friction = 0;
-squares.push(yellowShip);
-let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
-redShip.static=true;
-redShip.speed=2;
-redShip.direction=270;
-redShip.friction=0;
 
+let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
+redShip.speed=10;
+redShip.asset=img;
+redShip.mass = 1;
+redShip.direction=270;
+redShip.friction=0.5;
+redShip.rotationalVelocity = -0;
+squares.push(redShip);
+
+let yellowShip=$.makeBoxCollider($.w/2,$.h/2-50,80,80);
+yellowShip.speed=0;
+yellowShip.asset=img;
+yellowShip.mass = 100;
+yellowShip.direction=0;
+yellowShip.friction=0.5;
+yellowShip.rotationalVelocity = 0;
+squares.push(yellowShip);
+
+/*
 let rightSquare;
 for (let i = 10; i < 800; i += 10) {
     for (let j = 10; j < 600; j += 10) {
@@ -33,7 +37,7 @@ for (let i = 10; i < 800; i += 10) {
         squares.push(rightSquare);
     }
 }
-
+*/
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
     for (let i = 1; i <= 4; i++) {
@@ -75,7 +79,7 @@ function update() {
         yellowShip.y = mouse.y;
     }
 
-    yellowShip.rotation=yellowShip.direction;
+    //yellowShip.rotation=yellowShip.direction;
     if(keys.down("uparrow")){
         yellowShip.direction=0;
         yellowShip.speed=5;
