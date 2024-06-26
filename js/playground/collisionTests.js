@@ -8,36 +8,36 @@ let ships = $.makeGroup();
 
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");
-
+/*
 let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
 redShip.speed=10;
 redShip.asset=img;
 redShip.mass = 1;
 redShip.direction=270;
 redShip.friction=0.5;
-redShip.rotationalVelocity = -0;
+redShip.rotationalVelocity = 0;
 squares.push(redShip);
-
+*/
 let yellowShip=$.makeBoxCollider($.w/2,$.h/2-50,80,80);
 yellowShip.speed=0;
 yellowShip.asset=img;
-yellowShip.mass = 100;
+yellowShip.mass = 2;
 yellowShip.direction=0;
 yellowShip.friction=0.5;
-yellowShip.rotationalVelocity = 0;
 squares.push(yellowShip);
 
-/*
+
 let rightSquare;
-for (let i = 10; i < 800; i += 10) {
-    for (let j = 10; j < 600; j += 10) {
-        rightSquare=$.makeBoxCollider(i,j, 3, 3);
+for (let i = 100; i < 800; i += 200) {
+    for (let j = 100; j < 600; j += 200) {
+        rightSquare=$.makeBoxCollider(i,j, 80, 80);
         rightSquare.mass = 1;
-        rightSquare.friction = 100;
+        rightSquare.friction = 0.5;
+        rightSquare.asset=img;
         squares.push(rightSquare);
     }
 }
-*/
+
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
     for (let i = 1; i <= 4; i++) {
@@ -124,22 +124,22 @@ function update() {
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
-        // if(sq.x>$.width){
-        //     sq.x=$.width-1;
-        //     sq.velocity.x=-sq.velocity.x;
-        // }
-        // if(sq.x<0){
-        //     sq.x=0;
-        //     sq.velocity.x=-sq.velocity.x;
-        // }
-        // if(sq.y>$.height){
-        //     sq.y=$.height-1;
-        //     sq.velocity.y=-sq.velocity.y;
-        // }
-        // if(sq.y<0){
-        //     sq.y=0;
-        //     sq.velocity.y=-sq.velocity.y;
-        // }
+        if(sq.x>$.width){
+            sq.x=$.width-1;
+            sq.velocity.x=-sq.velocity.x;
+        }
+        if(sq.x<0){
+            sq.x=0;
+            sq.velocity.x=-sq.velocity.x;
+        }
+        if(sq.y>$.height){
+            sq.y=$.height-1;
+            sq.velocity.y=-sq.velocity.y;
+        }
+        if(sq.y<0){
+            sq.y=0;
+            sq.velocity.y=-sq.velocity.y;
+        }
 
         // $.colour.fill = "#00000000";
         // $.colour.stroke = "#FFFF00FF";
