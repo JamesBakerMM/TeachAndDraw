@@ -18,34 +18,46 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeCircleCollider($.w/2,$.h/2-200,80,80);
-yellowShip.speed=-10;
+let yellowShip=$.makeCircleCollider(600,$.h/2-200,80,80);
 yellowShip.asset=img;
 yellowShip.mass = 1;
-yellowShip.direction=0;
+yellowShip.static = true;
+yellowShip.direction=180;
 yellowShip.friction=0;
+yellowShip.speed = 50;
+yellowShip.bounciness = 1;
 squares.push(yellowShip);
 
-
-let box=$.makeBoxCollider($.w/2,$.h/2,400,50);
+let box=$.makeBoxCollider(600,$.h/2,400,40);
 box.shape = "box";
 box.speed=0;
 box.static = true;
-box.rotation = 45;
+box.bounciness = 1;
+box.friction=0;
+box.rotation = -45;
+box.mass = 1;
 squares.push(box);
-
 /*
+let box2=$.makeBoxCollider(200,$.h/2,200,40);
+box2.shape = "box";
+box2.speed=0;
+box2.static = true;
+box2.rotation = 45;
+box2.mass = 1;
+squares.push(box2);
+*/
+
 let rightSquare;
-for (let i = 100; i < 800; i += 200) {
-    for (let j = 100; j < 600; j += 200) {
-        rightSquare=$.makeBoxCollider(i,j, 80, 80);
+for (let i = 100; i < 800; i += 40) {
+    for (let j = 100; j < 600; j += 40) {
+        rightSquare=$.makeCircleCollider(i,j, 10, 10);
         rightSquare.mass = 1;
-        rightSquare.friction = 0.5;
-        rightSquare.asset=img;
+        rightSquare.friction = 1;
+        //rightSquare.asset=img;
         squares.push(rightSquare);
     }
 }
-*/
+
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
     for (let i = 1; i <= 4; i++) {
@@ -81,6 +93,10 @@ function update() {
     /*if(mouse.leftUp){
         $.camera.moveTo(mouse.x,mouse.y);
     }*/
+
+
+    //"gravity" 
+    //yellowShip.velocity.y += 0.9;
 
     if(mouse.leftDown){
         yellowShip.x = mouse.x;
