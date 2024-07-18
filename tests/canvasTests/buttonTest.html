@@ -62,9 +62,12 @@
                 if(fakeMouse.x===95){
                     test.simulateMouseClick($.canvas,fakeMouse.x,fakeMouse.y)
                 }
-                if(btn.clicked) {
+                if(btn.up) {
                     $.shape.oval(fakeMouse.x,fakeMouse.y,25);
-                    console.log("clicked!")
+                    console.log("up!")
+                } else if(btn.down){
+                    $.shape.oval(fakeMouse.x,fakeMouse.y,15);
+                    console.log("down!")
                 } else {
                     $.shape.oval(fakeMouse.x,fakeMouse.y,5);
                 }
