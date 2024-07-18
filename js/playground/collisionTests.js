@@ -18,25 +18,55 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeBoxCollider($.w/2,$.h/2-50,80,80);
-yellowShip.speed=0;
+let yellowShip=$.makeCircleCollider(600,0,80,60);
 yellowShip.asset=img;
-yellowShip.mass = 2;
-yellowShip.direction=0;
-yellowShip.friction=0.5;
+yellowShip.mass = 100;
+yellowShip.static = false;
+yellowShip.direction=180;
+yellowShip.friction=0.1;
+yellowShip.speed = 20;
+yellowShip.bounciness = 1;
+yellowShip.rotation = 0;
 squares.push(yellowShip);
+/*
+let box=$.makeCircleCollider(700,300,10,10);
+box.speed=0;
+box.static = false;
+box.bounciness = 1;
+box.friction=0;
+box.rotation = -45;
+box.mass = 10;
+squares.push(box);
 
+let box2=$.makeBoxCollider(200,300,300,40);
+box2.speed=0;
+box2.static = false;
+box2.bounciness = 1;
+box2.friction=0;
+box2.rotation = 45;
+box2.mass = 10;
+squares.push(box2);
 
+let box2=$.makeBoxCollider(200,$.h/2,200,40);
+box2.shape = "box";
+box2.speed=0;
+box2.static = true;
+box2.rotation = 45;
+box2.mass = 1;
+squares.push(box2);
+*/
 let rightSquare;
-for (let i = 100; i < 800; i += 200) {
-    for (let j = 100; j < 600; j += 200) {
-        rightSquare=$.makeBoxCollider(i,j, 80, 80);
+for (let i = 100; i < 800; i += 30) {
+    for (let j = 100; j < 600; j += 30) {
+        rightSquare=$.makeCircleCollider(i,j, 5, 5);
         rightSquare.mass = 1;
-        rightSquare.friction = 0.5;
-        rightSquare.asset=img;
+        rightSquare.friction = 0;
+        rightSquare.bounciness = 0.3;
+        //rightSquare.asset=img;
         squares.push(rightSquare);
     }
 }
+
 
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
@@ -73,6 +103,10 @@ function update() {
     /*if(mouse.leftUp){
         $.camera.moveTo(mouse.x,mouse.y);
     }*/
+
+
+    //"gravity" 
+    //yellowShip.velocity.y += 0.9;
 
     if(mouse.leftDown){
         yellowShip.x = mouse.x;
@@ -140,6 +174,7 @@ function update() {
             sq.y=0;
             sq.velocity.y=-sq.velocity.y;
         }
+        sq.velocity.y += 0.9;
 
         // $.colour.fill = "#00000000";
         // $.colour.stroke = "#FFFF00FF";
