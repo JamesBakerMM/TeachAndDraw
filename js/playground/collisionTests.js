@@ -184,7 +184,7 @@ function update() {
     // drawTree(squares.QuadTree.getTree(), 0);
     //console.log(squares.QuadTree.getTree());
 
-    $.drawAllColliders();
+    $.drawColliders();
 
     document.getElementById("fps").innerText = $.time.averageFps;
 }
