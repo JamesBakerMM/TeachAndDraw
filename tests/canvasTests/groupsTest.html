@@ -30,7 +30,7 @@
             }, "group should error on mismatched types on push");
             test.assertError(() => {
                 let numGroup = new Group();
-                numGroup.push($.makeBoxCollider(2, 2, 20, 20));
+                numGroup.push($.makeCircleCollider(2, 2, 20));
                 numGroup.push({});
             }, "group should error when a non collider object is added to a group");
             test.assertError(() => {
@@ -127,7 +127,7 @@
             }, "manually selected sprites from 2 groups should overlap ");
 
             function makeTestBox(x, y) {
-                let tempBox = $.makeBoxCollider(x, y, SIZE, SIZE);
+                let tempBox = $.makeCircleCollider(x, y, SIZE);
                 return tempBox;
             }
             $.debug=true;
