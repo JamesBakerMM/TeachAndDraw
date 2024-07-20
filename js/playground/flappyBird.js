@@ -4,7 +4,8 @@ $.use(update);
 const sampleSound = $.loadSound("../../data/test.mp3");
 const jason = $.loadJsonFile("../../data/jason.json");
 const dominance = $.loadImageToStamp($.w/2,$.h/2,"../../images/tpose.png");
-const me = $.makeCircleCollider(100,$.h/2,20);
+const me = $.makeCircleCollider(100,$.h/2,50);
+
 const pillars = $.makeGroup();
 let randomOffset= $.math.random(-200,200);
 pillars.push(createPillar($.w-100+randomOffset,100));
@@ -23,7 +24,6 @@ function update() {
         //$.paused = true;
     }
 
-    pillars.push(me);
     meUpdate();
     pillarUpdate();
     $.drawColliders();
@@ -33,7 +33,6 @@ function update() {
 function pillarUpdate() {
     for (let pillar of pillars) {
         if (pillar.collides(me)) {
-            console.log("hit");
             $.colour.fill = "red";
             $.shape.rectangle($.w / 2, $.h / 2, $.w, $.h);
         }
