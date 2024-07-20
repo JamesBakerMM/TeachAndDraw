@@ -18,7 +18,7 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeCircleCollider(600,0,80,60);
+let yellowShip=$.makeBoxCollider(600,0,80,60);
 yellowShip.asset=img;
 yellowShip.mass = 100;
 yellowShip.static = false;
@@ -28,25 +28,25 @@ yellowShip.speed = 20;
 yellowShip.bounciness = 1;
 yellowShip.rotation = 0;
 squares.push(yellowShip);
-/*
-let box=$.makeCircleCollider(700,300,10,10);
+
+let box=$.makeBoxCollider(700,300,150,40);
 box.speed=0;
-box.static = false;
+box.static = true;
 box.bounciness = 1;
 box.friction=0;
-box.rotation = -45;
+box.rotation = 0;
 box.mass = 10;
 squares.push(box);
 
 let box2=$.makeBoxCollider(200,300,300,40);
 box2.speed=0;
-box2.static = false;
+box2.static = true;
 box2.bounciness = 1;
 box2.friction=0;
-box2.rotation = 45;
+box2.rotation = 0;
 box2.mass = 10;
 squares.push(box2);
-
+/*
 let box2=$.makeBoxCollider(200,$.h/2,200,40);
 box2.shape = "box";
 box2.speed=0;
@@ -54,7 +54,7 @@ box2.static = true;
 box2.rotation = 45;
 box2.mass = 1;
 squares.push(box2);
-*/
+
 let rightSquare;
 for (let i = 100; i < 800; i += 30) {
     for (let j = 100; j < 600; j += 30) {
@@ -66,7 +66,7 @@ for (let i = 100; i < 800; i += 30) {
         squares.push(rightSquare);
     }
 }
-
+*/
 
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
@@ -106,7 +106,7 @@ function update() {
 
 
     //"gravity" 
-    //yellowShip.velocity.y += 0.9;
+    yellowShip.velocity.y += 0.9;
 
     if(mouse.leftDown){
         yellowShip.x = mouse.x;
@@ -174,7 +174,6 @@ function update() {
             sq.y=0;
             sq.velocity.y=-sq.velocity.y;
         }
-        sq.velocity.y += 0.9;
 
         // $.colour.fill = "#00000000";
         // $.colour.stroke = "#FFFF00FF";
