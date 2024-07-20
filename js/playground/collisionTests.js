@@ -7,7 +7,7 @@ let squares = $.makeGroup();
 let ships = $.makeGroup();
 
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
-let img=$.loadImage(0,0,"./images/fac0_refinery.png");
+let img=$.loadImageToStamp(0,0,"./images/fac0_refinery.png");
 /*
 let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
 redShip.speed=10;
@@ -18,7 +18,7 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeBoxCollider(600,0,80,60);
+let yellowShip=$.makeCircleCollider(600,0,100,100);
 yellowShip.asset=img;
 yellowShip.mass = 100;
 yellowShip.static = false;
