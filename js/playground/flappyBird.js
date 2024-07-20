@@ -12,12 +12,17 @@ pillars.push(createPillar($.w-100+randomOffset,$.h-100));
 me.asset = dominance;
 $.debug = true;
 
+
 const sampleBtn = $.makeButton(100,100,100,20,"hello world");
 
 
 sampleBtn.background="green";
 
 function update() {
+    if ($.frameCount == 1) {
+        //$.paused = true;
+    }
+
     pillars.push(me);
     meUpdate();
     pillarUpdate();
@@ -28,6 +33,7 @@ function update() {
 function pillarUpdate() {
     for (let pillar of pillars) {
         if (pillar.collides(me)) {
+            console.log("hit");
             $.colour.fill = "red";
             $.shape.rectangle($.w / 2, $.h / 2, $.w, $.h);
         }
