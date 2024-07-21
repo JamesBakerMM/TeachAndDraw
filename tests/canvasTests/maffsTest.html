@@ -53,7 +53,12 @@
                 "5 should be rescaled to 50 moving from 0->10 versus 0->100"
             );
             // test.message("atan");
-            // test.message("atan2"); 
+            test.message("atan2"); 
+            test.assertEqual(
+                $.math.atan2(3,5).toFixed(2),
+                30.96.toFixed(2),
+                "atan 2 should give back 30.96"
+            )
             
             // test.message("Random checks!");
             //random
