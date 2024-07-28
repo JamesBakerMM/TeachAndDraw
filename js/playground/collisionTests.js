@@ -102,11 +102,12 @@ function update() {
     setup();
     background("rgba(125,125,125)");
     $.paused=false;
-    /*if(mouse.leftUp){
-        $.camera.moveTo(mouse.x,mouse.y);
-    }*/
+    // if(mouse.leftReleased){
+    //     $.camera.moveTo(mouse.x,mouse.y);
+    // }
 
-
+    $.colour.fill="black";
+    $.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
     //"gravity" 
     //yellowShip.velocity.y += 0.9;
 

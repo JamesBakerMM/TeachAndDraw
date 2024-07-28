@@ -13,7 +13,7 @@
             $.use(draw);
             $.width = 800;
             $.height = 800;
-            //$.debug = true;
+            $.debug = true;
 
             let testIsDone = false;
             const test = new TestSuite();
@@ -21,7 +21,7 @@
                 if (testIsDone === false) {
                     test.message("any keys being pressed now?");
                     test.assertFalse(()=>{$.keys.down("any")},"not down on any key")
-                    test.assertFalse(()=>{$.keys.up("any")},"not up on any key")
+                    test.assertFalse(()=>{$.keys.released("any")},"not up on any key")
 
                     test.message("wheres the any key!?");
                     test.assertTrue(()=>{return anyWentDown},"any key went down");
@@ -54,7 +54,7 @@
                 if($.keys.down("any")){
                     anyWentDown = true;anyKeyDownFor++
                 }
-                if($.keys.up("any")){
+                if($.keys.released("any")){
                     anyWentUp = true;
                 }
 
@@ -65,7 +65,8 @@
                     $.colour.fill = "green";
                     $.shape.rectangle($.width / 2, $.height / 2, $.width, $.height);
                 }
-                if($.keys.up("f")){
+                if($.keys.released("f")){
+                    console.log("UP GOES F");
                     fKeyWentUp = true;
                     $.shape.oval($.width / 2, $.height / 2, 100, 100);
                 }

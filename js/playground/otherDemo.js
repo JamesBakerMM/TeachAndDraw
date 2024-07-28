@@ -52,7 +52,7 @@ let seeRange = false;
 //where all the drawing happens
 function update(){
     makeGameSpace();
-    if($.keys.up(" ")){
+    if($.keys.released(" ")){
         if(startWave === false){
             startWave = true;
         }
