@@ -29,20 +29,24 @@ yellowShip.bounciness = 1;
 yellowShip.rotation = 0;
 squares.push(yellowShip);
 
-let box=$.makeBoxCollider(600,400,101,100);
+let box=$.makeBoxCollider(700,400,20,210);
 box.static = true;
 box.bounciness = 1;
 box.friction= 0;
 box.rotation = 45;
 box.mass = 1;
+box.rotationalVelocity = 10;
+box.friction = 0;
 squares.push(box);
 
-let box2=$.makeBoxCollider(200,400,200,20);
+let box2=$.makeBoxCollider(200,400,300,20);
 box2.shape = "box";
 box2.speed=0;
 box2.static = true;
 box2.rotation = 45;
 box2.mass = 1;
+box2.rotationalVelocity = 10;
+box2.friction = 0;
 squares.push(box2);
 /*
 let rightSquare;
