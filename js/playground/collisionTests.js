@@ -2,7 +2,7 @@ import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 import { Paint } from "../../lib/Paint.js";
 
 $.use(update);
-$.debug=false;
+$.debug=true;
 let squares = $.makeGroup();
 let ships = $.makeGroup();
 
@@ -29,34 +29,22 @@ yellowShip.bounciness = 1;
 yellowShip.rotation = 0;
 squares.push(yellowShip);
 
-let box=$.makeCircleCollider(700,200,50,20);
-box.speed=20;
-box.direction = 90;
+let box=$.makeBoxCollider(600,400,101,100);
 box.static = true;
 box.bounciness = 1;
-box.friction=0;
-box.rotation = 90;
+box.friction= 0;
+box.rotation = 45;
 box.mass = 1;
 squares.push(box);
 
-let box2=$.makeCircleCollider(200,400,100,20);
-box2.speed=20;
-box2.direction = 90;
-box2.static = true;
-box2.bounciness = 1;
-box2.friction=0;
-box2.rotation = 90;
-box2.mass = 1;
-squares.push(box2);
-/*
-let box2=$.makeBoxCollider(200,$.h/2,200,40);
+let box2=$.makeBoxCollider(200,400,200,20);
 box2.shape = "box";
 box2.speed=0;
 box2.static = true;
 box2.rotation = 45;
 box2.mass = 1;
 squares.push(box2);
-*/
+/*
 let rightSquare;
 for (let i = 100; i < 800; i += 30) {
     for (let j = 100; j < 600; j += 30) {
@@ -68,7 +56,7 @@ for (let i = 100; i < 800; i += 30) {
         squares.push(rightSquare);
     }
 }
-
+*/
 
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
@@ -109,7 +97,7 @@ function update() {
     $.colour.fill="black";
     $.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
     //"gravity" 
-    //yellowShip.velocity.y += 0.9;
+    yellowShip.velocity.y += 0.9;
 
     if(mouse.leftDown){
         yellowShip.x = mouse.x;
@@ -161,7 +149,7 @@ function update() {
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
-        sq.velocity.y += 0.9;
+        //sq.velocity.y += 0.9;
         if(sq.x>$.width){
             sq.x=$.width-1;
             sq.velocity.x=-sq.velocity.x;
