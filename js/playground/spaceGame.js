@@ -129,7 +129,7 @@ function makeEnemyWave(x, y, amount = 5, x_increment = 100, y_increment=10) {
 function splashScreen() {
     colour.fill = "white";
     text.print($.w / 2, $.h / 2, "Press a to start!");
-    if (keys.howLongDown("any")>10) {
+    if (keys.durationDown("any")>10) {
         currentScreen = SCREENS.MENU;
     }
 }
