@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./js/playground/collisionTests.js" type="module" defer></script>
+    <title>Tetris</title>
+    <script src="./js/playground/buttonTest.js" type="module" defer></script>
     <style>
         html, body {
             margin:0px;
@@ -34,10 +34,10 @@
         }
         .wrapper {
             display:flex;
-            margin:100px;
+            margin-left:20px;
             overflow:hidden;
             /* margin:auto;  */
-            padding:0;
+            padding:1rem;
         }
         #debug.hidden {
             right: -360px; /* Hide all except 1px */
@@ -71,7 +71,7 @@
         .grid-overlay::after {
             content: "";
             position:absolute;
-            /* background-color:red; */
+            
             opacity:1;
             top: 0px;
             left: 0;
@@ -86,8 +86,9 @@
         }
 
         canvas{
-            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, 
-            rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            box-shadow: rgba(0, 0, 0, 0.527) 0px 0px 6px, 
+            rgba(0, 0, 0, 0.53) 0px 0px 6px;
+            box-sizing:border-box;
         }
 
         dialog {
@@ -112,7 +113,7 @@
         </iframe>
     </dialog>
     <div class="wrapper">
-        <canvas id="myCanvas"  style="border:2px solid black;"></canvas>
+        <canvas id="myCanvas"  ></canvas>
     </div>
     <aside id="debug" class="invisible">
         <button id="showhidebtn">🔍</button>
@@ -120,6 +121,5 @@
 
         </section>
     </aside>
-    <div id="fps">0</div>
 </body>
 </html>
