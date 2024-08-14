@@ -10,6 +10,6 @@ const checkbox = $.makeCheckbox(
 checkbox.name = "2";
 
 function update() {
-    console.log(checkbox.value);
+    // console.log(checkbox.value);
     checkbox.draw();
 }
