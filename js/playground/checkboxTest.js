@@ -7,7 +7,7 @@ const checkbox = $.makeCheckbox(
     $.h / 2,
     20
 );
-checkbox.name = "2";
+checkbox.checked = true;
 
 function update() {
     // console.log(checkbox.value);
