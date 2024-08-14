@@ -11,6 +11,6 @@ checkbox.checked = true;
 
 function update() {
     // console.log(checkbox.value);
-    console.log(checkbox.checked);
+    console.log();
     checkbox.draw();
 }
