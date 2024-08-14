@@ -1,11 +1,11 @@
 import { $ } from "../../lib/Pen.js";
 
 $.use(update);
-$.gui.accentColour = "red";
+// $.gui.accentColour = "red";
 const checkbox = $.makeCheckbox(    
     $.w / 2,
     $.h / 2,
-    15
+    20
 );
 // checkbox.checked = "true";
 
