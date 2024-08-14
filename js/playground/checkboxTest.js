@@ -5,7 +5,7 @@ $.use(update);
 const checkbox = $.makeCheckbox(    
     $.w / 2,
     $.h / 2,
-    30
+    20
 );
 checkbox.name = "2";
 
