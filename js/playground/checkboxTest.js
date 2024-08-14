@@ -10,7 +10,5 @@ const checkbox = $.makeCheckbox(
 checkbox.checked = true;
 
 function update() {
-    // console.log(checkbox.value);
-    console.log();
     checkbox.draw();
 }
