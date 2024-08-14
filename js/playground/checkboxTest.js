@@ -7,9 +7,9 @@ const checkbox = $.makeCheckbox(
     $.h / 2,
     30
 );
-// checkbox.checked = "true";
+checkbox.value = 9;
 
 function update() {
-    // console.log(checkbox);
+    console.log(checkbox.value);
     checkbox.draw();
 }
