@@ -4,7 +4,7 @@ $.use(update);
 const checkbox = $.makeCheckbox(    
     $.w / 2,
     $.h / 2,
-    100
+    30
 );
 const boxGroup = $.makeGroup();
 for(let i=0; i<10; i++) {
