@@ -6,6 +6,7 @@ const slider = $.makeSlider(
     $.h / 2,
     50
 );
+slider.value = "9";
 
 function update() {
     slider.draw();
