@@ -9,7 +9,7 @@ const checkbox = $.makeCheckbox(
 const slider = $.makeSlider(    
     $.w / 2,
     $.h / 2,
-    100
+    350
 );
 const boxGroup = $.makeGroup();
 for(let i=0; i<10; i++) {
