@@ -6,7 +6,7 @@ const slider = $.makeSlider(
     $.h / 2,
     50
 );
-slider.max = 10;
+slider.min = 10;
 console.log(slider);
 
 function update() {
