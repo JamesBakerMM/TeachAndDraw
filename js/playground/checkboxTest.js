@@ -2,7 +2,7 @@ import { $ } from "../../lib/Pen.js";
 
 $.use(update);
 const checkbox = $.makeCheckbox(    
-    $.w / 2,
+    $.w / 2 + 200,
     $.h / 2,
     30
 );
