@@ -6,6 +6,11 @@ const checkbox = $.makeCheckbox(
     $.h / 2,
     30
 );
+const slider = $.makeSlider(    
+    $.w / 2,
+    $.h / 2,
+    100
+);
 const boxGroup = $.makeGroup();
 for(let i=0; i<10; i++) {
     boxGroup.push($.makeCheckbox(20+i*30,60,20));
@@ -34,4 +39,5 @@ function update() {
     boxGroup.draw();
     checkbox.draw();
     button.draw();
+    slider.draw();
 }

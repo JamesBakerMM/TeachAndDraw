@@ -4,7 +4,7 @@ $.use(update);
 const slider = $.makeSlider(    
     $.w / 2,
     $.h / 2,
-    50
+    100
 );
 slider.min = 10;
 console.log(slider);
