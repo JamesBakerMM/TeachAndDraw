@@ -13,7 +13,7 @@ const slider = $.makeSlider(
 );
 // slider.value = 110;
 // slider.max = 100;
-slider.step = 15;
+slider.step = 0;
 
 const boxGroup = $.makeGroup();
 for(let i=0; i<10; i++) {
