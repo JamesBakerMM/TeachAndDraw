@@ -17,7 +17,6 @@ slider.max = 150;
 slider.value = 120;
 slider.min = 100;
 
-
 const boxGroup = $.makeGroup();
 for(let i=0; i<10; i++) {
     boxGroup.push($.makeCheckbox(20+i*30,60,20));
