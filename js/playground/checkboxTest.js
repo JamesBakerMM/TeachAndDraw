@@ -13,9 +13,9 @@ const slider = $.makeSlider(
 );
 // slider.value = 110;
 // slider.max = 100;
-slider.max = 150;
-slider.value = 120;
-slider.min = 100;
+slider.min = -10000;
+slider.value = 0;
+slider.max = 10000;
 
 const boxGroup = $.makeGroup();
 for(let i=0; i<10; i++) {
