@@ -36,6 +36,12 @@ sliderGroup2[3].step = 10;
 sliderGroup2[4].step = 25;
 sliderGroup2[5].step = 50;
 
+$.gui.accentColour = "yellow";
+$.gui.primaryColour = "lightblue";
+$.gui.secondaryColour = "black";
+$.gui.textColour = "green";
+
+
 const sliderGroup3 = $.makeGroup();
 for (let i = 0; i < 3; i++) {
     const slider = $.makeSlider($.w/2 + 150, 50 * i + 100, 120);
