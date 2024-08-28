@@ -2,10 +2,21 @@ import { $ } from "../../lib/Pen.js";
 
 $.use(update);
 const checkbox = $.makeCheckbox(    
-    $.w / 2,
+    $.w / 2 + 200,
     $.h / 2,
     30
 );
+const slider = $.makeSlider(    
+    $.w / 2,
+    $.h / 2,
+    350
+);
+// slider.value = 110;
+// slider.max = 100;
+slider.min = -10;
+slider.value = 50;
+slider.max = 100;
+
 const boxGroup = $.makeGroup();
 for(let i=0; i<10; i++) {
     boxGroup.push($.makeCheckbox(20+i*30,60,20));
@@ -34,4 +45,6 @@ function update() {
     boxGroup.draw();
     checkbox.draw();
     button.draw();
+    slider.draw();
+    // console.log(slider);
 }
