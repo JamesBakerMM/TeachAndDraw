@@ -24,6 +24,7 @@ for(let i=0; i<10; i++) {
 
 // const dropdown = $.makeDropdown(100, 200, 50, 20, ["option 1", 3, "option 3", true, ["hi", "hello"], {}]);
 const dropdown = $.makeDropdown(100, 200, 50, 20, ["option 1", "option 2 :)", "option 3"]);
+dropdown.index = 2;
 
 boxGroup[0].name="red";
 boxGroup[0].value="red";
@@ -49,5 +50,6 @@ function update() {
     checkbox.draw();
     button.draw();
     slider.draw();
+    dropdown.draw();
     // console.log(slider);
 }
