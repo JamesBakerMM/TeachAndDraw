@@ -23,7 +23,7 @@ for(let i=0; i<10; i++) {
 }
 
 // const dropdown = $.makeDropdown(100, 200, 50, 20, ["option 1", 3, "option 3", true, ["hi", "hello"], {}]);
-const dropdown = $.makeDropdown(400, 200, 300, 30, ["option 1", "option 2 :)", "option 3"]);
+const dropdown = $.makeDropdown(400, 200, 300, 30, ["option 1", "option 2 :)", "option 3", "Another option", "Wow! Another option. Cool, cool cool."]);
 dropdown.open = true;
 // dropdown.openDirection = "down";
 
