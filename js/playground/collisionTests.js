@@ -18,24 +18,26 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeCircleCollider(600,0,100,100);
-yellowShip.asset=img;
-yellowShip.mass = 100;
+let yellowShip=$.makeCircleCollider(348,300,100,100);
+//yellowShip.asset=img;
+yellowShip.mass = 1;
 yellowShip.static = false;
 yellowShip.direction=180;
-yellowShip.friction=0.1;
+yellowShip.friction=0;
 yellowShip.speed = 20;
-yellowShip.bounciness = 1.001;
+yellowShip.bounciness = 0;
 yellowShip.rotation = 0;
 squares.push(yellowShip);
 
-let box=$.makeBoxCollider(700,500,20,210);
+let box=$.makeBoxCollider(500,500,400,20);
+box.speed = 0;
+box.direction = 90;
+box.shape = "box";
 box.static = true;
-box.bounciness = 1;
+box.bounciness = 0;
 box.friction= 0;
-box.rotation = 45;
+box.rotation = 20;
 box.mass = 1;
-box.rotationalVelocity = 10;
 box.friction = 0;
 squares.push(box);
 
@@ -43,12 +45,12 @@ let box2=$.makeBoxCollider(200,500,300,20);
 box2.shape = "box";
 box2.speed=0;
 box2.static = true;
-box2.rotation = 45;
+box2.rotation = 0;
 box2.mass = 1;
-box2.rotationalVelocity = 10;
 box2.friction = 0;
 squares.push(box2);
 
+/*
 let rightSquare;
 for (let i = 100; i < 800; i += 10) {
     for (let j = 100; j < 600; j += 10) {
@@ -60,7 +62,7 @@ for (let i = 100; i < 800; i += 10) {
         squares.push(rightSquare);
     }
 }
-
+*/
 
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
@@ -110,20 +112,16 @@ function update() {
 
     //yellowShip.rotation=yellowShip.direction;
     if(keys.down("uparrow")){
-        yellowShip.direction=0;
-        yellowShip.speed=5;
+        yellowShip.velocity.y -=8;
     }
     if(keys.down("downarrow")){
-        yellowShip.direction=180;
-        yellowShip.speed=5;
+        yellowShip.velocity.y +=4;
     }
     if(keys.down("leftarrow")){
-        yellowShip.direction=270;
-        yellowShip.speed=5;
+        yellowShip.velocity.x -=4;
     }
     if(keys.down("rightarrow")){
-        yellowShip.direction=90;
-        yellowShip.speed=5;
+        yellowShip.velocity.x +=4;
     } 
     shape.polygon(
         $.w/2-75,100,
@@ -153,9 +151,7 @@ function update() {
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
-        if (sq.shape == "circle") {
-            sq.velocity.y += 0.9;
-        }
+            yellowShip.velocity.y += 0.9;
         
         if(sq.x>$.width){
             sq.x=$.width-1;
@@ -183,6 +179,4 @@ function update() {
     //console.log(squares.QuadTree.getTree());
 
     $.drawColliders();
-
-    document.getElementById("fps").innerText = $.time.averageFps;
 }
