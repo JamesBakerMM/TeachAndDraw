@@ -25,4 +25,5 @@ function update() {
     slider.draw();
 	$.text.print(400, 300, "Testing!");
 	$.text.print(400, 350, "Testing with max width!", 100);
+	$.text.print(400, 200, 234);
 }
