@@ -50,6 +50,7 @@ function update() {
 	//testing wrapping
 	$.text.alignment.x = "left";
 	$.text.print(450, 150, "Y alignment is center, X is left, this is how it wraps", 150);
+	$.text.print(550, 500, "Y alignment is center, X is left, this is how it wraps", 100);
 
 	$.text.alignment.y = "bottom";
 	$.text.alignment.x = "left";
