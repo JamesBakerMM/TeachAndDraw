@@ -64,4 +64,6 @@ function update() {
 	$.text.alignment.x = "center";
 	$.text.print(450, 250, "Y alignment is bottom, X is center, this is how it wraps", 150);
 
+	$.text.print(400, 550, "longsinglewordtoolong and now little words", 100);
+
 }
