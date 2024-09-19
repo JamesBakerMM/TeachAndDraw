@@ -7,8 +7,6 @@ const slider = $.makeSlider(
     $.h / 2,
     350
 );
-// slider.value = 110;
-// slider.max = 100;
 slider.min = -10;
 slider.value = 50;
 slider.max = 100;
@@ -19,14 +17,13 @@ const button = $.makeButton(
     100,
     50,
 	"Multiple lined button!"
-) //test "Multiple-lined button!". For some reason it starts the text on the second line if it cant fit in the first line
+)
 
 function update() {
     button.draw();
     slider.draw();
 	$.text.print(400, 300, "Testing!");
 	$.text.print(400, 250, "Testing with max width!", 100);
-	// $.text.print(400, 200, 234);
 
 	$.text.alignment.y = "top";
 	$.text.alignment.x = "left";
