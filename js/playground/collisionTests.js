@@ -2,7 +2,7 @@ import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 import { Paint } from "../../lib/Paint.js";
 
 $.use(update);
-$.debug=false;
+$.debug=true;
 let squares = $.makeGroup();
 let ships = $.makeGroup();
 
@@ -57,7 +57,7 @@ for (let i = 100; i < 800; i += 10) {
         rightSquare=$.makeCircleCollider(i,j, 5, 5);
         rightSquare.mass = 1;
         rightSquare.friction = 0;
-        rightSquare.bounciness = 0.3;
+        rightSquare.bounciness = 30;
         //rightSquare.asset=img;
         squares.push(rightSquare);
     }
@@ -95,7 +95,6 @@ function setup(){
 function update() { 
     setup();
     background("rgba(125,125,125)");
-    $.paused=false;
     // if(mouse.leftReleased){
     //     $.camera.moveTo(mouse.x,mouse.y);
     // }
@@ -104,8 +103,11 @@ function update() {
     $.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
     //"gravity" 
     //yellowShip.velocity.y += 0.9;
+    if($.keys.down("a")){
+        $.paused=true;     
+    }
 
-    if(mouse.leftDown){
+    if(mouse.leftDown){   
         yellowShip.x = mouse.x;
         yellowShip.y = mouse.y;
     }
