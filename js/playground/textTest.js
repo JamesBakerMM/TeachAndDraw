@@ -57,10 +57,10 @@ function update() {
 	$.text.alignment.x = "right";
 	$.text.print(100, 330, "Bottom Right");
 
-	//testing wrapping
+	// //testing wrapping
 	$.text.alignment.x = "center";
-	// $.text.print(450, 250, "Y alignment is bottom, X is center, this is how it wraps", 150);
+	$.text.print(450, 250, "Y alignment is bottom, X is center, this is how it wraps", 150);
 	// $.text.hyphenation = false;
-	$.text.print(400, 500, "Incomprehensible and incalculable monstrocities with antidisestablishmentarianismandevenbiggersonextline it's working?", 100);
+	$.text.print(400, 500, "Incomprehensible and incalculable monstrocities with antidisestablishmentarianismandevenbiggersonextline its working?", 100);
 
 }
