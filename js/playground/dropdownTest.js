@@ -26,8 +26,6 @@ function update() {
 	$.colour.fill = dropdown.value;
 	$.shape.rectangle($.w / 2, $.h / 2, $.w, $.h);
 
-
-
 	dropdown.draw();
 	dropup.draw();
 	dropdownGroup1.draw();
