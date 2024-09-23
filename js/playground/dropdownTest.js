@@ -20,7 +20,7 @@ const dropdown = $.makeDropdown(550, 50, 300, ["transparent", "red", "blue", "gr
 const dropup = $.makeDropdown(550, 550, 300, ["This is a dropup. The arrow indicates whether it opens upwards or downwards", "option 2 :) this is also a longer option, causing truncating", "option 3", "Another option", "Wow! Another option. Cool, cool cool. Love that for me", "Wow, a working dropdown", "Very cool", "actually", "it seems perfectly fine! Excellent"]);
 dropup.openDirection = "up";
 
-const font = $.loadCustomFont("New Font", "fonts/MightySouly-lxggD.ttf");
+const font = $.loadCustomFont("New Font", "fonts/MightySouly-lxggD.tff");
 function update() {
 	$.colour.fill = dropdown.value;
 	$.shape.rectangle($.w / 2, $.h / 2, $.w, $.h);
