@@ -18,7 +18,7 @@ const button = $.makeButton(
     50,
 	"Multiple lined button!"
 )
-const font = $.loadCustomFont("New Font", "fonts/MightySouly-lxggD.ttf");
+const font = $.loadCustomFont("New Font", "fonts/ComicMono.ttf");
 $.text.font = font;
 function update() {
     button.draw();
