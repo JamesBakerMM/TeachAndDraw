@@ -18,7 +18,8 @@ const button = $.makeButton(
     50,
 	"Multiple lined button!"
 )
-
+const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
+$.text.font = font;
 function update() {
     button.draw();
     slider.draw();
@@ -58,7 +59,7 @@ function update() {
 
 	//testing wrapping
 	$.text.alignment.x = "center";
-	// $.text.print(450, 250, "Y alignment is bottom, X is center, this is how it wraps", 150);
+	$.text.print(450, 250, "Y alignment is bottom, X is center, this is how it wraps", 150);
 	// $.text.hyphenation = false;
 	$.text.print(400, 500, "Incomprehensible and incalculable monstrocities with antidisestablishmentarianismandevenbiggersonextline it's working?", 100);
 
