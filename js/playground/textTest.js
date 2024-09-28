@@ -18,11 +18,14 @@ const button = $.makeButton(
     50,
 	"Multiple lined button!"
 )
-const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
-$.text.font = font;
+
+const textArea = $.makeTextArea(400, 200, 300, 150);
+// const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
+// $.text.font = font;
 function update() {
     button.draw();
     slider.draw();
+	textArea.draw();
 	$.text.print(400, 300, "Testing!");
 	$.text.print(400, 250, "Testing with max width!", 100);
 
