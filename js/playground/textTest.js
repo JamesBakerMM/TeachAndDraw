@@ -27,7 +27,7 @@ function update() {
     slider.draw();
 	textArea.draw();
 	$.text.print(400, 300, "Testing!");
-	$.text.print(400, 250, "Testing with max width!", 100);
+	// $.text.print(400, 250, "Testing with max width!", 100);
 
 	$.text.alignment.y = "top";
 	$.text.alignment.x = "left";
@@ -50,7 +50,7 @@ function update() {
 
 	//testing wrapping
 	$.text.alignment.x = "left";
-	$.text.print(450, 150, "Y alignment is center, X is left, this is how it wraps", 150);
+	// $.text.print(450, 150, "Y alignment is center, X is left, this is how it wraps", 150);
 
 	$.text.alignment.y = "bottom";
 	$.text.alignment.x = "left";
@@ -62,7 +62,7 @@ function update() {
 
 	//testing wrapping
 	$.text.alignment.x = "center";
-	$.text.print(450, 250, "Y alignment is bottom, X is center, this is how it wraps", 150);
+	// $.text.print(450, 250, "Y alignment is bottom, X is center, this is how it wraps", 150);
 	// $.text.hyphenation = false;
 	$.text.print(400, 500, "Incomprehensible and incalculable monstrocities with antidisestablishmentarianismandevenbiggersonextline it's working?", 100);
 
