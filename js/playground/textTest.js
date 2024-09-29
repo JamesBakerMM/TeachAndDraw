@@ -29,6 +29,8 @@ function update() {
 	$.text.print(400, 300, "Testing!");
 	// $.text.print(400, 250, "Testing with max width!", 100);
 
+	textArea.value = "Write text here... This is a testing note! Tee hee look at all these letters and lines that we're adding to this text box! Amazing isn't it?";
+
 	$.text.alignment.y = "top";
 	$.text.alignment.x = "left";
 	$.text.print(100, 50, "Top Left");
