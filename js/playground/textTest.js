@@ -22,6 +22,13 @@ const button = $.makeButton(
 const textArea = $.makeTextArea(400, 200, 300, 150);
 // const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
 // $.text.font = font;
+textArea.value = `Write text here...
+	
+This is a testing note! Tee he
+e look at all these letters and lines that we're adding to this text box! 
+
+
+Amazing isn't it? `;
 function update() {
     button.draw();
     slider.draw();
@@ -29,13 +36,6 @@ function update() {
 	$.text.print(400, 300, "Testing!");
 	// $.text.print(400, 250, "Testing with max width!", 100);
 
-	textArea.value = `Write text here... 
-	
-	This is a testing note! Tee he
-	e look at all these letters and lines that we're adding to this text box! 
-	
-	
-	Amazing isn't it?`;
 
 	$.text.alignment.y = "top";
 	$.text.alignment.x = "left";
