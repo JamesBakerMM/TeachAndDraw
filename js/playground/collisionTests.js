@@ -18,29 +18,32 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeCircleCollider(348,300,100,100);
+let yellowShip=$.makeCircleCollider(270,300,100,100);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
 yellowShip.static = false;
 yellowShip.direction=180;
 yellowShip.friction=0;
-yellowShip.speed = 20;
-yellowShip.bounciness = 0;
+yellowShip.speed = 0;
+yellowShip.bounciness = 100;
 yellowShip.rotation = 0;
+//yellowShip.rotationalVelocity = 10;
 squares.push(yellowShip);
 
-let box=$.makeBoxCollider(500,500,400,20);
+let box=$.makeBoxCollider(400,400,400,20);
 box.speed = 0;
 box.direction = 90;
 box.shape = "box";
 box.static = true;
 box.bounciness = 0;
 box.friction= 0;
-box.rotation = 20;
+box.rotation = 0;
 box.mass = 1;
 box.friction = 0;
+box.rotationalVelocity = 3;
 squares.push(box);
 
+/*
 let box2=$.makeBoxCollider(200,500,300,20);
 box2.shape = "box";
 box2.speed=0;
@@ -49,6 +52,7 @@ box2.rotation = 0;
 box2.mass = 1;
 box2.friction = 0;
 squares.push(box2);
+*/
 
 /*
 let rightSquare;
@@ -92,20 +96,27 @@ function setup(){
     }
 }
 
+let flag = 1;
+
 function update() { 
     setup();
     background("rgba(125,125,125)");
-    // if(mouse.leftReleased){
-    //     $.camera.moveTo(mouse.x,mouse.y);
-    // }
+
+    if (flag == 0 && yellowShip.velocity.y > 0) {
+        flag = 1;
+    }
+    if (flag == 1) {
+        //console.log(yellowShip.position.y);
+        flag = 2;
+    }
+    if (flag == 2 && yellowShip.velocity.y < 0) {
+        flag = 0;
+    }
 
     $.colour.fill="black";
     $.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
     //"gravity" 
-    //yellowShip.velocity.y += 0.9;
-    if($.keys.down("a")){
-        $.paused=true;     
-    }
+    //yellowShip.velocity.y += 1;
 
     if(mouse.leftDown){   
         yellowShip.x = mouse.x;
@@ -153,7 +164,7 @@ function update() {
     squares.collides(squares);
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
-            yellowShip.velocity.y += 0.9;
+        //sq.velocity.y += 1;
         
         if(sq.x>$.width){
             sq.x=$.width-1;
