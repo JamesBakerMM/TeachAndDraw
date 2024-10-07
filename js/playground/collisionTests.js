@@ -18,7 +18,7 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeBoxCollider(370,300,100,100);
+let yellowShip=$.makeCircleCollider(270,300,100,100);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
 yellowShip.static = false;
@@ -30,7 +30,7 @@ yellowShip.rotation = 0;
 //yellowShip.rotationalVelocity = 10;
 squares.push(yellowShip);
 
-let box=$.makeBoxCollider(500,500,400,20);
+let box=$.makeBoxCollider(400,400,400,20);
 box.speed = 0;
 box.direction = 90;
 box.shape = "box";
@@ -40,6 +40,7 @@ box.friction= 0;
 box.rotation = 0;
 box.mass = 1;
 box.friction = 0;
+box.rotationalVelocity = 3;
 squares.push(box);
 
 /*
@@ -115,7 +116,7 @@ function update() {
     $.colour.fill="black";
     $.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
     //"gravity" 
-    yellowShip.velocity.y += 1;
+    //yellowShip.velocity.y += 1;
 
     if(mouse.leftDown){   
         yellowShip.x = mouse.x;
