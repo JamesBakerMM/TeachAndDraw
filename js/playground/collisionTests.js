@@ -105,7 +105,7 @@ function update() {
         flag = 1;
     }
     if (flag == 1) {
-        console.log(yellowShip.position.y);
+        //console.log(yellowShip.position.y);
         flag = 2;
     }
     if (flag == 2 && yellowShip.velocity.y < 0) {
