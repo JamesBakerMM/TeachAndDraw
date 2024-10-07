@@ -1,5 +1,6 @@
 import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
 import { Paint } from "../../lib/Paint.js";
+import { Velocity } from "../../lib/Velocity.js";
 
 $.use(update);
 $.debug=true;
@@ -18,7 +19,7 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeCircleCollider(270,300,100,100);
+let yellowShip=$.makeCircleCollider(570,300,100,100);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
 yellowShip.static = false;
@@ -28,19 +29,21 @@ yellowShip.speed = 0;
 yellowShip.bounciness = 100;
 yellowShip.rotation = 0;
 //yellowShip.rotationalVelocity = 10;
+yellowShip.velocity = new Velocity(0, 10);
 squares.push(yellowShip);
 
 let box=$.makeBoxCollider(400,400,400,20);
 box.speed = 0;
 box.direction = 90;
 box.shape = "box";
-box.static = true;
-box.bounciness = 0;
+box.static = false;
+box.bounciness = 100;
 box.friction= 0;
 box.rotation = 0;
 box.mass = 1;
 box.friction = 0;
-box.rotationalVelocity = 3;
+//box.velocity = new Velocity(0, -10);
+//box.rotationalVelocity = 10;
 squares.push(box);
 
 /*
