@@ -23,11 +23,9 @@ const textArea = $.makeTextArea(400, 200, 300, 150);
 // const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
 // $.text.font = font;
 textArea.value = `Write text here... 
-This is a testing note! Tee he
-e look at all these letters and lines that we're adding to this text box! 
+Amazing isn't it? hi
 
-
-Amazing isn't it? `;
+Another testing lines df aerge rg wer gw erg er gw erg wer gwe rg er g werg we rg werg we rg werg`;
 function update() {
     button.draw();
     slider.draw();
