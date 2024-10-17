@@ -22,7 +22,7 @@ const button = $.makeButton(
 const textArea = $.makeTextArea(400, 200, 300, 150);
 // const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
 // $.text.font = font;
-textArea.value = `Write text here... 
+textArea.value = `Write text here...!
 Amazing isn't it? hi
 
 Another testing lines df aerge rg wer gw erg er gw erg wer gwe rg er g werg we rg werg we rg werg`;
