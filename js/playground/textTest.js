@@ -22,7 +22,7 @@ const button = $.makeButton(
 const textArea = $.makeTextArea(400, 200, 300, 150);
 // const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
 // $.text.font = font;
-textArea.value = `Write your great message here... This is longer than the ending!`;
+textArea.value = `Write your great message here... Thisislonger than the ending!`;
 function update() {
     button.draw();
     slider.draw();
