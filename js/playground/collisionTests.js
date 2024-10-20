@@ -19,7 +19,7 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-let yellowShip=$.makeCircleCollider(570,300,100,100);
+let yellowShip=$.makeCircleCollider(370,300,100,100);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
 yellowShip.static = false;
@@ -29,20 +29,18 @@ yellowShip.speed = 0;
 yellowShip.bounciness = 100;
 yellowShip.rotation = 0;
 //yellowShip.rotationalVelocity = 10;
-yellowShip.velocity = new Velocity(0, 10);
+//yellowShip.velocity = new Velocity(0, 10);
 squares.push(yellowShip);
 
 let box=$.makeBoxCollider(400,400,400,20);
 box.speed = 0;
 box.direction = 90;
-box.shape = "box";
-box.static = false;
-box.bounciness = 100;
-box.friction= 0;
-box.rotation = 0;
+box.static = true;
+box.bounciness = 0;
+box.friction= 100;
+box.rotation = 20;
 box.mass = 1;
-box.friction = 0;
-//box.velocity = new Velocity(0, -10);
+box.velocity = new Velocity(0, -0);
 //box.rotationalVelocity = 10;
 squares.push(box);
 
@@ -105,21 +103,8 @@ function update() {
     setup();
     background("rgba(125,125,125)");
 
-    if (flag == 0 && yellowShip.velocity.y > 0) {
-        flag = 1;
-    }
-    if (flag == 1) {
-        //console.log(yellowShip.position.y);
-        flag = 2;
-    }
-    if (flag == 2 && yellowShip.velocity.y < 0) {
-        flag = 0;
-    }
-
     $.colour.fill="black";
     $.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
-    //"gravity" 
-    //yellowShip.velocity.y += 1;
 
     if(mouse.leftDown){   
         yellowShip.x = mouse.x;
@@ -165,9 +150,11 @@ function update() {
     //     leftSquare.velocity.y=-leftSquare.velocity.y
     // }
     squares.collides(squares);
+
+    yellowShip.velocity.y += 1;
+
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
-        //sq.velocity.y += 1;
         
         if(sq.x>$.width){
             sq.x=$.width-1;
