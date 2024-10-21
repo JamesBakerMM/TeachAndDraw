@@ -3,7 +3,7 @@ import { Paint } from "../../lib/Paint.js";
 import { Velocity } from "../../lib/Velocity.js";
 
 $.use(update);
-$.debug=true;
+$.debug=false;
 let squares = $.makeGroup();
 let ships = $.makeGroup();
 
@@ -19,6 +19,7 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
+/*
 let yellowShip=$.makeCircleCollider(370,300,100,100);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
@@ -29,18 +30,20 @@ yellowShip.speed = 0;
 yellowShip.bounciness = 100;
 yellowShip.rotation = 0;
 //yellowShip.rotationalVelocity = 10;
-//yellowShip.velocity = new Velocity(0, 10);
+yellowShip.velocity = new Velocity(0, 10);
 squares.push(yellowShip);
+*/
 
-let box=$.makeBoxCollider(400,400,400,20);
+let box=$.makeBoxCollider(400,400,400,50);
 box.speed = 0;
 box.direction = 90;
 box.static = true;
 box.bounciness = 0;
-box.friction= 100;
-box.rotation = 20;
+box.friction= 0;
+box.rotation = 0;
 box.mass = 1;
-box.velocity = new Velocity(0, -0);
+box.rotation = 90;
+box.velocity = new Velocity(10, -0);
 //box.rotationalVelocity = 10;
 squares.push(box);
 
@@ -55,19 +58,19 @@ box2.friction = 0;
 squares.push(box2);
 */
 
-/*
+
 let rightSquare;
-for (let i = 100; i < 800; i += 10) {
-    for (let j = 100; j < 600; j += 10) {
-        rightSquare=$.makeCircleCollider(i,j, 5, 5);
+for (let i = 100; i < 800; i += 100) {
+    for (let j = 100; j < 600; j += 100) {
+        rightSquare=$.makeCircleCollider(i,j, 50, 50);
         rightSquare.mass = 1;
         rightSquare.friction = 0;
-        rightSquare.bounciness = 30;
+        rightSquare.bounciness = 0;
         //rightSquare.asset=img;
         squares.push(rightSquare);
     }
 }
-*/
+
 
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
@@ -151,10 +154,15 @@ function update() {
     // }
     squares.collides(squares);
 
-    yellowShip.velocity.y += 1;
+    //yellowShip.velocity.y += 1;
 
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
+        if (sq.shape == "circle") 
+        {
+            sq.velocity.y += 1;
+        }
+        
         
         if(sq.x>$.width){
             sq.x=$.width-1;
