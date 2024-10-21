@@ -29,7 +29,7 @@ function update() {
 	textArea.draw();
 	$.text.print(400, 300, "Testing!");
 	// $.text.print(400, 250, "Testing with max width!", 100);
-
+	textArea.characterLimit = 10;
 
 	$.text.alignment.y = "top";
 	$.text.alignment.x = "left";
