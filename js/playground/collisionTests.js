@@ -19,22 +19,22 @@ redShip.friction=0.5;
 redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
-/*
-let yellowShip=$.makeCircleCollider(370,300,100,100);
+
+let yellowShip=$.makeCircleCollider(170,200,100,100);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
 yellowShip.static = false;
 yellowShip.direction=180;
 yellowShip.friction=0;
 yellowShip.speed = 0;
-yellowShip.bounciness = 100;
+yellowShip.bounciness = 0;
 yellowShip.rotation = 0;
 //yellowShip.rotationalVelocity = 10;
-yellowShip.velocity = new Velocity(0, 10);
+//yellowShip.velocity = new Velocity(0, 10);
 squares.push(yellowShip);
-*/
 
-let box=$.makeBoxCollider(400,400,400,50);
+
+let box=$.makeBoxCollider(200,400,400,50);
 box.speed = 0;
 box.direction = 90;
 box.static = true;
@@ -42,13 +42,13 @@ box.bounciness = 0;
 box.friction= 0;
 box.rotation = 0;
 box.mass = 1;
-box.rotation = 90;
-box.velocity = new Velocity(10, -0);
-//box.rotationalVelocity = 10;
+box.rotation = 20;
+//box.velocity = new Velocity(-10, -0);
+box.rotationalVelocity = 10;
 squares.push(box);
 
 /*
-let box2=$.makeBoxCollider(200,500,300,20);
+let box2=$.makeBoxCollider(200,400,400,50);
 box2.shape = "box";
 box2.speed=0;
 box2.static = true;
@@ -58,14 +58,13 @@ box2.friction = 0;
 squares.push(box2);
 */
 
-
 let rightSquare;
-for (let i = 100; i < 800; i += 100) {
-    for (let j = 100; j < 600; j += 100) {
-        rightSquare=$.makeCircleCollider(i,j, 50, 50);
+for (let i = 100; i < 700; i += 10) {
+    for (let j = 100; j < 600; j += 10) {
+        rightSquare=$.makeCircleCollider(i,j, 5, 5);
         rightSquare.mass = 1;
-        rightSquare.friction = 0;
-        rightSquare.bounciness = 0;
+        rightSquare.friction = 10;
+        rightSquare.bounciness = 10;
         //rightSquare.asset=img;
         squares.push(rightSquare);
     }
@@ -127,24 +126,12 @@ function update() {
     if(keys.down("rightarrow")){
         yellowShip.velocity.x +=4;
     } 
+    
     shape.polygon(
         $.w/2-75,100,
         $.w/2,200,
         $.w/2+75,100,
     );
-    
-    if(keys.down("a")){
-        $.camera.x-=10
-    }
-    if(keys.down("d")){
-        $.camera.x+=10
-    }
-    if(keys.down("w")){
-        $.camera.y-=10
-    }
-    if(keys.down("s")){
-        $.camera.y+=10
-    }
 
     // if(leftSquare.x>$.width || leftSquare.x<0){
     //     leftSquare.velocity.x=-leftSquare.velocity.x
@@ -158,7 +145,7 @@ function update() {
 
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
-        if (sq.shape == "circle") 
+        if (sq.shape == "circle")
         {
             sq.velocity.y += 1;
         }
