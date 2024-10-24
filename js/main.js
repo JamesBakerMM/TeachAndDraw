@@ -35,9 +35,9 @@ let anim3=q.loadAnimation(
 //end load animations
 
 //load assets
-let img = q.loadImageToStamp(mouse.x, mouse.y, "../images/sample.png");
+let img = q.loadImage(mouse.x, mouse.y, "../images/sample.png");
 
-let img2 = q.loadImageToStamp(p.w / 2, q.h / 2, "../images/sample2.png");
+let img2 = q.loadImage(p.w / 2, q.h / 2, "../images/sample2.png");
 let text = q.loadTextFile("../data/hello.txt");
 let j = q.loadJsonFile("../data/jason.json");
 //end load assets

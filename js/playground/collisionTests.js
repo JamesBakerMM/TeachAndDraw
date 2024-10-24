@@ -8,7 +8,7 @@ let squares = $.makeGroup();
 let ships = $.makeGroup();
 
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
-let img=$.loadImageToStamp(0,0,"./images/fac0_refinery.png");
+let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 /*
 let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
 redShip.speed=10;

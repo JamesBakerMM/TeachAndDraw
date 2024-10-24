@@ -3,7 +3,7 @@ $.use(update);
 
 const sampleSound = $.loadSound("../../data/test.mp3");
 const jason = $.loadJsonFile("../../data/jason.json");
-const dominance = $.loadImageToStamp($.w/2,$.h/2,"../../images/tpose.png");
+const dominance = $.loadImage($.w/2,$.h/2,"../../images/tpose.png");
 const me = $.makeCircleCollider(100,$.h/2,50);
 
 const pillars = $.makeGroup();
