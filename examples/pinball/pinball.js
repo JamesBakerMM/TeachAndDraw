@@ -217,7 +217,7 @@ ball.asset = img_ball;
 balls.push(ball);
 
 //Control variables
-const maxBallSpeed = 200;
+const maxBallSpeed = 150;
 const flipperSpeed = 60;
 
 let score = 0;
