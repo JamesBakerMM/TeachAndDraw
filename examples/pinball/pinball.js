@@ -5,199 +5,81 @@ $.use(update);
 $.debug=false;
 
 //Make the groups
-let walls = $.makeGroup();
-let pegs = $.makeGroup();
-let pins = $.makeGroup();
-let balls = $.makeGroup();
+const walls = $.makeGroup();
+const pegs = $.makeGroup();
+const pins = $.makeGroup();
+const balls = $.makeGroup();
 
 //load all the images
-let img_peg=$.loadImage(0,0,"./images/peg.png");
-let img_peg2=$.loadImage(0,0,"./images/peg2.png");
-let img_pin=$.loadImage(0,0,"./images/pin.png");
-let img_pin2=$.loadImage(0,0,"./images/pin2.png");
-let img_ball=$.loadImage(0,0,"./images/ball.png");
-let img_wall=$.loadImage(0,0,"./images/bucket_wall.png");
-let img_wall_side=$.loadImage(0,0,"./images/side_wall.png");
-let img_wall_thin=$.loadImage(0,0,"./images/side_wall_thin.png");
-let img_floor=$.loadImage(0,0,"./images/bucket_floor.png");
-let img_arrows=$.loadImage(0,0,"./images/arrows.png");
-let img_flipperL=$.loadImage(0,0,"./images/flipperL.png");
-let img_flipperR=$.loadImage(0,0,"./images/flipperR.png");
-let img_background=$.loadImage(0,0,"./images/background.png");
-let img_sweeper=$.loadImage(0,0,"./images/sweeper.png");
+const img_peg=$.loadImage(0,0,"./images/peg.png");
+const img_peg2=$.loadImage(0,0,"./images/peg2.png");
+const img_pin=$.loadImage(0,0,"./images/pin.png");
+const img_pin2=$.loadImage(0,0,"./images/pin2.png");
+const img_ball=$.loadImage(0,0,"./images/ball.png");
+const img_wall=$.loadImage(0,0,"./images/bucket_wall.png");
+const img_wall_side=$.loadImage(0,0,"./images/side_wall.png");
+const img_wall_thin=$.loadImage(0,0,"./images/side_wall_thin.png");
+const img_floor=$.loadImage(0,0,"./images/bucket_floor.png");
+const img_arrows=$.loadImage(0,0,"./images/arrows.png");
+const img_flipperL=$.loadImage(0,0,"./images/flipperL.png");
+const img_flipperR=$.loadImage(0,0,"./images/flipperR.png");
+const img_background=$.loadImage(0,0,"./images/background.png");
+const img_sweeper=$.loadImage(0,0,"./images/sweeper.png");
 
 //load the text font
 const font = $.loadCustomFont("Comic Mono", "../../fonts/ComicMono.ttf");
 
-//Set up the table
-let background=$.makeBoxCollider(250,400,500,800);
-background.static = true;
-background.asset = img_background;
+let arrows= makeStaticAssetBox(460,700,40,220,img_arrows);
 
-let arrows=$.makeBoxCollider(460,700,40,220);
-arrows.static = true;
-arrows.asset = img_arrows;
+//walls
 
-let left_Wall=$.makeBoxCollider(0,400,40,800);
-left_Wall.static = true;
-left_Wall.asset = img_wall_side;
-walls.push(left_Wall);
+//left wall
+walls.push(makeStaticAssetBox(0,400,40,800,img_wall_side));
+//right wall
+walls.push(makeStaticAssetBox(500,400,40,800,img_wall_side));
+//right wall thing
+walls.push(makeStaticAssetBox(430,600,20,800,img_wall_thin));
 
-let right_Wall=$.makeBoxCollider(500,400,40,800);
-right_Wall.static = true;
-right_Wall.asset = img_wall_side;
-walls.push(right_Wall);
+walls.push(makeSweeper(100,410,-10));
+walls.push(makeSweeper(340,330,10));
 
-let right_Wall_thin=$.makeBoxCollider(430,600,20,800);
-right_Wall_thin.static = true;
-right_Wall_thin.asset = img_wall_thin;
-walls.push(right_Wall_thin);
-
-let sweeper=$.makeBoxCollider(100,410,150,16);
-sweeper.static = true;
-sweeper.asset = img_sweeper;
-sweeper.friction = 0;
-sweeper.rotationalVelocity = -10;
-walls.push(sweeper);
-
-let sweeper2=$.makeBoxCollider(340,330,150,16);
-sweeper2.static = true;
-sweeper2.asset = img_sweeper;
-sweeper2.friction = 0;
-sweeper2.rotationalVelocity = 10;
-walls.push(sweeper2);
-
-let floor=$.makeBoxCollider(300,800,600,40);
-floor.static = true;
-floor.asset = img_floor;
+let floor=makeStaticAssetBox(300,800,600,40,img_floor);
 walls.push(floor);
 
-let ceiling=$.makeBoxCollider(300,0,600,40);
-ceiling.static = true;
-ceiling.asset = img_floor;
-walls.push(ceiling);
+//ceiling
+walls.push(makeStaticAssetBox(300,0,600,40,img_floor));
 
-let curve1=$.makeBoxCollider(25,110,20,80);
-curve1.static = true;
-curve1.asset = img_wall;
-curve1.asset = img_wall;
-curve1.rotation = 22.5;
-walls.push(curve1);
+//curved box at top
+walls.push(makeCurveBox(25,110,22.5))
+walls.push(makeCurveBox(60,60,45))
+walls.push(makeCurveBox(110,25,67.5))
+walls.push(makeCurveBox(475,110,-22.5))
+walls.push(makeCurveBox(440,60,-45))
+walls.push(makeCurveBox(390,25,-67.5))
 
-let curve2=$.makeBoxCollider(60,60,20,80);
-curve2.static = true;
-curve2.asset = img_wall;
-curve2.rotation = 45;
-walls.push(curve2);
+//right slides
+walls.push(makeSlide(405,650,40));
+walls.push(makeSlide(350,550,0));
 
-let curve3=$.makeBoxCollider(110,25,20,80);
-curve3.static = true;
-curve3.asset = img_wall;
-curve3.rotation = 67.5;
-walls.push(curve3);
+//left slides
+walls.push(makeSlide(35,650,-40));
+walls.push(makeSlide(90,550,0));
 
-let curve4=$.makeBoxCollider(475,110,20,80);
-curve4.static = true;
-curve4.asset = img_wall;
-curve4.asset = img_wall;
-curve4.rotation = -22.5;
-walls.push(curve4);
+//make pegs
+pegs.push(makePeg(350,500));
+pegs.push(makePeg(350,600));
+pegs.push(makePeg(90,500));
+pegs.push(makePeg(90,600))
+pegs.push(makePeg(125,50));
+pegs.push(makePeg(75,80));
+pegs.push(makePeg(45,130));
+pegs.push(makePeg(430,190));
 
-let curve5=$.makeBoxCollider(440,60,20,80);
-curve5.static = true;
-curve5.asset = img_wall;
-curve5.rotation = -45;
-walls.push(curve5);
-
-let curve6=$.makeBoxCollider(390,25,20,80);
-curve6.static = true;
-curve6.asset = img_wall;
-curve6.rotation = -67.5;
-walls.push(curve6);
-
-let slideR=$.makeBoxCollider(405,650,20,80);
-slideR.static = true;
-slideR.asset = img_wall;
-slideR.rotation = 40;
-walls.push(slideR);
-
-let slideR2=$.makeBoxCollider(350,550,20,80);
-slideR2.static = true;
-slideR2.asset = img_wall;
-slideR2.rotation = 0;
-walls.push(slideR2);
-
-let peg1=$.makeCircleCollider(350,500,30,30);
-peg1.static = true;
-peg1.asset = img_peg;
-pegs.push(peg1);
-
-let peg7=$.makeCircleCollider(350,600,30,30);
-peg7.static = true;
-peg7.asset = img_peg;
-pegs.push(peg7);
-
-let slideL=$.makeBoxCollider(35,650,20,80);
-slideL.static = true;
-slideL.asset = img_wall;
-slideL.rotation = -40;
-walls.push(slideL);
-
-let slideL2=$.makeBoxCollider(90,550,20,80);
-slideL2.static = true;
-slideL2.asset = img_wall;
-slideL2.rotation = 0;
-walls.push(slideL2);
-
-let peg2=$.makeCircleCollider(90,500,30,30);
-peg2.static = true;
-peg2.asset = img_peg;
-pegs.push(peg2);
-
-let peg8=$.makeCircleCollider(90,600,30,30);
-peg8.static = true;
-peg8.asset = img_peg;
-pegs.push(peg8);
-
-let peg3=$.makeCircleCollider(125,50,30,30);
-peg3.static = true;
-peg3.asset = img_peg;
-pegs.push(peg3);
-
-let peg4=$.makeCircleCollider(75,80,30,30);
-peg4.static = true;
-peg4.asset = img_peg;
-pegs.push(peg4);
-
-let peg5=$.makeCircleCollider(45,130,30,30);
-peg5.static = true;
-peg5.asset = img_peg;
-pegs.push(peg5);
-
-let peg6=$.makeCircleCollider(430,190,20,20);
-peg6.static = true;
-peg6.asset = img_peg;
-pegs.push(peg6);
-
-let pin1=$.makeCircleCollider(225,100,50,50);
-pin1.static = true;
-pin1.asset = img_pin;
-pins.push(pin1);
-
-let pin2=$.makeCircleCollider(125,200,50,50);
-pin2.static = true;
-pin2.asset = img_pin;
-pins.push(pin2);
-
-let pin3=$.makeCircleCollider(325,200,50,50);
-pin3.static = true;
-pin3.asset = img_pin;
-pins.push(pin3);
-
-let pin4=$.makeCircleCollider(125,300,50,50);
-pin4.static = true;
-pin4.asset = img_pin;
-pins.push(pin4);
+//make pins
+pins.push(makePin(225,100));
+pins.push(makePin(125,200));
+pins.push(makePin(325,200));
+pins.push(makePin(125,300));
 
 let flipper_left=$.makeBoxCollider(50,680,280,30);
 flipper_left.static = true;
@@ -227,8 +109,8 @@ let moveFlipperUp = false;
 
 let respawning = 0;
 let respawnTime = 60;
-
 function update() {
+    img_background.draw();
     //Set screen size
     $.w=500;
     $.h=800;
@@ -248,7 +130,7 @@ function update() {
     //handle respawning if lost
     if (respawning > 0) {
         respawning -= 1;
-        if (respawning == 0) {
+        if (respawning === 0) {
             score = 0;
             ball.x = 450;
             ball.y = 700;
@@ -282,9 +164,9 @@ function update() {
         }
 
         //launch ball upwards if it touches a flipper
-        let result1 = ball.collides(flipper_left);
-        let result2 = ball.collides(flipper_right);
-        if(keys.down(" ") && (result1 || result2)){
+        const hitLeft = ball.collides(flipper_left);
+        const hitRight = ball.collides(flipper_right);
+        if(keys.down(" ") && (hitLeft || hitRight)){
             ball.velocity.y = Math.abs(ball.velocity.y) * -1.3;
         }
     }
@@ -384,4 +266,50 @@ function update() {
     }
 
     $.drawColliders();
+}
+
+function makeStaticAssetBox(x,y,w,h,asset){
+    const temp = $.makeBoxCollider(x,y,w,h);
+    temp.static = true;
+    temp.asset = asset;
+    return temp;
+}
+
+function makePeg(x,y){
+    const temp = $.makeCircleCollider(x,y,30,30);
+    temp.static = true;
+    temp.asset = img_peg;
+    return temp;
+}
+
+function makePin(x,y){
+    const temp = $.makeCircleCollider(x,y,50,50);
+    temp.static = true;
+    temp.asset = img_pin;
+    return temp;
+}
+
+function makeCurveBox(x,y,rotation){
+    const temp = $.makeBoxCollider(x,y,20,80)
+    temp.rotation = rotation
+    temp.static = true;
+    temp.asset = img_wall
+    return temp
+}
+
+function makeSweeper(x,y,rotationalVelocity){
+    const temp = $.makeBoxCollider(x,y,150,16);
+    temp.asset = img_sweeper;
+    temp.static = true;
+    temp.friction = 0;
+    temp.rotationalVelocity = rotationalVelocity;
+    return temp
+}
+
+function makeSlide(x,y,rotation){
+    const temp = $.makeBoxCollider(x,y,20,80);
+    temp.static = true;
+    temp.asset = img_wall;
+    temp.rotation = rotation;
+    return temp;
 }
