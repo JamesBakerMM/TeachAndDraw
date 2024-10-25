@@ -14,7 +14,7 @@ let balls = $.makeGroup(); //Kinematic balls
 let bars = $.makeGroup(); //Static Box Colliders
 
 
-let img=$.loadImageToStamp(0,0,"./images/fac0_refinery.png");
+let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 
 //border bars_______________
 let collideBarShort=$.makeBoxCollider(800, 750, 500, 25);

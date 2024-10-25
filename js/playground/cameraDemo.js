@@ -3,7 +3,7 @@ $.use(update);
 
 $.debug = true;
 
-const demoImage=$.loadImageToStamp(20,20,"../../images/tpose.png");
+const demoImage=$.loadImage(20,20,"../../images/tpose.png");
 demoImage.movedByCamera=false;
 
 function update(){

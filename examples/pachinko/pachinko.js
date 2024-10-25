@@ -9,16 +9,16 @@ let pegs = $.makeGroup();
 let balls = $.makeGroup();
 
 //load all the images
-let img_peg=$.loadImageToStamp(0,0,"./images/peg.png");
-let img_peg2=$.loadImageToStamp(0,0,"./images/peg2.png");
-let img_ball=$.loadImageToStamp(0,0,"./images/ball.png");
-let img_wall=$.loadImageToStamp(0,0,"./images/bucket_wall.png");
-let img_wall_side=$.loadImageToStamp(0,0,"./images/side_wall.png");
-let img_floor=$.loadImageToStamp(0,0,"./images/bucket_floor.png");
+let img_peg=$.loadImage(0,0,"./images/peg.png");
+let img_peg2=$.loadImage(0,0,"./images/peg2.png");
+let img_ball=$.loadImage(0,0,"./images/ball.png");
+let img_wall=$.loadImage(0,0,"./images/bucket_wall.png");
+let img_wall_side=$.loadImage(0,0,"./images/side_wall.png");
+let img_floor=$.loadImage(0,0,"./images/bucket_floor.png");
 
-let img_10=$.loadImageToStamp(0,0,"./images/points_10.png");
-let img_50=$.loadImageToStamp(0,0,"./images/points_50.png");
-let img_100=$.loadImageToStamp(0,0,"./images/points_100.png");
+let img_10=$.loadImage(0,0,"./images/points_10.png");
+let img_50=$.loadImage(0,0,"./images/points_50.png");
+let img_100=$.loadImage(0,0,"./images/points_100.png");
 
 //load the text font
 const font = $.loadCustomFont("Comic Mono", "../../fonts/ComicMono.ttf");
