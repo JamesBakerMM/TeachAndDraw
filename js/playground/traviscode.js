@@ -14,7 +14,7 @@ let balls = $.makeGroup(); //Kinematic balls
 let bars = $.makeGroup(); //Static Box Colliders
 
 
-let img=$.loadImageToStamp(0,0,"./images/fac0_refinery.png");
+let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 
 //border bars_______________
 let collideBarShort=$.makeBoxCollider(800, 750, 500, 25);
@@ -39,7 +39,7 @@ function createBall(xPos, yPos, size) {
     let randomXVel = $.math.random(-15,15); //Introduce some random spread
     ball.velocity.x += randomXVel;
     ball.direction = 180; 
-    ball.bounciness = 1; // low bounciness
+    ball.bounciness = 100; // low bounciness
     ball.friction = 1;
     ball.fill = "rgb(255,255,255)";
     //ball.collides(pegs);
@@ -86,7 +86,7 @@ function createPeg(xPos, yPos, size){
     peg.static = true;
     peg.fill = "rgb(77,77,77)";
     peg.friction = -1;
-    peg.bounciness = 1;
+    peg.bounciness = 100;
     pegs.push(peg)
 }
 
