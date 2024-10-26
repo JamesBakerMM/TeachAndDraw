@@ -22,14 +22,14 @@ const button = $.makeButton(
 const textArea = $.makeTextArea(400, 200, 300, 150);
 // const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
 // $.text.font = font;
-textArea.value = `Write your great mes`;
+textArea.value = `Write your great message here... Thisislonger than the ending!`;
 function update() {
     button.draw();
     slider.draw();
 	textArea.draw();
 	$.text.print(400, 300, "Testing!");
 	// $.text.print(400, 250, "Testing with max width!", 100);
-	textArea.characterLimit = 100;
+	textArea.characterLimit = 300;
 
 	$.text.alignment.y = "top";
 	$.text.alignment.x = "left";
