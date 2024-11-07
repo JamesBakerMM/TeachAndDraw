@@ -10,6 +10,9 @@ function draw() {
 
     $.shape.rotation = theta;
 
+    $.shape.alignment.x = "left";
+    $.shape.alignment.y = "bottom";
+
     $.colour.fill = "white";
     $.shape.rectangle(100, 100, 100, 50);
     $.shape.roundedRectangle(300, 100, 100, 50, 16);
