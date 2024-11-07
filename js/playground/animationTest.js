@@ -1,30 +1,75 @@
 import { $ } from "../../lib/Pen.js"
 
-$.w = 1024;
-$.h = 1024;
 $.use(draw);
+$.width  = 816;
+$.height = 900;
 
-let anim;
+let anims = [];
 
 function preload() {
     const paths = [];
 
     for (let i=0; i<=9; i++)
     {
-        paths.push(`images/explosion01/explosion01-${i}.png`);
+        paths.push(`images/explosion/explosion${i}.png`);
     }
 
-    anim = $.loadAnimation(256, 256, ...paths);
-}
+    for (let i=0; i<8; i++)
+    {
+        const A = $.loadAnimation(0, 0, ...paths);
+        A.scale = 200;
+        A.looping = true;
+        A.duration = (i + 1.0) * 0.5;
 
+        A.x = 128 + i * ($.width/4);
+        A.y = 64;
+
+        if (i >= 4)
+        {
+            A.x -= 4 * ($.width/4);
+            A.y += 128+64;
+        }
+
+        anims.push(A);
+    }
+
+    for (let i=0; i<8; i++)
+    {
+        const A = $.loadAnimation(0, 0, ...paths);
+        A.scale = 200;
+        A.looping = false;
+        A.duration = (i + 1.0) * 0.5;
+
+        A.x = 128 + i * ($.width/4);
+        A.y = 64 + 2*(128+64) + 64;
+
+        if (i >= 4)
+        {
+            A.x -= 4 * ($.width/4);
+            A.y += 128+64;
+        }
+
+        anims.push(A);
+    }
+    
+}
 
 preload();
 
 
 function draw() {
 
-    anim.x = $.mouse.x;
-    anim.y = $.mouse.y;
+    $.text.alignment.y = "top";
+    $.text.alignment.x = "left";
 
-    anim.draw();
+    for (let i=0; i<16; i++)
+    {
+        const A = anims[i];
+
+        A.draw();
+
+        $.text.print(A.x-50, A.y+50, `duration = ${A.duration}`);
+        $.text.print(A.x-50, A.y+70, `looping = ${A.looping}`);
+        $.text.print(A.x-50, A.y+90, `playing = ${A.playing}`);
+    }
 }
