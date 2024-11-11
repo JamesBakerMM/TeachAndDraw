@@ -57,10 +57,9 @@ function preload() {
 preload();
 
 
+
 let collider = $.makeCircleCollider($.width/2, $.height/2, 100, 100);
 collider.asset = anims[0];
-
-
 function draw() {
 
     $.text.alignment.y = "top";
@@ -76,7 +75,6 @@ function draw() {
         $.text.print(A.x-50, A.y+70, `looping = ${A.looping}`);
         $.text.print(A.x-50, A.y+90, `playing = ${A.playing}`);
     }
-
-
     $.drawColliders();
+
 }
