@@ -30,4 +30,5 @@ function draw() {
 
     A.draw();
     B.draw();
+    C.draw();
 }
