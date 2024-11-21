@@ -65,6 +65,8 @@ function draw() {
     $.text.alignment.y = "top";
     $.text.alignment.x = "left";
 
+    // anims[0].duration -= 0.001;
+
     for (let i=0; i<16; i++)
     {
         const A = anims[i];
