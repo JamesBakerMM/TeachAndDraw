@@ -18,7 +18,7 @@ function preload() {
     // Animations
     {
         A = $.loadAnimation(100, 100, ...paths);
-        A.duration = 0.5;
+        A.duration = 1.5;
         A.scale = 200;
         A.looping = true;
 
@@ -49,8 +49,13 @@ function preload() {
 preload();
 
 
+let theta = 0.0;
+
 function draw() {
 
+    A.offset.x = 32;
+    A.offset.y = 32;
+    A.rotation = theta;
     A.draw();
     B.draw();
     C.draw();
@@ -58,4 +63,6 @@ function draw() {
     D.draw();
     E.draw();
     F.draw();
+
+    theta += 1;
 }
