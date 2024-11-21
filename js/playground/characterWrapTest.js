@@ -6,6 +6,6 @@ $.height = 800;
 
 function draw()
 {
-    $.text.print($.w/2, $.h/2, 'ABCDEFG', 10);
+    $.text.print($.w/2, $.h/2, 'ABCDE', 32);
 }
 
