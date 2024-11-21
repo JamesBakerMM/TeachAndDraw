@@ -12,6 +12,8 @@ function update() {
 	textArea.draw();
 	textArea.characterLimit = 300;
 
-
+	$.keys.activeBuffer._forEach((event) => {
+		console.log(event);
+	});
 
 }
