@@ -2,18 +2,16 @@ import { $ } from "../../lib/Pen.js";
 // $.debug = true;
 
 $.use(update);
+$.width  = 512;
+$.height = 512;
 
 
-const textArea = $.makeTextArea(400, 200, 300, 150);
+const textArea = $.makeTextArea(256, 256, 300, 300);
 textArea.value = `Write your great message here...`;
 
 function update() {
 
 	textArea.draw();
 	textArea.characterLimit = 300;
-
-	$.keys.activeBuffer._forEach((event) => {
-		console.log(event);
-	});
 
 }
