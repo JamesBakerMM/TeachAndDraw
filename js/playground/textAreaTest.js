@@ -18,8 +18,10 @@ function update() {
 	$.text.print(0, 40,  "- ctl + C");
 	$.text.print(0, 60,  "- ctl + X");
 	$.text.print(0, 80,  "- ctl + V");
-	$.text.print(0, 100, "- ctl + backspace");
-	$.text.print(0, 120, "- ctl + left/right");
+	$.text.print(0, 100, "- ctl + Z");
+	$.text.print(0, 120, "- ctl + shift + Z");
+	$.text.print(0, 140, "- ctl + backspace");
+	$.text.print(0, 160, "- ctl + left/right");
 
 	$.text.print(175, 20, "- shift + left/right");
 	$.text.print(175, 40, "- shift + home/end");
