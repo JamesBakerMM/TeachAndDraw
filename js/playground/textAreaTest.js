@@ -28,7 +28,6 @@ function update() {
 
 	$.text.print(350, 20,  "- home/end");
 
-
 	textArea.draw();
 	textArea.characterLimit = 300;
 
