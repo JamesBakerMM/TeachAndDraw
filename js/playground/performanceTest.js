@@ -5,10 +5,6 @@ import { MetricBase } from "../../lib/PerformanceMetrics.js";
 // Example performance metric
 // -------------------------------------------------
 class MetricTest extends MetricBase {
-
-    /**
-     * @returns {{date: Date, data: number}}
-     */
     takeMeasurements() {
         return {date: new Date(), data: $.math.random(0, 100)};
     };
@@ -46,6 +42,13 @@ $.width  = 512;
 $.height = 512;
 
 
-function update() {
+let count = 0;
 
+function update() {
+    if (count >= 2048) {
+        $.performanceMetrics.printMeasurements();
+        $.performanceMetrics.printTrends();
+        count = 0;
+    }
+    count += 1;
 }
