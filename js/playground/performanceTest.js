@@ -2,33 +2,35 @@ import { $ } from "../../lib/Pen.js";
 import { MetricBase } from "../../lib/PerformanceMetrics.js";
 
 
-// Example performance metric.
+// Example performance metric
 // -------------------------------------------------
 class MetricTest extends MetricBase {
-    measurePerformance() {
-        return {value: $.math.random(0, 100)};
+
+    /**
+     * @returns {{date: Date, data: number}}
+     */
+    takeMeasurements() {
+        return {date: new Date(), data: $.math.random(0, 100)};
     };
 
     computeTrends( history ) {
         let avg = 0;
 
         for (let data of history) {
-            avg += data.value
+            avg += data.data
         }
 
         avg /= history.length;
 
-        return {value: avg};
+        return {date: new Date(), data: avg};
     };
 
-    printMeasurement( measurement ) {
-        console.groupCollapsed("Test Metric");
-        console.log(`Value: ${measurement.value}`);
-        console.groupEnd("Test Metric");
+    printMeasurements( data ) {
+        console.log(`Value: ${data.data}`);
     };
 
-    printTrends( trends ) {
-        this.printMeasurement(trends);
+    printTrends( data ) {
+        this.printMeasurements(data);
     };
 }
 
