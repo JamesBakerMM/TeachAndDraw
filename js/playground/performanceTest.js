@@ -1,6 +1,6 @@
 import { $ } from "../../lib/Pen.js";
 import { PerformanceMetrics } from "../../lib/PerformanceMetrics.js";
-$.debug = false;
+$.debug = true;
 
 $.use(update);
 $.width  = 512;
