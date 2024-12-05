@@ -10,7 +10,6 @@ let xSpeed  = 1.0;
 
 
 function drawShapes(x, y) {
-
     $.shape.rotation = theta;
 
     $.shape.alignment.x = "left";
@@ -28,12 +27,10 @@ function drawShapes(x, y) {
 
     $.text.alignment.x = "left";
     $.text.print(x+10, y+10, `θ = ${theta}°`);
-
 }
 
 
 function draw() {
-
     $.shape.movedByCamera = true;
     $.text.movedByCamera = true;
     drawShapes(0, 400);
@@ -43,8 +40,6 @@ function draw() {
     drawShapes(0, 0);
 
     theta = (theta + 1) % 360;
-
-
 
     if (xOffset < -4) {
         xSpeed = +0.05;
