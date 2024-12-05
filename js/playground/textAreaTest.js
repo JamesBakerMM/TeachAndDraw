@@ -8,6 +8,7 @@ $.height = 512;
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
 textArea.value = `Write your great message here...`;
+// textArea.movedByCamera = false;
 
 function update() {
 	$.text.alignment.x = "left";
