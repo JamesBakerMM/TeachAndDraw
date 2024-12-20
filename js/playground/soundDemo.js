@@ -5,8 +5,9 @@ const exampleSound = $.loadSound("../../data/test.mp3");
 
 function update(){
     if(exampleSound.isPlaying===false){
-exampleSound.startTime = 19;
-exampleSound.play();
+        exampleSound.startTime = 16;
+        exampleSound.endTime = exampleSound.startTime + 2.25;
+        exampleSound.play();
     } 
 
 }
