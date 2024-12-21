@@ -20,7 +20,7 @@ const COLS = 5;
 
 function createLifespans() {
     for (let i=0; i<COLS; i++) {
-        lifespans.push(250 + 100*i);
+        lifespans.push(5 + 5*i);
     }
 }
 
@@ -38,7 +38,7 @@ function createAnimations() {
         A.lifespan = lifespans[i];
         A.scale = 200;
         A.looping = true;
-        A.duration = 2.0 + 0.5*i;
+        A.duration = 1.0;
 
         A.x = 100 + 150*i;
         A.y = 50;
@@ -101,41 +101,39 @@ function createColliders() {
 function drawAnimations() {
     $.text.alignment.x = "left";
     $.text.alignment.y = "top";
-    $.text.print(0, 100, "lifespan:");
 
-    // for (const A of anims) {
-    for (let i=0; i<anims.length; i++) {
-        const A = anims[i];
-
-        if (A.exists === false) {
-            delete anims[i];
-            anims.splice(i, 1);
-            break;
+    for (const A of anims) {
+        if (A.exists) {
+            A.draw();
+            $.text.print(A.x, A.y+50, String(`lifespan=${Math.round(A.lifespan)}s`));
         }
-
-        A.draw();
-        $.text.print(A.x, A.y+50, String(`lifespan=${A.lifespan}`));
     }
 }
 
 function drawCheckboxes() {
     for (const cb of checkboxes) {
-        cb.draw();
-        $.text.print(cb.x, cb.y+25, String(`lifespan=${cb.lifespan}`));
+        if (cb.exists) {
+            cb.draw();
+            $.text.print(cb.x, cb.y+25, String(`lifespan=${Math.round(cb.lifespan)}s`));
+        }
     }
 }
 
 function drawButtons() {
     for (const B of buttons) {
-        B.draw();
-        $.text.print(B.x, B.y+25, String(`lifespan=${B.lifespan}`));
+        if (B.exists) {
+            B.draw();
+            $.text.print(B.x, B.y+25, String(`lifespan=${Math.round(B.lifespan)}s`));
+        }
     }
 }
 
 function drawSliders() {
     for (const S of sliders) {
-        S.draw();
-        $.text.print(S.x, S.y+25, String(`lifespan=${S.lifespan}`));
+        if (S.exists) {
+            S.draw();
+            $.text.print(S.x, S.y+25, String(`lifespan=${Math.round(S.lifespan)}s`));
+        }
     }
 }
 
@@ -144,9 +142,9 @@ function drawColliders() {
     balls.collides(walls);
 
     for (const B of balls) {
-        if (B) {
+        if (B.exists) {
             B.velocity.y += 1;
-            $.text.print(B.x, B.y, String(`lifespan=${B.lifespan}`));
+            $.text.print(B.x, B.y, String(`lifespan=${Math.round(B.lifespan)}s`));
         }
     }
 
