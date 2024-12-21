@@ -1,3 +1,4 @@
+import { MovingStamp } from "../../lib/Animation.js";
 import { $ } from "../../lib/Pen.js"
 
 $.use(draw);
@@ -69,8 +70,8 @@ function draw() {
 
     for (let i=0; i<16; i++)
     {
+        /** @type {MovingStamp} */
         const A = anims[i];
-
         A.draw();
 
         $.text.print(A.x-50, A.y+50, `duration = ${A.duration}`);
