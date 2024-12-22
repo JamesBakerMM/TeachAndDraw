@@ -27,11 +27,11 @@ let yoffset = 50;
 
 
 function createLifespans() {
-    for (let i=0; i<COLS-1; i++) {
+    for (let i=0; i<COLS; i++) {
         lifespans.push(5 + 5*i);
     }
 
-    lifespans.push(Infinity);
+    // lifespans.push(undefined);
 }
 
 function createAnimations() {
@@ -137,13 +137,16 @@ function drawLabelled( arr ) {
     for (let i=0; i<arr.length; i++) {
         const A = arr[i];
         if (A.exists === false) {
-            delete arr[i];
-            arr.splice(i, 1);
-            return;
+            continue;
+            // delete arr[i];
+            // arr.splice(i, 1);
+            // return;
         }
+        
+        let text = "";
 
-        let text = `lifespan=${A.lifespan.toFixed(1)}`;
-        if (A.lifespan < Infinity) {
+        if (A.lifespan) {
+            text = `lifespan=${A.lifespan.toFixed(1)}`;
             text += "s";
         }
 
@@ -153,10 +156,10 @@ function drawLabelled( arr ) {
 }
 
 function drawCheckboxes() {
-    for (let i=0; i<checkboxes.length; i++) {
-        const B = checkboxes[i];
-        B.ageless = !B.checked;
-    }
+    // for (let i=0; i<checkboxes.length; i++) {
+    //     const B = checkboxes[i];
+    //     B.ageless = !B.checked;
+    // }
     drawLabelled(checkboxes);
 }
 
@@ -197,6 +200,7 @@ createSliders();
 createDropdowns();
 createColliders();
 
+
 function draw() {
     $.text.alignment.x = "left";
     $.text.alignment.y = "top";
@@ -207,5 +211,4 @@ function draw() {
     drawLabelled(sliders);
     drawLabelled(dropdowns);
     drawColliders();
-
 }
