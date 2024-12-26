@@ -4,6 +4,7 @@ import { $ } from "../../lib/Pen.js";
 $.use(update);
 $.width  = 512;
 $.height = 512;
+$.time.fps = 20;
 
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
@@ -28,6 +29,7 @@ function update() {
 	$.text.print(175, 40, "- shift + home/end");
 
 	$.text.print(350, 20,  "- home/end");
+	$.text.print(350, 40,  String(`- fps: ${$.time.averageFps}`));
 
 	textArea.draw();
 	textArea.characterLimit = 300;
