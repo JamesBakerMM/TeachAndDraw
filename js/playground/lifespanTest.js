@@ -27,11 +27,11 @@ let yoffset = 50;
 
 
 function createLifespans() {
-    for (let i=0; i<COLS; i++) {
+    for (let i=0; i<COLS-1; i++) {
         lifespans.push(5 + 5*i);
     }
 
-    // lifespans.push(undefined);
+    lifespans.push(null);
 }
 
 function createAnimations() {
@@ -168,8 +168,10 @@ function drawButtons() {
         if (B.exists === false) {
             continue;
         }
-    
-        B.label = String(B.lifespan.toFixed(1)) + "s";
+
+        if (B.lifespan) {
+            B.label = String(B.lifespan.toFixed(1)) + "s";
+        }
 
         if (B.up) {
             B.lifespan += 5;
