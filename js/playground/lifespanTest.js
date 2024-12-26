@@ -136,13 +136,6 @@ function createColliders() {
 function drawLabelled( arr ) {
     for (let i=0; i<arr.length; i++) {
         const A = arr[i];
-        if (A.exists === false) {
-            continue;
-            // delete arr[i];
-            // arr.splice(i, 1);
-            // return;
-        }
-        
         let text = "";
 
         if (A.lifespan) {
@@ -155,20 +148,8 @@ function drawLabelled( arr ) {
     }
 }
 
-function drawCheckboxes() {
-    // for (let i=0; i<checkboxes.length; i++) {
-    //     const B = checkboxes[i];
-    //     B.ageless = !B.checked;
-    // }
-    drawLabelled(checkboxes);
-}
-
 function drawButtons() {
     for (const B of buttons) {
-        if (B.exists === false) {
-            continue;
-        }
-
         if (B.lifespan) {
             B.label = String(B.lifespan.toFixed(1)) + "s";
         }
@@ -208,7 +189,7 @@ function draw() {
     $.text.alignment.y = "top";
 
     drawLabelled(anims);
-    drawCheckboxes();
+    drawLabelled(checkboxes);
     drawButtons();
     drawLabelled(sliders);
     drawLabelled(dropdowns);
