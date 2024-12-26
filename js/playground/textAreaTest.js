@@ -4,7 +4,7 @@ import { $ } from "../../lib/Pen.js";
 $.use(update);
 $.width  = 512;
 $.height = 512;
-$.time.fps = 20;
+$.time.fps = 60;
 
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
