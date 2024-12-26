@@ -49,7 +49,6 @@ function cameraControl() {
 	if ($.keys.down("S")) {
 		$.camera.y += 1;
 	}
-
 	if ($.mouse.wheel.up) {
 		$.camera.zoom *= 1.05;
 	}
@@ -60,8 +59,8 @@ function cameraControl() {
 
 
 function update() {
-
 	$.text.movedByCamera = true;
+	// $.shape.movedByCamera = true;
 	button.movedByCamera = true;
 	slider.movedByCamera = true;
 	textArea.movedByCamera = true;
