@@ -10,7 +10,34 @@ const textArea = $.makeTextArea(256, 256, 300, 300);
 textArea.value = `Write your great message here...`;
 // textArea.movedByCamera = false;
 
+
+function cameraControl() {
+	if ($.keys.down("A")) {
+		$.camera.x -= 1;
+	}
+	if ($.keys.down("D")) {
+		$.camera.x += 1;
+	}
+	if ($.keys.down("W")) {
+		$.camera.y -= 1;
+	}
+	if ($.keys.down("S")) {
+		$.camera.y += 1;
+	}
+
+	if ($.mouse.wheel.up) {
+		$.camera.zoom += 0.01;
+	}
+	if ($.mouse.wheel.down) {
+		$.camera.zoom -= 0.01;
+	}
+
+
+}
+
+
 function update() {
+	$.text.movedByCamera = true;
 	$.text.alignment.x = "left";
 	$.text.alignment.y = "top";
 
@@ -32,4 +59,5 @@ function update() {
 	textArea.draw();
 	textArea.characterLimit = 300;
 
+	cameraControl();
 }
