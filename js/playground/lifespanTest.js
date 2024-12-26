@@ -91,9 +91,9 @@ function createDropdowns() {
         "Option 1", "Option 2", "Option 3", "Option 4"
     ]);
 
-    // A.lifespan = 2;
-    // B.lifespan = 4;
-    // C.lifespan = Infinity;
+    A.lifespan = 2;
+    B.lifespan = 4;
+    C.lifespan = 16;
 
     A.openDirection = "down";
     B.openDirection = "down";
