@@ -11,7 +11,7 @@ let dropdown1 = $.makeDropdown(
 
 let dropdown2 = $.makeDropdown(500, 300, 150, []); // zero options is allowed.
 
-// possible to set options later
+// setting options later also allowed.
 dropdown2.options = [
     "Option Q",
     "Option R",
