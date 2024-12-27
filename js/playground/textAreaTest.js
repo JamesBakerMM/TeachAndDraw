@@ -1,5 +1,5 @@
 import { $ } from "../../lib/Pen.js";
-// $.debug = true;
+$.debug = true;
 
 $.h = 512;
 $.w = 512;
