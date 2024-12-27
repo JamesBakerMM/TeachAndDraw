@@ -9,12 +9,7 @@ let dropdown1 = $.makeDropdown(
     ["Option A", "Option B", "Option C"] // options
 );
 
-let dropdown2 = $.makeDropdown(
-    500, // x position
-    300, // y position
-    150, // width
-    []   // zero options is allowed.
-);
+let dropdown2 = $.makeDropdown(500, 300, 150, []); // zero options is allowed.
 
 // possible to set options later
 dropdown2.options = [

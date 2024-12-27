@@ -15,8 +15,8 @@ let dropdown2 = $.makeDropdown( 550, 300, 200, [
 ]);
 
 function update() {
-    dropdown1.border = "orange";
-    dropdown2.border = "rgb(75, 15, 255)";
+    dropdown1.textColour = "orange";
+    dropdown2.textColour = "rgb(75, 15, 255)";
     dropdown1.draw();
     dropdown2.draw();
 }

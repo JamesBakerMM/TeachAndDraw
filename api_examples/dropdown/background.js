@@ -2,31 +2,21 @@ import { $ } from "../../lib/Pen.js";
 
 $.use(update);
 
-let dropdown1 = $.makeDropdown(200, 300, 150, [
+let dropdown1 = $.makeDropdown(250, 300, 200, [
     "Option A",
     "Option B",
     "Option C"
 ]);
 
-let dropdown2 = $.makeDropdown( 400, 300, 150, [
+let dropdown2 = $.makeDropdown( 550, 300, 200, [
     "Option X",
     "Option Y",
     "Option Z"
 ]);
 
-let dropdown3 = $.makeDropdown(600, 300, 150, [
-    "Option Q",
-    "Option R",
-    "Option S"
-]);
-
-
 function update() {
-    dropdown1.background = "lime";
-    dropdown2.background = "purple";
-    dropdown3.background = "rgb(100, 250, 250)";
-
+    dropdown1.background = "orange";
+    dropdown2.background = "rgb(75, 15, 255)";
     dropdown1.draw();
     dropdown2.draw();
-    dropdown3.draw();
 }

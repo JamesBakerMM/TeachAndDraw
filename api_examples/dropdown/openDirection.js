@@ -15,8 +15,8 @@ let dropdown2 = $.makeDropdown( 550, 300, 200, [
 ]);
 
 function update() {
-    dropdown1.border = "orange";
-    dropdown2.border = "rgb(75, 15, 255)";
+    dropdown1.openDirection = "down";
+    dropdown2.openDirection = "up";
     dropdown1.draw();
     dropdown2.draw();
 }
