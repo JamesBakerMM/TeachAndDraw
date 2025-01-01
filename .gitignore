@@ -2,5 +2,6 @@
 ./vscode/settings.json
 .vscode/settings.json
 .vscode/settings.json
-tsconfig.json
 js/playground/arcade
+.vscode/settings.json
+.gitignore
