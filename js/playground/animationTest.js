@@ -70,7 +70,6 @@ function draw() {
     for (let i=0; i<16; i++)
     {
         const A = anims[i];
-
         A.draw();
 
         $.text.print(A.x-50, A.y+50, `duration = ${A.duration}`);
