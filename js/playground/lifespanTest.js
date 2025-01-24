@@ -154,7 +154,7 @@ function drawButtons() {
             B.label = String(B.lifespan.toFixed(1)) + "s";
         }
 
-        if (B.up) {
+        if (B.released) {
             B.lifespan += 5;
         }
     }
