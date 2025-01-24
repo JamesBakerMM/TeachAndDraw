@@ -1,9 +1,9 @@
 import { $ } from "../../lib/Pen.js";
-// $.debug = true;
+$.debug = true;
 
+$.h = 512;
+$.w = 512;
 $.use(update);
-$.width  = 512;
-$.height = 512;
 
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
@@ -28,6 +28,7 @@ function update() {
 	$.text.print(175, 40, "- shift + home/end");
 
 	$.text.print(350, 20,  "- home/end");
+	$.text.print(350, 40,  String(`w, h = ${$.w}, ${$.h}`));
 
 	textArea.draw();
 	textArea.characterLimit = 300;
