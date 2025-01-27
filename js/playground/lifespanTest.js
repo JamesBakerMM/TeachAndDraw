@@ -1,4 +1,4 @@
-import { $ } from "../../lib/Pen.js"
+import { $ } from "../../lib/TeachAndDraw.js"
 import { Button } from "../../lib/Button.js";
 import { Checkbox } from "../../lib/Checkbox.js";
 import { Slider } from "../../lib/Slider.js";

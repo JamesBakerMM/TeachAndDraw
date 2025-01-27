@@ -1,7 +1,7 @@
-import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, keys, text } from "../../lib/TeachAndDraw.js";
 
 $.use(update);
-$.debug=false;
+$.debug=true;
 
 //Make the groups
 let walls = $.makeGroup();
