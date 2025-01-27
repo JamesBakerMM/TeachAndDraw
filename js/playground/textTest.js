@@ -1,4 +1,4 @@
-import { $ } from "../../lib/Pen.js";
+import { $ } from "../../lib/TeachAndDraw.js";
 $.debug = true;
 
 $.use(update);

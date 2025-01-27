@@ -1,5 +1,5 @@
 //TAD
-import { $ } from "../../lib/Pen.js"; //we use the es6 import system to import the way to access the library which is $ 
+import { $ } from "../../lib/TeachAndDraw.js"; //we use the es6 import system to import the way to access the library which is $ 
 $.use(update); //we tell it which function use for our draw :)
 
 $.width = 400; 
