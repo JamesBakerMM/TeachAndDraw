@@ -1,5 +1,5 @@
 import { CollisionUtilities } from "../../lib/CollisionUtilities.js";
-import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, keys, text } from "../../lib/TeachAndDraw.js";
 
 $.use(update);
 $.debug=false;
