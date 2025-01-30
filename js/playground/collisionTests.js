@@ -1,4 +1,4 @@
-import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, keys, text } from "../../lib/TeachAndDraw.js";
 import { Paint } from "../../lib/Paint.js";
 import { Velocity } from "../../lib/Velocity.js";
 
@@ -23,28 +23,26 @@ squares.push(redShip);
 let yellowShip=$.makeCircleCollider(170,200,100,100);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
-yellowShip.static = false;
+yellowShip.static = true;
 yellowShip.direction=180;
 yellowShip.friction=0;
 yellowShip.speed = 0;
-yellowShip.bounciness = 0;
+yellowShip.bounciness = 100;
 yellowShip.rotation = 0;
-//yellowShip.rotationalVelocity = 10;
-//yellowShip.velocity = new Velocity(0, 10);
+yellowShip.velocity = new Velocity(0, 10);
 squares.push(yellowShip);
 
-
-let box=$.makeBoxCollider(200,400,400,50);
+let box=$.makeCircleCollider(200,400,100,50);
 box.speed = 0;
 box.direction = 90;
-box.static = true;
-box.bounciness = 0;
+box.static = false;
+box.bounciness = 50;
 box.friction= 0;
 box.rotation = 0;
 box.mass = 1;
 box.rotation = 20;
-//box.velocity = new Velocity(-10, -0);
 box.rotationalVelocity = 10;
+box.velocity = new Velocity(0, 1);
 squares.push(box);
 
 /*
@@ -59,12 +57,12 @@ squares.push(box2);
 */
 
 let rightSquare;
-for (let i = 100; i < 700; i += 10) {
-    for (let j = 100; j < 600; j += 10) {
-        rightSquare=$.makeCircleCollider(i,j, 5, 5);
+for (let i = 600; i > 100; i -= 10) {
+    for (let j = 600; j > 100; j -= 10) {
+        rightSquare=$.makeCircleCollider(i,j, 10, 5);
         rightSquare.mass = 1;
-        rightSquare.friction = 10;
-        rightSquare.bounciness = 10;
+        rightSquare.friction = 0;
+        rightSquare.bounciness = 50;
         //rightSquare.asset=img;
         squares.push(rightSquare);
     }
@@ -106,7 +104,7 @@ function update() {
     background("rgba(125,125,125)");
 
     $.colour.fill="black";
-    $.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
+    //$.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
 
     if(mouse.leftDown){   
         yellowShip.x = mouse.x;
@@ -125,13 +123,7 @@ function update() {
     }
     if(keys.down("rightarrow")){
         yellowShip.velocity.x +=4;
-    } 
-    
-    shape.polygon(
-        $.w/2-75,100,
-        $.w/2,200,
-        $.w/2+75,100,
-    );
+    }
 
     // if(leftSquare.x>$.width || leftSquare.x<0){
     //     leftSquare.velocity.x=-leftSquare.velocity.x
@@ -147,9 +139,8 @@ function update() {
         const sq = squares[i];
         if (sq.shape == "circle")
         {
-            sq.velocity.y += 1;
+            //sq.velocity.y += 1;
         }
-        
         
         if(sq.x>$.width){
             sq.x=$.width-1;
