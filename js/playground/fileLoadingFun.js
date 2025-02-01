@@ -1,4 +1,4 @@
-import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, keys, text } from "../../lib/TeachAndDraw.js";
 
 $.use(draw);
 

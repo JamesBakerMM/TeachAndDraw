@@ -1,4 +1,4 @@
-import { $, shape, colour, mouse, keys, text } from "../../lib/Pen.js";
+import { $, shape, colour, mouse, keys, text } from "../../lib/TeachAndDraw.js";
 import { makeGroup } from "../../lib/Group.js";
 import { Paint } from "../../lib/Paint.js";
 

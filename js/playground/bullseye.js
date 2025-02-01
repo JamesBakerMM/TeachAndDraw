@@ -1,27 +1,18 @@
-import {Pen} from "../../lib/Pen.js"
-const p = new Pen(preload,setup,draw);
-const shape=p.shape;
-const colour=p.colour;
+import {$} from "../../lib/TeachAndDraw.js"
 
-p.preload();
+$.use(update);
+$.w = 400;
+$.h = 400;
 
-let angle=0;
-function preload(){}
-
-function setup(){
-    p.w=400;
-    p.h=400;
-}
-
-function draw(){
+function update(){
     for(let i=0; i<5; i++){
         const size=100-i*21;
-        colour.stroke="rgba(0,0,0,0)";
+        $.colour.stroke="rgba(0,0,0,0)";
         if(size%2===0){
-            colour.fill="red";
+            $.colour.fill="red";
         } else { 
-            colour.fill="white";
+            $.colour.fill="white";
         }
-        shape.oval(p.mouse.x,p.mouse.y,size);
+        $.shape.oval($.mouse.x,$.mouse.y,size);
     }
 }

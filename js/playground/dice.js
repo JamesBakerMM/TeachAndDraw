@@ -48,15 +48,20 @@ const stats = {
         hard:15,
         extreme:6
     },
+    "stealth":{
+        normal:50,
+        hard:25,
+        extreme:10
+    },
     "spot hidden":{
         normal:25,
         hard:12,
         extreme:5
     },
     "luck":{
-        normal:60,
-        hard:60,
-        extreme:60
+        normal:56,
+        hard:56,
+        extreme:56
     }
 }
 
