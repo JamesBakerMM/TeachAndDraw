@@ -1,5 +1,5 @@
 import { $ } from "../../lib/TeachAndDraw.js";
-$.debug = true;
+// $.debug = true;
 
 $.use(update);
 const slider = $.makeSlider(    
@@ -66,6 +66,11 @@ function update() {
 	$.text.alignment.x = "center";
 	// $.text.print(450, 250, "Y alignment is bottom, X is center, this is how it wraps", 150);
 	// $.text.hyphenation = false;
+
+	$.text.maxWidth = null;
+	$.text.print(400, 400, "Incomprehensible and incalculable monstrocities with antidisestablishmentarianismandevenbiggersonextline it's working?", 100);
+
+	$.text.maxWidth = 200;
 	$.text.print(400, 500, "Incomprehensible and incalculable monstrocities with antidisestablishmentarianismandevenbiggersonextline it's working?", 100);
 
 }
