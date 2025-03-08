@@ -20,29 +20,25 @@ redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
 
-let yellowShip=$.makeCircleCollider(170,200,100,100);
+let yellowShip=$.makeCircleCollider(500,200,50,50);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
-yellowShip.static = true;
+yellowShip.static = false;
 yellowShip.direction=180;
-yellowShip.friction=0;
+yellowShip.friction = 0;
 yellowShip.speed = 0;
 yellowShip.bounciness = 100;
 yellowShip.rotation = 0;
-yellowShip.velocity = new Velocity(0, 10);
+yellowShip.velocity = new Velocity(10, 0);
 squares.push(yellowShip);
 
-let box=$.makeCircleCollider(200,400,100,50);
-box.speed = 0;
-box.direction = 90;
-box.static = false;
+let box=$.makeBoxCollider(650,200,50,150);
+box.mass = 1;
+box.static = true;
 box.bounciness = 50;
 box.friction= 0;
 box.rotation = 0;
-box.mass = 1;
-box.rotation = 20;
-box.rotationalVelocity = 10;
-box.velocity = new Velocity(0, 1);
+box.velocity = new Velocity(0, 0);
 squares.push(box);
 
 /*
@@ -54,20 +50,21 @@ box2.rotation = 0;
 box2.mass = 1;
 box2.friction = 0;
 squares.push(box2);
-*/
+
+
 
 let rightSquare;
 for (let i = 600; i > 100; i -= 10) {
     for (let j = 600; j > 100; j -= 10) {
-        rightSquare=$.makeCircleCollider(i,j, 10, 5);
+        rightSquare=$.makeCircleCollider(i,j, 10);
         rightSquare.mass = 1;
-        rightSquare.friction = 0;
+        rightSquare.friction = 1;
         rightSquare.bounciness = 50;
         //rightSquare.asset=img;
         squares.push(rightSquare);
     }
 }
-
+*/
 
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
@@ -96,8 +93,6 @@ function setup(){
         console.log('Start');
     }
 }
-
-let flag = 1;
 
 function update() { 
     setup();
@@ -131,9 +126,13 @@ function update() {
     // if(leftSquare.y>$.height || leftSquare.y<0){
     //     leftSquare.velocity.y=-leftSquare.velocity.y
     // }
-    squares.collides(squares);
 
     //yellowShip.velocity.y += 1;
+
+    //squares.collides(squares);
+    if (yellowShip.collides(box)) {
+        console.log("HIT");
+    }
 
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
@@ -163,9 +162,6 @@ function update() {
         // $.colour.stroke = "#FFFF00FF";
         // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
-
-    // drawTree(squares.QuadTree.getTree(), 0);
-    //console.log(squares.QuadTree.getTree());
 
     $.drawColliders();
 }
