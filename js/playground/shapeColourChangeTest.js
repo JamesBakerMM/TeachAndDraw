@@ -27,7 +27,7 @@ const anim = $.loadAnimation(
 const box = $.makeBoxCollider(20, 20, 20, 20);
 
 $.use(update);
-$.debug = true;
+// $.debug = true;
 function update() {
     $.shape.colour = "red";
     $.shape.rectangle($.w / 2, $.h / 2, 200, 50);
