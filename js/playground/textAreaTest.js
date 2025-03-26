@@ -7,7 +7,7 @@ $.use(update);
 
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
-textArea.value = `Write your great message here...`;
+textArea.value = ``;
 // textArea.movedByCamera = false;
 
 function update() {
