@@ -14,6 +14,8 @@ function update() {
 	$.text.alignment.x = "left";
 	$.text.alignment.y = "top";
 
+	console.log($.time.secondsElapsed);
+
 	$.text.print(0, 0, "TextArea now supports:");
 	$.text.print(0, 20,  "- ctl + A");
 	$.text.print(0, 40,  "- ctl + C");
