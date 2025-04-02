@@ -1,4 +1,4 @@
-import { $ } from "../../lib/TeachAndDraw.js";
+import { $, text } from "../../lib/TeachAndDraw.js";
 $.debug = true;
 
 $.h = 512;
@@ -7,8 +7,7 @@ $.use(update);
 
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
-textArea.value = ``;
-// textArea.movedByCamera = false;
+textArea.value = "abc";
 
 function update() {
 	$.text.alignment.x = "left";
