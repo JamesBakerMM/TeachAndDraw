@@ -35,7 +35,11 @@ function update() {
     }
     btn2.draw(); // btn.up/down works regardless of draw order.
 
-
+    if (btn3.hovered) {
+        btn3.label = "hovered";
+    } else {
+        btn3.label = "not hovered";
+    }
     btn3.rotation  += 0.001;
     btn3.draw();
 
