@@ -1,4 +1,4 @@
-import { $ } from "../../lib/TeachAndDraw.js";
+import { $, text } from "../../lib/TeachAndDraw.js";
 $.debug = true;
 
 $.h = 512;
@@ -7,14 +7,14 @@ $.use(update);
 
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
-textArea.value = `abc`;
+textArea.value = `TextArea now supports`;
 // textArea.movedByCamera = false;
 
 function update() {
 	$.text.alignment.x = "left";
 	$.text.alignment.y = "top";
 
-	textArea.rotation += 0.001;
+	textArea.rotation += 0.002;
 
 	$.text.print(0, 0, "TextArea now supports:");
 	$.text.print(0, 20,  "- ctl + A");
