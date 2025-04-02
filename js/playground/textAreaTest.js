@@ -7,12 +7,14 @@ $.use(update);
 
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
-textArea.value = ``;
+textArea.value = `abc`;
 // textArea.movedByCamera = false;
 
 function update() {
 	$.text.alignment.x = "left";
 	$.text.alignment.y = "top";
+
+	textArea.rotation += 0.001;
 
 	$.text.print(0, 0, "TextArea now supports:");
 	$.text.print(0, 20,  "- ctl + A");

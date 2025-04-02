@@ -16,8 +16,11 @@ const btn = $.makeButton(
 );
 
 const btn2 = $.makeButton($.w / 2, $.h / 2 + 100, 200, 100, "small text");
+const btn3 = $.makeButton($.w/2, 150, 300, 50, "rotating");
+
 
 function update() {
+
     btn.draw();
     if (btn.up) {
         console.log("btn.up");
@@ -31,4 +34,10 @@ function update() {
         console.log("btn2.down");
     }
     btn2.draw(); // btn.up/down works regardless of draw order.
+
+
+    btn3.rotation  += 0.001;
+    btn3.draw();
+
+
 }
