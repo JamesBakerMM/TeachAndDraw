@@ -7,7 +7,7 @@ $.use(update);
 
 
 const textArea = $.makeTextArea(256, 256, 300, 300);
-textArea.value = "abc--------------------------------------------------------------xyz";
+textArea.value = "abc";
 
 function update() {
 	$.text.alignment.x = "left";
