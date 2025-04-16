@@ -33,7 +33,10 @@ function update() {
     } else if (btn2.down) {
         console.log("btn2.down");
     }
-    btn2.draw(); // btn.up/down works regardless of draw order.
+    // btn2.draw(); // btn.up/down works regardless of draw order.
+    $.text.alignment.x = "right";
+    $.text.colour = "white";
+    $.text.print(btn2.x-btn2.w/2, btn2.y, "Invisible button here --> ");
 
     if (btn3.hovered) {
         btn3.label = "hovered";
