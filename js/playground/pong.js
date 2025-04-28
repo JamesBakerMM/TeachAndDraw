@@ -62,11 +62,39 @@ function updateInput() {
         leftPlayer.y += speed;
     }
 
-    if ($.keys.down("upArrow") && rightPlayer.y > rightPlayer.h/2) {
-        rightPlayer.y -= speed;
+    // if ($.keys.down("upArrow") && rightPlayer.y > rightPlayer.h/2) {
+    //     rightPlayer.y -= speed;
+    // }
+    // if ($.keys.down("downArrow") && rightPlayer.y < $.h-rightPlayer.h/2) {
+    //     rightPlayer.y += speed;
+    // }
+
+
+    if ($.keys.down("leftArrow")) {
+        $.camera2.x -= 1;
     }
-    if ($.keys.down("downArrow") && rightPlayer.y < $.h-rightPlayer.h/2) {
-        rightPlayer.y += speed;
+    if ($.keys.down("rightArrow")) {
+        $.camera2.x += 1;
+    }
+    if ($.keys.down("upArrow")) {
+        $.camera2.y -= 1;
+    }
+    if ($.keys.down("downArrow")) {
+        $.camera2.y += 1;
+    }
+
+	if ($.keys.down("q")) {
+        $.camera2.rotation -= 0.0025;
+    }
+    if ($.keys.down("e")) {
+        $.camera2.rotation += 0.0025;
+    }
+
+	if ($.keys.down("i")) {
+        $.camera2.zoom += 0.01;
+    }
+    if ($.keys.down("k")) {
+        $.camera2.zoom -= 0.01;
     }
 
 }
@@ -79,7 +107,7 @@ function cameraTracking() {
 
     // const cam = $.camera;
     // cam.xOffset += 1.01;
-    $.camera2.x += 0.03 * (ball.x - $.camera2.x);
+    // $.camera2.x += 0.005 * (ball.x - $.camera2.x);
     // cam.x += 55;
     // cam.moveTo(ball.x, ball.y);
     // console.log(cam.x);
