@@ -25,20 +25,6 @@ for (let i=0; i<10; i++) {
 
 
 function update() {
-
-    $.shape.movedByCamera = true;
-    $.shape.strokeWidth = 2;
-    $.shape.border = Paint.white;
-    $.shape.colour = Paint.white;
-
-    for (let i=0; i<=$.w; i+=50) {
-        $.shape.line(i, 0, i, $.h);
-    }
-
-    for (let i=0; i<=$.h; i+=50) {
-        $.shape.line(0, i, $.w, i);
-    }
-
     for (let i=0; i<groups.length; i++)
     {
         groups[i].draw();

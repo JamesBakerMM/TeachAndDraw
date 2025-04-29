@@ -19,7 +19,6 @@ function drawShapes(x, y) {
     $.shape.arc(x+300, y+300, 100, 50, 0, 45);
     $.shape.polygon(x+475, y+315, x+500, y+275, x+525, y+315);
 
-    $.text.alignment.x = "left";
     $.text.print(x+10, y+10, `θ = ${theta}°`);
 
     $.drawColliders();
@@ -32,13 +31,13 @@ function draw() {
     $.shape.rotation = theta;
     $.shape.movedByCamera = true;
     $.text.movedByCamera = true;
-    drawShapes(0, 0);
 
     console.log($.camera2.x);
     const tmp = $.camera2.screenToWorld($.mouse.x, $.mouse.y);
 
-    $.shape.alignment.x = "center";
+    $.shape.alignment.x = "left";
     $.shape.alignment.y = "center";
+    drawShapes(50, 50);
 
     if ($.keys.down("leftArrow")) {
         $.camera2.x -= 1;
