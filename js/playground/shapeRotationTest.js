@@ -32,9 +32,6 @@ function draw() {
     $.shape.movedByCamera = true;
     $.text.movedByCamera = true;
 
-    console.log($.camera2.x);
-    const tmp = $.camera2.screenToWorld($.mouse.x, $.mouse.y);
-
     $.shape.alignment.x = "left";
     $.shape.alignment.y = "center";
     drawShapes(50, 50);
@@ -53,10 +50,10 @@ function draw() {
     }
 
 	if ($.keys.down("q")) {
-        $.camera2.rotation -= 0.01;
+        $.camera2.rotation -= 0.5;
     }
     if ($.keys.down("e")) {
-        $.camera2.rotation += 0.01;
+        $.camera2.rotation += 0.5;
     }
 
 	if ($.keys.down("i")) {
