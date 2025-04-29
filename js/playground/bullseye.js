@@ -9,16 +9,16 @@ function update(){
     $.shape.alignment.y = "center";
 
     if ($.keys.down("leftArrow")) {
-        $.camera2.x -= 1;
+        $.camera.x -= 1;
     }
     if ($.keys.down("rightArrow")) {
-        $.camera2.x += 1;
+        $.camera.x += 1;
     }
     if ($.keys.down("upArrow")) {
-        $.camera2.y -= 1;
+        $.camera.y -= 1;
     }
     if ($.keys.down("downArrow")) {
-        $.camera2.y += 1;
+        $.camera.y += 1;
     }
 
     for(let i=0; i<5; i++){

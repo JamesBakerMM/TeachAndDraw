@@ -37,30 +37,30 @@ function draw() {
     drawShapes(50, 50);
 
     if ($.keys.down("leftArrow")) {
-        $.camera2.x -= 1;
+        $.camera.x -= 1;
     }
     if ($.keys.down("rightArrow")) {
-        $.camera2.x += 1;
+        $.camera.x += 1;
     }
     if ($.keys.down("upArrow")) {
-        $.camera2.y -= 1;
+        $.camera.y -= 1;
     }
     if ($.keys.down("downArrow")) {
-        $.camera2.y += 1;
+        $.camera.y += 1;
     }
 
 	if ($.keys.down("q")) {
-        $.camera2.rotation -= 0.5;
+        $.camera.rotation -= 0.5;
     }
     if ($.keys.down("e")) {
-        $.camera2.rotation += 0.5;
+        $.camera.rotation += 0.5;
     }
 
 	if ($.keys.down("i")) {
-        $.camera2.zoom *= 1.01;
+        $.camera.zoom *= 1.01;
     }
     if ($.keys.down("k")) {
-        $.camera2.zoom *= 0.99;
+        $.camera.zoom *= 0.99;
     }
 }
 

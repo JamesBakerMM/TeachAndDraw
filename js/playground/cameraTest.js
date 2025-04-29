@@ -29,16 +29,16 @@ for(let circle of circles){
 
 function draw() {
     if ($.keys.down("a")) {
-        $.camera2.x -= 1;
+        $.camera.x -= 1;
     }
     if ($.keys.down("d")) {
-        $.camera2.x += 1;
+        $.camera.x += 1;
     }
     if ($.keys.down("w")) {
-        $.camera2.y -= 1;
+        $.camera.y -= 1;
     }
     if ($.keys.down("s")) {
-        $.camera2.y += 1;
+        $.camera.y += 1;
     }
     circles.draw();
     for (let circle of circles) {

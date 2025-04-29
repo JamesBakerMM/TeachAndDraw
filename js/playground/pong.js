@@ -19,9 +19,9 @@ const state = {
 
     update: () => {
         $.shape.movedByCamera = true;
-        $.camera2.zoomTo(state.targetZoom);
-        $.camera2.rotateTo(state.targetRot, 0.05);
-        $.camera2.moveTo(state.targetX, state.targetY, 0.01);
+        $.camera.zoomTo(state.targetZoom);
+        $.camera.rotateTo(state.targetRot, 0.05);
+        $.camera.moveTo(state.targetX, state.targetY, 0.01);
         state.statefn();
     }
 };
@@ -40,9 +40,9 @@ let gameOverMsg   = "";
 function gameEntry() {
     state.targetRot  = 90;
     state.targetZoom = 2;
-    $.camera2.moveTo(state.targetX, state.targetY, 1.0);
-    $.camera2.rotation = state.targetRot;
-    $.camera2.zoom = state.targetZoom;
+    $.camera.moveTo(state.targetX, state.targetY, 1.0);
+    $.camera.rotation = state.targetRot;
+    $.camera.zoom = state.targetZoom;
 
     state.transition(menuLoop);
 }
