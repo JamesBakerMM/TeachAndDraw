@@ -126,7 +126,7 @@ function gameInit() {
 
 function gameLoop() {
     state.targetY = 0.5 * (leftPlayer.y + rightPlayer.y);
-    state.targetRot  = mix(state.targetRot, 0.025*(rightPlayer.y-leftPlayer.y), 0.1);
+    state.targetRot  = mix(state.targetRot, 0.025*(leftPlayer.y-rightPlayer.y), 0.1);
     state.targetZoom = mix(state.targetZoom, 1.0, 0.1);
 
     updateInput();
@@ -192,34 +192,5 @@ function updateInput() {
     if ($.keys.down("downArrow") && rightPlayer.y + rightPlayer.h/2 < wallBot) {
         rightPlayer.y += speed;
     }
-
-
-    // if ($.keys.down("leftArrow")) {
-    //     $.camera2.x -= 1;
-    // }
-    // if ($.keys.down("rightArrow")) {
-    //     $.camera2.x += 1;
-    // }
-    // if ($.keys.down("upArrow")) {
-    //     $.camera2.y -= 1;
-    // }
-    // if ($.keys.down("downArrow")) {
-    //     $.camera2.y += 1;
-    // }
-
-	if ($.keys.down("q")) {
-        $.camera2.rotation -= 0.1;
-    }
-    if ($.keys.down("e")) {
-        $.camera2.rotation += 0.1;
-    }
-
-	if ($.keys.down("i")) {
-        $.camera2.zoom += 0.01;
-    }
-    if ($.keys.down("k")) {
-        $.camera2.zoom -= 0.01;
-    }
-
 }
 
