@@ -63,30 +63,9 @@ preload();
 let collider = $.makeCircleCollider($.width/2, $.height/2, 100, 100);
 collider.asset = anims[0];
 function draw() {
-    if ($.keys.down("leftArrow")) {
-        $.camera2.x -= 1;
-    }
-    if ($.keys.down("rightArrow")) {
-        $.camera2.x += 1;
-    }
-    if ($.keys.down("upArrow")) {
-        $.camera2.y -= 1;
-    }
-    if ($.keys.down("downArrow")) {
-        $.camera2.y += 1;
-    }
-    if ($.keys.down("q")) {
-        $.camera2.rotation -= 0.01;
-    }
-    if ($.keys.down("e")) {
-        $.camera2.rotation += 0.01;
-    }
     $.text.alignment.y = "top";
     $.text.alignment.x = "left";
     $.text.movedByCamera = true;
-
-
-    // anims[0].duration -= 0.001;
 
     for (let i=0; i<16; i++)
     {

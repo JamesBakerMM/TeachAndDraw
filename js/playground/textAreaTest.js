@@ -11,8 +11,6 @@ const textArea = $.makeTextArea(256, 256, 300, 300);
 textArea.value = "abc";
 
 function update() {
-	updateInput();
-
 	$.text.alignment.x = "left";
 	$.text.alignment.y = "top";
 
@@ -36,26 +34,4 @@ function update() {
 	textArea.characterLimit = 300;
 
 }
-
-
-
-function updateInput() {
-    if ($.keys.down("leftArrow")) {
-        $.camera2.x -= 1;
-    }
-    if ($.keys.down("rightArrow")) {
-        $.camera2.x += 1;
-    }
-    if ($.keys.down("upArrow")) {
-        $.camera2.y -= 1;
-    }
-    if ($.keys.down("downArrow")) {
-        $.camera2.y += 1;
-    }
-
-	if ($.keys.down("e")) {
-        $.camera2.rotation += 0.001;
-    }
-}
-
 

@@ -64,32 +64,4 @@ function update() {
 
     $.text.print(slider.x, slider.y+25, `radius = ${slider.value}`);
     slider.draw();
-
-
-    if ($.keys.down("leftArrow")) {
-        $.camera2.x -= 1;
-    }
-    if ($.keys.down("rightArrow")) {
-        $.camera2.x += 1;
-    }
-    if ($.keys.down("upArrow")) {
-        $.camera2.y -= 1;
-    }
-    if ($.keys.down("downArrow")) {
-        $.camera2.y += 1;
-    }
-
-	if ($.keys.down("q")) {
-        $.camera2.rotation -= 0.01;
-    }
-    if ($.keys.down("e")) {
-        $.camera2.rotation += 0.01;
-    }
-
-	if ($.keys.down("i")) {
-        $.camera2.zoom *= 1.01;
-    }
-    if ($.keys.down("k")) {
-        $.camera2.zoom *= 0.99;
-    }
 }
