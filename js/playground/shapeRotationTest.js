@@ -1,7 +1,7 @@
 import { Paint } from "../../lib/Paint.js";
 import { $ } from "../../lib/TeachAndDraw.js"
 $.use(draw)
-// $.debug = true;
+$.debug = true;
 $.width = 900
 $.height = 900
 
@@ -9,9 +9,6 @@ $.height = 900
 let theta = 0.0;
 
 function drawShapes(x, y) {
-    $.shape.alignment.x = "left";
-    $.shape.alignment.y = "bottom";
-
     $.shape.colour = Paint.white;
     $.shape.rectangle(x+100, y+100, 100, 50);
     // $.shape.roundedRectangle(x+300, y+100, 100, 50, 16);
@@ -24,6 +21,8 @@ function drawShapes(x, y) {
 
     $.text.alignment.x = "left";
     $.text.print(x+10, y+10, `θ = ${theta}°`);
+
+    $.drawColliders();
 }
 
 
@@ -37,7 +36,6 @@ function draw() {
 
     console.log($.camera2.x);
     const tmp = $.camera2.screenToWorld($.mouse.x, $.mouse.y);
-    $.shape.oval(tmp.x, tmp.y, 50);
 
     $.shape.alignment.x = "center";
     $.shape.alignment.y = "center";
@@ -62,12 +60,11 @@ function draw() {
         $.camera2.rotation += 0.01;
     }
 
-
 	if ($.keys.down("i")) {
-        $.camera2.scale -= 0.01;
+        $.camera2.zoom *= 1.01;
     }
     if ($.keys.down("k")) {
-        $.camera2.scale += 0.01;
+        $.camera2.zoom *= 0.99;
     }
 }
 

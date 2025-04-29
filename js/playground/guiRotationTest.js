@@ -73,18 +73,17 @@ function updateInput() {
     }
 
 	if ($.keys.down("q")) {
-        $.camera2.rotation -= 0.0025;
+        $.camera2.rotation -= 0.01;
     }
     if ($.keys.down("e")) {
-        $.camera2.rotation += 0.0025;
+        $.camera2.rotation += 0.01;
     }
-
 
 	if ($.keys.down("i")) {
-        $.camera2.scale -= 0.01;
+        $.camera2.zoom *= 1.01;
     }
     if ($.keys.down("k")) {
-        $.camera2.scale += 0.01;
+        $.camera2.zoom *= 0.99;
     }
 }
 
