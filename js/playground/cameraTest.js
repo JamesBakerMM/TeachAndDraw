@@ -22,12 +22,14 @@ const circles = $.makeGroup(
     topCenter
 );
 
-for(let circle of circles){
+for(let circle of circles) {
     circle.velocity.x=2
     // circle.friction=0
 }
 
 function draw() {
+    $.shape.movedByCamera = true;
+    $.text.movedByCamera = true;
     if ($.keys.down("a")) {
         $.camera.x -= 1;
     }
