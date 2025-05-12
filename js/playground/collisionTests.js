@@ -163,6 +163,28 @@ function update() {
         // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
 
+    $.shape.movedByCamera = true;
+
+    if ($.keys.down("a")) {
+        $.camera.x -= 1;
+    }
+    if ($.keys.down("d")) {
+        $.camera.x += 1;
+    }
+    if ($.keys.down("w")) {
+        $.camera.y -= 1;
+    }
+    if ($.keys.down("s")) {
+        $.camera.y += 1;
+    }
+    if ($.keys.down("q")) {
+        $.camera.rotation -= 1;
+    }
+    if ($.keys.down("e")) {
+        $.camera.rotation += 1;
+    }
+
+
     // drawTree(squares.QuadTree.getTree(), 0);
     //console.log(squares.QuadTree.getTree());
 

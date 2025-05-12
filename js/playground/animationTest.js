@@ -66,7 +66,18 @@ function draw() {
     $.text.alignment.y = "top";
     $.text.alignment.x = "left";
     $.text.movedByCamera = true;
-
+    if ($.keys.down("a")) {
+        $.camera.x -= 1;
+    }
+    if ($.keys.down("d")) {
+        $.camera.x += 1;
+    }
+    if ($.keys.down("w")) {
+        $.camera.y -= 1;
+    }
+    if ($.keys.down("s")) {
+        $.camera.y += 1;
+    }
     for (let i=0; i<16; i++)
     {
         const A = anims[i];

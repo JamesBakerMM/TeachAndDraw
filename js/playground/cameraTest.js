@@ -22,14 +22,12 @@ const circles = $.makeGroup(
     topCenter
 );
 
-for(let circle of circles) {
+for(let circle of circles){
     circle.velocity.x=2
     // circle.friction=0
 }
 
 function draw() {
-    $.shape.movedByCamera = true;
-    $.text.movedByCamera = true;
     if ($.keys.down("a")) {
         $.camera.x -= 1;
     }
@@ -42,12 +40,16 @@ function draw() {
     if ($.keys.down("s")) {
         $.camera.y += 1;
     }
-    circles.draw();
+
     for (let circle of circles) {
         if (circle.movedByCamera) {
+            $.text.movedByCamera = true;
             $.text.print(circle.x, circle.y-20, `🎥 ${parseInt(circle.x)},${parseInt(circle.y)}`);
+            $.text.movedByCamera = false;
         } else {
             $.text.print(circle.x, circle.y-20, `${parseInt(circle.x)},${parseInt(circle.y)}`);
         }
     }
+
+    circles.draw();
 }
