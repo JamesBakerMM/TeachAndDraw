@@ -1,3 +1,4 @@
+import { Paint } from "../../lib/Paint.js";
 import { $ } from "../../lib/TeachAndDraw.js";  
 
 $.width = 800;
@@ -39,6 +40,9 @@ function ngon( x, y, n, width, height=width )
 
 
 function update() {
+    $.shape.movedByCamera = true;
+    $.shape.colour = Paint.grey;
+    $.shape.border = Paint.white;
 
     $.shape.rounding = slider.value;
     $.shape.multiline(100, 500, 200, 400, 300, 600, 400, 500, 500, 450, 600, 550);

@@ -1,4 +1,4 @@
-import { $, shape, colour, mouse, keys, text } from "../../lib/TeachAndDraw.js";
+import { $, shape, mouse, keys, text } from "../../lib/TeachAndDraw.js";
 import { Paint } from "../../lib/Paint.js";
 import { Velocity } from "../../lib/Velocity.js";
 
@@ -74,8 +74,8 @@ function drawTree(quad, counter) {
     for (let i = 1; i <= 4; i++) {
         let q = quad.getQuad(i);
         if (q != null) {
-            $.colour.stroke="black";
-            $.colour.fill = "white";//colorArray[counter];
+            $.shape.colour = "black";
+            $.shape.colour = "white"; //colorArray[counter];
             counter += 1;
             if (counter == colorArray.length) {
                 counter = 0;
@@ -86,8 +86,8 @@ function drawTree(quad, counter) {
     }
 }
 
-function background(colour){
-    $.colour.fill=colour;
+function background(colour) {
+    $.shape.colour = colour;
     $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
 }
 
@@ -101,9 +101,8 @@ let flag = 1;
 
 function update() { 
     setup();
-    background("rgba(125,125,125)");
-
-    $.colour.fill="black";
+    background("rgba(125, 125, 125)");
+    $.shape.colour = "black";
     //$.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
 
     if(mouse.leftDown){   
@@ -163,6 +162,28 @@ function update() {
         // $.colour.stroke = "#FFFF00FF";
         // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
+
+    $.shape.movedByCamera = true;
+
+    if ($.keys.down("a")) {
+        $.camera.x -= 1;
+    }
+    if ($.keys.down("d")) {
+        $.camera.x += 1;
+    }
+    if ($.keys.down("w")) {
+        $.camera.y -= 1;
+    }
+    if ($.keys.down("s")) {
+        $.camera.y += 1;
+    }
+    if ($.keys.down("q")) {
+        $.camera.rotation -= 1;
+    }
+    if ($.keys.down("e")) {
+        $.camera.rotation += 1;
+    }
+
 
     // drawTree(squares.QuadTree.getTree(), 0);
     //console.log(squares.QuadTree.getTree());

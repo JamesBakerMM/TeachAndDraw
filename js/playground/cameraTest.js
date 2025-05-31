@@ -40,12 +40,16 @@ function draw() {
     if ($.keys.down("s")) {
         $.camera.y += 1;
     }
-    circles.draw();
+
     for (let circle of circles) {
         if (circle.movedByCamera) {
+            $.text.movedByCamera = true;
             $.text.print(circle.x, circle.y-20, `🎥 ${parseInt(circle.x)},${parseInt(circle.y)}`);
+            $.text.movedByCamera = false;
         } else {
             $.text.print(circle.x, circle.y-20, `${parseInt(circle.x)},${parseInt(circle.y)}`);
         }
     }
+
+    circles.draw();
 }

@@ -17,6 +17,7 @@ function preload() {
     for (let i=0; i<8; i++)
     {
         const A = $.loadAnimation(0, 0, ...paths);
+        A.movedByCamera = true;
         A.scale = 200;
         A.looping = true;
         A.duration = (i + 1.0) * 0.5;
@@ -36,6 +37,7 @@ function preload() {
     for (let i=0; i<8; i++)
     {
         const A = $.loadAnimation(0, 0, ...paths);
+        A.movedByCamera = true;
         A.scale = 200;
         A.looping = false;
         A.duration = (i + 1.0) * 0.5;
@@ -61,15 +63,25 @@ preload();
 let collider = $.makeCircleCollider($.width/2, $.height/2, 100, 100);
 collider.asset = anims[0];
 function draw() {
-
     $.text.alignment.y = "top";
     $.text.alignment.x = "left";
-
-    // anims[0].duration -= 0.001;
-
+    $.text.movedByCamera = true;
+    if ($.keys.down("a")) {
+        $.camera.x -= 1;
+    }
+    if ($.keys.down("d")) {
+        $.camera.x += 1;
+    }
+    if ($.keys.down("w")) {
+        $.camera.y -= 1;
+    }
+    if ($.keys.down("s")) {
+        $.camera.y += 1;
+    }
     for (let i=0; i<16; i++)
     {
         const A = anims[i];
+        A.movedByCamera = !(i <= 2);
         A.draw();
 
         $.text.print(A.x-50, A.y+50, `duration = ${A.duration}`);

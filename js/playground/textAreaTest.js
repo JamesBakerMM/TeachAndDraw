@@ -1,4 +1,5 @@
-import { $, text } from "../../lib/TeachAndDraw.js";
+import { $ } from "../../lib/TeachAndDraw.js";
+
 $.debug = true;
 
 $.h = 512;
@@ -33,3 +34,4 @@ function update() {
 	textArea.characterLimit = 300;
 
 }
+

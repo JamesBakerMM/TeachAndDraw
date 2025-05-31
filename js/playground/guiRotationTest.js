@@ -1,3 +1,4 @@
+import { Paint } from "../../lib/Paint.js";
 import { $ } from "../../lib/TeachAndDraw.js";
 
 $.use(update);
@@ -16,6 +17,23 @@ textArea.value = "Some text goes here";
 
 
 function update() {
+    updateInput();
+
+    $.shape.movedByCamera = true;
+
+    $.shape.strokeWidth = 2;
+    $.shape.border = Paint.white;
+    $.shape.colour = Paint.white;
+
+    for (let i=0; i<=$.w; i+=50) {
+        $.shape.line(i, 0, i, $.h);
+    }
+
+    for (let i=0; i<=$.h; i+=50) {
+        $.shape.line(0, i, $.w, i);
+    }
+
+
     if (btn.hovered) {
         btn.label = "hovered";
     } else {
@@ -39,3 +57,34 @@ function update() {
 	textArea.draw();
 
 }
+
+function updateInput() {
+    if ($.keys.down("leftArrow")) {
+        $.camera.x -= 1;
+    }
+    if ($.keys.down("rightArrow")) {
+        $.camera.x += 1;
+    }
+    if ($.keys.down("upArrow")) {
+        $.camera.y -= 1;
+    }
+    if ($.keys.down("downArrow")) {
+        $.camera.y += 1;
+    }
+
+	if ($.keys.down("q")) {
+        $.camera.rotation -= 0.01;
+    }
+    if ($.keys.down("e")) {
+        $.camera.rotation += 0.01;
+    }
+
+	if ($.keys.down("i")) {
+        $.camera.zoom *= 1.01;
+    }
+    if ($.keys.down("k")) {
+        $.camera.zoom *= 0.99;
+    }
+}
+
+

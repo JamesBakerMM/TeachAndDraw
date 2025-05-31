@@ -1,4 +1,5 @@
 import { $ } from "../../lib/TeachAndDraw.js";
+import { Paint } from "../../lib/Paint.js";
 $.use(update);
 
 let groups = []
@@ -24,7 +25,6 @@ for (let i=0; i<10; i++) {
 
 
 function update() {
-
     for (let i=0; i<groups.length; i++)
     {
         groups[i].draw();
