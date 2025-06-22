@@ -49,7 +49,7 @@ function dragTest() {
         $.shape.strokeWidth = 5;
         $.shape.line(
             $.touch.startX, $.touch.startY,
-            $.touch.currX, $.touch.currY
+            $.touch.endX, $.touch.endY
         );
         $.shape.border = Paint.clear;
         $.shape.strokeWidth = 1;
@@ -58,11 +58,11 @@ function dragTest() {
         $.shape.oval($.touch.startX, $.touch.startY, 10);
     
         $.shape.colour = Paint.blue;
-        $.shape.oval($.touch.currX, $.touch.currY, 10);
+        $.shape.oval($.touch.endX, $.touch.endY, 10);
     
         $.text.colour = Paint.white;
         $.text.print($.touch.startX, $.touch.startY-25, "start");
-        $.text.print($.touch.currX, $.touch.currY-25, "current");
+        $.text.print($.touch.endX, $.touch.endY-25, "end");
     }
 
 
@@ -73,8 +73,8 @@ function dragTest() {
     ($.touch.swipedUp) ? console.log("swipedUp") : {};
     ($.touch.swipedDown) ? console.log("swipedDown") : {};
 
-    // $.camera.x += $.touch.motionX;
-    // $.camera.y += $.touch.motionY;
+    $.camera.x += $.touch.dragX;
+    $.camera.y += $.touch.dragY;
 
 }
 
