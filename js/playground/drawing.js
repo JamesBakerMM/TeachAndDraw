@@ -214,17 +214,11 @@ let drawables = [
 
 
 function update() {
-
-    if (toolButtons.rect.released)
-        toolState = toolStateRectIdle;
-    if (toolButtons.oval.released)
-        toolState = toolStateOvalIdle;
-    if (toolButtons.brush.released)
-        toolState = toolStateBrushIdle;
-    if (toolButtons.undo.released)
-        toolState = toolStateUndo;
-    if (toolButtons.clear.released)
-        toolState = toolStateClear;
+    if (toolButtons.rect.released)  toolState = toolStateRectIdle;
+    if (toolButtons.oval.released)  toolState = toolStateOvalIdle;
+    if (toolButtons.brush.released) toolState = toolStateBrushIdle;
+    if (toolButtons.undo.released)  toolState = toolStateUndo;
+    if (toolButtons.clear.released) toolState = toolStateClear;
 
     strokeColour = dropdownColour.value;
     toolState();
@@ -232,9 +226,7 @@ function update() {
     for (let S of strokes) {
         S.draw();
     }
-
     for (let D of drawables) {
         D.draw();
     }
-
 }
