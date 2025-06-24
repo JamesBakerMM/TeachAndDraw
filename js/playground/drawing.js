@@ -8,12 +8,6 @@ $.use(update);
 
 class Stroke {
 
-    /** @type {Number} */
-    size = 4;
-
-    /** @type {String} */
-    colour = Paint.white;
-
     /** @type {Number[]} */
     sizes = [];
 
@@ -90,6 +84,7 @@ class OvalStroke {
     draw() {
         $.shape.colour = this.colour;
         $.shape.border = this.colour;
+        $.shape.strokeWidth = 1;
         $.shape.oval(this.x, this.y, this.w, this.h);
     }
 }
