@@ -94,12 +94,6 @@ class OvalStroke {
     }
 }
 
-
-
-
-
-
-
 /** @type {Stroke[]} */
 let strokes = [];
 let strokeColour = "green";
@@ -124,10 +118,8 @@ function toolStateBrushDragging() {
     const prevStroke = strokes[strokes.length-1];
     const prevPoints = prevStroke.points;
     const prevPoint  = prevPoints[prevPoints.length-1];
-
     const delta = $.math.distance($.mouse.previous.x, $.mouse.previous.y, $.mouse.x, $.mouse.y);
     const speed = delta / $.time.msElapsed;
-
     if (!isNaN(delta)) {
         mspeed = 0.95*mspeed + 0.05*speed;
     }
@@ -153,10 +145,8 @@ function toolStateRectIdle() {
 
 function toolStateRectDragging() {
     const prevStroke = strokes[strokes.length-1];
-
     prevStroke.x1 = $.mouse.x;
     prevStroke.y1 = $.mouse.y;
-
     if ($.mouse.leftReleased) {
         toolState = toolStateRectIdle;
     }
@@ -184,7 +174,8 @@ function toolStateOvalDragging() {
 
 
 function toolStateUndo() {
-    strokes.length = Math.max(strokes.length-1, 0);
+    if (strokes.length > 0)
+        strokes.pop();
     toolState = toolStateIdle;
 }
 
@@ -224,15 +215,15 @@ let drawables = [
 
 function update() {
 
-    if (toolButtons.rect.down)
+    if (toolButtons.rect.released)
         toolState = toolStateRectIdle;
-    if (toolButtons.oval.down)
+    if (toolButtons.oval.released)
         toolState = toolStateOvalIdle;
-    if (toolButtons.brush.down)
+    if (toolButtons.brush.released)
         toolState = toolStateBrushIdle;
-    if (toolButtons.undo.down)
+    if (toolButtons.undo.released)
         toolState = toolStateUndo;
-    if (toolButtons.clear.down)
+    if (toolButtons.clear.released)
         toolState = toolStateClear;
 
     strokeColour = dropdownColour.value;
