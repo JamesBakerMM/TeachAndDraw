@@ -15,18 +15,11 @@ class Stroke {
 /** @type {Array<Stroke[]>} */
 const allLayers = [[], [], [], []];
 
-const layerButtons = [
+const layerSelectButtons = [
     $.makeButton($.w-50,  50, 75, 25, "Layer 0"),
     $.makeButton($.w-50,  80, 75, 25, "Layer 1"),
     $.makeButton($.w-50, 110, 75, 25, "Layer 2"),
     $.makeButton($.w-50, 140, 75, 25, "Layer 3"),
-];
-
-const layerShowButtons = [
-    $.makeButton($.w-100,  50, 25, 25, "🗙"),
-    $.makeButton($.w-100,  80, 25, 25, "🗙"),
-    $.makeButton($.w-100, 110, 25, 25, "🗙"),
-    $.makeButton($.w-100, 140, 25, 25, "🗙"),
 ];
 
 const layerHideButtons = [
@@ -43,8 +36,6 @@ const layerVisibility = [
 
 function update() {
 
-    DrawTool.currTool.update();
-
     for (let i=0; i<allLayers.length; i++) {
         if (layerVisibility[i] == true) {
             for (let S of allLayers[i]) {
@@ -53,33 +44,42 @@ function update() {
         }
     }
 
-    for (let T of allTools) {
-        T.draw();
-    }
 
-    for (let i=0; i<layerButtons.length; i++) {
+    DrawTool.btnHovered = false;
 
-        if (layerVisibility[i] == true) {
-            if (layerHideButtons[i].released)
-                layerVisibility[i] = false;
-            layerHideButtons[i].draw();
-        } else {
-            if (layerShowButtons[i].released)
-                layerVisibility[i] = true;
-            layerShowButtons[i].draw();
+    for (let i=0; i<layerSelectButtons.length; i++) {
+        if (layerHideButtons[i].hovered) {
+            DrawTool.btnHovered = true;
         }
+        if (layerHideButtons[i].released) {
+            layerVisibility[i] = !layerVisibility[i];
+        }
+        if (layerVisibility[i]) {
+            layerHideButtons[i].label = "👁";
+        } else {
+            layerHideButtons[i].label = "🗙";
+        }
+        layerHideButtons[i].draw();
 
-        if (layerButtons[i].released) {
+        if (layerSelectButtons[i].hovered) {
+            DrawTool.btnHovered = true;
+        }
+        if (layerSelectButtons[i].released) {
             DrawTool.currLayer = i;
         }
         if (DrawTool.currLayer == i) {
-            layerButtons[i].background = "grey";
-            layerButtons[i].textColour = "white";
+            layerSelectButtons[i].background = "grey";
+            layerSelectButtons[i].textColour = "white";
         } else {
-            layerButtons[i].background = "white";
-            layerButtons[i].textColour = "grey";
+            layerSelectButtons[i].background = "white";
+            layerSelectButtons[i].textColour = "grey";
         }
-        layerButtons[i].draw();
+        layerSelectButtons[i].draw();
+    }
+
+    DrawTool.currTool.update();
+    for (let T of allTools) {
+        T.draw();
     }
 }
 
@@ -180,6 +180,7 @@ class DrawTool {
     static prevTool = undefined;
     /** @type {Number} */
     static currLayer = 0;
+    static btnHovered = false;
 
     static switchTool(tool) {
         if (DrawTool.currTool == undefined) {
@@ -214,11 +215,11 @@ class DrawTool {
     }
 
     update() {
-        let btnHovered = false;
+        // let btnHovered = false;
 
         for (let T of allTools) {
             if (T.button.hovered) {
-                btnHovered = true;
+                DrawTool.btnHovered = true;
             }
             if (T.button.released) {
                 DrawTool.switchTool(T);
@@ -226,7 +227,7 @@ class DrawTool {
             }
         }
 
-        if ($.mouse.leftDown && !this.isDown && !btnHovered) {
+        if ($.mouse.leftDown && !this.isDown && !DrawTool.btnHovered) {
             this.isDown = true;
             this.beginStroke();
         } else if ($.mouse.leftReleased) {
