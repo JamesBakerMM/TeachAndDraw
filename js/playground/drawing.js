@@ -1,62 +1,135 @@
-import { Colour } from "../../lib/Colour.js";
-import { Paint } from "../../lib/Paint.js";
 import { $ } from "../../lib/TeachAndDraw.js";  
 import { Vector } from "../../lib/Vector.js";
 
 $.use(update);
 
 
+
 class Stroke {
+    /** @type {String} */
+    colour;
+    constructor(colour) { this.colour = colour; }
+    draw() {  }
+    translate(x, y) {  }
+}
+/** @type {Array<Stroke[]>} */
+const allLayers = [[], [], [], []];
 
-    /** @type {Number[]} */
-    sizes = [];
+const layerButtons = [
+    $.makeButton($.w-50,  50, 75, 25, "Layer 0"),
+    $.makeButton($.w-50,  80, 75, 25, "Layer 1"),
+    $.makeButton($.w-50, 110, 75, 25, "Layer 2"),
+    $.makeButton($.w-50, 140, 75, 25, "Layer 3"),
+];
 
-    /** @type {String[]} */
-    colours = [];
+const layerShowButtons = [
+    $.makeButton($.w-100,  50, 25, 25, "🗙"),
+    $.makeButton($.w-100,  80, 25, 25, "🗙"),
+    $.makeButton($.w-100, 110, 25, 25, "🗙"),
+    $.makeButton($.w-100, 140, 25, 25, "🗙"),
+];
 
-    /** @type {Vector[]} */
-    points = new Array();
+const layerHideButtons = [
+    $.makeButton($.w-100,  50, 25, 25, "👁"),
+    $.makeButton($.w-100,  80, 25, 25, "👁"),
+    $.makeButton($.w-100, 110, 25, 25, "👁"),
+    $.makeButton($.w-100, 140, 25, 25, "👁"),
+];
 
-    constructor(x, y, size=4) {
-        this.size = size;
-        this.pushPoint(x, y, size);
-    }
+const layerVisibility = [
+    true, true, true, true
+];
 
-    pushPoint(x, y, size=4) {
-        this.points.push(new Vector(x, y));
-        this.colours.push(strokeColour);
-        this.sizes.push(size);
-    }
 
-    draw() {
-        const S = this;
-        for (let i=0; i<S.points.length-1; i++)
-        {
-            const p0 = S.points[i+0];
-            const p1 = S.points[i+1];
-            $.shape.border = S.colours[i];
-            $.shape.colour = S.colours[i];
-            $.shape.strokeWidth = S.sizes[i];
-            $.shape.line(p0.x, p0.y, p1.x, p1.y);
+function update() {
 
-            $.shape.strokeWidth = 0;
-            // $.shape.oval(p0.x, p0.y, S.sizes[i+0]/32);
-            $.shape.oval(p1.x, p1.y, S.sizes[i+1]/32);
+    DrawTool.currTool.update();
+
+    for (let i=0; i<allLayers.length; i++) {
+        if (layerVisibility[i] == true) {
+            for (let S of allLayers[i]) {
+                S.draw();
+            }
         }
+    }
+
+    for (let T of allTools) {
+        T.draw();
+    }
+
+    for (let i=0; i<layerButtons.length; i++) {
+
+        if (layerVisibility[i] == true) {
+            if (layerHideButtons[i].released)
+                layerVisibility[i] = false;
+            layerHideButtons[i].draw();
+        } else {
+            if (layerShowButtons[i].released)
+                layerVisibility[i] = true;
+            layerShowButtons[i].draw();
+        }
+
+        if (layerButtons[i].released) {
+            DrawTool.currLayer = i;
+        }
+        if (DrawTool.currLayer == i) {
+            layerButtons[i].background = "grey";
+            layerButtons[i].textColour = "white";
+        } else {
+            layerButtons[i].background = "white";
+            layerButtons[i].textColour = "grey";
+        }
+        layerButtons[i].draw();
     }
 }
 
 
-class RectStroke {
-    x0; y0; x1; y1;
-    colour;
 
-    constructor(x0, y0) {
-        this.x0 = x0;
-        this.y0 = y0;
-        this.x1 = x0;
-        this.y1 = y0;
-        this.colour = strokeColour;
+
+class BrushStroke extends Stroke {
+    /** @type {Number} */
+    size;
+
+    /** @type {Number[]} */
+    points = [];
+
+    constructor(x, y, size, colour) {
+        super(colour);
+        this.size = size;
+        this.pushPoint(x, y, size);
+        this.pushPoint(x, y, size);
+    }
+
+    pushPoint(x, y) {
+        this.points.push(x);
+        this.points.push(y);
+    }
+
+    draw() {
+        $.shape.strokeWidth = this.size;
+        $.shape.colour = this.colour;
+        $.shape.border = this.colour;
+        $.shape.multiline(...this.points);
+    }
+
+    translate(x, y) {
+        for (let i=0; i<this.points.length/2; i++) {
+            this.points[2*i+0] += x;
+            this.points[2*i+1] += y;
+        }
+    }
+
+}
+
+
+class RectStroke extends Stroke {
+    x0; y0; x1; y1;
+
+    constructor(x0, y0, colour) {
+        super(colour);
+        this.x0=x0; this.y0=y0;
+        this.x1=x0; this.y1=y0;
+        this.colour = colour;
     }
 
     draw() {
@@ -66,19 +139,21 @@ class RectStroke {
         const h = this.y1 - this.y0;
         $.shape.rectangle(this.x0+w/2, this.y0+h/2, w, h);
     }
+
+    translate(x, y) {
+        this.x0+=x; this.y0+=y;
+        this.x1+=x; this.y1+=y;
+    }
 }
 
 
-class OvalStroke {
+class OvalStroke extends Stroke {
     x; y; w; h;
-    colour;
 
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.w = 1;
-        this.h = 1;
-        this.colour = strokeColour;
+    constructor(x, y, colour) {
+        super(colour);
+        this.x=x; this.y=y;
+        this.w=1; this.h=1;
     }
 
     draw() {
@@ -87,141 +162,281 @@ class OvalStroke {
         $.shape.strokeWidth = 1;
         $.shape.oval(this.x, this.y, this.w, this.h);
     }
-}
 
-/** @type {Stroke[]} */
-let strokes = [];
-let strokeColour = "green";
-
-
-let toolState = toolStateClear;
-
-
-function toolStateBrushIdle() {
-    dropdownColour.x = toolButtons.brush.x;
-
-    if ($.mouse.leftDown) {
-        strokes.push(new Stroke($.mouse.x, $.mouse.y));
-        toolState = toolStateBrushDragging;
-    }
-}
-
-
-let mspeed = 0;
-
-function toolStateBrushDragging() {
-    const prevStroke = strokes[strokes.length-1];
-    const prevPoints = prevStroke.points;
-    const prevPoint  = prevPoints[prevPoints.length-1];
-    const delta = $.math.distance($.mouse.previous.x, $.mouse.previous.y, $.mouse.x, $.mouse.y);
-    const speed = delta / $.time.msElapsed;
-    if (!isNaN(delta)) {
-        mspeed = 0.95*mspeed + 0.05*speed;
-    }
-    if ($.math.distance(prevPoint.x, prevPoint.y, $.mouse.x, $.mouse.y) > 2*prevStroke.size) {
-        prevStroke.pushPoint($.mouse.x, $.mouse.y, Math.max(4*mspeed, 4));
-    }
-    if ($.mouse.leftReleased) {
-        mspeed = 0;
-        toolState = toolStateBrushIdle;
+    translate(x, y) {
+        this.x+=x; this.y+=y;
     }
 }
 
 
 
+import { Button } from "../../lib/Button.js";
+import { Dropdown } from "../../lib/Dropdown.js";
 
-function toolStateRectIdle() {
-    dropdownColour.x = toolButtons.rect.x;
-    if ($.mouse.leftDown) {
-        strokes.push(new RectStroke($.mouse.x, $.mouse.y));
-        toolState = toolStateRectDragging;
+class DrawTool {
+    /** @type {DrawTool} */
+    static currTool = undefined;
+    /** @type {DrawTool} */
+    static prevTool = undefined;
+    /** @type {Number} */
+    static currLayer = 0;
+
+    static switchTool(tool) {
+        if (DrawTool.currTool == undefined) {
+            DrawTool.prevTool = tool;
+            DrawTool.currTool = tool;
+        } else {
+            DrawTool.currTool.isDown = false;
+            DrawTool.prevTool = DrawTool.currTool;
+            DrawTool.currTool = tool;
+        }
+    }
+
+    /** @type {Button} */
+    button;
+    /** @type {Dropdown} */
+    colourDropdown;
+    
+    static #btnx = 50;
+    static #colourOptions = [
+        "white", "black", "grey",
+        "green", "blue", "red", "purple", "aqua", "pink", "yellow", "brown", "orange",
+    ];
+    isDown = false;
+
+    constructor(label) {
+        this.button = $.makeButton(DrawTool.#btnx, 15, 100, 30, label);
+        this.colourDropdown = $.makeDropdown(
+            DrawTool.#btnx, this.button.y+this.button.h, 100,
+            DrawTool.#colourOptions
+        );
+        DrawTool.#btnx += 100;
+    }
+
+    update() {
+        let btnHovered = false;
+
+        for (let T of allTools) {
+            if (T.button.hovered) {
+                btnHovered = true;
+            }
+            if (T.button.released) {
+                DrawTool.switchTool(T);
+                break;
+            }
+        }
+
+        if ($.mouse.leftDown && !this.isDown && !btnHovered) {
+            this.isDown = true;
+            this.beginStroke();
+        } else if ($.mouse.leftReleased) {
+            this.isDown = false
+            this.endStroke();
+        } else if (this.isDown) {
+            this.midStroke();
+        }
+    }
+
+    draw(drawDropdown=true) {
+        if (DrawTool.currTool == this) {
+            this.button.background = "grey"
+            this.button.textColour = "white"
+        } else {
+            this.button.background = "white";
+            this.button.textColour = "grey"
+        }
+
+        this.colourDropdown.accentColour = this.colourDropdown.value;
+        this.colourDropdown.secondaryColour = this.colourDropdown.value;
+
+        if (this.colourDropdown.open) {
+            for (let i=0; i<this.colourDropdown.options.length; i++) {
+                if (this.colourDropdown.isHoverOnOption(i)) {
+                    this.colourDropdown.accentColour = this.colourDropdown.options[i];
+                    this.colourDropdown.secondaryColour = this.colourDropdown.options[i];
+                    break;
+                }
+            }
+        }
+
+        $.state.save();
+        this.button.draw();
+        if (drawDropdown)
+            this.colourDropdown.draw();
+        $.state.load();
+    }
+
+    pushStroke(stroke) {
+        allLayers[DrawTool.currLayer].push(stroke);
+    }
+    popStroke() {
+
+    }
+    topStroke() {
+        const layer = allLayers[DrawTool.currLayer];
+        return layer[layer.length-1];
+    }
+    beginStroke() {  }
+    midStroke() {  }
+    endStroke() {  }
+}
+
+class DrawToolBrush extends DrawTool {
+    mspeed = 0;
+    prevxy = new Vector(0, 0);
+    constructor() { super("Brush"); }
+    beginStroke() {
+        console.log(this.button.label);
+
+        this.pushStroke(new BrushStroke($.mouse.x, $.mouse.y, 4, this.colourDropdown.value));
+        this.prevxy.x = $.mouse.x;
+        this.prevxy.y = $.mouse.y;
+    }
+    endStroke() {
+        this.mspeed = 0;
+    }
+    midStroke() {
+        const layer = allLayers[DrawTool.currLayer];
+        const prevStroke = layer[layer.length-1];
+        const delta = $.math.distance($.mouse.previous.x, $.mouse.previous.y, $.mouse.x, $.mouse.y);
+        const speed = delta / $.time.msElapsed;
+        if (!isNaN(delta)) {
+            this.mspeed = 0.95*this.mspeed + 0.05*speed;
+        }
+        if ($.math.distance(this.prevxy.x, this.prevxy.y, $.mouse.x, $.mouse.y) > 2*prevStroke.size) {
+            prevStroke.pushPoint($.mouse.x, $.mouse.y, Math.max(4*this.mspeed, 4));
+            this.prevxy.x = $.mouse.x;
+            this.prevxy.y = $.mouse.y;
+        }
     }
 }
 
-function toolStateRectDragging() {
-    const prevStroke = strokes[strokes.length-1];
-    prevStroke.x1 = $.mouse.x;
-    prevStroke.y1 = $.mouse.y;
-    if ($.mouse.leftReleased) {
-        toolState = toolStateRectIdle;
+class DrawToolRect extends DrawTool {
+    constructor() { super("Rect"); }
+    beginStroke() {
+        this.pushStroke(new RectStroke($.mouse.x, $.mouse.y, this.colourDropdown.value));
+    }
+    midStroke() {
+        const layer = allLayers[DrawTool.currLayer];
+        const prevStroke = layer[layer.length-1];
+        prevStroke.x1 = $.mouse.x;
+        prevStroke.y1 = $.mouse.y;
+    }
+}
+
+class DrawToolOval extends DrawTool {
+    constructor() { super("Oval"); }
+    beginStroke() {
+        this.pushStroke(new OvalStroke($.mouse.x, $.mouse.y, this.colourDropdown.value));
+    }
+    midStroke() {
+        const layer = allLayers[DrawTool.currLayer];
+        const prevStroke = layer[layer.length-1];
+        prevStroke.w = $.math.abs($.mouse.x - prevStroke.x);
+        prevStroke.h = $.math.abs($.mouse.y - prevStroke.y);
+    }
+}
+
+class DrawToolGrab extends DrawTool {
+    constructor() { super("Grab"); }
+
+    midStroke() {
+        const layer = allLayers[DrawTool.currLayer];
+        for (let S of layer) {
+            S.translate($.mouse.x-$.mouse.previous.x, $.mouse.y-$.mouse.previous.y);
+        }
+    }
+    draw() {
+        super.draw(false);
+    }
+}
+
+class DrawToolUndo extends DrawTool {
+    constructor() { super("Undo"); }
+    update() {
+        console.log(this.button.label);
+        // if (this.button.released && allStrokes.length > 0) {
+            allLayers[DrawTool.currLayer].pop();
+            DrawTool.currTool = DrawTool.prevTool;
+        // }
+    }
+    draw() {
+        super.draw(false);
+    }
+}
+
+class DrawToolClear extends DrawTool {
+    constructor() { super("Clear"); }
+    update() {
+        allLayers[DrawTool.currLayer].length = 0;
+        DrawTool.currTool = DrawTool.prevTool;
+    }
+    draw() {
+        super.draw(false);
+    }
+}
+
+
+class DrawToolPopLayer extends DrawTool {
+    constructor() {
+        super("-");
+        this.button.x = $.w-50;
+        this.button.y = 50;
+        this.button.w = 25;
+        this.button.h = 25;
+    }
+    update() {
+        allLayers.pop();
+        DrawTool.currTool = DrawTool.prevTool;
+    }
+    draw() {
+        let y = 50;
+        for (let i=0; i<allLayers.length; i++) {
+            // $.shape.rectangle(this.button.x, y, 50, 50);
+            y += 50;
+        }
+        this.button.y = y;
+        super.draw(false);
+    }
+}
+
+class DrawToolPushLayer extends DrawTool {
+    constructor() {
+        super("+");
+        this.button.x = $.w-50 + 25;
+        this.button.y = 100;
+        this.button.w = 25;
+        this.button.h = 25;
+    }
+    update() {
+        allLayers.push([]);
+        DrawTool.currTool = DrawTool.prevTool;
+    }
+    draw() {
+        let y = 50;
+        for (let i=0; i<allLayers.length; i++) {
+            $.shape.rectangle(this.button.x-12.5, y, 50, 50);
+            y += 50;
+        }
+        this.button.y = y;
+        super.draw(false);
     }
 }
 
 
 
-function toolStateOvalIdle() {
-    dropdownColour.x = toolButtons.oval.x;
-    if ($.mouse.leftDown) {
-        strokes.push(new OvalStroke($.mouse.x, $.mouse.y));
-        toolState = toolStateOvalDragging;
-    }
-}
 
-function toolStateOvalDragging() {
-    const prevStroke = strokes[strokes.length-1];
-    prevStroke.w = $.math.abs($.mouse.x - prevStroke.x);
-    prevStroke.h = $.math.abs($.mouse.y - prevStroke.y);
-    if ($.mouse.leftReleased) {
-        toolState = toolStateOvalIdle;
-    }
-}
-
-
-
-function toolStateUndo() {
-    if (strokes.length > 0)
-        strokes.pop();
-    toolState = toolStateIdle;
-}
-
-function toolStateClear() {
-    dropdownColour.x = $.w + 50;
-    strokes = [];
-    toolState = toolStateIdle;
-}
-
-function toolStateIdle() {
-
-}
-
-
-
-let dropdownColour = $.makeDropdown(
-    50, 50, 100, ["white", "black", "grey", "red", "blue", "green", "orange", "yellow", "purple", "pink"]
-);
-
-let toolButtons = {
-    rect:  $.makeButton( 50, 15, 100, 30, "Rect"),
-    oval:  $.makeButton(150, 15, 100, 30, "Oval"),
-    brush: $.makeButton(250, 15, 100, 30, "Brush"),
-    undo:  $.makeButton(350, 15, 100, 30, "Undo"),
-    clear: $.makeButton($.w-50, 15, 100, 30, "Clear"),
-};
-
-let drawables = [
-    dropdownColour,
-    toolButtons.rect,
-    toolButtons.oval,
-    toolButtons.brush,
-    toolButtons.undo,
-    toolButtons.clear,
+/** @type {DrawTool[]} */
+const allTools = [
+    new DrawToolBrush(),
+    new DrawToolRect(),
+    new DrawToolOval(),
+    new DrawToolGrab(),
+    new DrawToolUndo(),
+    new DrawToolClear(),
+    // new DrawToolPopLayer(),
+    // new DrawToolPushLayer(),
 ];
+DrawTool.currTool = allTools[0];
+DrawTool.pervTool = allTools[0];
 
-
-function update() {
-    if (toolButtons.rect.released)  toolState = toolStateRectIdle;
-    if (toolButtons.oval.released)  toolState = toolStateOvalIdle;
-    if (toolButtons.brush.released) toolState = toolStateBrushIdle;
-    if (toolButtons.undo.released)  toolState = toolStateUndo;
-    if (toolButtons.clear.released) toolState = toolStateClear;
-
-    strokeColour = dropdownColour.value;
-    toolState();
-
-    for (let S of strokes) {
-        S.draw();
-    }
-    for (let D of drawables) {
-        D.draw();
-    }
-}
