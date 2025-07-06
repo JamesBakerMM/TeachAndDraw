@@ -20,26 +20,26 @@ redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
 
-let yellowShip=$.makeCircleCollider(500,560,100,50);
+let yellowShip=$.makeCircleCollider(500,160,50,50);
 //yellowShip.asset=img;
 yellowShip.mass = 1;
-yellowShip.static = true;
+yellowShip.static = false;
 yellowShip.direction=180;
 yellowShip.friction = 5;
 yellowShip.speed = 0;
 yellowShip.bounciness = 100;
-yellowShip.rotation = 20;
+//yellowShip.rotation = 20;
 yellowShip.velocity = new Velocity(0, 0);
 squares.push(yellowShip);
 
-let box=$.makeCircleCollider(450,400,25,250);
-box.mass = 1;
-box.static = false;
-box.bounciness = 100;
+let box=$.makeBoxCollider(450,400,25,250);
+box.mass = 1000;
+box.static = true;
+box.bounciness = 0;
 box.friction= 0;
 box.rotation = 50;
-box.velocity = new Velocity(0, 10);
-box.rotationalVelocity = 5;
+box.velocity = new Velocity(0, 0);
+//box.rotationalVelocity = 5;
 squares.push(box);
 
 /*
@@ -53,19 +53,19 @@ box2.friction = 0;
 squares.push(box2);
 */
 
-/*
+
 let rightSquare;
 for (let i = 600; i > 100; i -= 10) {
     for (let j = 600; j > 100; j -= 10) {
         rightSquare=$.makeCircleCollider(i,j, 9, 9);
         rightSquare.mass = 1;
-        rightSquare.friction = 1;
+        rightSquare.friction = 100;
         rightSquare.bounciness = 50;
         //rightSquare.asset=img;
         squares.push(rightSquare);
     }
 }
-*/
+
 
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
@@ -127,15 +127,18 @@ function update() {
     //     leftSquare.velocity.y=-leftSquare.velocity.y
     // }
 
-    //yellowShip.velocity.y += 1;
+    yellowShip.velocity.y += 1;
 
     squares.collides(squares);
+    if (yellowShip.collides(box)) {
+        console.log("HIT");
+    }
 
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
         if (sq.shape == "circle")
         {
-            //sq.velocity.y += 1;
+            sq.velocity.y += 1;
         }
         
         if(sq.x>$.width){
