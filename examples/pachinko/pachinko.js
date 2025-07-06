@@ -1,7 +1,7 @@
-import { $, shape, colour, mouse, keys, text } from "../../lib/TeachAndDraw.js";
+import { $, shape, mouse, keys, text } from "../../lib/TeachAndDraw.js";
 
 $.use(update);
-$.debug=true;
+$.debug=false;
 
 //Make the groups
 let walls = $.makeGroup();
@@ -92,7 +92,7 @@ function update() {
     $.h=800;
 
     //do background colour
-    $.colour.fill="rgba(245,245,255)";
+    $.shape.colour="rgba(245,245,255)";
     $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
 
     //Spawn balls if spacebar is pressed
@@ -151,7 +151,7 @@ function update() {
 
 
     //Put text at the top of screen
-    $.colour.fill = "black";
+    $.shape.colour = "black";
     $.text.size = 64;
     $.text.font = font;
     $.text.print(300, 40, score.toString());

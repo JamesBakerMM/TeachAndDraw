@@ -98,8 +98,9 @@ flipper_right.friction = 0;
 flipper_right.asset = img_flipperR;
 
 //Setup the ball
-let ball=$.makeCircleCollider(450,700,40,40);
+let ball=$.makeCircleCollider(460,700,36,36);
 ball.asset = img_ball;
+ball.bounciness = 100;
 balls.push(ball);
 
 //Control variables
@@ -136,7 +137,7 @@ function update() {
         respawning -= 1;
         if (respawning === 0) {
             score = 0;
-            ball.x = 450;
+            ball.x = 460;
             ball.y = 700;
             ball.velocity.x = 0;
             ball.velocity.y = 0;
@@ -171,7 +172,7 @@ function update() {
         const hitLeft = ball.collides(flipper_left);
         const hitRight = ball.collides(flipper_right);
         if($.keys.down(" ") && (hitLeft || hitRight)){
-            ball.velocity.y = Math.abs(ball.velocity.y) * -1.3;
+            ball.velocity.y = Math.abs(ball.velocity.y) * 1.3;
         }
     }
     
