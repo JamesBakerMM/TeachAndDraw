@@ -1,14 +1,18 @@
-import { CollisionUtilities } from "../../lib/CollisionUtilities.js";
-import { $, shape, colour, mouse, keys, text } from "../../lib/TeachAndDraw.js";
+
+import { $ } from "../../lib/TeachAndDraw.js";
 
 $.use(update);
-$.debug=false;
+$.debug=true;
 
 //Make the groups
 const walls = $.makeGroup();
+walls.name="walls";
 const pegs = $.makeGroup();
+pegs.name="pegs";
 const pins = $.makeGroup();
+pins.name="pins";
 const balls = $.makeGroup();
+balls.name="balls";
 
 //load all the images
 const img_peg=$.loadImage(0,0,"./images/peg.png");
@@ -99,7 +103,7 @@ ball.asset = img_ball;
 balls.push(ball);
 
 //Control variables
-const maxBallSpeed = 150;
+const maxBallSpeed = 50;
 const flipperSpeed = 60;
 
 let score = 0;
@@ -116,15 +120,15 @@ function update() {
     $.h=800;
 
     //do background colour
-    $.colour.fill="rgba(245,245,255)";
+    $.shape.colour="rgba(245,245,255)";
     $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
 
     //limit ball max speed so it doesn't glitch out
-    let speed = CollisionUtilities.distance(ball.velocity.x, ball.velocity.y);
-    if (speed >= maxBallSpeed) {
-        let ballVector = CollisionUtilities.normalize(ball.velocity.x, ball.velocity.y);
-        ball.velocity.x = ballVector.x * maxBallSpeed;
-        ball.velocity.y = ballVector.y * maxBallSpeed;
+    if(ball.velocity.x > maxBallSpeed){
+        ball.velocity.x = maxBallSpeed;
+    }
+    if(ball.velocity.y > maxBallSpeed){
+        ball.velocity.y = maxBallSpeed;
     }
 
     //handle respawning if lost
@@ -153,7 +157,7 @@ function update() {
 
     //launch ball if over arrows in start
     if (ball.overlaps(arrows)) {
-        if(keys.down(" ")){
+        if($.keys.down(" ")){
             showScore = true;
             ball.velocity.y -= 20;
         }
@@ -166,19 +170,19 @@ function update() {
         //launch ball upwards if it touches a flipper
         const hitLeft = ball.collides(flipper_left);
         const hitRight = ball.collides(flipper_right);
-        if(keys.down(" ") && (hitLeft || hitRight)){
+        if($.keys.down(" ") && (hitLeft || hitRight)){
             ball.velocity.y = Math.abs(ball.velocity.y) * -1.3;
         }
     }
     
     //show instructions or score
     if (showScore) {
-        $.colour.fill = "black";
+        $.text.colour = "black";
         $.text.size = 64;
         $.text.font = font;
         $.text.print(220, 760, score.toString());
     } else {
-        $.colour.fill = "black";
+        $.text.colour = "black";
         $.text.size = 30;  
         $.text.font = font;
         $.text.print(225, 760, "Press Space To Start!");
@@ -213,7 +217,7 @@ function update() {
     }
 
     //trigger flippers moving upwards if space is pressed
-    if(keys.down(" ") && !moveFlipperUp){
+    if($.keys.down(" ") && !moveFlipperUp){
         flipper_left.rotationalVelocity = -flipperSpeed;
         flipper_right.rotationalVelocity = flipperSpeed;
         moveFlipperUp = true;
@@ -225,7 +229,7 @@ function update() {
     //Countdown to reset peg image after it has been hit
     for (let i = 0; i < pegs.length; i++) {
         const peg = pegs[i];
-        if (peg.life != null) {
+        if (peg.life !== null) {
             peg.life -= 1;
             if (peg.life == 0) {
                 peg.life = null;
@@ -236,7 +240,7 @@ function update() {
     //Countdown to reset pin image after it has been hit
     for (let i = 0; i < pins.length; i++) {
         const pin = pins[i];
-        if (pin.life != null) {
+        if (pin.life !== null) {
             pin.life -= 1;
             if (pin.life == 0) {
                 pin.life = null;

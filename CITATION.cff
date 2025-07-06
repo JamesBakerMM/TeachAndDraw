@@ -21,6 +21,8 @@ authors:
     orcid: 'https://orcid.org/0000-0002-4412-7199'
   - given-names: Nicholas
     family-names: Bland
+  - given-names: Michael
+    family-names: Ellicott
 abstract: >-
   TeachAndDraw.js is a JavaScript library that has been
   developed as a teaching and learning tool and is
