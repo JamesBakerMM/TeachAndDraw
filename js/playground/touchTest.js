@@ -40,7 +40,6 @@ function dragTest() {
     $.text.alignment.x = "left"
     $.text.print(50, 100, `down == ${$.touch.down}`);
     $.text.print(50, 120, `released == ${$.touch.released}`);
-    $.text.print(50, 140, `dragged == ${$.touch.dragged}`);
 
     // console.log($.touch.dragEnd.x, $.touch.dragEnd.y, 10);
 
@@ -64,14 +63,6 @@ function dragTest() {
         $.text.print($.touch.startX, $.touch.startY-25, "start");
         $.text.print($.touch.endX, $.touch.endY-25, "end");
     }
-
-
-    ($.touch.swipedLeft) ? console.log("swipedLeft") : {};
-    ($.touch.swipedRight) ? console.log("swipedRight") : {};
-
-
-    ($.touch.swipedUp) ? console.log("swipedUp") : {};
-    ($.touch.swipedDown) ? console.log("swipedDown") : {};
 
     $.camera.x += $.touch.dragX;
     $.camera.y += $.touch.dragY;
