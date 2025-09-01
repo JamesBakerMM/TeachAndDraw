@@ -16,17 +16,17 @@ class Stroke {
 const allLayers = [[], [], [], []];
 
 const layerSelectButtons = [
-    $.makeButton($.w-50,  50, 75, 25, "Layer 0"),
-    $.makeButton($.w-50,  80, 75, 25, "Layer 1"),
-    $.makeButton($.w-50, 110, 75, 25, "Layer 2"),
-    $.makeButton($.w-50, 140, 75, 25, "Layer 3"),
+    $.make.button($.w-50,  50, 75, 25, "Layer 0"),
+    $.make.button($.w-50,  80, 75, 25, "Layer 1"),
+    $.make.button($.w-50, 110, 75, 25, "Layer 2"),
+    $.make.button($.w-50, 140, 75, 25, "Layer 3"),
 ];
 
 const layerHideButtons = [
-    $.makeButton($.w-100,  50, 25, 25, "👁"),
-    $.makeButton($.w-100,  80, 25, 25, "👁"),
-    $.makeButton($.w-100, 110, 25, 25, "👁"),
-    $.makeButton($.w-100, 140, 25, 25, "👁"),
+    $.make.button($.w-100,  50, 25, 25, "👁"),
+    $.make.button($.w-100,  80, 25, 25, "👁"),
+    $.make.button($.w-100, 110, 25, 25, "👁"),
+    $.make.button($.w-100, 140, 25, 25, "👁"),
 ];
 
 const layerVisibility = [
@@ -206,7 +206,7 @@ class DrawTool {
     isDown = false;
 
     constructor(label) {
-        this.button = $.makeButton(DrawTool.#btnx, 15, 100, 30, label);
+        this.button = $.make.button(DrawTool.#btnx, 15, 100, 30, label);
         this.colourDropdown = $.makeDropdown(
             DrawTool.#btnx, this.button.y+this.button.h, 100,
             DrawTool.#colourOptions
