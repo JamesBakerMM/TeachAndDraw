@@ -2,7 +2,7 @@ import { $ } from "../../lib/TeachAndDraw.js";
 // $.debug = true;
 
 $.use(update);
-const slider = $.makeSlider(    
+const slider = $.make.slider(    
     $.w / 2,
     $.h / 2,
     350
@@ -11,7 +11,7 @@ slider.min = -10;
 slider.value = 50;
 slider.max = 100;
 
-const button = $.makeButton(
+const button = $.make.button(
     $.w/2-200,
     $.h/2,
     100,
@@ -19,7 +19,7 @@ const button = $.makeButton(
 	"Multiple lined button!"
 )
 
-const textArea = $.makeTextArea(400, 200, 300, 150);
+const textArea = $.make.textArea(400, 200, 300, 150);
 // const font = $.loadCustomFont("Comic Mono", "fonts/ComicMono.ttf");
 // $.text.font = font;
 textArea.value = `Write your great message here...`;

@@ -1,4 +1,4 @@
-import { tad, load, shape, make, keys } from "../../lib/TeachAndDraw.js";
+import { tad, load, shape, text, make, keys } from "../../lib/TeachAndDraw.js";
 
 tad.use(update);
 // tad.debug = true;
