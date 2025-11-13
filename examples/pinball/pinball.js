@@ -30,7 +30,7 @@ const img_background = load.image(0, 0, "./images/background.png");
 const img_sweeper = load.image(0, 0, "./images/sweeper.png");
 
 //load the text font
-const font = load.font("Comic Mono", "../../fonts/ComicMono.ttf");
+const font = load.font("../../fonts/ComicMono.ttf");
 
 let arrows = make_static_asset_box(460, 700, 40, 220, img_arrows);
 

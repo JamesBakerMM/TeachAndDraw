@@ -29,7 +29,7 @@ let img_50 = tad.load.image(0, 0, "./images/points_50.png");
 let img_100 = tad.load.image(0, 0, "./images/points_100.png");
 
 //load the text font
-const font = tad.load.font("Comic Mono", "../../fonts/ComicMono.ttf");
+const font = tad.load.font("../../fonts/ComicMono.ttf");
 
 //make the walls and floor
 let left_Wall = make.boxCollider(0, 400, 40, 800);
