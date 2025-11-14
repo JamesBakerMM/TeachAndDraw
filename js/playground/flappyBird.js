@@ -10,7 +10,7 @@ const pillars = $.makeGroup();
 let randomOffset= $.math.random(-200,200);
 pillars.push(createPillar($.w-100+randomOffset,100));
 pillars.push(createPillar($.w-100+randomOffset,$.h-100));
-me.asset = dominance;
+me.image = dominance;
 $.debug = true;
 
 

@@ -34,17 +34,17 @@ const font = tad.load.font("../../fonts/ComicMono.ttf");
 //make the walls and floor
 let left_Wall = make.boxCollider(0, 400, 40, 800);
 left_Wall.static = true;
-left_Wall.asset = img_wall_side;
+left_Wall.image = img_wall_side;
 walls.push(left_Wall);
 
 let right_Wall = make.boxCollider(600, 400, 40, 800);
 right_Wall.static = true;
-right_Wall.asset = img_wall_side;
+right_Wall.image = img_wall_side;
 walls.push(right_Wall);
 
 let floor = make.boxCollider(300, 800, 600, 40);
 floor.static = true;
-floor.asset = img_floor;
+floor.image = img_floor;
 walls.push(floor);
 
 // make the buckets at the bottom
@@ -52,7 +52,7 @@ let size = 118;
 for (let i = size; i <= 500; i += size) {
     let bucket_Wall = make.boxCollider(i, 740, 20, 80);
     bucket_Wall.static = true;
-    bucket_Wall.asset = img_wall;
+    bucket_Wall.image = img_wall;
     walls.push(bucket_Wall);
 }
 
@@ -66,7 +66,7 @@ for (let i = 150; i <= 650; i += 90) {
     for (let j = 30 + offset; j + offset <= 570; j += 90) {
         let peg = make.circleCollider(j, i, 20, 80);
         peg.static = true;
-        peg.asset = img_peg;
+        peg.image = img_peg;
         pegs.push(peg);
     }
 }
@@ -74,23 +74,23 @@ for (let i = 150; i <= 650; i += 90) {
 //make the points boxes in the buckets
 let points1 = make.boxCollider(size / 2, 750, size, size);
 points1.static = true;
-points1.asset = img_10;
+points1.image = img_10;
 
 let points2 = make.boxCollider(size / 2 + size, 750, size, size);
 points2.static = true;
-points2.asset = img_50;
+points2.image = img_50;
 
 let points3 = make.boxCollider(size / 2 + size * 2, 750, size, size);
 points3.static = true;
-points3.asset = img_100;
+points3.image = img_100;
 
 let points4 = make.boxCollider(size / 2 + size * 3, 750, size, size);
 points4.static = true;
-points4.asset = img_50;
+points4.image = img_50;
 
 let points5 = make.boxCollider(size / 2 + size * 4, 750, size, size);
 points5.static = true;
-points5.asset = img_10;
+points5.image = img_10;
 
 let keydown = false;
 function update() {
@@ -107,7 +107,7 @@ function update() {
         keydown = true;
         let x = 20 + Math.random() * 560;
         let ball = make.circleCollider(x, 20, 40, 40);
-        ball.asset = img_ball;
+        ball.image = img_ball;
         ball.mass = 1;
         ball.bounciness = 100;
         ball.friction = 2;
@@ -127,7 +127,7 @@ function update() {
             peg.life -= 1;
             if (peg.life == 0) {
                 peg.life = null;
-                pegs[i].asset = img_peg;
+                pegs[i].image = img_peg;
             }
         }
     }
@@ -148,7 +148,7 @@ function update() {
 
         for (let j = 0; j < pegs.length; j++) {
             if (ball.collides(pegs[j])) {
-                pegs[j].asset = img_peg2;
+                pegs[j].image = img_peg2;
                 pegs[j].life = 10;
             }
         }

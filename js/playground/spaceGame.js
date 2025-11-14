@@ -365,7 +365,7 @@ function creditScreen() {
 
 function makeEnemy(x, y) {
     let newEnemy = make.boxCollider(x, y, 64, 95);
-    newEnemy.asset = assets.enemyImg;
+    newEnemy.image = assets.enemyImg;
     newEnemy.rotation = 180;
     newEnemy.direction = 180;
     newEnemy.friction = 0;
@@ -397,7 +397,7 @@ function makePlayer() {
     tempPlayer.shots = make.group();
 
     tempPlayer.hp = 200;
-    tempPlayer.asset = assets.playerImg;
+    tempPlayer.image = assets.playerImg;
 
     window.player = tempPlayer;
     return tempPlayer;

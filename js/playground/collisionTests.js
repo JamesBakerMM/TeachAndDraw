@@ -12,7 +12,7 @@ let img=$.loadImage(0,0,"./images/fac0_refinery.png");
 /*
 let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
 redShip.speed=10;
-redShip.asset=img;
+redShip..image=img;
 redShip.mass = 1;
 redShip.direction=270;
 redShip.friction=0.5;
@@ -21,7 +21,7 @@ squares.push(redShip);
 */
 
 let yellowShip=$.makeCircleCollider(170,200,100,100);
-//yellowShip.asset=img;
+//yellowShip..image=img;
 yellowShip.mass = 1;
 yellowShip.static = true;
 yellowShip.direction=180;
@@ -63,7 +63,7 @@ for (let i = 600; i > 100; i -= 10) {
         rightSquare.mass = 1;
         rightSquare.friction = 0;
         rightSquare.bounciness = 50;
-        //rightSquare.asset=img;
+        //rightSquare..image=img;
         squares.push(rightSquare);
     }
 }
