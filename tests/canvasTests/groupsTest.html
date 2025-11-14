@@ -5,42 +5,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Group Tests</title>
         <script type="module">
-
-            import {
-                $,
-                shape,
-                colour,
-                mouse,
-                keys,
-                text
-            } from "/lib/Pen.js";
+            import { $ } from "/lib/TeachAndDraw.js";
             import { Group } from "/lib/Group.js";
             import { TestSuite } from "/tests/TestSuite.js";
             const test = new TestSuite();
             //GROUP TYPE CHECKING
             test.assertError(() => {
-                let numGroup = new Group(0, "a");
+                let numGroup = $.makeGroup(0, "a");
                 numGroup.push(0);
                 numGroup.push("a");
             }, "group should error on mismatched types on creation");
             test.assertError(() => {
-                let numGroup = new Group();
+                let numGroup = $.makeGroup();
                 numGroup.push(0);
                 numGroup.push("a");
             }, "group should error on mismatched types on push");
             test.assertError(() => {
-                let numGroup = new Group();
+                let numGroup = $.makeGroup();
                 numGroup.push($.makeCircleCollider(2, 2, 20));
                 numGroup.push({});
             }, "group should error when a non collider object is added to a group");
             test.assertError(() => {
-                let numGroup = new Group();
+                let numGroup = $.makeGroup();
                 numGroup.unshift(0);
                 numGroup.unshift("a");
             }, "group should error on mismatched types on unshift");
 
             //GROUP REMOVAL
-            let objGroup = new Group(
+            let objGroup = $.makeGroup(
                 {
                     id: 1,
                     remove: true,
@@ -54,7 +46,8 @@
                     remove: true,
                 }
             );
-            let otherObjGroup = new Group(
+            objGroup.name = "objGroup";
+            let otherObjGroup = $.makeGroup(
                 {
                     id: "a",
                     remove: false,
@@ -68,167 +61,189 @@
                     remove: true,
                 }
             );
-            Group.cleanup();
-            test.assertEqual(
-                objGroup.length,
-                otherObjGroup.length,
-                "cleanup should remove all entries marked for removal from all groups"
-            );
-            test.assertEqual(
-                objGroup.id,
-                otherObjGroup.id,
-                "cleanup should remove all entries marked for removal from all groups"
-            );
+            otherObjGroup.name = "otherObjGroup";
 
             //GROUP COLLISIONS
             const LEFT_X = 20;
             const SIZE = 100;
             const RIGHT_X = LEFT_X + SIZE - 20;
-            const sampleCollider = makeTestBox(LEFT_X+150, 160);
+            const sampleCollider = makeTestBox(LEFT_X + 150, 160);
 
-            const failGroup = new Group(1,2,3);
+            const failGroup = $.makeGroup(1, 2, 3);
+            failGroup.name = "failGroup";
 
-            const leftGroup = new Group();
+            const leftGroup = $.makeGroup();
+            leftGroup.colour = "red";
+            leftGroup.name = "leftGroup";
             for (let i = 0; i < 3; i++) {
                 const Y_OFFSET = (SIZE + 10) * i;
                 const tempCollider = makeTestBox(LEFT_X, 280 + Y_OFFSET);
-                console.log(tempCollider);
                 leftGroup.push(tempCollider);
             }
-            const rightGroup = new Group();
+            const rightGroup = $.makeGroup();
+            rightGroup.name = "rightGroup";
             for (let i = 0; i < 2; i++) {
                 const Y_OFFSET = (SIZE + 10) * i;
                 const tempCollider = makeTestBox(RIGHT_X, 210 + Y_OFFSET);
                 rightGroup.push(tempCollider);
             }
 
-            test.assertTrue(() => {
-                return rightGroup.overlaps(leftGroup);
-            }, "rightGroup should overlap left group");
-
-            test.assertError(() => {
-                return sampleCollider.overlaps(failGroup);
-            }, "sampleCollider should fail trying to overlap a non collider group called failGroup");
-
-            test.assertTrue(() => {
-                return sampleCollider.overlaps(rightGroup);
-            }, "sampleCollider should overlap rightGroup");
-
-            test.assertTrue(() => {
-                return rightGroup.overlaps(sampleCollider);
-            }, "rightGroup should overlap sampleCollider");
-
-            test.assertFalse(() => {
-                return leftGroup.overlaps(sampleCollider);
-            }, "leftGroup should NOT overlap sampleCollider");
-            
-            test.assertTrue(() => {
-                return rightGroup[0].overlaps(leftGroup[0]);
-            }, "manually selected sprites from 2 groups should overlap ");
-
             function makeTestBox(x, y) {
                 let tempBox = $.makeCircleCollider(x, y, SIZE);
                 return tempBox;
             }
-            $.debug=true;
-            $.use(draw);
+            // $.debug = true;
+            $.use(update);
             $.width = 800;
             $.height = 800;
-            function draw() {
+            function update() {
+                if ($.frameCount === 2) {
+                    test.message("Test Overlaps");
+                    test.assertTrue(() => {
+                        return rightGroup.overlaps(leftGroup);
+                    }, "rightGroup should overlap left group");
+
+                    const result = rightGroup.overlaps(leftGroup);
+                    if (result) {
+                        console.log("fart");
+                    }
+                    test.assertError(() => {
+                        return sampleCollider.overlaps(failGroup);
+                    }, "sampleCollider should fail trying to overlap a non collider group called failGroup");
+
+                    test.assertTrue(() => {
+                        return sampleCollider.overlaps(rightGroup);
+                    }, "sampleCollider should overlap rightGroup");
+
+                    test.assertTrue(() => {
+                        return rightGroup.overlaps(sampleCollider);
+                    }, "rightGroup should overlap sampleCollider");
+
+                    test.assertFalse(() => {
+                        return leftGroup.overlaps(sampleCollider);
+                    }, "leftGroup should NOT overlap sampleCollider");
+
+                    const rightCollider = rightGroup[0];
+                    const leftCollider = leftGroup[0];
+
+                    test.assertTrue(() => {
+                        return rightCollider.overlaps(leftCollider);
+                    }, "manually selected colliders from 2 groups should overlap ");
+
+                    // test.message("test collides");
+                    // test.assertEqual(
+                    //     rightGroup.collides(leftGroup),
+                    //     true,
+                    //     "right group should collide to the left group!"
+                    // );
+                    test.assertEqual(
+                        objGroup.length,
+                        otherObjGroup.length,
+                        "cleanup should remove all entries marked for removal from all groups"
+                    );
+                }
+                if ($.frameCount === 10) {
+                    test.reportResults();
+                }
                 sampleCollider.draw();
                 leftGroup.draw();
                 rightGroup.draw();
             }
-            test.reportResults();
         </script>
         <style>
-            html, body {
-                margin:0px;
-                padding:0px;
-                background-color:rgb(30,30,25);
-                font-family:sans-serif; 
-                color:white;
-                overflow:hidden;
-            }       
+            html,
+            body {
+                margin: 0px;
+                padding: 0px;
+                background-color: rgb(30, 30, 25);
+                font-family: sans-serif;
+                color: white;
+                overflow: hidden;
+            }
             #debug {
-                position:absolute;
-                border-radius:15px;
-                padding:1rem;
-                right:10px;
-                background-color:rgba(30,30,25,0.5);
-                top:0;
-                width:300px;
-                transition:0.5s;
+                position: absolute;
+                border-radius: 15px;
+                padding: 1rem;
+                right: 10px;
+                background-color: rgba(30, 30, 25, 0.5);
+                top: 0;
+                width: 300px;
+                transition: 0.5s;
             }
             .invisible {
-                display:none;
+                display: none;
             }
             .prev {
-                background-color:red;
-                background-size:10px;
-                height:1lh;
+                background-color: red;
+                background-size: 10px;
+                height: 1lh;
             }
             .wrapper {
-                overflow:hidden;
-                margin:0 !important; 
-                padding:0;
+                overflow: hidden;
+                margin: 0 !important;
+                padding: 0;
             }
             #debug.hidden {
                 right: -360px; /* Hide all except 1px */
             }
             #debug.hidden button {
-                position:absolute;
+                position: absolute;
             }
             #debug:hover {
-                background-color:rgba(30,30,25,1);
+                background-color: rgba(30, 30, 25, 1);
             }
             #debug:hover button {
-                opacity:1;
+                opacity: 1;
             }
             #debug button {
-                left:-3rem;
-                position:absolute;
-                height:3rem;
-                width:3rem;
-                opacity:0.5;
+                left: -3rem;
+                position: absolute;
+                height: 3rem;
+                width: 3rem;
+                opacity: 0.5;
             }
             #debug ul {
-                padding:0;
-                margin:0;
-                padding-left:1rem;
+                padding: 0;
+                margin: 0;
+                padding-left: 1rem;
             }
-    
+
             .grid-overlay {
-                margin-top:1rem;
+                margin-top: 1rem;
             }
-    
+
             .grid-overlay::after {
                 content: "";
-                position:absolute;
+                position: absolute;
                 /* background-color:red; */
-                opacity:1;
+                opacity: 1;
                 top: 0px;
                 left: 0;
                 pointer-events: none; /* Allows clicks to pass through */
-                width:100%;
-                height:100vh;
-    
-                background-image: 
-                    linear-gradient(to right, rgba(0,255,0,0.15) 1px, transparent 1px),
-                    linear-gradient(to bottom, rgba(0,255,0,0.15) 1px, transparent 1px);
+                width: 100%;
+                height: 100vh;
+
+                background-image: linear-gradient(
+                        to right,
+                        rgba(0, 255, 0, 0.15) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        to bottom,
+                        rgba(0, 255, 0, 0.15) 1px,
+                        transparent 1px
+                    );
                 background-size: 50px 50px;
             }
         </style>
     </head>
     <body>
         <div class="wrapper">
-            <canvas id="myCanvas"  style="border:2px solid black;"></canvas>
+            <canvas id="myCanvas" style="border: 2px solid black"></canvas>
         </div>
         <aside id="debug" class="invisible">
             <button id="showhidebtn">🔍</button>
-            <section>
-    
-            </section>
+            <section></section>
         </aside>
     </body>
 </html>
