@@ -9,9 +9,9 @@ $.use(update);
 $.debug=true;
 
 //groups
-let pegs = $.makeGroup(); //Static circular colliders
-let balls = $.makeGroup(); //Kinematic balls
-let bars = $.makeGroup(); //Static Box Colliders
+let pegs = $.make.group(); //Static circular colliders
+let balls = $.make.group(); //Kinematic balls
+let bars = $.make.group(); //Static Box Colliders
 
 
 let img=$.loadImage(0,0,"./images/fac0_refinery.png");

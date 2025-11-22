@@ -5,19 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Colour Tests</title>
         <script type="module">
-
-
-            import {
-                $,
-                shape,
-                colour,
-                mouse,
-                keys,
-                text
-            } from "/lib/Pen.js";
-            import {
-                Point
-            } from "/lib/Point.js";
+            import { $ } from "../../lib/TeachAndDraw.js";
+            import { Point } from "../../lib/Point.js";
             import { Group } from "/lib/Group.js";
             import { TestSuite } from "/tests/TestSuite.js";
 
@@ -28,25 +17,56 @@
             const test = new TestSuite();
 
             //check fill
-            $.colour.fill="red";
-            test.assertEqual($.colour.fill,"red","fill should be set to red");
+            $.shape.colour = "#ad1f1e";
+            test.assertEqual(
+                $.shape.colour,
+                "#ad1f1e",
+                "shape colour should be set to #ad1f1e"
+            );
+
+
+            $.text.colour = "#3ca9c6";
+            test.assertEqual(
+                $.text.colour,
+                "#3ca9c6",
+                "text colour should be #3ca9c6"
+            );
             //check stroke
-            $.colour.stroke="green";
-            test.assertEqual($.colour.stroke,"green","stroke should be set to green");
-            
+            $.shape.border = "green";
+            test.assertEqual(
+                $.shape.border,
+                "green",
+                "shape border should be set to green"
+            );
+
             //check state updates correctly when new state obj to it
-            let testState={
-                fill:"blue",
-                stroke:"blue"
-            }
-            
-            $.colour.state=testState;
-            
-            test.assertEqual($.colour.fill,"blue","state loading should set fill to blue");
-            test.assertEqual($.colour.stroke,"blue","state loading should set stroke set to blue");
+            let testState = {        
+                shapeColour:"#3ca9c6",
+                shapeBorder:"#ad1f1e",
+                shapeAlignmentX:"left",
+                shapeAlignmentY:"top",
+                shapeStrokeWidth:2,
+                shapeRounding:0,
+                shapeStrokeDash:2,
+                shapeMovedByCamera:false,
+                shapeRotation:0
+            };
+
+            $.shape.state = testState;
+
+            test.assertEqual(
+                $.shape.colour,
+                "#3ca9c6",
+                "state loading should set fill to #3ca9c6"
+            );
+            test.assertEqual(
+                $.shape.border,
+                "#ad1f1e",
+                "state loading should set stroke set to #ad1f1e"
+            );
 
             test.reportResults();
-            
+
             function draw() {}
         </script>
         <style>

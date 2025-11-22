@@ -7,7 +7,7 @@ $.w = 512;
 $.use(update);
 
 
-const textArea = $.makeTextArea(256, 256, 300, 300);
+const textArea = $.make.textArea(256, 256, 300, 300);
 textArea.value = "abc";
 
 function update() {

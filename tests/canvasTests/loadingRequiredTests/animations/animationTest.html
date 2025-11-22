@@ -5,23 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Animation Tests</title>
         <script type="module">
-            import { $, shape, colour, mouse, keys, text } from "/lib/Pen.js";
+            import { $, load, make, shape, mouse, keys, text } from "/lib/TeachAndDraw.js";
             import { Point } from "/lib/Point.js";
             import { Group, makeGroup } from "/lib/Group.js";
             import { TestSuite } from "/tests/TestSuite.js";
 
-            $.use(draw);
+            $.use(update);
             $.debug=true;
-            $.width = 300;
-            $.height = 800;
+            $.w = 300;
+            $.h = 800;
 
-            const entityA = $.makeEntity(50, 110);
-            const entityB = $.makeEntity(100, 110);
-            const entityC = $.makeEntity(150, 110);
-            const entityD = $.makeEntity(150, 210);
+            const entityA = make.entity(50, 110);
+            const entityB = make.entity(100, 110);
+            const entityC = make.entity(150, 110);
+            const entityD = make.entity(150, 210);
 
             // const failAnim=$.loadAnimation("2",3,"test");
-            const anim = $.loadAnimation(
+            const anim = $.load.animation(
                 20,
                 50,
                 "./images/animAsset1.png",
@@ -32,7 +32,7 @@
                 "./images/animAsset6.png"
             );
 
-            const alternateAnim = $.loadAnimation(
+            const alternateAnim = $.load.animation(
                 20,
                 110,
                 "./images/animAssetLetter1.png",
@@ -43,17 +43,19 @@
                 "./images/animAssetLetter6.png"
             );
 
-            let testImage = $.loadImage(
+            let testImage = $.load.image(
                 210,
                 210,
                 "./images/animAssetLetter6.png"
             );
-            entityA.asset = alternateAnim;
-            entityB.asset = alternateAnim;
-            entityC.asset = alternateAnim;
-            entityD.asset = testImage;
 
-            const testAnim = $.loadAnimation(
+            console.log(alternateAnim,alternateAnim.toString())
+            entityA.image = alternateAnim;
+            entityB.image = alternateAnim;
+            entityC.image = alternateAnim;
+            entityD.image = testImage;
+
+            const testAnim = $.load.animation(
                 20,
                 50,
                 "./images/animAsset1.png",
@@ -63,7 +65,8 @@
                 "./images/animAsset5.png",
                 "./images/animAsset6.png"
             );
-            let testsHaveRun = false;
+            var testsHaveRun = false;
+
             function runTests() {
                 if (testsHaveRun===false) {
                     const test = new TestSuite();
@@ -160,12 +163,12 @@
 
             let rotation = 0;
 
-            function draw() {
+            function update() {
                 runTests();
-                $.colour.fill = "grey";
+                $.shape.colour = "grey";
                 $.shape.rectangle($.width / 2, $.height / 2, $.width, $.height);
 
-                $.colour.fill = "black";
+                $.shape.colour = "black";
                 $.text.alignment.x = "left";
                 $.text.print(20, 20, "Raw Animation");
                 anim.draw();
@@ -176,7 +179,7 @@
 
                 if ($.mouse.leftDown) {
                     fart.push($.makeEntity(mouse.x, mouse.y));
-                    fart[fart.length - 1].asset = alternateAnim;
+                    fart[fart.length - 1].image = alternateAnim;
                     if (rotation > 360) {
                         rotation = 0;
                     }
@@ -185,9 +188,9 @@
                     rotation++;
                 }
                 entityA.draw();
-                entityB.asset.delay = 20;
+                entityB.image.delay = 20;
                 entityB.draw();
-                entityC.asset.playing = false;
+                entityC.image.playing = false;
                 entityC.rotation++;
                 entityC.draw();
                 testImage.draw();

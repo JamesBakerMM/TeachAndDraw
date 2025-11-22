@@ -4,10 +4,10 @@ $.width = 900
 $.height = 600
 // $.debug = true
 
-let playerCar = $.makeBoxCollider(200, 200, 20, 20)
+let playerCar = $.make.boxCollider(200, 200, 20, 20)
 // playerCar.asset = $.loadImage(165,200,  "./assets/carSmol.png")
 
-let grass = $.makeBoxCollider(20, 20, 82.5, 82.5)
+let grass = $.make.boxCollider(20, 20, 82.5, 82.5)
 // grass.asset = $.loadImage(0,0, "assets/g1Scale.png")
 
 

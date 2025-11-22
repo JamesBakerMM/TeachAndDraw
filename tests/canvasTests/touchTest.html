@@ -5,12 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Touch Tests</title>
         <script type="module">
-            import { $, shape, colour, mouse, keys, text } from "/lib/Pen.js";
+            import { $ } from "/lib/TeachAndDraw.js";
             import { Point } from "/lib/Point.js";
             import { Group } from "/lib/Group.js";
             import { TestSuite } from "/tests/TestSuite.js";
 
-            $.use(draw);
+            $.use(update);
             $.width = 800;
             $.height = 800;
             //$.debug = true;
@@ -19,15 +19,33 @@
             const test = new TestSuite();
             function generateReport() {
                 if (testIsDone === false) {
-                    test.assertEqual(initXOfTouch,0,"initial touch x was 0");
-                    test.assertEqual(initYOfTouch,0,"initial touch y was 0");
-                    test.assertEqual($.touch.x,$.width/2,`last x touch was ${$.width/2}`);
-                    test.assertEqual($.touch.y,$.height/2,`last y touch was ${$.height/2}`);
-                    test.assertFalse(()=>{return $.touch.down},"touch is not currently down");
-                    test.assertFalse(()=>{return $.touch.up},"touch did not just go up");
-                    test.assertTrue(()=>{return touchUpHappened},"touchUp happened");
-                    test.assertTrue(()=>{return touchDownHappened},"touchDown happened");
-                    test.assertTrue(()=>{return howLongDidTouchDownHappen>100},"touch was down for over 100 frames");
+                    test.assertEqual(initXOfTouch, 0, "initial touch x was 0");
+                    test.assertEqual(initYOfTouch, 0, "initial touch y was 0");
+                    test.assertEqual(
+                        $.touch.x,
+                        $.width / 2,
+                        `last x touch was ${$.width / 2}`
+                    );
+                    test.assertEqual(
+                        $.touch.y,
+                        $.height / 2,
+                        `last y touch was ${$.height / 2}`
+                    );
+                    test.assertFalse(() => {
+                        return $.touch.down;
+                    }, "touch is not currently down");
+                    test.assertFalse(() => {
+                        return $.touch.up;
+                    }, "touch did not just go up");
+                    test.assertTrue(() => {
+                        return touchUpHappened;
+                    }, "touchUp happened");
+                    test.assertTrue(() => {
+                        return touchDownHappened;
+                    }, "touchDown happened");
+                    test.assertTrue(() => {
+                        return howLongDidTouchDownHappen > 100;
+                    }, "touch was down for over 100 frames");
                     test.reportResults();
                     testIsDone = true;
                 }
@@ -37,30 +55,33 @@
             let touchUpHappened = false;
             let touchDownHappened = false;
             let howLongDidTouchDownHappen = 0;
-            let initXOfTouch=$.touch.x;
-            let initYOfTouch=$.touch.y;
-            const SPAWNTOUCHFRAMECOUNT=100;
-            const ENDOFTESTFRAMECOUNT=300;
-            function draw() {
+            let initXOfTouch = $.touch.x;
+            let initYOfTouch = $.touch.y;
+            const SPAWNTOUCHFRAMECOUNT = 100;
+            const ENDOFTESTFRAMECOUNT = 300;
+            function update() {
                 if ($.touch.down) {
-                    $.colour.fill = "green";
+                    $.shape.colour = "green";
                     touchDownHappened = true;
                     howLongDidTouchDownHappen++;
                 } else {
-                    $.colour.fill = "aqua";
+                    $.shape.colour = "aqua";
                 }
                 $.shape.rectangle($.width / 2, $.height / 2, $.width, $.height);
-                $.colour.fill = "black";
+                $.text.colour = "black";
                 $.text.alignment.x = "left";
                 $.text.print(20, 20, `touchdown ${$.touch.down}`);
                 $.text.print(20, 40, `touchup ${$.touch.up}`);
-                $.text.alignment.x="center";
-                $.text.size=24;
-                if($.frameCount<=ENDOFTESTFRAMECOUNT){
-                    $.text.print($.width/2,40,"🛑 please do not press as test is done");
+                $.text.alignment.x = "center";
+                $.text.size = 24;
+                if ($.frameCount <= ENDOFTESTFRAMECOUNT) {
+                    $.text.print(
+                        $.width / 2,
+                        40,
+                        "🛑 please do not press as test is done"
+                    );
                 } else {
-                    $.text.print($.width/2,40,"✔️ test is done");
-
+                    $.text.print($.width / 2, 40, "✔️ test is done");
                 }
                 if ($.touch.up) {
                     touchUpHappened = true;

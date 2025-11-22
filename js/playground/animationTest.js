@@ -61,7 +61,7 @@ preload();
 
 
 let collider = $.makeCircleCollider($.width/2, $.height/2, 100, 100);
-collider.asset = anims[0];
+collider.image = anims[0];
 function draw() {
     $.text.alignment.y = "top";
     $.text.alignment.x = "left";
