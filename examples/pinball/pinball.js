@@ -1,4 +1,4 @@
-import { tad, load, shape, make, keys } from "../../lib/TeachAndDraw.js";
+import { tad, load, shape, make, keys, text } from "../../lib/TeachAndDraw.js";
 
 tad.use(update);
 // tad.debug = true;
@@ -97,13 +97,13 @@ flipper_right.friction = 0;
 flipper_right.asset = img_flipperR;
 
 //Setup the ball
-let ball = make.circleCollider(450, 700, 40, 40);
+let ball = make.circleCollider(450, 700, 35, 35);
 ball.asset = img_ball;
 balls.push(ball);
 
 //Control variables
-const maxBallSpeed = 50;
-const flipperSpeed = 60;
+const maxBallSpeed = 100;
+const flipperSpeed = 50;
 
 let score = 0;
 let showScore = false;
@@ -119,13 +119,6 @@ function update() {
     img_background.draw();
     shape.colour = "rgba(245,245,255)";
     shape.rectangle(tad.w / 2, tad.h / 2, tad.w, tad.h);
-
-    if (ball.velocity.x > maxBallSpeed) {
-        ball.velocity.x = maxBallSpeed;
-    }
-    if (ball.velocity.y > maxBallSpeed) {
-        ball.velocity.y = maxBallSpeed;
-    }
 
     if (respawning > 0) {
         respawning -= 1;
@@ -253,6 +246,12 @@ function update() {
             pins[j].life = 10;
             score += 25;
         }
+    }
+
+    let length = ball.speed;
+    if (length > maxBallSpeed) {
+        ball.velocity.x = (ball.velocity.x / length) * maxBallSpeed;
+        ball.velocity.y = (ball.velocity.y / length) * maxBallSpeed;
     }
 
     tad.drawColliders();

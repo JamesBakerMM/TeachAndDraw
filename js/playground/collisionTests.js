@@ -1,14 +1,14 @@
-import { $, shape, mouse, keys, text } from "../../lib/TeachAndDraw.js";
+import { $, shape, mouse, keys, make, load } from "../../lib/TeachAndDraw.js";
 import { Paint } from "../../lib/Paint.js";
 import { Velocity } from "../../lib/Velocity.js";
 
 $.use(update);
 $.debug=false;
-let squares = $.makeGroup();
-let ships = $.makeGroup();
+let squares = $.make.group();
+let ships = $.make.group();
 
 // let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
-let img=$.loadImage(0,0,"./images/fac0_refinery.png");
+let img=$.load.image(0,0,"./images/fac0_refinery.png");
 /*
 let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
 redShip.speed=10;
@@ -20,52 +20,52 @@ redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
 
-let yellowShip=$.makeCircleCollider(500,160,50,50);
-//yellowShip.asset=img;
+let yellowShip=$.make.boxCollider(530,160,50,50);
 yellowShip.mass = 1;
-yellowShip.static = false;
-yellowShip.direction=180;
-yellowShip.friction = 0;
-yellowShip.speed = 0;
-yellowShip.bounciness = 100;
-//yellowShip.rotation = 20;
-yellowShip.velocity = new Velocity(0, 0);
+yellowShip.friction = 1;
+yellowShip.bounciness = 10;
+//yellowShip.asset=img;
+yellowShip.torque = 1;
+yellowShip.rotationalVelocity = 10;
 squares.push(yellowShip);
 
-let box=$.makeBoxCollider(450,300,25,400);
-box.mass = 1000;
+let box=$.make.boxCollider(450,300,50,800);
+box.mass = 1;
 box.static = true;
-box.bounciness = 0;
+box.bounciness = 10;
 box.friction= 0;
-box.rotation = 50;
+box.rotation = 90;
 box.velocity = new Velocity(0, 0);
-box.rotationalVelocity = -2;
+box.rotationalVelocity = 0;
 squares.push(box);
 
 /*
-let box2=$.makeBoxCollider(200,400,400,50);
-box2.shape = "box";
-box2.speed=0;
-box2.static = true;
-box2.rotation = 0;
+let box2=$.make.circleCollider(550,400,75);
 box2.mass = 1;
-box2.friction = 0;
+box2.static = false;
+box2.direction=180;
+box2.friction = 1;
+box2.speed = 0;
+box2.bounciness = 10;
+box2.rotationalVelocity = 0;
+box2.velocity = new Velocity(0, 0);
+box2.asset=img;
 squares.push(box2);
 
 
-
 let rightSquare;
-for (let i = 600; i > 100; i -= 10) {
-    for (let j = 600; j > 100; j -= 10) {
-        rightSquare=$.makeCircleCollider(i,j, 9, 9);
+for (let i = 600; i > 100; i -= 100) {
+    for (let j = 600; j > 100; j -= 100) {
+        rightSquare=$.make.circleCollider(i,j, 50, 50);
         rightSquare.mass = 1;
-        rightSquare.friction = 100;
-        rightSquare.bounciness = 50;
+        rightSquare.friction = 10;
+        rightSquare.bounciness = 10;
         //rightSquare.asset=img;
+        rightSquare.torque = 1;
         squares.push(rightSquare);
     }
-}*/
-
+}
+*/
 
 function drawTree(quad, counter) {
     let colorArray = ["white", "yellow", "red", "purple", "blue", "green", "orange", "brown", "pink", "grey", "gold", "teal", "bronze", "lime"];
@@ -127,12 +127,9 @@ function update() {
     //     leftSquare.velocity.y=-leftSquare.velocity.y
     // }
 
-    //yellowShip.velocity.y += 1;
+    yellowShip.velocity.y += 1;
 
     squares.collides(squares);
-    if (yellowShip.collides(box)) {
-        console.log("HIT");
-    }
 
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
