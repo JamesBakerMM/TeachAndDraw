@@ -1,16 +1,16 @@
-import { $, shape, mouse, keys, text } from "../../lib/TeachAndDraw.js";
+import { tad, make, load, shape, mouse, keys, text } from "../../lib/TeachAndDraw.js";
 import { Paint } from "../../lib/Paint.js";
 import { Velocity } from "../../lib/Velocity.js";
 
-$.use(update);
-$.debug=false;
-let squares = $.makeGroup();
-let ships = $.makeGroup();
+tad.use(update);
+tad.debug=false;
+let squares = make.group();
+let ships = make.group();
 
-// let leftSquare=$.makeBoxCollider($.w/2-300,$.h/2-20,80,80);
-let img=$.loadImage(0,0,"./images/fac0_refinery.png"); 
+// let leftSquare=make.BoxCollider(tad.w/2-300,tad.h/2-20,80,80);
+let img=tad.load.image(0,0,"./images/fac0_refinery.png"); 
 /*
-let redShip=$.makeBoxCollider($.w/2+200,$.h/2,80,80);
+let redShip=make.BoxCollider(tad.w/2+200,tad.h/2,80,80);
 redShip.speed=10;
 redShip..image=img;
 redShip.mass = 1;
@@ -20,7 +20,7 @@ redShip.rotationalVelocity = 0;
 squares.push(redShip);
 */
 
-let yellowShip=$.makeCircleCollider(170,200,100,100);
+let yellowShip=make.circleCollider(170,200,100,100);
 //yellowShip..image=img;
 yellowShip.mass = 1;
 yellowShip.static = true;
@@ -32,7 +32,7 @@ yellowShip.rotation = 0;
 yellowShip.velocity = new Velocity(0, 10);
 squares.push(yellowShip);
 
-let box=$.makeCircleCollider(200,400,100,50);
+let box=make.circleCollider(200,400,100,50);
 box.speed = 0;
 box.direction = 90;
 box.static = false;
@@ -46,7 +46,7 @@ box.velocity = new Velocity(0, 1);
 squares.push(box);
 
 /*
-let box2=$.makeBoxCollider(200,400,400,50);
+let box2=make.BoxCollider(200,400,400,50);
 box2.shape = "box";
 box2.speed=0;
 box2.static = true;
@@ -59,7 +59,7 @@ squares.push(box2);
 let rightSquare;
 for (let i = 600; i > 100; i -= 10) {
     for (let j = 600; j > 100; j -= 10) {
-        rightSquare=$.makeCircleCollider(i,j, 10, 5);
+        rightSquare=make.circleCollider(i,j, 10, 5);
         rightSquare.mass = 1;
         rightSquare.friction = 0;
         rightSquare.bounciness = 50;
@@ -74,25 +74,25 @@ function drawTree(quad, counter) {
     for (let i = 1; i <= 4; i++) {
         let q = quad.getQuad(i);
         if (q != null) {
-            $.shape.colour = "black";
-            $.shape.colour = "white"; //colorArray[counter];
+            tad.shape.colour = "black";
+            tad.shape.colour = "white"; //colorArray[counter];
             counter += 1;
             if (counter == colorArray.length) {
                 counter = 0;
             }
-            $.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.size, q.size);
+            tad.shape.rectangle(q.left + (q.right - q.left)/2, q.top + (q.bottom - q.top)/2, q.size, q.size);
             drawTree(q, counter);
         }
     }
 }
 
 function background(colour) {
-    $.shape.colour = colour;
-    $.shape.rectangle($.width/2,$.height/2,$.width,$.height);
+    tad.shape.colour = colour;
+    tad.shape.rectangle(tad.width/2,tad.height/2,tad.width,tad.height);
 }
 
 function setup(){
-    if($.frameCount===0){
+    if(tad.frameCount===0){
         console.log('Start');
     }
 }
@@ -102,8 +102,8 @@ let flag = 1;
 function update() { 
     setup();
     background("rgba(125, 125, 125)");
-    $.shape.colour = "black";
-    //$.text.print($.w/2,$.h/2,`x:${$.mouse.x} y:${$.mouse.y}`);
+    tad.shape.colour = "black";
+    //tad.text.print(tad.w/2,tad.h/2,`x:${tad.mouse.x} y:${tad.mouse.y}`);
 
     if(mouse.leftDown){   
         yellowShip.x = mouse.x;
@@ -124,10 +124,10 @@ function update() {
         yellowShip.velocity.x +=4;
     }
 
-    // if(leftSquare.x>$.width || leftSquare.x<0){
+    // if(leftSquare.x>tad.width || leftSquare.x<0){
     //     leftSquare.velocity.x=-leftSquare.velocity.x
     // }
-    // if(leftSquare.y>$.height || leftSquare.y<0){
+    // if(leftSquare.y>tad.height || leftSquare.y<0){
     //     leftSquare.velocity.y=-leftSquare.velocity.y
     // }
     squares.collides(squares);
@@ -141,16 +141,16 @@ function update() {
             //sq.velocity.y += 1;
         }
         
-        if(sq.x>$.width){
-            sq.x=$.width-1;
+        if(sq.x>tad.width){
+            sq.x=tad.width-1;
             sq.velocity.x=-sq.velocity.x;
         }
         if(sq.x<0){
             sq.x=0;
             sq.velocity.x=-sq.velocity.x;
         }
-        if(sq.y>$.height){
-            sq.y=$.height-1;
+        if(sq.y>tad.height){
+            sq.y=tad.height-1;
             sq.velocity.y=-sq.velocity.y;
         }
         if(sq.y<0){
@@ -158,35 +158,35 @@ function update() {
             sq.velocity.y=-sq.velocity.y;
         }
 
-        // $.colour.fill = "#00000000";
-        // $.colour.stroke = "#FFFF00FF";
-        // $.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
+        // tad.colour.fill = "#00000000";
+        // tad.colour.stroke = "#FFFF00FF";
+        // tad.shape.oval(squares[i].x, squares[i].y, squares[i].radius, squares[i].radius);
     }
 
-    $.shape.movedByCamera = true;
+    tad.shape.movedByCamera = true;
 
-    if ($.keys.down("a")) {
-        $.camera.x -= 1;
+    if (tad.keys.down("a")) {
+        tad.camera.x -= 1;
     }
-    if ($.keys.down("d")) {
-        $.camera.x += 1;
+    if (tad.keys.down("d")) {
+        tad.camera.x += 1;
     }
-    if ($.keys.down("w")) {
-        $.camera.y -= 1;
+    if (tad.keys.down("w")) {
+        tad.camera.y -= 1;
     }
-    if ($.keys.down("s")) {
-        $.camera.y += 1;
+    if (tad.keys.down("s")) {
+        tad.camera.y += 1;
     }
-    if ($.keys.down("q")) {
-        $.camera.rotation -= 1;
+    if (tad.keys.down("q")) {
+        tad.camera.rotation -= 1;
     }
-    if ($.keys.down("e")) {
-        $.camera.rotation += 1;
+    if (tad.keys.down("e")) {
+        tad.camera.rotation += 1;
     }
 
 
     // drawTree(squares.QuadTree.getTree(), 0);
     //console.log(squares.QuadTree.getTree());
 
-    $.drawColliders();
+    tad.drawColliders();
 }
