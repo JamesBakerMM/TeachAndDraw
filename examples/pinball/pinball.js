@@ -1,7 +1,7 @@
 import { tad, load, shape, text, make, keys } from "../../lib/TeachAndDraw.js";
 
 tad.use(update);
-// tad.debug = true;
+tad.debug = false;
 
 //Make the groups
 const walls = make.group();
@@ -99,10 +99,10 @@ flipper_right.asset = img_flipperR;
 //Setup the ball
 let ball = make.circleCollider(450, 700, 40, 40);
 ball.asset = img_ball;
+ball.bounciness = 10;
 balls.push(ball);
 
 //Control variables
-const maxBallSpeed = 50;
 const flipperSpeed = 60;
 
 let score = 0;
@@ -119,13 +119,6 @@ function update() {
     img_background.draw();
     shape.colour = "rgba(245,245,255)";
     shape.rectangle(tad.w / 2, tad.h / 2, tad.w, tad.h);
-
-    if (ball.velocity.x > maxBallSpeed) {
-        ball.velocity.x = maxBallSpeed;
-    }
-    if (ball.velocity.y > maxBallSpeed) {
-        ball.velocity.y = maxBallSpeed;
-    }
 
     if (respawning > 0) {
         respawning -= 1;
@@ -237,7 +230,11 @@ function update() {
         }
     }
 
+
     ball.velocity.y += 1;
+    if (ball.x < 450 && ball.speed > 100) {
+        ball.speed = 100;
+    }
 
     for (let j = 0; j < pegs.length; j++) {
         if (ball.collides(pegs[j])) {

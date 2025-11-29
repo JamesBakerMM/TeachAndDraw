@@ -9,7 +9,7 @@ import {
 } from "../../lib/TeachAndDraw.js";
 
 tad.use(update);
-tad.debug = true;
+tad.debug = false;
 
 //Make the groups
 let walls = make.group();
@@ -109,8 +109,8 @@ function update() {
         let ball = make.circleCollider(x, 20, 40, 40);
         ball.image = img_ball;
         ball.mass = 1;
-        ball.bounciness = 100;
-        ball.friction = 2;
+        ball.bounciness = 101;
+        ball.friction = 1;
         balls.push(ball);
     } else if (!keys.down(" ")) {
         keydown = false;
