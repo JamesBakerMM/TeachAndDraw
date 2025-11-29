@@ -59,24 +59,22 @@ function pillarUpdate() {
 
 function meUpdate() {
     window.me = me;
-    // me.velocity.y += 0.1;
-    // if (tad.keys.down("uparrow")) {
-    //     me.direction = 180
-    //     me.velocity.y -= 2;
-    // }
+    if (tad.keys.down("uparrow")) {
+        me.direction = 0
+        me.speed = 20
+    }
     // if (me.y > tad.h) {
     //     me.y = tad.h / 2;
     // }
     // if (me.x < 0) {
     //     me.x = tad.w / 2;
     // }
-    if(tad.keys.down("d")) {
-        me.velocity.x +=1
-    }
-    if(tad.keys.down("a")) {
-        me.velocity.x -=1
-    }
-    console.log(me.direction, me.speed)
+    // if(tad.keys.down("d")) {
+    //     me.velocity.x +=1
+    // }
+    // if(tad.keys.down("a")) {
+    //     me.velocity.x -=1
+    // }
 }
 
 function createPillar(x, y) {
