@@ -66,8 +66,8 @@ squares.push(box2);
 */
 
 let rightSquare;
-for (let i = 600; i > 100; i -= 10) {
-    for (let j = 600; j > 100; j -= 10) {
+for (let i = 600; i > 100; i -= 20) {
+    for (let j = 600; j > 100; j -= 20) {
         rightSquare = make.circleCollider(i, j, 10, 5);
         rightSquare.mass = 1;
         rightSquare.friction = 50;
@@ -168,7 +168,7 @@ function update() {
     for (let i = 0; i < squares.length; i++) {
         const sq = squares[i];
         if (sq.shape == "circle") {
-            //sq.velocity.y += 1;
+            sq.velocity.y += 1;
         }
 
         if (sq.x > tad.width) {
