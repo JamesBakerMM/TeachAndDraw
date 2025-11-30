@@ -5,3 +5,4 @@
 js/playground/arcade
 .vscode/settings.json
 .gitignore
+dist
